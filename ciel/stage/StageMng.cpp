@@ -6,14 +6,11 @@
 #include "templeMap.h"
 #include "TempleInMap.h"
 #include "ForestInMap.h"
-<<<<<<< HEAD
 
-=======
 
 bool StageMng::Init()
 {
 	stage_ = std::make_unique<templeMap>();
->>>>>>> d1c9d0617e6bdb411a23946738ee410874f5d1ce
     return true;
 }
 
