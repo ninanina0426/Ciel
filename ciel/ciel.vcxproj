@@ -161,14 +161,11 @@
     <ClCompile Include="scene\TitleScene.cpp" />
     <ClCompile Include="stage\StageMng.cpp" />
     <ClCompile Include="stage\Stage.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="stage\SweetsMap.cpp" />
     <ClCompile Include="stage\SweetsOutMap.cpp" />
     <ClCompile Include="stage\SweetsSchoolMap.cpp" />
-=======
     <ClCompile Include="stage\TempleInMap.cpp" />
     <ClCompile Include="stage\templeMap.cpp" />
->>>>>>> d1c9d0617e6bdb411a23946738ee410874f5d1ce
     <ClCompile Include="_debug\_DebugConOut.cpp" />
     <ClCompile Include="_debug\_DebugDispOut.cpp" />
   </ItemGroup>
@@ -184,14 +181,11 @@
     <ClInclude Include="scene\TitleScene.h" />
     <ClInclude Include="stage\StageMng.h" />
     <ClInclude Include="stage\Stage.h" />
-<<<<<<< HEAD
     <ClInclude Include="stage\SweetsMap.h" />
     <ClInclude Include="stage\SweetsOutMap.h" />
     <ClInclude Include="stage\SweetsSchoolMap.h" />
-=======
     <ClInclude Include="stage\TempleInMap.h" />
     <ClInclude Include="stage\templeMap.h" />
->>>>>>> d1c9d0617e6bdb411a23946738ee410874f5d1ce
     <ClInclude Include="_debug\_DebugConOut.h" />
     <ClInclude Include="_debug\_DebugDispOut.h" />
   </ItemGroup>
