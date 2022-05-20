@@ -1,9 +1,10 @@
 #include "StageMng.h"
 #include "ForestMap.h"
+#include "waMap.h"
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<ForestMap>();
+	stage_ = std::make_unique<waMap>();
     return true;
 }
 
