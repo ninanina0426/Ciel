@@ -1,9 +1,11 @@
 #include "StageMng.h"
 #include "ForestMap.h"
-
+#include "templeMap.h"
+#include "TempleInMap.h"
+#include "ForestInMap.h"
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<ForestMap>();
+	stage_ = std::make_unique<templeMap>();
     return true;
 }
 
@@ -33,7 +35,20 @@ void StageMng::Update(void)
 	}
 
 	stage_->Update(mOffset);
-	
+
+	if (CheckHitKey(KEY_INPUT_A))
+	{
+		stage_ = std::move(std::make_unique<ForestMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_S))
+	{
+		stage_ = std::move(std::make_unique<TempleInMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_D))
+	{
+		stage_ = std::move(std::make_unique<ForestInMap>());
+	}
+
 }
 
 bool StageMng::Release(void)

@@ -435,6 +435,7 @@ void ForestMap::Update(Vector2 offset)
 
 void ForestMap::DrawOwnScn()
 {
+
 	for (int x = 0; x < MAP_X; x++)
 	{
 		for (int y = 0; y < MAP_Y; y++)
@@ -460,8 +461,5 @@ bool ForestMap::Init(void)
 	{
 		return false;
 	}
-
-	//SetMap(mapID);
-
 	return true;
 }

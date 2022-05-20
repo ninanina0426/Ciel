@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="stage\ForestInMap.cpp" />
     <ClCompile Include="stage\ForestMap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scene\BaseScene.cpp" />
@@ -160,12 +161,15 @@
     <ClCompile Include="scene\TitleScene.cpp" />
     <ClCompile Include="stage\StageMng.cpp" />
     <ClCompile Include="stage\Stage.cpp" />
+    <ClCompile Include="stage\TempleInMap.cpp" />
+    <ClCompile Include="stage\templeMap.cpp" />
     <ClCompile Include="_debug\_DebugConOut.cpp" />
     <ClCompile Include="_debug\_DebugDispOut.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\details\Vector2.h" />
     <ClInclude Include="common\Vector2.h" />
+    <ClInclude Include="stage\ForestInMap.h" />
     <ClInclude Include="stage\ForestMap.h" />
     <ClInclude Include="scene\BaseScene.h" />
     <ClInclude Include="scene\EndScene.h" />
@@ -174,6 +178,8 @@
     <ClInclude Include="scene\TitleScene.h" />
     <ClInclude Include="stage\StageMng.h" />
     <ClInclude Include="stage\Stage.h" />
+    <ClInclude Include="stage\TempleInMap.h" />
+    <ClInclude Include="stage\templeMap.h" />
     <ClInclude Include="_debug\_DebugConOut.h" />
     <ClInclude Include="_debug\_DebugDispOut.h" />
   </ItemGroup>
