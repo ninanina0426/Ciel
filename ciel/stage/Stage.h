@@ -16,6 +16,9 @@ using uniquStage = std::unique_ptr<Stage>;			//mapのポインター
 enum class MAP_ID
 {
 	FOREST,
+	SWEETS,
+	SWEETSOUT,
+	SWEETSSCHOOL,
 	MAX
 };
 

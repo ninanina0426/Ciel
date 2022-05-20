@@ -1,9 +1,12 @@
 #include "StageMng.h"
 #include "ForestMap.h"
+#include "SweetsMap.h"
+#include"SweetsOutMap.h"
+#include"SweetsSchoolMap.h"
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<ForestMap>();
+	stage_ = std::make_unique<SweetsSchoolMap>();
     return true;
 }
 

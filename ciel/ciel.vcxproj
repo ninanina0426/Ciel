@@ -160,6 +160,9 @@
     <ClCompile Include="scene\TitleScene.cpp" />
     <ClCompile Include="stage\StageMng.cpp" />
     <ClCompile Include="stage\Stage.cpp" />
+    <ClCompile Include="stage\SweetsMap.cpp" />
+    <ClCompile Include="stage\SweetsOutMap.cpp" />
+    <ClCompile Include="stage\SweetsSchoolMap.cpp" />
     <ClCompile Include="_debug\_DebugConOut.cpp" />
     <ClCompile Include="_debug\_DebugDispOut.cpp" />
   </ItemGroup>
@@ -174,6 +177,9 @@
     <ClInclude Include="scene\TitleScene.h" />
     <ClInclude Include="stage\StageMng.h" />
     <ClInclude Include="stage\Stage.h" />
+    <ClInclude Include="stage\SweetsMap.h" />
+    <ClInclude Include="stage\SweetsOutMap.h" />
+    <ClInclude Include="stage\SweetsSchoolMap.h" />
     <ClInclude Include="_debug\_DebugConOut.h" />
     <ClInclude Include="_debug\_DebugDispOut.h" />
   </ItemGroup>
