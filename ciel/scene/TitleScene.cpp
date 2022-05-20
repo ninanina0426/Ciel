@@ -27,7 +27,8 @@ void TitleScene::DrawOwnScn()
 {
     SetDrawScreen(sceneScrID_);
     ClsDrawScreen();
-    DrawBox(0, 0, 720, 405, 0xffffff, false);
+    DrawBox(0, 0, 1080, 604, 0xffffff, false);
+    DrawString(500, 300, "タイトル表示するよ", 0xffffff);
     
 }
 

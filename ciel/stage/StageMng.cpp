@@ -3,10 +3,17 @@
 #include "SweetsMap.h"
 #include"SweetsOutMap.h"
 #include"SweetsSchoolMap.h"
+#include "templeMap.h"
+#include "TempleInMap.h"
+#include "ForestInMap.h"
+<<<<<<< HEAD
+
+=======
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<SweetsSchoolMap>();
+	stage_ = std::make_unique<templeMap>();
+>>>>>>> d1c9d0617e6bdb411a23946738ee410874f5d1ce
     return true;
 }
 
@@ -36,7 +43,20 @@ void StageMng::Update(void)
 	}
 
 	stage_->Update(mOffset);
-	
+
+	if (CheckHitKey(KEY_INPUT_A))
+	{
+		stage_ = std::move(std::make_unique<ForestMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_S))
+	{
+		stage_ = std::move(std::make_unique<TempleInMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_D))
+	{
+		stage_ = std::move(std::make_unique<ForestInMap>());
+	}
+
 }
 
 bool StageMng::Release(void)
