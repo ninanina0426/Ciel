@@ -326,7 +326,6 @@ TempleInMap::~TempleInMap()
 
 void TempleInMap::Update(Vector2 offset)
 {
-	DrawOwnScn();
 	mOffset = { offset.x_,offset.y_ };
 	/*mPlayer->Update();*/
 }
@@ -357,4 +356,9 @@ bool TempleInMap::Init(void)
 	//mPlayer->init();
 
 	return true;
+}
+
+int TempleInMap::GetMapChip(Vector2 pos)
+{
+	return mMap[pos.y_ / 32][pos.x_ / 32];
 }

@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include "SceneMng.h"
 #include "TitleScene.h"
+#include "Obj/Player.h"
 #include "../_debug/_DebugConOut.h"
 #include "../_debug/_DebugDispOut.h"
 
@@ -20,7 +21,7 @@ void SceneMng::Run(void)
 
 	//初期シーンのインスタンス
 	scene_ = std::make_unique<TitleScene>();
-
+	
 
 
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0) //ProcessMessage()はウィンドウにメッセージを送る
@@ -35,6 +36,7 @@ void SceneMng::Run(void)
 		ClsDrawScreen();
 
 		scene_->Draw();				//シーンのDraw
+		
 		_dbgDraw();
 		ScreenFlip();
 	}

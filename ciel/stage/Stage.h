@@ -35,14 +35,15 @@ public:
 	virtual void DrawOwnScn() = 0;		//各シーンのDraw
 	virtual bool Init(void) = 0;
 	
+	virtual int GetMapChip(Vector2 pos) = 0;		//各マップチップを取得
 	virtual MAP_ID GetSceneID(void) = 0;
 	Vector2 GetOffSet(void);
 	void SetOffSet(Vector2 offset);
 protected:
 	Vector2 mOffset;
 	int mChipImage[10000];
-
-
+	int mMap[MAP_Y][MAP_X];
+	
 	/*MAP_ID mMapID;*/
 		//座標を指定してマップチップデータをもらう。
 

@@ -223,7 +223,6 @@ SweetsSchoolMap::~SweetsSchoolMap()
 
 void SweetsSchoolMap::Update(Vector2 offset)
 {
-	DrawOwnScn();
 	mOffset = { offset.x_,offset.y_ };
 }
 
@@ -253,4 +252,9 @@ bool SweetsSchoolMap::Init(void)
 	//SetMap(mapID);
 
 	return true;
+}
+
+int SweetsSchoolMap::GetMapChip(Vector2 pos)
+{
+	return 0;
 }

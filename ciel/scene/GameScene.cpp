@@ -49,7 +49,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     lpMapMng.Update();
 
     mPlayer->Update();
-
+	
     return std::move(own);
 }
 
@@ -64,7 +64,7 @@ void GameScene::DrawOwnScn()
 
 bool GameScene::Init(void)
 {
-
+	//lpMapMng.Init();
     mPlayer = new Player();
     mPlayer->init(this);
 
