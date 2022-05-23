@@ -501,8 +501,5 @@ bool SweetsMap::CheckMapChip(Vector2 pos)
 		return flg;
 }
 
-int SweetsMap::GetMapChip(Vector2 pos)
-{
-	return 0;
-}
+
 

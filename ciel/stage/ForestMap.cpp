@@ -462,9 +462,9 @@ bool ForestMap::Init(void)
 	return true;
 }
 
-int ForestMap::GetMapChip(Vector2 pos)
+bool ForestMap::CheckMapChip(Vector2 pos)
 {
-	//①マップ座標(pos)をマップ配列のindexに変換す
-	//②マップ配列に入っているマップチップ番号を返す。
-	return mMap[pos.y_ / 32][pos.x_ / 32];
+	return false;
 }
+
+

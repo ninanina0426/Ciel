@@ -254,7 +254,8 @@ bool SweetsSchoolMap::Init(void)
 	return true;
 }
 
-int SweetsSchoolMap::GetMapChip(Vector2 pos)
+bool SweetsSchoolMap::CheckMapChip(Vector2 pos)
 {
-	return 0;
+	return false;
 }
+

@@ -13,6 +13,12 @@
     <ClCompile Include="_debug\_DebugConOut.cpp" />
     <ClCompile Include="_debug\_DebugDispOut.cpp" />
     <ClCompile Include="scene\Obj\Player.cpp" />
+    <ClCompile Include="stage\SweetsOutMap.cpp" />
+    <ClCompile Include="stage\SweetsSchoolMap.cpp" />
+    <ClCompile Include="stage\TempleInMap.cpp" />
+    <ClCompile Include="stage\templeMap.cpp" />
+    <ClCompile Include="stage\ForestInMap.cpp" />
+    <ClCompile Include="stage\ForestMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\details\Vector2.h" />
@@ -28,5 +34,11 @@
     <ClInclude Include="_debug\_DebugConOut.h" />
     <ClInclude Include="_debug\_DebugDispOut.h" />
     <ClInclude Include="scene\Obj\Player.h" />
+    <ClInclude Include="stage\SweetsOutMap.h" />
+    <ClInclude Include="stage\SweetsSchoolMap.h" />
+    <ClInclude Include="stage\TempleInMap.h" />
+    <ClInclude Include="stage\templeMap.h" />
+    <ClInclude Include="stage\ForestInMap.h" />
+    <ClInclude Include="stage\ForestMap.h" />
   </ItemGroup>
 </Project>

@@ -357,7 +357,8 @@ bool SweetsOutMap::Init(void)
 	return true;
 }
 
-int SweetsOutMap::GetMapChip(Vector2 pos)
+bool SweetsOutMap::CheckMapChip(Vector2 pos)
 {
-	return 0;
+	return false;
 }
+
