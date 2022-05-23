@@ -98,16 +98,20 @@ Vector2 Player::Update(void)
 			}
 
 		}
+
 		/*mPos = copyPos;*/
+		mPos = copyPos;
 
 		//ˆÚ“®”ÍˆÍ‚ðs‚¤
 		switch (mParent->GetEvent(copyPos))
 		{
-		case 6618:
-		case 6319:
-		case 6418:
-		case 6820:
+
+		
 			mMoveSpeed = 5;
+
+		case 1:
+			//mMoveSpeed = 5;
+
 			mPos = copyPos;
 			break;
 		default:

@@ -1,6 +1,5 @@
 #pragma once
 #include "BaseScene.h"
-
 #define lpSceneMng SceneMng::GetInstance()  //動的な関数
 
 constexpr int ScreenSizeX = 1080;			//スクリーンサイズ横

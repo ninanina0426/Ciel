@@ -323,7 +323,7 @@ SweetsOutMap::~SweetsOutMap()
 
 void SweetsOutMap::Update(Vector2 offset)
 {
-    DrawOwnScn();
+    //DrawOwnScn();
     mOffset = { offset.x_,offset.y_ };
 }
 
@@ -355,4 +355,9 @@ bool SweetsOutMap::Init(void)
 	//SetMap(mapID);
 
 	return true;
+}
+
+int SweetsOutMap::GetMapChip(Vector2 pos)
+{
+	return 0;
 }

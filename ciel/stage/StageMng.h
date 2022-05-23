@@ -21,12 +21,11 @@ public:
 	void Draw();
 	void Update(void);
 	bool Release(void);
-	
+	int GetMapChip(Vector2 pos);
+
 	Vector2 mOffset;
 	MAP_ID mMapID;
-	int mMap[MAP_Y][MAP_X];
 	int mChipImage[10000];
-	int GetMapChip(Vector2 pos);
 private:
 	StageMng();
 	~StageMng();

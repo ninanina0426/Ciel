@@ -325,7 +325,6 @@ ForestInMap::~ForestInMap()
 
 void ForestInMap::Update(Vector2 offset)
 {
-	DrawOwnScn();
 	mOffset = { offset.x_,offset.y_ };
 }
 
@@ -349,4 +348,9 @@ bool ForestInMap::Init(void)
 		return false;
 	}
 	return true;
+}
+
+int ForestInMap::GetMapChip(Vector2 pos)
+{
+	return mMap[pos.y_ / 32][pos.x_ / 32];
 }

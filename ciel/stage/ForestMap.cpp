@@ -428,9 +428,7 @@ ForestMap::~ForestMap()
 
 void ForestMap::Update(Vector2 offset)
 {
-	DrawOwnScn();
-	mOffset = { offset.x_,offset.y_ };
-    
+	mOffset = { offset.x_,offset.y_ };   
 }
 
 void ForestMap::DrawOwnScn()
@@ -462,4 +460,11 @@ bool ForestMap::Init(void)
 		return false;
 	}
 	return true;
+}
+
+int ForestMap::GetMapChip(Vector2 pos)
+{
+	//①マップ座標(pos)をマップ配列のindexに変換す
+	//②マップ配列に入っているマップチップ番号を返す。
+	return mMap[pos.y_ / 32][pos.x_ / 32];
 }

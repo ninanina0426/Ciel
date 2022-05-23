@@ -531,7 +531,6 @@ templeMap::~templeMap()
 
 void templeMap::Update(Vector2 offset)
 {	
-	DrawOwnScn();
 	mOffset = { offset.x_,offset.y_ };
 }
 
@@ -564,4 +563,9 @@ bool templeMap::Init(void)
 		return false;
 	}
 	return true;
+}
+
+int templeMap::GetMapChip(Vector2 pos)
+{
+	return mMap[pos.y_ / 32][pos.x_ / 32];
 }

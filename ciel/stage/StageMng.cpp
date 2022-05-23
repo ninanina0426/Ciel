@@ -12,16 +12,13 @@
 bool StageMng::Init()
 {
 	stage_ = std::make_unique<SweetsMap>();
-	//mPlayer = new Player();
-	//mPlayer->init();
 
     return true;
 }
 
 void StageMng::Draw()
 {
-	stage_->DrawOwnScn();
-	/*mPlayer->Draw(mOffset);*/
+	stage_->DrawOwnScn();		//それぞれのマップを描画
 }
 
 void StageMng::Update(void)
@@ -73,10 +70,10 @@ bool StageMng::Release(void)
 
 int StageMng::GetMapChip(Vector2 pos)
 {
-    //①マップ座標(pos)をマップ配列のindexに変換す
-//	//②マップ配列に入っているマップチップ番号を返す。
-    return mMap[pos.y_ / 32][pos.x_ / 32];
+	return stage_->GetMapChip(pos);
 }
+
+
 
 StageMng::StageMng()
 {

@@ -15,18 +15,7 @@ Stage::~Stage()
 
 void Stage::Draw()
 {
-	//for (int x = 0; x < MAP_X; x++)
-	//{
-	//	for (int y = 0; y < MAP_Y; y++)
-	//	{
-	//		mMap[y][x];
-	//		
-
-	//		DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[mMap[y][x]], true);
-	//		/*DrawFormatString(32 * x - mOffset.X, 32 * y - mOffset.Y, GetColor(255, 255, 255), "%d", mMap[y][x]);*/
-
-	//	}
-	//}
+	
 }
 
 Vector2 Stage::GetOffSet(void)

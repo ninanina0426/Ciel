@@ -428,7 +428,6 @@ SweetsMap::~SweetsMap()
 
 void SweetsMap::Update(Vector2 offset)
 {
-	DrawOwnScn();
 	mOffset = { offset.x_,offset.y_ };
 }
 
@@ -464,4 +463,8 @@ bool SweetsMap::Init(void)
 	return true;
 }
 
+int SweetsMap::GetMapChip(Vector2 pos)
+{
+	return 0;
+}
 
