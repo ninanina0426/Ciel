@@ -470,7 +470,7 @@ bool SweetsMap::CheckMapChip(Vector2 pos)
 	layer3= mMapObj[pos.y_ / 16][pos.x_ / 16];
 	layer4= mMapShadow[pos.y_ / 16][pos.x_ / 16];
 
-	bool flg=false;	//true=player‚ª•à‚¯‚é
+	bool flg=true;	//true=player‚ª•à‚¯‚é
 
 		//ˆÚ“®”ÍˆÍ‚ğs‚¤
 		switch (layer1)
@@ -479,7 +479,20 @@ bool SweetsMap::CheckMapChip(Vector2 pos)
 		case 6319:
 		case 6418:
 		case 6820:
-			flg=true;
+		case 7621:
+		case 7721:
+		case 7319:
+		case 7419:
+		case 7019:
+		case 7020:
+		case 7021:
+		case 7022:
+		case 6718:
+		case 6818:
+		case 6819:
+		case 7018:
+		
+			/*flg=true;*/
 			break;
 		default:
 			break;

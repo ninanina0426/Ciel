@@ -12,7 +12,7 @@ public:
     ~GameScene();
 
     //チップ座標を受け取りマップチップ番号を返す
-    void GetEvent(Vector2 pos);
+    /*void GetEvent(Vector2 pos);*/
 private:
     uniquBaseScn Update(uniquBaseScn own) override;     //タイトルシーンUpdata
     void DrawOwnScn() override;                         //タイトルシーンDraw

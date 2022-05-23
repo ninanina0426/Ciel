@@ -19,11 +19,11 @@ public:
 	
 	bool Init();
 	void Draw();
-	void Update(void);
+	void Update(Vector2 mPlayerset);
 	bool Release(void);
 	int GetMapChipMng(Vector2 pos);
 	bool cheakMapChip(Vector2 pos);
-
+	void GetEvent(Vector2 pos);
 	Vector2 mOffset;
 	MAP_ID mMapID;
 	int mChipImage[10000];
@@ -34,6 +34,11 @@ private:
 	Player* mPlayer;
 
 	uniquStage stage_;		//ステージ管理
+
+	 //マップの変更処理
+	bool mMapChange;
+	MAP_ID mNextMapID;
+	Vector2 mNextPos;
 
 	friend Stage;
 };
