@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include "TempleInMap.h"
+#include"../scene/Obj/Player.h"
 
 int ti_soil[MAP_X][MAP_Y] = {
     -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
@@ -327,6 +328,7 @@ void TempleInMap::Update(Vector2 offset)
 {
 	DrawOwnScn();
 	mOffset = { offset.x_,offset.y_ };
+	/*mPlayer->Update();*/
 }
 
 void TempleInMap::DrawOwnScn()
@@ -341,6 +343,8 @@ void TempleInMap::DrawOwnScn()
 
 		}
 	}
+
+	/*mPlayer->Draw(mOffset);*/
 }
 
 bool TempleInMap::Init(void)
@@ -349,5 +353,8 @@ bool TempleInMap::Init(void)
 	{
 		return false;
 	}
+	//mPlayer = new Player();
+	//mPlayer->init();
+
 	return true;
 }

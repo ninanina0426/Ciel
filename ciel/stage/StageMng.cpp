@@ -6,17 +6,22 @@
 #include "templeMap.h"
 #include "TempleInMap.h"
 #include "ForestInMap.h"
+#include"../scene/Obj/Player.h"
 
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<templeMap>();
+	stage_ = std::make_unique<SweetsMap>();
+	//mPlayer = new Player();
+	//mPlayer->init();
+
     return true;
 }
 
 void StageMng::Draw()
 {
 	stage_->DrawOwnScn();
+	/*mPlayer->Draw(mOffset);*/
 }
 
 void StageMng::Update(void)
@@ -53,6 +58,7 @@ void StageMng::Update(void)
 	{
 		stage_ = std::move(std::make_unique<ForestInMap>());
 	}
+	/*mPlayer->Update();*/
 
 }
 

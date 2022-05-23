@@ -1,5 +1,7 @@
 #pragma once
 #include "Stage.h"
+class Player;
+
 class TempleInMap :
     public Stage
 {
@@ -11,5 +13,7 @@ private:
 	void DrawOwnScn() override;
 	bool Init(void)override;
 	MAP_ID GetSceneID(void) { return MAP_ID::TEMPLEIN; };
+
+	Player* mPlayer;
 };
 

@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="scene\Obj\Player.cpp" />
     <ClCompile Include="stage\ForestInMap.cpp" />
     <ClCompile Include="stage\ForestMap.cpp" />
     <ClCompile Include="main.cpp" />
@@ -172,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="common\details\Vector2.h" />
     <ClInclude Include="common\Vector2.h" />
+    <ClInclude Include="scene\Obj\Player.h" />
     <ClInclude Include="stage\ForestInMap.h" />
     <ClInclude Include="stage\ForestMap.h" />
     <ClInclude Include="scene\BaseScene.h" />
