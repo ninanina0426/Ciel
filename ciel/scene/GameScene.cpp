@@ -15,31 +15,31 @@ GameScene::~GameScene()
 {
 }
 
-void GameScene::GetEvent(Vector2 pos)
-{
-    lpMapMng.cheakMapChip(pos);
-	/*int chipID = mSweetsMap->GetMapChip(pos);*/
-	//階段等でステージ切り替え
-	//if (chipID == 15)
-	//{
-	//	if (lpMapMng.mMapID == MAP_ID::SWEETS)
-	//	{
-	//		//マップを切り替えることになった
-	//		mMapChange = true;
-	//		mNextMapID = MAP_ID::SWEETSOUT;
-	//		mNextPos = { 1 * 32 + 32 / 2,1 * 32 + 32 / 2, };
-	//	}
-	//	else if (lpMapMng.mMapID == MAP_ID::SWEETSOUT)
-	//	{
-	//		mMapChange = true;
-	//		mNextMapID = MAP_ID::SWEETS;
-	//		mNextPos = { 3 * 32 + 32 / 2,3 * 32 + 32 / 2, };
-	//	}
-
-	//}
-
-	/*return chipID;*/
-}
+//void GameScene::GetEvent(Vector2 pos)
+//{
+//    int chipID= lpMapMng.cheakMapChip(pos);
+//	/*int chipID = mSweetsMap->GetMapChip(pos);*/
+//	//階段等でステージ切り替え
+//	//if (chipID == 15)
+//	//{
+//	//	if (lpMapMng.mMapID == MAP_ID::SWEETS)
+//	//	{
+//	//		//マップを切り替えることになった
+//	//		mMapChange = true;
+//	//		mNextMapID = MAP_ID::SWEETSOUT;
+//	//		mNextPos = { 1 * 32 + 32 / 2,1 * 32 + 32 / 2, };
+//	//	}
+//	//	else if (lpMapMng.mMapID == MAP_ID::SWEETSOUT)
+//	//	{
+//	//		mMapChange = true;
+//	//		mNextMapID = MAP_ID::SWEETS;
+//	//		mNextPos = { 3 * 32 + 32 / 2,3 * 32 + 32 / 2, };
+//	//	}
+//
+//	//}
+//
+//	/*return chipID;*/
+//}
 
 uniquBaseScn GameScene::Update(uniquBaseScn own)
 {
