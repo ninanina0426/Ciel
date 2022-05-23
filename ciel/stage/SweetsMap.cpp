@@ -463,8 +463,33 @@ bool SweetsMap::Init(void)
 	return true;
 }
 
+bool SweetsMap::CheckMapChip(Vector2 pos)
+{
+	layer1= mMapNomal[pos.y_ / 16][pos.x_ / 16];
+	layer2= mMapRoad[pos.y_ / 16][pos.x_ / 16];
+	layer3= mMapObj[pos.y_ / 16][pos.x_ / 16];
+	layer4= mMapShadow[pos.y_ / 16][pos.x_ / 16];
+
+	bool flg=false;	//true=player‚ª•à‚¯‚é
+
+		//ˆÚ“®”ÍˆÍ‚ğs‚¤
+		switch (layer1)
+		{
+		case 6618:
+		case 6319:
+		case 6418:
+		case 6820:
+			flg=true;
+			break;
+		default:
+			break;
+		}
+
+		return flg;
+}
+
 int SweetsMap::GetMapChip(Vector2 pos)
 {
-	return mMapNomal[pos.y_ / 16][pos.x_ / 16];
+	return 0;
 }
 

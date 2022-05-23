@@ -22,6 +22,7 @@ public:
 	void Update(void);
 	bool Release(void);
 	int GetMapChipMng(Vector2 pos);
+	bool cheakMapChip(Vector2 pos);
 
 	Vector2 mOffset;
 	MAP_ID mMapID;

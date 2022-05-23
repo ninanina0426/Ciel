@@ -1,13 +1,14 @@
 #include "StageMng.h"
-#include "ForestMap.h"
-#include "SweetsMap.h"
-#include"SweetsOutMap.h"
-#include"SweetsSchoolMap.h"
-#include "templeMap.h"
-#include "TempleInMap.h"
-#include "ForestInMap.h"
-#include"../scene/Obj/Player.h"
 
+#include "SweetsMap.h"
+
+#include"../scene/Obj/Player.h"
+//#include"SweetsOutMap.h"
+//#include"SweetsSchoolMap.h"
+//#include "ForestMap.h"
+//#include "templeMap.h"
+//#include "TempleInMap.h"
+//#include "ForestInMap.h"
 
 bool StageMng::Init()
 {
@@ -43,7 +44,7 @@ void StageMng::Update(void)
 
 	stage_->Update(mOffset);
 
-	if (CheckHitKey(KEY_INPUT_A))
+	/*if (CheckHitKey(KEY_INPUT_A))
 	{
 		stage_ = std::move(std::make_unique<ForestMap>());
 	}
@@ -54,7 +55,7 @@ void StageMng::Update(void)
 	if (CheckHitKey(KEY_INPUT_D))
 	{
 		stage_ = std::move(std::make_unique<ForestInMap>());
-	}
+	}*/
 	/*mPlayer->Update();*/
 
 }
@@ -71,6 +72,11 @@ bool StageMng::Release(void)
 int StageMng::GetMapChipMng(Vector2 pos)
 {
 	return stage_->GetMapChip(pos);
+}
+
+bool StageMng::cheakMapChip(Vector2 pos)
+{
+	return stage_->CheckMapChip(pos);
 }
 
 

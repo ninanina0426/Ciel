@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include "Player.h"
+#include"../../stage/StageMng.h"
 #include"../../scene/GameScene.h"
 
 bool Player::init(GameScene* parent)
@@ -100,23 +101,30 @@ Vector2 Player::Update(void)
 		}
 
 		/*mPos = copyPos;*/
-		mPos = copyPos;
-
-		//ˆÚ“®”ÍˆÍ‚ðs‚¤
-		switch (mParent->GetEvent(copyPos))
-		{
-
 		
-			mMoveSpeed = 5;
 
-		case 1:
-			//mMoveSpeed = 5;
-
+		if (lpMapMng.cheakMapChip(copyPos))
+		{
 			mPos = copyPos;
-			break;
-		default:
-			break;
 		}
+
+
+		/*mParent->GetEvent(copyPos);*/
+	//	//ˆÚ“®”ÍˆÍ‚ðs‚¤
+	//	switch (mParent->GetEvent(copyPos))
+	//	{
+
+	//	
+	//		mMoveSpeed = 5;
+
+	//	case 1:
+	//		//mMoveSpeed = 5;
+
+	//		mPos = copyPos;
+	//		break;
+	//	default:
+	//		break;
+	//	}
 	}
 
 	mAnmCnt++;

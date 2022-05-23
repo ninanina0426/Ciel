@@ -1,5 +1,6 @@
 #pragma once
 #include "../../common/Vector2.h"
+
 class GameScene;
 
 enum DIR		//Œü‚«ŠÇ——p
@@ -18,6 +19,8 @@ private:
 	
 
 	GameScene* mParent;
+
+
 
 	/*GameScene* mParent;*/
 

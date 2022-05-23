@@ -15,9 +15,9 @@ GameScene::~GameScene()
 {
 }
 
-int GameScene::GetEvent(Vector2 pos)
+void GameScene::GetEvent(Vector2 pos)
 {
-	int chipID = lpMapMng.GetMapChipMng(pos);
+    lpMapMng.cheakMapChip(pos);
 	/*int chipID = mSweetsMap->GetMapChip(pos);*/
 	//階段等でステージ切り替え
 	//if (chipID == 15)
@@ -38,7 +38,7 @@ int GameScene::GetEvent(Vector2 pos)
 
 	//}
 
-	return chipID;
+	/*return chipID;*/
 }
 
 uniquBaseScn GameScene::Update(uniquBaseScn own)
