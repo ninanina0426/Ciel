@@ -6,8 +6,8 @@ bool Player::init(GameScene* parent)
 {
 	mParent = parent;
 
-	mPos.x_ = 600;
-	mPos.y_ = 100;
+	mPos.x_ = 260;
+	mPos.y_ = 175;
 
 	
 	mSizeOffset.x_ = 0;
@@ -98,11 +98,15 @@ Vector2 Player::Update(void)
 			}
 
 		}
+		/*mPos = copyPos;*/
 
 		//ˆÚ“®”ÍˆÍ‚ðs‚¤
 		switch (mParent->GetEvent(copyPos))
 		{
-		case 1:
+		case 6618:
+		case 6319:
+		case 6418:
+		case 6820:
 			mMoveSpeed = 5;
 			mPos = copyPos;
 			break;
@@ -119,6 +123,7 @@ Vector2 Player::Update(void)
 void Player::Draw(Vector2 offset)
 {
 	DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - mSizeOffset.y_, mImage[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
 }
 
 bool Player::Release(void)

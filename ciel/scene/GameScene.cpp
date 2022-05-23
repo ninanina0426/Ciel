@@ -4,6 +4,7 @@
 #include "../stage/StageMng.h"
 
 
+
 GameScene::GameScene(/*SceneMng* manager*/)
 {
     Init();
@@ -17,6 +18,7 @@ GameScene::~GameScene()
 int GameScene::GetEvent(Vector2 pos)
 {
 	int chipID = lpMapMng.GetMapChip(pos);
+	/*int chipID = mSweetsMap->GetMapChip(pos);*/
 	//階段等でステージ切り替え
 	//if (chipID == 15)
 	//{
@@ -59,7 +61,7 @@ void GameScene::DrawOwnScn()
     ClsDrawScreen();
     lpMapMng.Draw();
 
-    mPlayer->Draw(mMapOffset);
+	 mPlayer->Draw(mMapOffset);
 }
 
 bool GameScene::Init(void)
