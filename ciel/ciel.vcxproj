@@ -158,9 +158,15 @@
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="scene\SceneMng.cpp" />
     <ClCompile Include="scene\TitleScene.cpp" />
+    <ClCompile Include="stage\ForestInMap.cpp" />
+    <ClCompile Include="stage\ForestMap.cpp" />
     <ClCompile Include="stage\StageMng.cpp" />
     <ClCompile Include="stage\Stage.cpp" />
     <ClCompile Include="stage\SweetsMap.cpp" />
+    <ClCompile Include="stage\SweetsOutMap.cpp" />
+    <ClCompile Include="stage\SweetsSchoolMap.cpp" />
+    <ClCompile Include="stage\TempleInMap.cpp" />
+    <ClCompile Include="stage\templeMap.cpp" />
     <ClCompile Include="_debug\_DebugConOut.cpp" />
     <ClCompile Include="_debug\_DebugDispOut.cpp" />
   </ItemGroup>
@@ -173,9 +179,15 @@
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="scene\SceneMng.h" />
     <ClInclude Include="scene\TitleScene.h" />
+    <ClInclude Include="stage\ForestInMap.h" />
+    <ClInclude Include="stage\ForestMap.h" />
     <ClInclude Include="stage\StageMng.h" />
     <ClInclude Include="stage\Stage.h" />
     <ClInclude Include="stage\SweetsMap.h" />
+    <ClInclude Include="stage\SweetsOutMap.h" />
+    <ClInclude Include="stage\SweetsSchoolMap.h" />
+    <ClInclude Include="stage\TempleInMap.h" />
+    <ClInclude Include="stage\templeMap.h" />
     <ClInclude Include="_debug\_DebugConOut.h" />
     <ClInclude Include="_debug\_DebugDispOut.h" />
   </ItemGroup>

@@ -565,7 +565,8 @@ bool templeMap::Init(void)
 	return true;
 }
 
-int templeMap::GetMapChip(Vector2 pos)
+bool templeMap::CheckMapChip(Vector2 pos)
 {
-	return mMap[pos.y_ / 32][pos.x_ / 32];
+	return false;
 }
+

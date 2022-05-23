@@ -34,10 +34,7 @@ public:
 	virtual void Draw();
 	virtual void DrawOwnScn() = 0;		//各シーンのDraw
 	virtual bool Init(void) = 0;
-	
-
-	virtual bool CheckMapChip(Vector2 pos)=0;
-	virtual int GetMapChip(Vector2 pos) = 0;		//各マップチップを取得
+	virtual bool CheckMapChip(Vector2 pos)=0;  //当たり判定
 	virtual MAP_ID GetSceneID(void) = 0;
 	Vector2 GetOffSet(void);
 	void SetOffSet(Vector2 offset);

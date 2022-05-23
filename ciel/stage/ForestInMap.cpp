@@ -350,7 +350,8 @@ bool ForestInMap::Init(void)
 	return true;
 }
 
-int ForestInMap::GetMapChip(Vector2 pos)
+bool ForestInMap::CheckMapChip(Vector2 pos)
 {
-	return mMap[pos.y_ / 32][pos.x_ / 32];
+	return false;
 }
+
