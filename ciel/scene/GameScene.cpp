@@ -17,7 +17,7 @@ GameScene::~GameScene()
 
 int GameScene::GetEvent(Vector2 pos)
 {
-	int chipID = lpMapMng.GetMapChip(pos);
+	int chipID = lpMapMng.GetMapChipMng(pos);
 	/*int chipID = mSweetsMap->GetMapChip(pos);*/
 	//階段等でステージ切り替え
 	//if (chipID == 15)

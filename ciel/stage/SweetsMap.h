@@ -12,7 +12,7 @@ public:
 	MAP_ID mMapID;
 	int mMap[MAP_Y][MAP_X];
 
-	int GetMapChip(Vector2 pos);
+	
 private:
 	void Update(Vector2 offset) override;
 	void DrawOwnScn() override;

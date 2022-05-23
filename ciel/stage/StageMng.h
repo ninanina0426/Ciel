@@ -21,7 +21,7 @@ public:
 	void Draw();
 	void Update(void);
 	bool Release(void);
-	int GetMapChip(Vector2 pos);
+	int GetMapChipMng(Vector2 pos);
 
 	Vector2 mOffset;
 	MAP_ID mMapID;

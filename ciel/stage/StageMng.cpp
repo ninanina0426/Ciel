@@ -68,7 +68,7 @@ bool StageMng::Release(void)
 	return true;
 }
 
-int StageMng::GetMapChip(Vector2 pos)
+int StageMng::GetMapChipMng(Vector2 pos)
 {
 	return stage_->GetMapChip(pos);
 }

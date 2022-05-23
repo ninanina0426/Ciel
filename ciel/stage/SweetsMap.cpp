@@ -465,6 +465,6 @@ bool SweetsMap::Init(void)
 
 int SweetsMap::GetMapChip(Vector2 pos)
 {
-	return 0;
+	return mMapNomal[pos.y_ / 16][pos.x_ / 16];
 }
 
