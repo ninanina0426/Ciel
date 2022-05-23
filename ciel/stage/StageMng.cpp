@@ -22,7 +22,7 @@ void StageMng::Draw()
 	stage_->DrawOwnScn();		//‚»‚ê‚¼‚ê‚Ìƒ}ƒbƒv‚ð•`‰æ
 }
 
-void StageMng::Update(void)
+void StageMng::Update(Vector2 mPlayerset)
 {
 	// ”wŒiiƒJƒƒ‰j‚Ì‘€ì
 	if (CheckHitKey(KEY_INPUT_RIGHT))
@@ -40,6 +40,43 @@ void StageMng::Update(void)
 	if (CheckHitKey(KEY_INPUT_DOWN))
 	{
 		mOffset.y_ += 4;
+	}
+
+	if (mPlayerset.x_ - mOffset.x_ > 512)
+	{
+		mOffset.x_ += 4;
+	}
+
+	if (mPlayerset.x_ - mOffset.x_ < 128)
+	{
+		mOffset.x_ -= 4;
+
+	}
+	if (mPlayerset.y_ - mOffset.y_ < 128)
+	{
+		mOffset.y_ -= 4;
+
+	}
+	if (mPlayerset.y_ - mOffset.y_ > 384)
+	{
+		mOffset.y_ += 4;
+	}
+
+	if (mOffset.x_ > 900)
+	{
+		mOffset.x_ = 900;
+	}
+	if (mOffset.x_ < 0)
+	{
+		mOffset.x_ = 0;
+	}
+	if (mOffset.y_ < 0)
+	{
+		mOffset.y_ = 0;
+	}
+	if (mOffset.y_ > 1500)
+	{
+		mOffset.y_ = 1500;
 	}
 
 	stage_->Update(mOffset);

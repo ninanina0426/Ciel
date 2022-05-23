@@ -19,7 +19,7 @@ public:
 	
 	bool Init();
 	void Draw();
-	void Update(void);
+	void Update(Vector2 mPlayerset);
 	bool Release(void);
 	int GetMapChipMng(Vector2 pos);
 	bool cheakMapChip(Vector2 pos);

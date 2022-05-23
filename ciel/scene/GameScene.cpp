@@ -48,7 +48,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         return std::make_unique<GameScene>(std::move(own));
     }*/
     DrawOwnScn();//ŒÂ•Ê‚ÌDrawˆ—‚Èˆ×•K‚¸‘‚­
-    lpMapMng.Update();
+    lpMapMng.Update(mPlayer->GetPos());
 
     mPlayer->Update();
 	

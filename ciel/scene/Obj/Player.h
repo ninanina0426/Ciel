@@ -45,5 +45,7 @@ public:
 	DIR GetDIR(void);
 	void SetPos(Vector2 pos);
 	Vector2 GetSiz(void);
+	Vector2 GetPos(void);
+
 };
 

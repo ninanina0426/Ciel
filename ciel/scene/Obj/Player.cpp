@@ -161,3 +161,8 @@ Vector2 Player::GetSiz(void)
 {
 	return mSize;
 }
+
+Vector2 Player::GetPos(void)
+{
+	return mPos;
+}
