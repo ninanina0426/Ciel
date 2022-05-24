@@ -428,13 +428,12 @@ ForestMap::~ForestMap()
 
 void ForestMap::Update(Vector2 offset)
 {
-	DrawOwnScn();
-	mOffset = { offset.x_,offset.y_ };
-    
+	mOffset = { offset.x_,offset.y_ };   
 }
 
 void ForestMap::DrawOwnScn()
 {
+
 	for (int x = 0; x < MAP_X; x++)
 	{
 		for (int y = 0; y < MAP_Y; y++)
@@ -460,8 +459,12 @@ bool ForestMap::Init(void)
 	{
 		return false;
 	}
-
-	//SetMap(mapID);
-
 	return true;
 }
+
+bool ForestMap::CheckMapChip(Vector2 pos)
+{
+	return false;
+}
+
+

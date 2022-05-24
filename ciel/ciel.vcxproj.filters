@@ -1,18 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="scene\BaseScene.cpp" />
+    <ClCompile Include="scene\EndScene.cpp" />
+    <ClCompile Include="scene\GameScene.cpp" />
+    <ClCompile Include="scene\SceneMng.cpp" />
+    <ClCompile Include="scene\TitleScene.cpp" />
+    <ClCompile Include="stage\StageMng.cpp" />
+    <ClCompile Include="stage\Stage.cpp" />
+    <ClCompile Include="stage\SweetsMap.cpp" />
+    <ClCompile Include="_debug\_DebugConOut.cpp" />
+    <ClCompile Include="_debug\_DebugDispOut.cpp" />
+    <ClCompile Include="scene\Obj\Player.cpp" />
+    <ClCompile Include="stage\SweetsOutMap.cpp" />
+    <ClCompile Include="stage\SweetsSchoolMap.cpp" />
+    <ClCompile Include="stage\TempleInMap.cpp" />
+    <ClCompile Include="stage\templeMap.cpp" />
+    <ClCompile Include="stage\ForestInMap.cpp" />
+    <ClCompile Include="stage\ForestMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -116,5 +122,26 @@
     <ClInclude Include="stage\DarkTemple.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+
+    <ClInclude Include="common\details\Vector2.h" />
+    <ClInclude Include="common\Vector2.h" />
+    <ClInclude Include="scene\BaseScene.h" />
+    <ClInclude Include="scene\EndScene.h" />
+    <ClInclude Include="scene\GameScene.h" />
+    <ClInclude Include="scene\SceneMng.h" />
+    <ClInclude Include="scene\TitleScene.h" />
+    <ClInclude Include="stage\StageMng.h" />
+    <ClInclude Include="stage\Stage.h" />
+    <ClInclude Include="stage\SweetsMap.h" />
+    <ClInclude Include="_debug\_DebugConOut.h" />
+    <ClInclude Include="_debug\_DebugDispOut.h" />
+    <ClInclude Include="scene\Obj\Player.h" />
+    <ClInclude Include="stage\SweetsOutMap.h" />
+    <ClInclude Include="stage\SweetsSchoolMap.h" />
+    <ClInclude Include="stage\TempleInMap.h" />
+    <ClInclude Include="stage\templeMap.h" />
+    <ClInclude Include="stage\ForestInMap.h" />
+    <ClInclude Include="stage\ForestMap.h" />
+
   </ItemGroup>
 </Project>

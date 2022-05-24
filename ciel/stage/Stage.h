@@ -21,6 +21,13 @@ enum class MAP_ID
 	CAVE,
 	CAVESHOP,
 	DARK,
+	FORESTIN,
+	TEMPLE,
+	TEMPLEIN,
+	SWEETS,
+	SWEETSOUT,
+	SWEETSSCHOOL,
+
 	MAX
 };
 
@@ -33,15 +40,15 @@ public:
 	virtual void Draw();
 	virtual void DrawOwnScn() = 0;		//各シーンのDraw
 	virtual bool Init(void) = 0;
-	
+	virtual bool CheckMapChip(Vector2 pos)=0;  //当たり判定
 	virtual MAP_ID GetSceneID(void) = 0;
 	Vector2 GetOffSet(void);
 	void SetOffSet(Vector2 offset);
 protected:
 	Vector2 mOffset;
 	int mChipImage[10000];
-
-
+	int mMap[MAP_Y][MAP_X];
+	
 	/*MAP_ID mMapID;*/
 		//座標を指定してマップチップデータをもらう。
 
