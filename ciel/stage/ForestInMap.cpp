@@ -337,6 +337,9 @@ void ForestInMap::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[fi_soil[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[fi_tree[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[fi_obj1[y][x]], true);
+
+			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 0, 0), "%d", fi_soil[y][x]);
+
 		}
 	}
 }
@@ -352,6 +355,25 @@ bool ForestInMap::Init(void)
 
 bool ForestInMap::CheckMapChip(Vector2 pos)
 {
-	return false;
+	soil = fi_soil[pos.y_ / 32][pos.x_ / 32];
+	tree = fi_tree[pos.y_ / 32][pos.x_ / 32];
+	obj1 = fi_obj1[pos.y_ / 32][pos.x_ / 32];
+
+	bool flg = false;	//true=playerÇ™ï‡ÇØÇÈ
+
+		//à⁄ìÆîÕàÕÇçsÇ§
+	switch (soil)
+	{
+	case -1:
+	case 896:
+	case 454:
+	case 337:
+		flg = true;
+		break;
+	default:
+		break;
+	}
+
+	return flg;
 }
 

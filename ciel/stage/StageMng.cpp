@@ -1,14 +1,12 @@
 #include "StageMng.h"
-
 #include "SweetsMap.h"
-
 #include"../scene/Obj/Player.h"
-//#include"SweetsOutMap.h"
-//#include"SweetsSchoolMap.h"
-//#include "ForestMap.h"
-//#include "templeMap.h"
-//#include "TempleInMap.h"
-//#include "ForestInMap.h"
+#include"SweetsOutMap.h"
+#include"SweetsSchoolMap.h"
+#include "ForestMap.h"
+#include "templeMap.h"
+#include "TempleInMap.h"
+#include "ForestInMap.h"
 
 bool StageMng::Init()
 {
@@ -42,7 +40,9 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 		mOffset.y_ += 6;
 	}
 
+
 	if (mPlayerset.x_ - mOffset.x_ > 520)
+
 	{
 		mOffset.x_ += 2;
 	}
@@ -80,9 +80,8 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 		mOffset.y_ = 1000;
 	}
 
-	stage_->Update(mOffset);
 
-	/*if (CheckHitKey(KEY_INPUT_A))
+	if (CheckHitKey(KEY_INPUT_A))
 	{
 		stage_ = std::move(std::make_unique<ForestMap>());
 	}
@@ -93,10 +92,13 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 	if (CheckHitKey(KEY_INPUT_D))
 	{
 		stage_ = std::move(std::make_unique<ForestInMap>());
-	}*/
-	/*mPlayer->Update();*/
+	}
 
+	stage_->Update(mOffset);
 	return mOffset;
+
+
+	
 
 }
 
