@@ -194,7 +194,6 @@
     <ClInclude Include="scene\SceneMng.h" />
     <ClInclude Include="scene\TitleScene.h" />
     <ClInclude Include="stage\ForestInMap.h" />
-    <ClInclude Include="stage\ForestMap.h" />
     <ClInclude Include="stage\StageMng.h" />
     <ClInclude Include="stage\Stage.h" />
     <ClInclude Include="stage\WaMap.h" />
