@@ -48,9 +48,10 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         return std::make_unique<GameScene>(std::move(own));
     }*/
     DrawOwnScn();//ŒÂ•Ê‚ÌDrawˆ—‚Èˆ×•K‚¸‘‚­
-    lpMapMng.Update(mPlayer->GetPos());
 
-    mPlayer->Update();
+    mMapOffset= lpMapMng.Update(PlayerPos);
+
+    PlayerPos=mPlayer->Update();
 	
     return std::move(own);
 }
@@ -61,7 +62,8 @@ void GameScene::DrawOwnScn()
     ClsDrawScreen();
     lpMapMng.Draw();
 
-	 mPlayer->Draw(mMapOffset);
+	 mPlayer->Draw(GameScene::mMapOffset);
+    
 }
 
 bool GameScene::Init(void)

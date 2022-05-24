@@ -446,7 +446,7 @@ void SweetsMap::DrawOwnScn()
 
 			DrawGraph(16 * x - mOffset.x_, 16 * y - mOffset.y_, mChipImage[mMapShadow[y][x]], true);
 			
-			DrawFormatString(16 * x - mOffset.x_, 16 * y - mOffset.y_, GetColor(255, 0, 0), "%d", mMapNomal[y][x]);
+			DrawFormatString(0,10, GetColor(255, 255, 255), "mapPos=(%d,%d)", mOffset.x_, mOffset.y_);
 		}
 	}
 }
