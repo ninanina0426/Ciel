@@ -151,6 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="stage\CaveMap.cpp" />
+    <ClCompile Include="stage\CaveShop.cpp" />
+    <ClCompile Include="stage\DarkTemple.cpp" />
     <ClCompile Include="stage\ForestMap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scene\BaseScene.cpp" />
@@ -160,13 +163,17 @@
     <ClCompile Include="scene\TitleScene.cpp" />
     <ClCompile Include="stage\StageMng.cpp" />
     <ClCompile Include="stage\Stage.cpp" />
-    <ClCompile Include="stage\waMap.cpp" />
+    <ClCompile Include="stage\WaMap.cpp" />
+    <ClCompile Include="stage\WaShop.cpp" />
     <ClCompile Include="_debug\_DebugConOut.cpp" />
     <ClCompile Include="_debug\_DebugDispOut.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\details\Vector2.h" />
     <ClInclude Include="common\Vector2.h" />
+    <ClInclude Include="stage\CaveMap.h" />
+    <ClInclude Include="stage\CaveShop.h" />
+    <ClInclude Include="stage\DarkTemple.h" />
     <ClInclude Include="stage\ForestMap.h" />
     <ClInclude Include="scene\BaseScene.h" />
     <ClInclude Include="scene\EndScene.h" />
@@ -175,7 +182,8 @@
     <ClInclude Include="scene\TitleScene.h" />
     <ClInclude Include="stage\StageMng.h" />
     <ClInclude Include="stage\Stage.h" />
-    <ClInclude Include="stage\waMap.h" />
+    <ClInclude Include="stage\WaMap.h" />
+    <ClInclude Include="stage\WaShop.h" />
     <ClInclude Include="_debug\_DebugConOut.h" />
     <ClInclude Include="_debug\_DebugDispOut.h" />
   </ItemGroup>

@@ -1,10 +1,14 @@
 #include "StageMng.h"
 #include "ForestMap.h"
-#include "waMap.h"
+#include "WaMap.h"
+#include "WaShop.h"
+#include "CaveShop.h"
+#include "CaveMap.h"
+#include "DarkTemple.h"
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<waMap>();
+	stage_ = std::make_unique<DarkTemple>();
     return true;
 }
 
