@@ -28,48 +28,52 @@ void StageMng::Draw()
 	stage_->DrawOwnScn();		//それぞれのマップを描画
 }
 
-void StageMng::Update(Vector2 mPlayerset)
+Vector2 StageMng::Update(Vector2 mPlayerset)
 {
 	// 背景（カメラ）の操作
 	if (CheckHitKey(KEY_INPUT_RIGHT))
 	{
-		mOffset.x_ += 4;
+		mOffset.x_ += 3;
 	}
 	if (CheckHitKey(KEY_INPUT_LEFT))
 	{
-		mOffset.x_ -= 4;
+		mOffset.x_ -= 3;
 	}
 	if (CheckHitKey(KEY_INPUT_UP))
 	{
-		mOffset.y_ -= 4;
+		mOffset.y_ -= 3;
 	}
 	if (CheckHitKey(KEY_INPUT_DOWN))
 	{
-		mOffset.y_ += 4;
-	}
-	if (mPlayerset.x_ - mOffset.x_ > 512)
-	{
-		mOffset.x_ += 4;
+		mOffset.y_ += 6;
 	}
 
-	if (mPlayerset.x_ - mOffset.x_ < 128)
-	{
-		mOffset.x_ -= 4;
 
-	}
-	if (mPlayerset.y_ - mOffset.y_ < 128)
-	{
-		mOffset.y_ -= 4;
+	if (mPlayerset.x_ - mOffset.x_ > 520)
 
-	}
-	if (mPlayerset.y_ - mOffset.y_ > 384)
 	{
-		mOffset.y_ += 4;
+		mOffset.x_ += 2;
 	}
 
-	if (mOffset.x_ > 900)
+	if (mPlayerset.x_ - mOffset.x_ < 900)
 	{
-		mOffset.x_ = 900;
+		mOffset.x_ -= 2;
+
+	}
+	//カメラ下移動制限
+	if (mPlayerset.y_ - mOffset.y_ < 400)
+	{
+		mOffset.y_ -= 2;
+
+	}
+	if (mPlayerset.y_ - mOffset.y_ > 1400)
+	{
+		mOffset.y_ += 2;
+	}
+
+	if (mOffset.x_ > 530)
+	{
+		mOffset.x_ = 530;
 	}
 	if (mOffset.x_ < 0)
 	{
@@ -79,9 +83,9 @@ void StageMng::Update(Vector2 mPlayerset)
 	{
 		mOffset.y_ = 0;
 	}
-	if (mOffset.y_ > 1500)
+	if (mOffset.y_ > 1000)
 	{
-		mOffset.y_ = 1500;
+		mOffset.y_ = 1000;
 	}
 
 
@@ -98,9 +102,12 @@ void StageMng::Update(Vector2 mPlayerset)
 		stage_ = std::move(std::make_unique<ForestInMap>());
 	}
 
-
-	/*mPlayer->Update();*/
 	stage_->Update(mOffset);
+	return mOffset;
+
+
+	
+
 }
 
 bool StageMng::Release(void)

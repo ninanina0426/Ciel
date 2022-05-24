@@ -19,6 +19,7 @@ private:
     bool Init(void) override;                           // タイトルシーン初期化
     SceneID GetSceneID(void) override { return SceneID::GAME; };   //sceneIDをタイトルに設定
 
+    Vector2 PlayerPos;
     //player
     Player*mPlayer;
 

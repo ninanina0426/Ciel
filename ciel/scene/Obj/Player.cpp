@@ -37,19 +37,19 @@ Vector2 Player::Update(void)
 	Vector2 copyPos = mPos;
 
 	//プレイヤーの操作
-	if (CheckHitKey(KEY_INPUT_H))
+	if (CheckHitKey(KEY_INPUT_DOWN))
 	{
 		keyDir = DIR_DOWN;
 	}
-	if (CheckHitKey(KEY_INPUT_Y))
+	if (CheckHitKey(KEY_INPUT_UP))
 	{
 		keyDir = DIR_UP;
 	}
-	if (CheckHitKey(KEY_INPUT_G))
+	if (CheckHitKey(KEY_INPUT_LEFT))
 	{
 		keyDir = DIR_LEFT;
 	}
-	if (CheckHitKey(KEY_INPUT_J))
+	if (CheckHitKey(KEY_INPUT_RIGHT))
 	{
 		keyDir = DIR_RIGHT;
 	}
@@ -73,9 +73,9 @@ Vector2 Player::Update(void)
 		if (keyDir == DIR_DOWN)
 		{
 			copyPos.y_ += mMoveSpeed;
-			if (copyPos.y_ > MAP_Y * 32)
+			if (copyPos.y_ > 1600)
 			{
-				copyPos.y_ = MAP_Y * 32;
+				copyPos.y_ = 1600;
 			}
 
 		}
@@ -83,9 +83,9 @@ Vector2 Player::Update(void)
 		if (keyDir == DIR_RIGHT)
 		{
 			copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
-			if (copyPos.x_ > MAP_X * 32)
+			if (copyPos.x_ > 1600)
 			{
-				copyPos.x_ = MAP_X * 32;
+				copyPos.x_ = 1600;
 			}
 
 		}
@@ -100,6 +100,7 @@ Vector2 Player::Update(void)
 
 		}
 
+		
 		/*mPos = copyPos;*/
 		
 
