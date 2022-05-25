@@ -91,7 +91,7 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 
 	if (CheckHitKey(KEY_INPUT_W))
 	{
-		stage_ = std::move(std::make_unique<CaveMap>());
+		stage_ = std::move(std::make_unique<WaMap>());
 	}
 	if (CheckHitKey(KEY_INPUT_A))
 	{

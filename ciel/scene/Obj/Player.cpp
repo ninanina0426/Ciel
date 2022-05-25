@@ -73,9 +73,9 @@ Vector2 Player::Update(void)
 		if (keyDir == DIR_DOWN)
 		{
 			copyPos.y_ += mMoveSpeed;
-			if (copyPos.y_ > 1600)
+			if (copyPos.y_ > 3000)
 			{
-				copyPos.y_ = 1600;
+				copyPos.y_ = 3000;
 			}
 
 		}
@@ -83,9 +83,9 @@ Vector2 Player::Update(void)
 		if (keyDir == DIR_RIGHT)
 		{
 			copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
-			if (copyPos.x_ > 1600)
+			if (copyPos.x_ > 3000)
 			{
-				copyPos.x_ = 1600;
+				copyPos.x_ = 3000;
 			}
 
 		}
