@@ -35,6 +35,8 @@ void SceneMng::Run(void)
 		SetDrawScreen(DX_SCREEN_BACK);//転写するだけのバックバッファ
 		ClsDrawScreen();
 
+
+		
 		scene_->Draw();				//シーンのDraw
 		
 		_dbgDraw();

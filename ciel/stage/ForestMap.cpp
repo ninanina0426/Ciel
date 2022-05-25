@@ -426,6 +426,11 @@ ForestMap::~ForestMap()
 {
 }
 
+void ForestMap::SetMap(MAP_ID mapID)
+{
+	mMapID = mapID;
+}
+
 void ForestMap::Update(Vector2 offset)
 {
 	mOffset = { offset.x_,offset.y_ };   
@@ -447,7 +452,7 @@ void ForestMap::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[mMap2[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[mMap3[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[mMap4[y][x]], true);
-			/*DrawFormatString(32 * x - mOffset.X, 32 * y - mOffset.Y, GetColor(255, 255, 255), "%d", mMap[y][x]);*/
+			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", mMap3[y][x]);
 
 		}
 	}
@@ -464,7 +469,14 @@ bool ForestMap::Init(void)
 
 bool ForestMap::CheckMapChip(Vector2 pos)
 {
-	return false;
+	bool Flg = true;
+
+	return Flg;
+}
+
+int ForestMap::GetMapChip(Vector2 pos)
+{
+	return mMap3[pos.y_ / 32][pos.x_ / 32];
 }
 
 

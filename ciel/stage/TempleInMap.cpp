@@ -363,3 +363,8 @@ bool TempleInMap::CheckMapChip(Vector2 pos)
 	return false;
 }
 
+int TempleInMap::GetMapChip(Vector2 pos)
+{
+	return 0;
+}
+

@@ -1,14 +1,26 @@
 #include <DxLib.h>
 #include "Player.h"
 #include"../../stage/StageMng.h"
-#include"../../scene/GameScene.h"
 
-bool Player::init(GameScene* parent)
+
+
+
+Player::Player()
 {
-	mParent = parent;
+	init();
+}
 
-	mPos.x_ = 260;
-	mPos.y_ = 175;
+Player::~Player()
+{
+}
+
+bool Player::init(void)
+{
+	/*mParent = parent;*/
+
+
+	/*mPos.x_ = 260;
+	mPos.y_ = 175;*/
 
 	
 	mSizeOffset.x_ = 0;
@@ -102,13 +114,44 @@ Vector2 Player::Update(void)
 
 		
 		/*mPos = copyPos;*/
+		/*switch (lpMapMng.GetEvent(copyPos))
+		{
+		case -1:
+		case 1407:
+		case 1315:
+			mPos = copyPos;
+		default:
+			break;
+		}*/
+
+
+		
+		if (lpMapMng.GetEvent(copyPos) == true)
+		{
+			copyPos = lpMapMng.GetPos();
+
+			lpMapMng.mMapChange = false;
+			/*lpMapMng.mMapChange = false;*/
+
+		}
+		else if(lpMapMng.GetEvent(copyPos) == false)
+		{
+			lpMapMng.GetEvent(copyPos);
+		}
+		
 		
 
 		if (lpMapMng.cheakMapChip(copyPos))
 		{
 			mPos = copyPos;
 		}
-
+		
+		/*mPos = copyPos;*/
+		
+	
+		
+		
+		
 	}
 
 	mAnmCnt++;
@@ -120,6 +163,7 @@ void Player::Draw(Vector2 offset)
 {
 	DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - mSizeOffset.y_, mImage[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
+
 }
 
 bool Player::Release(void)

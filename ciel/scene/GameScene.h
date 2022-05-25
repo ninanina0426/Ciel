@@ -1,9 +1,9 @@
 #pragma once
 #include "BaseScene.h"
-//#include"../scene/Obj/Player.h"
+#include"../scene/Obj/Player.h"
 #include "../stage/stage.h"
 class SceneMng;
-class Player;
+//class Player;
 
 class GameScene : public BaseScene
 {
@@ -21,7 +21,7 @@ private:
 
     Vector2 PlayerPos;
     //player
-    Player*mPlayer;
+    Player mPlayer;
 
     //マップの変更処理
     bool mMapChange;

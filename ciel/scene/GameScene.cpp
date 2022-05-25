@@ -1,6 +1,5 @@
 #include <DxLib.h>
 #include "GameScene.h"
-#include"../scene/Obj/Player.h"
 #include "../stage/StageMng.h"
 
 
@@ -49,10 +48,11 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     }*/
     DrawOwnScn();//ŒÂ•Ê‚ÌDrawˆ—‚Èˆ×•K‚¸‘‚­
 
-    mMapOffset= lpMapMng.Update(PlayerPos);
+    mMapOffset = lpMapMng.Update(PlayerPos);
 
-    PlayerPos=mPlayer->Update();
-	
+    PlayerPos = mPlayer.Update();
+
+   
     return std::move(own);
 }
 
@@ -62,15 +62,15 @@ void GameScene::DrawOwnScn()
     ClsDrawScreen();
     lpMapMng.Draw();
 
-	 mPlayer->Draw(GameScene::mMapOffset);
+	 mPlayer.Draw(GameScene::mMapOffset);
     
 }
 
 bool GameScene::Init(void)
 {
 	//lpMapMng.Init();
-    mPlayer = new Player();
-    mPlayer->init(this);
+   
+
 
 	return true;
 }
