@@ -148,10 +148,6 @@ Vector2 Player::Update(void)
 		
 		/*mPos = copyPos;*/
 		
-	
-		
-		
-		
 	}
 
 	mAnmCnt++;

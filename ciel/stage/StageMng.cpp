@@ -76,9 +76,9 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 	}
 
 	//カメラ端
-	if (mOffset.x_ > 530)
+	if (mOffset.x_ > 2000)
 	{
-		mOffset.x_ = 530;
+		mOffset.x_ = 2000;
 	}
 	if (mOffset.x_ < 0)
 	{
@@ -88,9 +88,9 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 	{
 		mOffset.y_ = 0;
 	}
-	if (mOffset.y_ > 1000)
+	if (mOffset.y_ > 2000)
 	{
-		mOffset.y_ = 1000;
+		mOffset.y_ = 2000;
 	}
 
 
@@ -108,7 +108,7 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 	}
 	if (CheckHitKey(KEY_INPUT_D))
 	{
-		
+		stage_ = std::move(std::make_unique<CaveMap>());
 	}
 
 	stage_->Update(mOffset);
@@ -131,6 +131,33 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 		{
 			//マップを切り替えることになった
 			stage_ = std::move(std::make_unique<ForestInMap>());
+		}
+	}
+
+	if (mMapChange == true)
+	{
+		if (lpMapMng.mMapID == MAP_ID::WA)
+		{
+			//マップを切り替えることになった
+			stage_ = std::move(std::make_unique<WaShop>());
+		}
+	}
+
+	if (mMapChange == true)
+	{
+		if (lpMapMng.mMapID == MAP_ID::CAVE)
+		{
+			//マップを切り替えることになった
+			stage_ = std::move(std::make_unique<CaveShop>());
+		}
+	}
+
+	if (mMapChange == true)
+	{
+		if (lpMapMng.mMapID == MAP_ID::CAVE)
+		{
+			//マップを切り替えることになった
+			stage_ = std::move(std::make_unique<DarkTemple>());
 		}
 	}
 	
@@ -172,13 +199,55 @@ bool StageMng::GetEvent(Vector2 pos)
 		}
 	}
 
+	if (chipID == 1929)
+	{
+		mMapChange = true;
+
+		if (lpMapMng.mMapID == MAP_ID::WA)
+		{
+			//マップを切り替えることになった
+
+			//mNextMapID = MAP_ID::WASHOP;
+			mNextPos = { 500,500 };
+			stage_ = std::move(std::make_unique<WaShop>());
+
+		}
+	}
+
+	if (chipID == 103)
+	{
+		mMapChange = true;
+
+		if (lpMapMng.mMapID == MAP_ID::CAVE)
+		{
+			//マップを切り替えることになった
+
+			mNextPos = { 500,500 };
+			stage_ = std::move(std::make_unique<CaveShop>());
+
+		}
+	}
+
+	if (chipID == 105)
+	{
+		mMapChange = true;
+
+		if (lpMapMng.mMapID == MAP_ID::CAVE)
+		{
+			//マップを切り替えることになった
+
+			mNextPos = { 500,500 };
+			stage_ = std::move(std::make_unique<DarkTemple>());
+			return  
+		}
+	}
+
 
 	return mMapChange;
 }
 
 Vector2 StageMng::GetPos(void)
 {
-
 	return mNextPos;
 }
 
