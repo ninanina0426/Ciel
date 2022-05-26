@@ -19,6 +19,8 @@
     <ClCompile Include="stage\templeMap.cpp" />
     <ClCompile Include="stage\ForestInMap.cpp" />
     <ClCompile Include="stage\ForestMap.cpp" />
+    <ClCompile Include="scene\Obj\Aitem.cpp" />
+    <ClCompile Include="scene\Obj\Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\details\Vector2.h" />
@@ -40,5 +42,7 @@
     <ClInclude Include="stage\templeMap.h" />
     <ClInclude Include="stage\ForestInMap.h" />
     <ClInclude Include="stage\ForestMap.h" />
+    <ClInclude Include="scene\Obj\Aitem.h" />
+    <ClInclude Include="scene\Obj\Menu.h" />
   </ItemGroup>
 </Project>

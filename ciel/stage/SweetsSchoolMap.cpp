@@ -236,7 +236,7 @@ void SweetsSchoolMap::DrawOwnScn()
 			DrawGraph(16 * x - mOffset.x_, 16 * y - mOffset.y_, mChipImage[mMapSchoolNomal[y][x]], true);
 
 			DrawGraph(16 * x - mOffset.x_, 16 * y - mOffset.y_, mChipImage[mMapSchoolObj[y][x]], true);
-
+			DrawFormatString(0, 10, GetColor(255, 255, 255), "mapPos=(%d,%d)", mOffset.x_, mOffset.y_);
 
 		}
 	}
@@ -256,11 +256,28 @@ bool SweetsSchoolMap::Init(void)
 
 bool SweetsSchoolMap::CheckMapChip(Vector2 pos)
 {
-	return false;
+	layer1 = mMapSchoolNomal[pos.y_ / 16][pos.x_ / 16];
+	layer2 = mMapSchoolObj[pos.y_ / 16][pos.x_ / 16];
+	
+
+	bool flg = true;	//true=player‚ª•à‚¯‚é
+
+		//ˆÚ“®”ÍˆÍ‚ğs‚¤
+	switch (layer1)
+	{
+	case 6618:
+
+		/*flg=true;*/
+		break;
+	default:
+		break;
+	}
+
+	return flg;
 }
 
 int SweetsSchoolMap::GetMapChip(Vector2 pos)
 {
-	return 0;
+	return mMapSchoolObj[pos.y_ / 16][pos.x_ / 16];
 }
 

@@ -31,6 +31,7 @@ public:
 
 	bool mMapChange;
 	Vector2 GetPos(void);
+	MAP_ID GetMapId(void);
 private:
 	StageMng();
 	~StageMng();

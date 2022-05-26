@@ -32,6 +32,7 @@ bool Player::init(void)
 	mSizeOffset.x_ = mSize.x_ / 2;
 	mSizeOffset.y_ = mSize.y_ / 2;
 
+	
 	mAnmCnt = 0;
 
 	if (LoadDivGraph("image/100.png", 16, 4, 4, 32, 32, &mImage[0]) == -1)
@@ -47,6 +48,9 @@ Vector2 Player::Update(void)
 {
 	DIR keyDir = DIR_MAX;		//キー入力の方向
 	Vector2 copyPos = mPos;
+
+	MAP_ID mapID = lpMapMng.GetMapId();
+
 
 	//プレイヤーの操作
 	if (CheckHitKey(KEY_INPUT_DOWN))
@@ -85,21 +89,44 @@ Vector2 Player::Update(void)
 		if (keyDir == DIR_DOWN)
 		{
 			copyPos.y_ += mMoveSpeed;
-			if (copyPos.y_ > 1600)
+
+			if (mapID == MAP_ID::SWEETS|| mapID == MAP_ID::SWEETSOUT|| mapID == MAP_ID::SWEETSSCHOOL)
 			{
-				copyPos.y_ = 1600;
+				if (copyPos.y_ > 1600)
+				{
+					copyPos.y_ = 1600;
+				}
 			}
+			else
+			{
+				if (copyPos.y_ > 3200)
+				{
+					copyPos.y_ = 3200;
+				}
+			}
+
+			
 
 		}
 
 		if (keyDir == DIR_RIGHT)
 		{
 			copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
-			if (copyPos.x_ > 1600)
+			
+			if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
 			{
-				copyPos.x_ = 1600;
+				if (copyPos.x_ > 1600)
+				{
+					copyPos.x_ = 1600;
+				}
 			}
-
+			else
+			{
+				if (copyPos.x_ > 3200)
+				{
+					copyPos.x_ = 3200;
+				}
+			}
 		}
 
 		if (keyDir == DIR_LEFT)
@@ -112,27 +139,15 @@ Vector2 Player::Update(void)
 
 		}
 
-		
-		/*mPos = copyPos;*/
-		/*switch (lpMapMng.GetEvent(copyPos))
-		{
-		case -1:
-		case 1407:
-		case 1315:
-			mPos = copyPos;
-		default:
-			break;
-		}*/
-
-
-		
+	
+		//移動チップに当たっている時
 		if (lpMapMng.GetEvent(copyPos) == true)
 		{
+			//切り替え先のSetposをもらう
 			copyPos = lpMapMng.GetPos();
 
 			lpMapMng.mMapChange = false;
-			/*lpMapMng.mMapChange = false;*/
-
+			
 		}
 		else if(lpMapMng.GetEvent(copyPos) == false)
 		{
@@ -140,17 +155,11 @@ Vector2 Player::Update(void)
 		}
 		
 		
-
+		//当たり判定
 		if (lpMapMng.cheakMapChip(copyPos))
 		{
 			mPos = copyPos;
 		}
-		
-		/*mPos = copyPos;*/
-		
-	
-		
-		
 		
 	}
 
@@ -194,3 +203,5 @@ Vector2 Player::GetPos(void)
 {
 	return mPos;
 }
+
+
