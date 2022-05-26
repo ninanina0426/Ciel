@@ -418,6 +418,7 @@ int mMapShadow[MAP_Y][MAP_X] = {
 SweetsMap::SweetsMap()
 {
 	Init();
+
 	DrawOwnScn();
 }
 
@@ -429,10 +430,12 @@ SweetsMap::~SweetsMap()
 void SweetsMap::Update(Vector2 offset)
 {
 	mOffset = { offset.x_,offset.y_ };
+
 }
 
 void SweetsMap::DrawOwnScn()
 {
+	
 	for (int y = 0; y < MAP_Y; y++)
 	{
 		for (int x = 0; x < MAP_X; x++)
@@ -445,6 +448,8 @@ void SweetsMap::DrawOwnScn()
 			DrawGraph(16 * x - mOffset.x_, 16 * y - mOffset.y_, mChipImage[mMapObj[y][x]], true);
 
 			DrawGraph(16 * x - mOffset.x_, 16 * y - mOffset.y_, mChipImage[mMapShadow[y][x]], true);
+
+			/*DrawFormatString(16 * x - mOffset.x_, 16 * y - mOffset.y_, GetColor(255, 255, 255), "%d", mMap[y][x]);*/
 			
 			DrawFormatString(0,10, GetColor(255, 255, 255), "mapPos=(%d,%d)", mOffset.x_, mOffset.y_);
 		}
@@ -453,10 +458,16 @@ void SweetsMap::DrawOwnScn()
 
 bool SweetsMap::Init(void)
 {
+	
+
+
 	if (LoadDivGraph("./image/s1.png", 10000, 100, 100, 16, 16, &mChipImage[0]) == -1)
 	{
 		return false;
 	}
+
+	
+
 
 	//SetMap(mapID);
 
@@ -499,6 +510,11 @@ bool SweetsMap::CheckMapChip(Vector2 pos)
 		}
 
 		return flg;
+}
+
+int SweetsMap::GetMapChip(Vector2 pos)
+{
+	return 0;
 }
 
 

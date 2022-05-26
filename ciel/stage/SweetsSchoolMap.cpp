@@ -259,3 +259,8 @@ bool SweetsSchoolMap::CheckMapChip(Vector2 pos)
 	return false;
 }
 
+int SweetsSchoolMap::GetMapChip(Vector2 pos)
+{
+	return 0;
+}
+

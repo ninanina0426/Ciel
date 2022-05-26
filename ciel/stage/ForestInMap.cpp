@@ -377,3 +377,8 @@ bool ForestInMap::CheckMapChip(Vector2 pos)
 	return flg;
 }
 
+int ForestInMap::GetMapChip(Vector2 pos)
+{
+	return 0;
+}
+

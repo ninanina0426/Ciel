@@ -41,9 +41,12 @@ public:
 	virtual void DrawOwnScn() = 0;		//äeÉVÅ[ÉìÇÃDraw
 	virtual bool Init(void) = 0;
 	virtual bool CheckMapChip(Vector2 pos)=0;  //ìñÇΩÇËîªíË
+	virtual int GetMapChip(Vector2 pos) = 0;
 	virtual MAP_ID GetSceneID(void) = 0;
 	Vector2 GetOffSet(void);
 	void SetOffSet(Vector2 offset);
+
+
 protected:
 	Vector2 mOffset;
 	int mChipImage[10000];
