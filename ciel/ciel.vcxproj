@@ -161,6 +161,9 @@
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="scene\SceneMng.cpp" />
     <ClCompile Include="scene\TitleScene.cpp" />
+    <ClCompile Include="scene\Transition\CrossOver.cpp" />
+    <ClCompile Include="scene\Transition\FadeInOut.cpp" />
+    <ClCompile Include="scene\Transition\TransitionScene.cpp" />
     <ClCompile Include="stage\ForestInMap.cpp" />
     <ClCompile Include="stage\ForestMap.cpp" />
     <ClCompile Include="stage\StageMng.cpp" />
@@ -185,6 +188,9 @@
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="scene\SceneMng.h" />
     <ClInclude Include="scene\TitleScene.h" />
+    <ClInclude Include="scene\Transition\CrossOver.h" />
+    <ClInclude Include="scene\Transition\FadeInOut.h" />
+    <ClInclude Include="scene\Transition\TransitionScene.h" />
     <ClInclude Include="stage\ForestInMap.h" />
     <ClInclude Include="stage\ForestMap.h" />
     <ClInclude Include="stage\StageMng.h" />

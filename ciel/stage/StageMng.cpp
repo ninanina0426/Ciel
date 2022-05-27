@@ -7,6 +7,7 @@
 #include "templeMap.h"
 #include "TempleInMap.h"
 #include "ForestInMap.h"
+#include "../scene/Transition/FadeInOut.h"
 
 bool StageMng::Init()
 {
@@ -189,8 +190,8 @@ bool StageMng::GetEvent(Vector2 pos)
 			
 			/*mNextMapID = MAP_ID::FORESTIN;*/
 			mNextPos = { 1400,400 };
-			stage_ = std::move(std::make_unique<ForestInMap>());
-			
+			//stage_ = std::move(std::make_unique<ForestInMap>());
+			//std::make_unique<FadeInOut>(std::move(stage_), std::make_unique<ForestInMap>());
 		}
 	}
 	//sweetw
@@ -204,6 +205,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			/*mNextMapID = MAP_ID::FORESTIN;*/
 			mNextPos = { 820,305 };
 			stage_ = std::move(std::make_unique<SweetsOutMap>());
+			
 		}
 	}
 	if (chipID == 2669 || chipID == 2670 || chipID == 2671)
@@ -227,6 +229,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			//É}ÉbÉvÇêÿÇËë÷Ç¶ÇÈÇ±Ç∆Ç…Ç»Ç¡ÇΩ
 			/*mNextMapID = MAP_ID::FORESTIN;*/
 			mNextPos = { 1045,1405 };
+
 			stage_ = std::move(std::make_unique<SweetsOutMap>());
 		}
 	}

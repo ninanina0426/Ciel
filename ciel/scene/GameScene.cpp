@@ -141,7 +141,7 @@ bool GameScene::Init(void)
     /* mPlayer = new Player();
     mPlayer->init(this);*/
 
-    / ポーズフラグ
+    // ポーズフラグ
         mPose = false;
 
     mAitem = new Aitem();

@@ -22,6 +22,9 @@
     <ClCompile Include="..\..\..\ciel\scene\SelectScene.cpp" />
     <ClCompile Include="scene\Obj\Aitem.cpp" />
     <ClCompile Include="scene\Obj\Menu.cpp" />
+    <ClCompile Include="scene\Transition\CrossOver.cpp" />
+    <ClCompile Include="scene\Transition\FadeInOut.cpp" />
+    <ClCompile Include="scene\Transition\TransitionScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\details\Vector2.h" />
@@ -46,5 +49,8 @@
     <ClInclude Include="..\..\..\ciel\scene\SelectScene.h" />
     <ClInclude Include="scene\Obj\Aitem.h" />
     <ClInclude Include="scene\Obj\Menu.h" />
+    <ClInclude Include="scene\Transition\CrossOver.h" />
+    <ClInclude Include="scene\Transition\FadeInOut.h" />
+    <ClInclude Include="scene\Transition\TransitionScene.h" />
   </ItemGroup>
 </Project>
