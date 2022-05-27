@@ -19,7 +19,6 @@
     <ClCompile Include="stage\templeMap.cpp" />
     <ClCompile Include="stage\ForestInMap.cpp" />
     <ClCompile Include="stage\ForestMap.cpp" />
-    <ClCompile Include="..\..\..\ciel\scene\SelectScene.cpp" />
     <ClCompile Include="scene\Obj\Aitem.cpp" />
     <ClCompile Include="scene\Obj\Menu.cpp" />
     <ClCompile Include="scene\Transition\CrossOver.cpp" />
@@ -28,6 +27,7 @@
     <ClCompile Include="stage\transitionStage\TraStage.cpp" />
     <ClCompile Include="stage\transitionStage\FadeInStage.cpp" />
     <ClCompile Include="scene\Input\Keyboard.cpp" />
+    <ClCompile Include="scene\SelectScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\details\Vector2.h" />
@@ -49,7 +49,6 @@
     <ClInclude Include="stage\templeMap.h" />
     <ClInclude Include="stage\ForestInMap.h" />
     <ClInclude Include="stage\ForestMap.h" />
-    <ClInclude Include="..\..\..\ciel\scene\SelectScene.h" />
     <ClInclude Include="scene\Obj\Aitem.h" />
     <ClInclude Include="scene\Obj\Menu.h" />
     <ClInclude Include="scene\Transition\CrossOver.h" />
@@ -59,5 +58,6 @@
     <ClInclude Include="stage\transitionStage\FadeInStage.h" />
     <ClInclude Include="scene\Input\Input.h" />
     <ClInclude Include="scene\Input\Keyboard.h" />
+    <ClInclude Include="scene\SelectScene.h" />
   </ItemGroup>
 </Project>

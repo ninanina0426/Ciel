@@ -161,6 +161,7 @@
     <ClCompile Include="scene\EndScene.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="scene\SceneMng.cpp" />
+    <ClCompile Include="scene\SelectScene.cpp" />
     <ClCompile Include="scene\TitleScene.cpp" />
     <ClCompile Include="scene\Transition\CrossOver.cpp" />
     <ClCompile Include="scene\Transition\FadeInOut.cpp" />
@@ -180,7 +181,6 @@
     <ClCompile Include="_debug\_DebugDispOut.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ciel\scene\SelectScene.h" />
     <ClInclude Include="common\details\Vector2.h" />
     <ClInclude Include="common\Vector2.h" />
     <ClInclude Include="scene\Input\Input.h" />
@@ -192,6 +192,7 @@
     <ClInclude Include="scene\EndScene.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="scene\SceneMng.h" />
+    <ClInclude Include="scene\SelectScene.h" />
     <ClInclude Include="scene\TitleScene.h" />
     <ClInclude Include="scene\Transition\CrossOver.h" />
     <ClInclude Include="scene\Transition\FadeInOut.h" />

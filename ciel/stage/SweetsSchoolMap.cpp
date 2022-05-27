@@ -236,6 +236,7 @@ void SweetsSchoolMap::DrawOwnScn()
 			DrawGraph(16 * x - mOffset.x_, 16 * y - mOffset.y_, mChipImage[mMapSchoolNomal[y][x]], true);
 
 			DrawGraph(16 * x - mOffset.x_, 16 * y - mOffset.y_, mChipImage[mMapSchoolObj[y][x]], true);
+			//DrawFormatString(16 * x - mOffset.x_, 16 * y - mOffset.y_, GetColor(255, 255, 255), "%d", mMapSchoolObj[y][x]);
 			DrawFormatString(0, 10, GetColor(255, 255, 255), "mapPos=(%d,%d)", mOffset.x_, mOffset.y_);
 
 		}
