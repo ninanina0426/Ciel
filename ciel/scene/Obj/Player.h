@@ -36,18 +36,17 @@ public:
 
 	int mPosBottom;	//キャラクターの足元のY座標
 
-	bool Flg;
+	bool flg;
 
 	bool init(void);		//初期化
 	Vector2 Update(void);		//更新
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
 	DIR GetDIR(void);
+	void SetDIR(DIR dir);
 	void SetPos(Vector2 pos);
 	Vector2 GetSiz(void);
 	Vector2 GetPos(void);
 	
-
-
 };
 

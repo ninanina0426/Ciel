@@ -15,6 +15,8 @@ bool StageMng::Init()
 
 	mMapID = MAP_ID::SWEETS;
 
+	flg = false;
+
     return true;
 }
 
@@ -30,50 +32,64 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 	
 
 	// 背景（カメラ）の操作
+	bool f = true;
 
+	f = cheakMapChip(mPlayer.GetPos());
+	if (cheakMapChip(mPlayer.GetPos()) == true)
+	{
+		if (CheckHitKey(KEY_INPUT_RIGHT))
+		{
+			mOffset.x_ += 4;
+		}
+		if (CheckHitKey(KEY_INPUT_LEFT))
+		{
+			mOffset.x_ -= 4;
+		}
+		if (CheckHitKey(KEY_INPUT_UP))
+		{
+			mOffset.y_ -= 4;
+		}
+		if (CheckHitKey(KEY_INPUT_DOWN))
+		{
+			mOffset.y_ += 6;
+		}
+
+		//カメラ追従
+		if (flg == false)
+		{
+
+			if (mPlayerset.x_ - mOffset.x_ > 500)
+
+			{
+				mOffset.x_ += 2;
+			}
+
+			if (mPlayerset.x_ - mOffset.x_ < 1370)
+			{
+				mOffset.x_ -= 2;
+
+			}
+			//カメラ下移動制限
+			if (mPlayerset.y_ - mOffset.y_ < 500)
+			{
+				mOffset.y_ -= 2;
+
+			}
+			if (mPlayerset.y_ - mOffset.y_ > 200)
+			{
+				mOffset.y_ += 2;
+			}
+		}
+		else
+		{
+
+			mOffset = Vector2{ mPlayerset.x_ / 2,mPlayerset.y_ / 2 };
+			flg = false;
+		}
+	}
 	
-	if (CheckHitKey(KEY_INPUT_RIGHT))
-	{
-		mOffset.x_ += 3;
-	}
-	if (CheckHitKey(KEY_INPUT_LEFT))
-	{
-		mOffset.x_ -= 3;
-	}
-	if (CheckHitKey(KEY_INPUT_UP))
-	{
-		mOffset.y_ -= 3;
-	}
-	if (CheckHitKey(KEY_INPUT_DOWN))
-	{
-		mOffset.y_ += 6;
-	}
-
-
-
-	//カメラ追従
-	if (mPlayerset.x_ - mOffset.x_ > 520)
-
-	{
-		mOffset.x_ += 2;
-	}
-
-	if (mPlayerset.x_ - mOffset.x_ < 900)
-	{
-		mOffset.x_ -= 2;
-
-	}
-
-	//カメラ下移動制限
-	if (mPlayerset.y_ - mOffset.y_ < 400)
-	{
-		mOffset.y_ -= 2;
-
-	}
-	if (mPlayerset.y_ - mOffset.y_ > 1400)
-	{
-		mOffset.y_ += 2;
-	}
+	
+	
 
 	//カメラ端
 	if (lpMapMng.mMapID == MAP_ID::SWEETS || lpMapMng.mMapID == MAP_ID::SWEETSOUT || lpMapMng.mMapID == MAP_ID::SWEETSSCHOOL)
@@ -135,28 +151,6 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 
 	stage_->Update(mOffset);
 
-	
-	
-	/*if (mMapChange == true)
-	{
-		mMapChange = false;
-	}*/
-	//	/*stage_->GetSceneID(mNextMapID);*/
-	//	mPlayer.SetPos(mNextPos);
-	//}
-
-	/*mPlayer.Update();*/
-
-	//if (mMapChange == true)
-	//{
-	//	if (lpMapMng.mMapID == MAP_ID::FOREST)
-	//	{
-	//		//マップを切り替えることになった
-	//		stage_ = std::move(std::make_unique<ForestInMap>());
-	//		mMapID = MAP_ID::FORESTIN;
-	//	}
-	//}
-	
 	return mOffset;
 
 }
@@ -179,6 +173,8 @@ bool StageMng::cheakMapChip(Vector2 pos)
 bool StageMng::GetEvent(Vector2 pos)
 {
 	int chipID = stage_->GetMapChip(pos);
+
+
 	//ステージ切り替え
 	if (chipID == 1407)
 	{
@@ -187,11 +183,9 @@ bool StageMng::GetEvent(Vector2 pos)
 		if (lpMapMng.mMapID == MAP_ID::FOREST)
 		{
 			//マップを切り替えることになった
-			
-			/*mNextMapID = MAP_ID::FORESTIN;*/
 			mNextPos = { 1400,400 };
-			//stage_ = std::move(std::make_unique<ForestInMap>());
-			//std::make_unique<FadeInOut>(std::move(stage_), std::make_unique<ForestInMap>());
+			mMapID = MAP_ID::FORESTIN;
+			stage_ = std::move(std::make_unique<ForestInMap>());
 		}
 	}
 	//sweetw
@@ -205,6 +199,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			/*mNextMapID = MAP_ID::FORESTIN;*/
 			mNextPos = { 820,305 };
 			stage_ = std::move(std::make_unique<SweetsOutMap>());
+			mMapID = MAP_ID::SWEETSOUT;
 			
 		}
 	}
@@ -218,6 +213,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			/*mNextMapID = MAP_ID::FORESTIN;*/
 			mNextPos = { 665,1395 };
 			stage_ = std::move(std::make_unique<SweetsOutMap>());
+			mMapID = MAP_ID::SWEETSOUT;
 		}
 	}
 	if (chipID == 7006 || chipID == 7110 || chipID == 7011)
@@ -229,8 +225,8 @@ bool StageMng::GetEvent(Vector2 pos)
 			//マップを切り替えることになった
 			/*mNextMapID = MAP_ID::FORESTIN;*/
 			mNextPos = { 1045,1405 };
-
 			stage_ = std::move(std::make_unique<SweetsOutMap>());
+			mMapID = MAP_ID::SWEETSOUT;
 		}
 	}
 	if (chipID == 2663 || chipID == 2664 || chipID == 2665)
@@ -243,6 +239,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			/*mNextMapID = MAP_ID::FORESTIN;*/
 			mNextPos = { 1375,825 };
 			stage_ = std::move(std::make_unique<SweetsOutMap>());
+			mMapID = MAP_ID::SWEETSOUT;
 		}
 	}
 	if (chipID == 2660 || chipID == 2661 || chipID == 2662)
@@ -255,10 +252,42 @@ bool StageMng::GetEvent(Vector2 pos)
 			/*mNextMapID = MAP_ID::FORESTIN;*/
 			mNextPos = { 450,1585};
 			stage_ = std::move(std::make_unique<SweetsSchoolMap>());
+			mMapID = MAP_ID::SWEETSSCHOOL;
+		}
+	}
+	if (chipID == 7005 || chipID == 7006)
+	{
+		mMapChange = true;
+
+		if (lpMapMng.mMapID == MAP_ID::SWEETSSCHOOL)
+		{
+			//マップを切り替えることになった
+			/*mNextMapID = MAP_ID::FORESTIN;*/
+			mNextPos = { 495,740 };
+			mMapID = MAP_ID::SWEETSSCHOOL;
+			flg = true;
+			mDir = DIR_LEFT;
+		}
+	}
+	if ((chipID == 7005 || chipID == 7006)&&pos.x_>965)
+	{
+		mMapChange = true;
+
+		if (lpMapMng.mMapID == MAP_ID::SWEETSSCHOOL)
+		{
+			mNextPos = { 860,215 };
+			mMapID = MAP_ID::SWEETSSCHOOL;
+			flg = true;
+			mDir = DIR_DOWN;
 		}
 	}
 
 	return mMapChange;
+}
+
+DIR StageMng::GetDir(void)
+{
+	return mDir;
 }
 
 Vector2 StageMng::GetPos(void)
@@ -276,6 +305,8 @@ MAP_ID StageMng::GetMapId(void)
 	return  mChipID;
 }
 
+
+
 StageMng::StageMng()
 {
 	Init();
@@ -284,3 +315,4 @@ StageMng::StageMng()
 StageMng::~StageMng()
 {
 }
+
