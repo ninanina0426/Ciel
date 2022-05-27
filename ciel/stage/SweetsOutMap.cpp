@@ -359,6 +359,27 @@ bool SweetsOutMap::Init(void)
 
 bool SweetsOutMap::CheckMapChip(Vector2 pos)
 {
-	return false;
+	layer1 = mMapOutNomal[pos.y_ / 16][pos.x_ / 16];
+	layer2 = mMapOutRoad[pos.y_ / 16][pos.x_ / 16];
+	layer3 = mMapOutObj[pos.y_ / 16][pos.x_ / 16];
+	
+	bool flg = true;	//true=player‚ª•à‚¯‚é
+
+		//ˆÚ“®”ÍˆÍ‚ğs‚¤
+	switch (layer1)
+	{
+	case 6618:
+		/*flg=true;*/
+		break;
+	default:
+		break;
+	}
+
+	return flg;
+}
+
+int SweetsOutMap::GetMapChip(Vector2 pos)
+{
+	return mMapOutObj[pos.y_ / 16][pos.x_ / 16];
 }
 

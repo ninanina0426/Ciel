@@ -1,6 +1,7 @@
 #pragma once
 #include <DxLib.h>
 #include "../common/Vector2.h"
+#include"../scene/Obj/Player.h"
 #include "Stage.h"
 
 class Player;
@@ -23,20 +24,24 @@ public:
 	bool Release(void);
 	int GetMapChipMng(Vector2 pos);
 	bool cheakMapChip(Vector2 pos);
-	void GetEvent(Vector2 pos);
+	bool GetEvent(Vector2 pos);
 	Vector2 mOffset;
 	MAP_ID mMapID;
 	int mChipImage[10000];
+
+	bool mMapChange;
+	Vector2 GetPos(void);
+	MAP_ID GetMapId(void);
 private:
 	StageMng();
 	~StageMng();
 
-	Player* mPlayer;
+	Player mPlayer;
 
 	uniquStage stage_;		//ステージ管理
 
 	 //マップの変更処理
-	bool mMapChange;
+
 	MAP_ID mNextMapID;
 	Vector2 mNextPos;
 

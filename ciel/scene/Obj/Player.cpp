@@ -1,14 +1,26 @@
 #include <DxLib.h>
 #include "Player.h"
 #include"../../stage/StageMng.h"
-#include"../../scene/GameScene.h"
 
-bool Player::init(GameScene* parent)
+
+
+
+Player::Player()
 {
-	mParent = parent;
+	init();
+}
 
-	mPos.x_ = 260;
-	mPos.y_ = 175;
+Player::~Player()
+{
+}
+
+bool Player::init(void)
+{
+	/*mParent = parent;*/
+
+
+	/*mPos.x_ = 260;
+	mPos.y_ = 175;*/
 
 	
 	mSizeOffset.x_ = 0;
@@ -20,6 +32,7 @@ bool Player::init(GameScene* parent)
 	mSizeOffset.x_ = mSize.x_ / 2;
 	mSizeOffset.y_ = mSize.y_ / 2;
 
+	
 	mAnmCnt = 0;
 
 	if (LoadDivGraph("image/100.png", 16, 4, 4, 32, 32, &mImage[0]) == -1)
@@ -35,6 +48,9 @@ Vector2 Player::Update(void)
 {
 	DIR keyDir = DIR_MAX;		//キー入力の方向
 	Vector2 copyPos = mPos;
+
+	MAP_ID mapID = lpMapMng.GetMapId();
+
 
 	//プレイヤーの操作
 	if (CheckHitKey(KEY_INPUT_DOWN))
@@ -73,21 +89,44 @@ Vector2 Player::Update(void)
 		if (keyDir == DIR_DOWN)
 		{
 			copyPos.y_ += mMoveSpeed;
-			if (copyPos.y_ > 1600)
+
+			if (mapID == MAP_ID::SWEETS|| mapID == MAP_ID::SWEETSOUT|| mapID == MAP_ID::SWEETSSCHOOL)
 			{
-				copyPos.y_ = 1600;
+				if (copyPos.y_ > 1600)
+				{
+					copyPos.y_ = 1600;
+				}
 			}
+			else
+			{
+				if (copyPos.y_ > 3200)
+				{
+					copyPos.y_ = 3200;
+				}
+			}
+
+			
 
 		}
 
 		if (keyDir == DIR_RIGHT)
 		{
 			copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
-			if (copyPos.x_ > 1600)
+			
+			if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
 			{
-				copyPos.x_ = 1600;
+				if (copyPos.x_ > 1600)
+				{
+					copyPos.x_ = 1600;
+				}
 			}
-
+			else
+			{
+				if (copyPos.x_ > 3200)
+				{
+					copyPos.x_ = 3200;
+				}
+			}
 		}
 
 		if (keyDir == DIR_LEFT)
@@ -100,15 +139,28 @@ Vector2 Player::Update(void)
 
 		}
 
-		
-		/*mPos = copyPos;*/
-		
+	
+		//移動チップに当たっている時
+		if (lpMapMng.GetEvent(copyPos) == true)
+		{
+			//切り替え先のSetposをもらう
+			copyPos = lpMapMng.GetPos();
 
+			lpMapMng.mMapChange = false;
+			
+		}
+		else if(lpMapMng.GetEvent(copyPos) == false)
+		{
+			lpMapMng.GetEvent(copyPos);
+		}
+		
+		
+		//当たり判定
 		if (lpMapMng.cheakMapChip(copyPos))
 		{
 			mPos = copyPos;
 		}
-
+		
 	}
 
 	mAnmCnt++;
@@ -120,6 +172,7 @@ void Player::Draw(Vector2 offset)
 {
 	DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - mSizeOffset.y_, mImage[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
+
 }
 
 bool Player::Release(void)
@@ -150,3 +203,5 @@ Vector2 Player::GetPos(void)
 {
 	return mPos;
 }
+
+

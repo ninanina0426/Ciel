@@ -152,6 +152,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\ciel\scene\SelectScene.cpp" />
+    <ClCompile Include="scene\Obj\Aitem.cpp" />
+    <ClCompile Include="scene\Obj\Menu.cpp" />
     <ClCompile Include="scene\Obj\Player.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scene\BaseScene.cpp" />
@@ -175,6 +177,8 @@
     <ClInclude Include="..\..\..\ciel\scene\SelectScene.h" />
     <ClInclude Include="common\details\Vector2.h" />
     <ClInclude Include="common\Vector2.h" />
+    <ClInclude Include="scene\Obj\Aitem.h" />
+    <ClInclude Include="scene\Obj\Menu.h" />
     <ClInclude Include="scene\Obj\Player.h" />
     <ClInclude Include="scene\BaseScene.h" />
     <ClInclude Include="scene\EndScene.h" />

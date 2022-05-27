@@ -11,7 +11,12 @@ private:
 	void DrawOwnScn() override;
 	bool Init(void)override;
 	bool CheckMapChip(Vector2 pos)override;
+	int GetMapChip(Vector2 pos) override;
 	MAP_ID GetSceneID(void) { return MAP_ID::SWEETSOUT; };
 
+	int layer1;
+	int layer2;
+	int layer3;
+	
 };
 

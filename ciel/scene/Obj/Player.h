@@ -1,7 +1,7 @@
 #pragma once
 #include "../../common/Vector2.h"
 
-class GameScene;
+
 
 enum DIR		//向き管理用
 {
@@ -15,18 +15,13 @@ enum DIR		//向き管理用
 class Player
 {
 private:
-
 	
 
-	GameScene* mParent;
-
-
-
+	/*GameScene* mParent;*/
 	/*GameScene* mParent;*/
 
 	int mImage[16];		//画像の格納領域
 
-	
 	DIR mMoveDir;		//キャラクターの向き
 	Vector2 mPos;		//キャラクターの地図上の座標
 	Vector2 mPlayer;
@@ -36,9 +31,14 @@ private:
 	int mMoveSpeed;		//キャラクター移動スピード
 	int mAnmCnt;
 public:
+	Player();
+	~Player();
+
 	int mPosBottom;	//キャラクターの足元のY座標
 
-	bool init(GameScene*parent);		//初期化
+	bool Flg;
+
+	bool init(void);		//初期化
 	Vector2 Update(void);		//更新
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
@@ -47,6 +47,7 @@ public:
 	Vector2 GetSiz(void);
 	Vector2 GetPos(void);
 	
+
 
 };
 

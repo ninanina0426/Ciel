@@ -570,3 +570,8 @@ bool templeMap::CheckMapChip(Vector2 pos)
 	return false;
 }
 
+int templeMap::GetMapChip(Vector2 pos)
+{
+	return 0;
+}
+
