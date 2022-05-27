@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseScene.h"
+#include "Input/Keyboard.h"
 
 class TitleScene :
     public BaseScene
@@ -13,6 +14,7 @@ private:
     bool Init(void) override;                           // タイトルシーン初期化
     SceneID GetSceneID(void) override { return SceneID::TITLE; };   //sceneIDをタイトルに設定
 
+    Keyboard* key_;
 
     //グラフィック関係
 };

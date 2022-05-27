@@ -7,7 +7,7 @@
 #include "templeMap.h"
 #include "TempleInMap.h"
 #include "ForestInMap.h"
-#include "../scene/Transition/FadeInOut.h"
+//#include "transitionStage/FadeInStage.h"
 
 bool StageMng::Init()
 {
@@ -190,8 +190,8 @@ bool StageMng::GetEvent(Vector2 pos)
 			
 			/*mNextMapID = MAP_ID::FORESTIN;*/
 			mNextPos = { 1400,400 };
-			//stage_ = std::move(std::make_unique<ForestInMap>());
-			//std::make_unique<FadeInOut>(std::move(stage_), std::make_unique<ForestInMap>());
+			stage_ = std::move(std::make_unique<ForestInMap>());
+			//stage_=std::move(std::make_unique<FadeInStage>(std::move(stage_), std::make_unique<ForestInMap>()));
 		}
 	}
 	//sweetw

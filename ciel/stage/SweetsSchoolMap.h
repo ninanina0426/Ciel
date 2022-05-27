@@ -12,7 +12,7 @@ private:
 	bool Init(void)override;
 	bool CheckMapChip(Vector2 pos)override;
 	int GetMapChip(Vector2 pos) override;
-	MAP_ID GetSceneID(void) { return MAP_ID::SWEETSSCHOOL; };
+	MAP_ID GetStageID(void) { return MAP_ID::SWEETSSCHOOL; };
 
 	int layer1;
 	int layer2;

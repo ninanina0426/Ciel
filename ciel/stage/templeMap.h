@@ -12,7 +12,7 @@ private:
 	bool Init(void)override;
 	bool CheckMapChip(Vector2 pos)override;
 	int GetMapChip(Vector2 pos) override;
-	MAP_ID GetSceneID(void) { return MAP_ID::TEMPLE; };
+	MAP_ID GetStageID(void) { return MAP_ID::TEMPLE; };
 
 	int mMap1[MAP_Y][MAP_X];
 	int mMap2[MAP_Y][MAP_X];
