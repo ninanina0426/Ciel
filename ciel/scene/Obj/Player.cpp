@@ -35,6 +35,7 @@ bool Player::init(void)
 	
 	mAnmCnt = 0;
 
+
 	if (LoadDivGraph("image/100.png", 16, 4, 4, 32, 32, &mImage[0]) == -1)
 	{
 		return false;
