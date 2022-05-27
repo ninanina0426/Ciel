@@ -1,6 +1,6 @@
 #include <DxLib.h>
 #include "ForestInMap.h"
-
+#include "../scene/Obj/Player.h"
 int fi_soil[MAP_X][MAP_Y] = {
 	-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 ,- 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
@@ -336,9 +336,10 @@ void ForestInMap::DrawOwnScn()
 		{
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[fi_soil[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[fi_tree[y][x]], true);
+
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[fi_obj1[y][x]], true);
 
-			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 0, 0), "%d", fi_soil[y][x]);
+			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 0, 0), "%d", fi_obj1[y][x]);
 
 		}
 	}
@@ -350,6 +351,9 @@ bool ForestInMap::Init(void)
 	{
 		return false;
 	}
+
+	/*player_ = new Player();
+	player_->SetPos(Vector2{ 895, 535 });*/
 	return true;
 }
 
@@ -359,6 +363,7 @@ bool ForestInMap::CheckMapChip(Vector2 pos)
 	tree = fi_tree[pos.y_ / 32][pos.x_ / 32];
 	obj1 = fi_obj1[pos.y_ / 32][pos.x_ / 32];
 
+	
 	bool flg = false;	//true=player‚ª•à‚¯‚é
 
 		//ˆÚ“®”ÍˆÍ‚ğs‚¤
@@ -368,7 +373,41 @@ bool ForestInMap::CheckMapChip(Vector2 pos)
 	case 896:
 	case 454:
 	case 337:
-		flg = true;
+	case 57:
+		//flg = true;
+		switch (tree)
+		{
+		case -1:
+			
+			switch (obj1)
+			{
+			case -1:
+			case 675:
+			case 676:
+			case 731:
+			case 732:
+			case 550:
+			case 551:
+			case 733:
+			case 734:
+			case 677:
+			case 678:
+			case 735:
+			case 621:
+			case 622:
+			case 791:
+			
+
+				flg = true;
+				break;
+			default:
+				break;
+			}
+			break;
+		default:
+			break;
+		}
+		
 		break;
 	default:
 		break;

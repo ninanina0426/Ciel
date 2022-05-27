@@ -1,5 +1,8 @@
 #pragma once
 #include "Stage.h"
+
+
+
 class ForestInMap :
     public Stage
 {
@@ -12,6 +15,9 @@ private:
 	bool Init(void)override;
 	bool CheckMapChip(Vector2 pos)override;
 	MAP_ID GetSceneID(void) { return MAP_ID::FORESTIN; };
+
+
+	
 
 	int soil;
 	int tree;

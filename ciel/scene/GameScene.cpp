@@ -69,8 +69,8 @@ void GameScene::DrawOwnScn()
 bool GameScene::Init(void)
 {
 	//lpMapMng.Init();
-    mPlayer = new Player();
-    mPlayer->init(this);
+   /* mPlayer = new Player();
+    mPlayer->init(this);*/
 
 	return true;
 }
