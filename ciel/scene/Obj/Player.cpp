@@ -152,7 +152,7 @@ Vector2 Player::Update(void)
 		
 	}
 
-
+	mDamyPos = copyPos;
 
 	mAnmCnt++;
 
@@ -197,7 +197,7 @@ Vector2 Player::GetSiz(void)
 
 Vector2 Player::GetPos(void)
 {
-	return mPos;
+	return mDamyPos;
 }
 
 
