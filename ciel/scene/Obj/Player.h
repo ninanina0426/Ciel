@@ -26,6 +26,10 @@ private:
 	Vector2 mPos;		//キャラクターの地図上の座標
 	Vector2 mPlayer;
 
+
+
+	Vector2 mDamyPos;
+
 	Vector2 mSizeOffset;//キャラクターのオフセットサイズ　　半分の値
 	Vector2 mSize;		//キャラクター画像のサイズ
 	int mMoveSpeed;		//キャラクター移動スピード

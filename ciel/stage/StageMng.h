@@ -29,6 +29,8 @@ public:
 	MAP_ID mMapID;
 	DIR mDir;
 
+	int mChipId;
+
 	int mChipImage[10000];
 	bool mMapChange;
 	DIR GetDir(void);

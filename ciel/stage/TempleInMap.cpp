@@ -360,7 +360,9 @@ bool TempleInMap::Init(void)
 
 bool TempleInMap::CheckMapChip(Vector2 pos)
 {
-	return false;
+	bool Flg = true;
+
+	return Flg;
 }
 
 int TempleInMap::GetMapChip(Vector2 pos)

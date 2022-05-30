@@ -86,6 +86,11 @@ Vector2 Player::Update(void)
 		if (keyDir == DIR_DOWN)
 		{
 			copyPos.y_ += mMoveSpeed;
+			if (copyPos.y_ > 3000)
+			{
+				copyPos.y_ = 3000;
+			}
+
 
 			if (mapID == MAP_ID::SWEETS|| mapID == MAP_ID::SWEETSOUT|| mapID == MAP_ID::SWEETSSCHOOL)
 			{
@@ -103,25 +108,30 @@ Vector2 Player::Update(void)
 			}
 		}
 
-		if (keyDir == DIR_RIGHT)
-		{
-			copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
-			
-			if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
-			{
-				if (copyPos.x_ > 1600)
-				{
-					copyPos.x_ = 1600;
-				}
-			}
-			else
-			{
-				if (copyPos.x_ > 3200)
-				{
-					copyPos.x_ = 3200;
-				}
-			}
-		}
+		//if (keyDir == DIR_RIGHT)
+		//{
+		//	copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
+		//	if (copyPos.x_ > 3000)
+		//	{
+		//		copyPos.x_ = 3000;
+
+		//	}
+		//	if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
+		//	{
+		//		if (copyPos.x_ > 1600)
+		//		{
+		//			copyPos.x_ = 1600;
+		//		}
+		//	}
+		//	else
+		//	{
+		//		if (copyPos.x_ > 3200)
+		//		{
+		//			copyPos.x_ = 3200;
+		//		}
+
+		//	}
+		//}
 
 		if (keyDir == DIR_LEFT)
 		{
@@ -150,10 +160,9 @@ Vector2 Player::Update(void)
 		{
 			mPos = copyPos;
 		}
-		
+
+		mDamyPos = copyPos;
 	}
-
-
 
 	mAnmCnt++;
 
@@ -198,7 +207,7 @@ Vector2 Player::GetSiz(void)
 
 Vector2 Player::GetPos(void)
 {
-	return mPos;
+	return mDamyPos;
 }
 
 

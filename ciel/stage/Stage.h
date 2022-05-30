@@ -16,6 +16,11 @@ using uniquStage = std::unique_ptr<Stage>;			//mapのポインター
 enum class MAP_ID
 {
 	FOREST,
+	WA,
+	WASHOP,
+	CAVE,
+	CAVESHOP,
+	DARK,
 	FORESTIN,
 	TEMPLE,
 	TEMPLEIN,
@@ -48,7 +53,7 @@ protected:
 	int mMap[MAP_Y][MAP_X];
 	
 	/*MAP_ID mMapID;*/
-		//座標を指定してマップチップデータをもらう。
+	//座標を指定してマップチップデータをもらう。
 
 };
 
