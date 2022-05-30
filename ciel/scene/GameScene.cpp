@@ -109,10 +109,13 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     DrawOwnScn();//ŒÂ•Ê‚ÌDrawˆ—‚Èˆ×•K‚¸‘‚­
 
+    PlayerPos = mPlayer.GetPos();
+
     mMapOffset = lpMapMng.Update(PlayerPos);
 
-    PlayerPos = mPlayer.Update();
-
+    mPlayer.Update();
+   /* PlayerPos = mPlayer.Update();*/
+ 
    /* mAitem->Update();*/
 
     /*mMenu.Update();*/

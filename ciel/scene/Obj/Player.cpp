@@ -150,10 +150,9 @@ Vector2 Player::Update(void)
 		{
 			mPos = copyPos;
 		}
-		
-	}
 
-	mDamyPos = copyPos;
+		mDamyPos = copyPos;
+	}
 
 	mAnmCnt++;
 

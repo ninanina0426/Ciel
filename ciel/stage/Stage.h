@@ -48,7 +48,7 @@ protected:
 	int mMap[MAP_Y][MAP_X];
 	
 	/*MAP_ID mMapID;*/
-		//座標を指定してマップチップデータをもらう。
+	//座標を指定してマップチップデータをもらう。
 
 };
 

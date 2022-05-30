@@ -24,6 +24,7 @@ void StageMng::Draw()
 {
 	stage_->DrawOwnScn();		//‚»‚ê‚¼‚ê‚Ìƒ}ƒbƒv‚ð•`‰æ
 
+	DrawFormatString(0, 50, GetColor(255, 255, 255), "chipId=%d", mChipId);
 
 }
 
@@ -32,10 +33,7 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 	
 
 	// ”wŒiiƒJƒƒ‰j‚Ì‘€ì
-	bool f = true;
-
-	f = cheakMapChip(mPlayer.GetPos());
-	if (cheakMapChip(mPlayer.GetPos()) == true)
+	if (cheakMapChip(mPlayer.GetPos()))
 	{
 		if (CheckHitKey(KEY_INPUT_RIGHT))
 		{
@@ -150,6 +148,8 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 	}
 
 	stage_->Update(mOffset);
+
+	mChipId = stage_->GetMapChip(mPlayerset);
 
 	return mOffset;
 

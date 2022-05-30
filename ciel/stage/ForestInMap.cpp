@@ -419,6 +419,6 @@ bool ForestInMap::CheckMapChip(Vector2 pos)
 
 int ForestInMap::GetMapChip(Vector2 pos)
 {
-	return 0;
+	return fi_obj1[pos.y_ / 32][pos.x_ / 32];
 }
 

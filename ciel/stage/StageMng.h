@@ -29,6 +29,8 @@ public:
 	MAP_ID mMapID;
 	DIR mDir;
 
+	int mChipId;
+
 	int mChipImage[10000];
 	bool mMapChange;
 	DIR GetDir(void);
@@ -39,7 +41,7 @@ private:
 	StageMng();
 	~StageMng();
 
-	Player *mPlayer;
+	Player mPlayer;
 
 	uniquStage stage_;		//ステージ管理
 
