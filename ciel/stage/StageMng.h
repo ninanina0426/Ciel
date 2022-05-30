@@ -27,15 +27,19 @@ public:
 	bool GetEvent(Vector2 pos);
 	Vector2 mOffset;
 	MAP_ID mMapID;
-	int mChipImage[10000];
+	DIR mDir;
 
+	int mChipImage[10000];
 	bool mMapChange;
+	DIR GetDir(void);
+
 	Vector2 GetPos(void);
+	MAP_ID GetMapId(void);
 private:
 	StageMng();
 	~StageMng();
 
-	Player mPlayer;
+	Player *mPlayer;
 
 	uniquStage stage_;		//ステージ管理
 
@@ -43,6 +47,8 @@ private:
 
 	MAP_ID mNextMapID;
 	Vector2 mNextPos;
+
+	bool flg;
 
 	friend Stage;
 };

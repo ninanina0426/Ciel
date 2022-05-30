@@ -151,10 +151,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+
     <ClCompile Include="stage\CaveMap.cpp" />
     <ClCompile Include="stage\CaveShop.cpp" />
     <ClCompile Include="stage\DarkTemple.cpp" />
     <ClCompile Include="stage\ForestMap.cpp" />
+
+    <ClCompile Include="..\..\..\ciel\scene\SelectScene.cpp" />
+    <ClCompile Include="scene\Input\Keyboard.cpp" />
+    <ClCompile Include="scene\Obj\Aitem.cpp" />
+    <ClCompile Include="scene\Obj\Menu.cpp" />
     <ClCompile Include="scene\Obj\Player.cpp" />
 
     <ClCompile Include="main.cpp" />
@@ -162,7 +168,11 @@
     <ClCompile Include="scene\EndScene.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="scene\SceneMng.cpp" />
+    <ClCompile Include="scene\SelectScene.cpp" />
     <ClCompile Include="scene\TitleScene.cpp" />
+    <ClCompile Include="scene\Transition\CrossOver.cpp" />
+    <ClCompile Include="scene\Transition\FadeInOut.cpp" />
+    <ClCompile Include="scene\Transition\TransitionScene.cpp" />
     <ClCompile Include="stage\ForestInMap.cpp" />
     <ClCompile Include="stage\StageMng.cpp" />
     <ClCompile Include="stage\Stage.cpp" />
@@ -174,6 +184,8 @@
     <ClCompile Include="stage\SweetsSchoolMap.cpp" />
     <ClCompile Include="stage\TempleInMap.cpp" />
     <ClCompile Include="stage\templeMap.cpp" />
+    <ClCompile Include="stage\transitionStage\FadeInStage.cpp" />
+    <ClCompile Include="stage\transitionStage\TraStage.cpp" />
 
     <ClCompile Include="_debug\_DebugConOut.cpp" />
     <ClCompile Include="_debug\_DebugDispOut.cpp" />
@@ -186,13 +198,22 @@
     <ClInclude Include="stage\DarkTemple.h" />
     <ClInclude Include="stage\ForestMap.h" />
 
+    <ClInclude Include="scene\Input\Input.h" />
+    <ClInclude Include="scene\Input\Keyboard.h" />
+    <ClInclude Include="scene\Obj\Aitem.h" />
+    <ClInclude Include="scene\Obj\Menu.h" />
+
     <ClInclude Include="scene\Obj\Player.h" />
 
     <ClInclude Include="scene\BaseScene.h" />
     <ClInclude Include="scene\EndScene.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="scene\SceneMng.h" />
+    <ClInclude Include="scene\SelectScene.h" />
     <ClInclude Include="scene\TitleScene.h" />
+    <ClInclude Include="scene\Transition\CrossOver.h" />
+    <ClInclude Include="scene\Transition\FadeInOut.h" />
+    <ClInclude Include="scene\Transition\TransitionScene.h" />
     <ClInclude Include="stage\ForestInMap.h" />
     <ClInclude Include="stage\StageMng.h" />
     <ClInclude Include="stage\Stage.h" />
@@ -204,6 +225,11 @@
     <ClInclude Include="stage\SweetsSchoolMap.h" />
     <ClInclude Include="stage\TempleInMap.h" />
     <ClInclude Include="stage\templeMap.h" />
+
+    <ClInclude Include="stage\transitionStage\FadeInStage.h" />
+    <ClInclude Include="stage\transitionStage\TraStage.h" />
+
+   
 
     <ClInclude Include="_debug\_DebugConOut.h" />
     <ClInclude Include="_debug\_DebugDispOut.h" />

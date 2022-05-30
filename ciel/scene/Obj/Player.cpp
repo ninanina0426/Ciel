@@ -31,8 +31,10 @@ bool Player::init(void)
 	mSize.y_ = 32;
 	mSizeOffset.x_ = mSize.x_ / 2;
 	mSizeOffset.y_ = mSize.y_ / 2;
-
+	flg = false;
+	
 	mAnmCnt = 0;
+
 
 	if (LoadDivGraph("image/100.png", 16, 4, 4, 32, 32, &mImage[0]) == -1)
 	{
@@ -47,6 +49,9 @@ Vector2 Player::Update(void)
 {
 	DIR keyDir = DIR_MAX;		//キー入力の方向
 	Vector2 copyPos = mPos;
+
+	MAP_ID mapID = lpMapMng.GetMapId();
+
 
 	//プレイヤーの操作
 	if (CheckHitKey(KEY_INPUT_DOWN))
@@ -69,8 +74,6 @@ Vector2 Player::Update(void)
 	if (keyDir != DIR_MAX)
 	{
 		mMoveDir = keyDir;
-
-
 		//プレイヤーのコピー
 		if (keyDir == DIR_UP)
 		{
@@ -79,9 +82,7 @@ Vector2 Player::Update(void)
 			{
 				copyPos.y_ = 0;
 			}
-
 		}
-
 		if (keyDir == DIR_DOWN)
 		{
 			copyPos.y_ += mMoveSpeed;
@@ -90,17 +91,47 @@ Vector2 Player::Update(void)
 				copyPos.y_ = 3000;
 			}
 
-		}
 
-		if (keyDir == DIR_RIGHT)
-		{
-			copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
-			if (copyPos.x_ > 3000)
+			if (mapID == MAP_ID::SWEETS|| mapID == MAP_ID::SWEETSOUT|| mapID == MAP_ID::SWEETSSCHOOL)
 			{
-				copyPos.x_ = 3000;
+				if (copyPos.y_ > 1600)
+				{
+					copyPos.y_ = 1600;
+				}
 			}
-
+			else
+			{
+				if (copyPos.y_ > 3200)
+				{
+					copyPos.y_ = 3200;
+				}
+			}
 		}
+
+		//if (keyDir == DIR_RIGHT)
+		//{
+		//	copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
+		//	if (copyPos.x_ > 3000)
+		//	{
+		//		copyPos.x_ = 3000;
+
+		//	}
+		//	if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
+		//	{
+		//		if (copyPos.x_ > 1600)
+		//		{
+		//			copyPos.x_ = 1600;
+		//		}
+		//	}
+		//	else
+		//	{
+		//		if (copyPos.x_ > 3200)
+		//		{
+		//			copyPos.x_ = 3200;
+		//		}
+
+		//	}
+		//}
 
 		if (keyDir == DIR_LEFT)
 		{
@@ -111,44 +142,28 @@ Vector2 Player::Update(void)
 			}
 
 		}
-
-		
-		/*mPos = copyPos;*/
-		/*switch (lpMapMng.GetEvent(copyPos))
-		{
-		case -1:
-		case 1407:
-		case 1315:
-			mPos = copyPos;
-		default:
-			break;
-		}*/
-
-
-		
+		//移動チップに当たっている時
 		if (lpMapMng.GetEvent(copyPos) == true)
 		{
+			//切り替え先のSetposをもらう
 			copyPos = lpMapMng.GetPos();
-
+			mMoveDir = lpMapMng.GetDir();
 			lpMapMng.mMapChange = false;
-			/*lpMapMng.mMapChange = false;*/
-
+			
 		}
 		else if(lpMapMng.GetEvent(copyPos) == false)
 		{
 			lpMapMng.GetEvent(copyPos);
 		}
-		
-		
-
+		//当たり判定
 		if (lpMapMng.cheakMapChip(copyPos))
 		{
 			mPos = copyPos;
 		}
 		
-		/*mPos = copyPos;*/
-		
 	}
+
+
 
 	mAnmCnt++;
 
@@ -176,6 +191,11 @@ DIR Player::GetDIR(void)
 	return mMoveDir;
 }
 
+void Player::SetDIR(DIR dir)
+{
+	mMoveDir = dir;
+}
+
 void Player::SetPos(Vector2 pos)
 {
 	mPos = pos;
@@ -190,3 +210,5 @@ Vector2 Player::GetPos(void)
 {
 	return mPos;
 }
+
+
