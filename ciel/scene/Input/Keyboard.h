@@ -1,4 +1,5 @@
 #pragma once
+#include "Input.h"
 
 enum class Trg
 {
@@ -23,7 +24,7 @@ public:
 
 private:
 	char keyBuf_[256];
-	char keyBufOld_[256];
+	
 	Trg keyTrg_;
 };
 

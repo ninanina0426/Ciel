@@ -151,7 +151,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\ciel\scene\SelectScene.cpp" />
     <ClCompile Include="scene\Input\Keyboard.cpp" />
     <ClCompile Include="scene\Obj\Aitem.cpp" />
     <ClCompile Include="scene\Obj\Menu.cpp" />

@@ -12,10 +12,6 @@ FadeInStage::~FadeInStage()
 {
 }
 
-void FadeInStage::Update(Vector2 offset)
-{
-}
-
 bool FadeInStage::UpdataTrangetion(void)
 {
 	DrawOwnScn();

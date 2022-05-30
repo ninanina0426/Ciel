@@ -7,7 +7,7 @@
 #include "templeMap.h"
 #include "TempleInMap.h"
 #include "ForestInMap.h"
-//#include "transitionStage/FadeInStage.h"
+#include "transitionStage/FadeInStage.h"
 
 bool StageMng::Init()
 {
@@ -185,8 +185,11 @@ bool StageMng::GetEvent(Vector2 pos)
 			//マップを切り替えることになった
 			mMapID = MAP_ID::FORESTIN;
 			stage_ = std::move(std::make_unique<ForestInMap>());
-			//stage_=std::move(std::make_unique<FadeInStage>(std::move(stage_), std::make_unique<ForestInMap>()));
+			
+			//切り替えを単体として考える。時間で切り替え？？？？？
 			mNextPos = { 1400,400 };
+			
+			//stage_ = std::move(std::make_unique<FadeInStage>(std::move(stage_), std::make_unique<ForestInMap>()));
 		}
 	}
 	//sweetw

@@ -39,9 +39,11 @@ private:
 	StageMng();
 	~StageMng();
 
-	Player *mPlayer;
+	Player mPlayer;
 
 	uniquStage stage_;		//ステージ管理
+
+	
 
 	 //マップの変更処理
 
