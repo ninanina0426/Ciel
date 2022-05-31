@@ -467,8 +467,7 @@ bool ForestMap::Init(void)
 	{
 		return false;
 	}
-	BGM_ = LoadSoundMem("./image/music/f1.ogg");
-	PlaySoundMem(BGM_, DX_PLAYTYPE_LOOP);
+	
 	
 	return true;
 }

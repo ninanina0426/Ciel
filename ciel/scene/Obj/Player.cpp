@@ -117,6 +117,15 @@ Vector2 Player::Update(void)
 
 			}
 		}
+		if (keyDir == DIR_LEFT)
+		{
+			copyPos.x_ -= mMoveSpeed;
+			if (copyPos.x_ < 0)
+			{
+				copyPos.x_ = 0;
+			}
+
+		}
 		//	if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
 		//	{
 		//		if (copyPos.x_ > 1600)
@@ -134,16 +143,16 @@ Vector2 Player::Update(void)
 		//	}
 		//}
 
-		if (keyDir == DIR_LEFT)
-		{
-			copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
+		//if (keyDir == DIR_LEFT)
+		//{
+		//	copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
 
-			if (copyPos.x_ > 3000)
-			{
-				copyPos.x_ = 3000;
+		//	if (copyPos.x_ > 3000)
+		//	{
+		//		copyPos.x_ = 3000;
 
-			}
-		}
+		//	}
+		//}
 		if (copyPos.x_ > 4000)
 		{
 			copyPos.x_ = 4000;
@@ -167,15 +176,7 @@ Vector2 Player::Update(void)
 		}
 	}
 
-	if (keyDir == DIR_LEFT)
-	{
-		copyPos.x_ -= mMoveSpeed;
-		if (copyPos.x_ < 0)
-		{
-			copyPos.x_ = 0;
-		}
-
-	}
+	
 	//移動チップに当たっている時
 	if (lpMapMng.GetEvent(copyPos) == true)
 	{
