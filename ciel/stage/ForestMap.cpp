@@ -467,8 +467,6 @@ bool ForestMap::Init(void)
 	{
 		return false;
 	}
-	
-	
 	return true;
 }
 
