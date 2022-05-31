@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include"../GameScene.h"
+#include "../Input/Keyboard.h"
 #include "Menu.h"
 
 Menu::Menu()
@@ -13,6 +14,9 @@ Menu::~Menu()
 bool Menu::init(GameScene* parent)
 {
 	mParent = parent;
+
+	b = 0;
+	
 	
 	mImage[0][0] = LoadGraph("image/menyu/menu10.png");
 	//ƒAƒCƒeƒ€
@@ -142,7 +146,9 @@ bool Menu::init(GameScene* parent)
 
 void Menu::Update(void)
 {
-	
+	key_.Update();
+	key_.getKeyDown(KEY_INPUT_DOWN);
+
 	switch (mSelect)
 	{
 	case Menu::MENU_SELECT::MENU_ID:
@@ -192,7 +198,7 @@ void Menu::Draw(void)
 		break;
 	case Menu::MENU_SELECT::MENU_OPTION:
 		SetDrawBlendMode(DX_BLENDMODE_MULA, 150);
-		DrawBox(mBoxO[xxxx].x_, 135, mBoxO[xxxx + 1].x_,180,GetColor(0, 0, 200), true);
+		/*DrawBox(mBoxO[xxxx].x_, 135, mBoxO[xxxx + 1].x_,180,GetColor(0, 0, 200), true);*/
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		break;
 	/*case Menu::MENU_SELECT::MENU_NO:
@@ -450,7 +456,7 @@ void Menu::Menus(void)
 {
 	if (y >= 0)
 	{
-		if (CheckHitKey(KEY_INPUT_DOWN))
+		if (key_.getKeyDown(KEY_INPUT_DOWN))
 		{
 			y += 1;
 			if (y > 4)
@@ -459,7 +465,7 @@ void Menu::Menus(void)
 			}
 			mPos.y_ = -10;
 		}
-		else if (CheckHitKey(KEY_INPUT_UP) && y >= 0)
+		else if (key_.getKeyDown(KEY_INPUT_UP) && y >= 0)
 		{
 			y -= 1;
 			if (y <= 0)
@@ -468,7 +474,7 @@ void Menu::Menus(void)
 			}
 			mPos.y_ = -10;
 		}
-		if (CheckHitKey(KEY_INPUT_M))
+		if (key_.getKeyDown(KEY_INPUT_M))
 		{
 			if (y == 1)
 			{
@@ -535,7 +541,7 @@ void Menu::Select(void)
 {
 	if (xx >= 0)
 	{
-		if (CheckHitKey(KEY_INPUT_RIGHT))
+		if (key_.getKeyDown(KEY_INPUT_RIGHT))
 		{
 			xx += 1;
 			if (xx > 3)
@@ -544,7 +550,7 @@ void Menu::Select(void)
 			}
 
 		}
-		else if (CheckHitKey(KEY_INPUT_LEFT) && xx >= 0)
+		else if (key_.getKeyDown(KEY_INPUT_LEFT) && xx >= 0)
 		{
 			xx -= 1;
 			if (xx <= 0)
@@ -554,7 +560,7 @@ void Menu::Select(void)
 
 		}
 	}
-	if (CheckHitKey(KEY_INPUT_M))
+	if (key_.getKeyDown(KEY_INPUT_M))
 	{
 		if (xx == 1)
 		{
@@ -573,7 +579,7 @@ void Menu::Select(void)
 			yyy = 1;
 		}
 	}
-	if (CheckHitKey(KEY_INPUT_B))
+	if (key_.getKeyDown(KEY_INPUT_B))
 	{
 		ChangeState(MENU_SELECT::MENU_ID);
 		xx = 0;
@@ -588,7 +594,7 @@ void Menu::Nomal(void)
 	{
 		if (yyy >= 0)
 		{
-			if (CheckHitKey(KEY_INPUT_DOWN))
+			if (key_.getKeyDown(KEY_INPUT_DOWN))
 			{
 				yyy += 1;
 				if (yyy > 2)
@@ -596,7 +602,7 @@ void Menu::Nomal(void)
 					yyy = 1;
 				}
 			}
-			else if (CheckHitKey(KEY_INPUT_UP) && yyy >= 0)
+			else if (key_.getKeyDown(KEY_INPUT_UP) && yyy >= 0)
 			{
 				yyy -= 1;
 				if (yyy <= 0)
@@ -606,7 +612,7 @@ void Menu::Nomal(void)
 			}
 		}
 	}
-	if (CheckHitKey(KEY_INPUT_B))
+	if (key_.getKeyDown(KEY_INPUT_B))
 	{
 		ChangeAitem(AITEM_SELECT::AITEM_ID);
 		xxx = 0;
@@ -620,7 +626,7 @@ void Menu::Heal(void)
 	{
 		if (yyy >= 0)
 		{
-			if (CheckHitKey(KEY_INPUT_DOWN))
+			if (key_.getKeyDown(KEY_INPUT_DOWN))
 			{
 				yyy += 1;
 				if (yyy > 2)
@@ -628,7 +634,7 @@ void Menu::Heal(void)
 					yyy = 1;
 				}
 			}
-			else if (CheckHitKey(KEY_INPUT_UP) && yyy >= 0)
+			else if (key_.getKeyDown(KEY_INPUT_UP) && yyy >= 0)
 			{
 				yyy -= 1;
 				if (yyy <= 0)
@@ -638,7 +644,7 @@ void Menu::Heal(void)
 			}
 		}
 	}
-	if (CheckHitKey(KEY_INPUT_B))
+	if (key_.getKeyDown(KEY_INPUT_B))
 	{
 		ChangeAitem(AITEM_SELECT::AITEM_ID);
 		xxx = 0;
@@ -651,7 +657,7 @@ void Menu::Important(void)
 {
 	if (xxx >= 0)
 	{
-		if (CheckHitKey(KEY_INPUT_RIGHT))
+		if (key_.getKeyDown(KEY_INPUT_RIGHT))
 		{
 			xxx += 1;
 			if (xxx >= 2)
@@ -659,7 +665,7 @@ void Menu::Important(void)
 				xxx = 0;
 			}
 		}
-		else if (CheckHitKey(KEY_INPUT_LEFT) && xxx >= 0)
+		else if (key_.getKeyDown(KEY_INPUT_LEFT) && xxx >= 0)
 		{
 			xxx -= 1;
 			if (xxx < 0)
@@ -671,7 +677,7 @@ void Menu::Important(void)
 		{
 			if (xxx == 0)
 			{
-				if (CheckHitKey(KEY_INPUT_DOWN))
+				if (key_.getKeyDown(KEY_INPUT_DOWN))
 				{
 					yyy += 1;
 					if (yyy > 5)
@@ -679,7 +685,7 @@ void Menu::Important(void)
 						yyy = 1;
 					}
 				}
-				else if (CheckHitKey(KEY_INPUT_UP) && yyy >= 0)
+				else if (key_.getKeyDown(KEY_INPUT_UP) && yyy >= 0)
 				{
 					yyy -= 1;
 					if (yyy <= 0)
@@ -690,7 +696,7 @@ void Menu::Important(void)
 			}
 			else if (xxx == 1)
 			{
-				if (CheckHitKey(KEY_INPUT_DOWN))
+				if (key_.getKeyDown(KEY_INPUT_DOWN))
 				{
 					yyy += 1;
 					if (yyy > 3)
@@ -698,7 +704,7 @@ void Menu::Important(void)
 						yyy = 1;
 					}
 				}
-				else if (CheckHitKey(KEY_INPUT_UP) && yyy >= 0)
+				else if (key_.getKeyDown(KEY_INPUT_UP) && yyy >= 0)
 				{
 					yyy -= 1;
 					if (yyy <= 0)
@@ -710,7 +716,7 @@ void Menu::Important(void)
 			
 		}
 	}
-	if (CheckHitKey(KEY_INPUT_B))
+	if (key_.getKeyDown(KEY_INPUT_B))
 	{
 		ChangeAitem(AITEM_SELECT::AITEM_ID);
 		xxx = 0;
@@ -722,7 +728,7 @@ void Menu::Hint(void)
 {
 	if (yyyyy >= 0)
 	{
-		if (CheckHitKey(KEY_INPUT_DOWN))
+		if (key_.getKeyDown(KEY_INPUT_DOWN))
 		{
 			yyyyy += 1;
 			if (yyyyy > 2)
@@ -730,7 +736,7 @@ void Menu::Hint(void)
 				yyyyy = 1;
 			}
 		}
-		else if (CheckHitKey(KEY_INPUT_UP) && yyy >= 0)
+		else if (key_.getKeyDown(KEY_INPUT_UP) && yyy >= 0)
 		{
 			yyyyy -= 1;
 			if (yyyyy <= 0)
@@ -739,7 +745,7 @@ void Menu::Hint(void)
 			}
 		}
 	}
-	if (CheckHitKey(KEY_INPUT_B))
+	if (key_.getKeyDown(KEY_INPUT_B))
 	{
 		ChangeState(MENU_SELECT::MENU_ID);
 		xxxxx = 0;
@@ -748,11 +754,11 @@ void Menu::Hint(void)
 
 }
 
-void Menu::Opution(void)
+int Menu::Opution(void)
 {
-	if (xxxx >= 0)
+	/*if (xxxx >= 0)
 	{
-		if (CheckHitKey(KEY_INPUT_RIGHT))
+		if (key_.getKeyDown(KEY_INPUT_RIGHT))
 		{
 			xxxx += 1;
 			if (xxxx > 3)
@@ -760,7 +766,7 @@ void Menu::Opution(void)
 				xxxx = 1;
 			}
 		}
-		else if (CheckHitKey(KEY_INPUT_LEFT) && xxxx >= 0)
+		else if (key_.getKeyDown(KEY_INPUT_LEFT) && xxxx >= 0)
 		{
 			xxxx -= 1;
 			if (xxxx <= 0)
@@ -769,13 +775,36 @@ void Menu::Opution(void)
 			}
 		}
 
+	}*/
+
+	
+
+	if (key_.getKeyDownHold(KEY_INPUT_DOWN))
+	{
+		b += 1;
+		if (b > 100)
+		{
+			x = 100;
+		}
 	}
-	if (CheckHitKey(KEY_INPUT_B))
+	if (key_.getKeyDownHold(KEY_INPUT_UP))
+	{
+		b -= 1;
+		if (b < 0)
+		{
+			b = 0;
+		}
+	}
+
+	if (key_.getKeyDown(KEY_INPUT_B))
 	{
 		ChangeState(MENU_SELECT::MENU_ID);
 		xxxx = 0;
 		yyyy = 0;
 	}
+
+	return b;
+	
 }
 
 //void Menu::Opution(void)
@@ -867,6 +896,11 @@ void Menu::End(void)
 		x = 0;
 		yy = 0;
 	}
+}
+
+int Menu::OpBgm(void)
+{
+	return b;
 }
 
 void Menu::ChangeState(MENU_SELECT select)

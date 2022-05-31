@@ -1,5 +1,7 @@
 #include <DxLib.h>
 #include "GameScene.h"
+#include"../scene/Obj/BGM.h"
+#include"../scene/Input/Keyboard.h"
 #include"../scene/Obj/Aitem.h"
 #include "../stage/StageMng.h"
 
@@ -86,12 +88,13 @@ bool GameScene::mEnd()
 
 uniquBaseScn GameScene::Update(uniquBaseScn own)
 {
-    /*if (CheckHitKey(KEY_INPUT_SPACE))
+   /* if (CheckHitKey(KEY_INPUT_SPACE))
     {
         return std::make_unique<GameScene>(std::move(own));
     }*/
 
     //ポーズ機能
+    key_.Update();
     if (mPose == false)
     {
         if (CheckHitKey(KEY_INPUT_F))
@@ -116,7 +119,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     //一日の流れ
     int min = 60;    //一分間のフレーム数
-    int Day = min*10;      //一日の秒数
+    int Day = min * 10;      //一日の秒数
 
     if (delta % Day == 300)
     {
@@ -130,12 +133,12 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         PMflg_ = false;
         count_ = 0;
     }
-   /* if (PMflg_ && !AMflg_ && delta % Day == 121)
-    {
-        AMflg_ = true;
-        Nightflg_ = false;
-        count_ = 0;
-    }*/
+    /* if (PMflg_ && !AMflg_ && delta % Day == 121)
+     {
+         AMflg_ = true;
+         Nightflg_ = false;
+         count_ = 0;
+     }*/
 
     if (delta % Day == 0)
     {
@@ -152,9 +155,6 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     }
 
 
-
-
-
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
     PlayerPos = mPlayer.GetPos();
@@ -169,6 +169,10 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     /* mAitem->Update();*/
 
      /*mMenu.Update();*/
+
+    mMenu.Update();
+
+    mBgm->Update(mMenu.OpBgm());
 
 
     return std::move(own);
@@ -195,14 +199,15 @@ void GameScene::DrawOwnScn()
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* mAitem->Draw(mMapOffset);*/
 
-    /* mMenu.Draw();*/
+     mMenu.Draw();
     
 }
 
 bool GameScene::Init(void)
 {
+
     // ポーズフラグ
-        mPose = false;
+    mPose = false;
 
     mAitem = new Aitem();
 
@@ -218,8 +223,10 @@ bool GameScene::Init(void)
     Nightflg_ = false;
     count_ = 0;
 
+    mBgm = new BGM();
 
-	return true;
+   	return true;
+
 }
 
 void GameScene::TimeManeger(void)

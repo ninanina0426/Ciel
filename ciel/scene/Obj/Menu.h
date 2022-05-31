@@ -1,5 +1,6 @@
 #pragma once
 #include "../../common/Vector2.h"
+#include "../Input/Keyboard.h"
 #include"Aitem.h"
 class GameScene;
 
@@ -42,10 +43,11 @@ public:
 	void Heal(void);
 	void Important(void);
 
-	void Opution(void);
+	int Opution(void);
 	void Hint(void);
 	void End(void);
 
+	int OpBgm(void);
 
 	
 	int y;
@@ -61,6 +63,9 @@ public:
 	int sy;
 	
 	int menuScr;
+
+	
+
 
 private:
 
@@ -86,6 +91,11 @@ private:
 	MENU_SELECT mSelect;
 
 	AITEM_SELECT mAitem;
+
+	Keyboard key_;
+
+	int b;
+
 	//èÛë‘ëJà⁄
 	void ChangeState(MENU_SELECT select);
 

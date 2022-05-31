@@ -1,4 +1,5 @@
 #include <DxLib.h>
+
 #include "SweetsMap.h"
 
 int mMapNomal[MAP_Y][MAP_X] = {
@@ -428,6 +429,9 @@ SweetsMap::~SweetsMap()
 
 void SweetsMap::Update(Vector2 offset)
 {
+
+	
+
 	mOffset = { offset.x_,offset.y_ };
 
 }
@@ -457,8 +461,6 @@ void SweetsMap::DrawOwnScn()
 
 bool SweetsMap::Init(void)
 {
-	
-
 
 	if (LoadDivGraph("./image/s1.png", 10000, 100, 100, 16, 16, &mChipImage[0]) == -1)
 	{
@@ -466,8 +468,6 @@ bool SweetsMap::Init(void)
 	}
 
 	
-
-
 	//SetMap(mapID);
 
 	return true;

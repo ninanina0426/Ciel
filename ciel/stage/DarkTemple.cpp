@@ -365,9 +365,9 @@ bool DarkTemple::Init(void)
 bool DarkTemple::CheckMapChip(Vector2 pos)
 {
 
-	layer1 = dt_ground[pos.y_ / 16][pos.x_ / 16];
-	layer2 = dt_wall[pos.y_ / 16][pos.x_ / 16];
-	layer3 = dt_obj[pos.y_ / 16][pos.x_ / 16];
+	layer1 = dt_ground[pos.y_ / 32][pos.x_ / 32];
+	layer2 = dt_wall[pos.y_ / 32][pos.x_ / 32];
+	layer3 = dt_obj[pos.y_ / 32][pos.x_ / 32];
 
 
 	bool flg = true;	//true=player‚ª•à‚¯‚é
@@ -375,13 +375,33 @@ bool DarkTemple::CheckMapChip(Vector2 pos)
 		//ˆÚ“®”ÍˆÍ‚ğs‚¤
 	switch (layer1)
 	{
-		//case 3330:
+	case 73:
+	
+		
+		switch (layer2)
+		{
+		case 240:
+			
+			switch (layer3)
+			{
+		//	case :
+			
+				flg = true;
+				break;
+			default:
+				break;
+			}
+			break;
+		default:
+			break;
+		}
 
-			/*flg=true;*/
 		break;
 	default:
 		break;
 	}
+
+	
 
 	return flg;
 

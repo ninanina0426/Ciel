@@ -1,11 +1,13 @@
 #pragma once
 #include <chrono>
 #include "BaseScene.h"
+#include"../scene/Input/Keyboard.h"
 #include"../scene/Obj/Player.h"
 #include"../scene/Obj/Menu.h"
 #include "../stage/stage.h"
 class SceneMng;
 class Aitem;
+class BGM;
 
 
 class GameScene : public BaseScene
@@ -31,6 +33,8 @@ public:
 
     bool mEnd();
 
+    int SHandle;
+
     bool mPose;
 private:
     uniquBaseScn Update(uniquBaseScn own) override;     //タイトルシーンUpdata
@@ -52,7 +56,6 @@ private:
 
     Vector2 mMapOffset;
 
-
     //時間関係
     void TimeManeger(void);
     bool AMflg_;            //朝
@@ -63,6 +66,15 @@ private:
     int evening_;
     std::chrono::system_clock::time_point nowTime_;
     std::chrono::system_clock::time_point oldTime_;
+
+
+
+    Keyboard key_;
+
+    BGM*mBgm;
+
+    int x;
+
 
 };
 

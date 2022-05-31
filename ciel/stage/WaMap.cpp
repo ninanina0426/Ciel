@@ -450,6 +450,7 @@ void WaMap::Update(Vector2 offset)
 
 }
 
+
 void WaMap::DrawOwnScn()
 {
 
@@ -519,3 +520,5 @@ int WaMap::GetMapChip(Vector2 pos)
 {
 	return wa_build3[pos.y_ / 32][pos.x_ / 32];
 }
+
+

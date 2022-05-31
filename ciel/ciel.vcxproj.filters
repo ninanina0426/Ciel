@@ -29,9 +29,12 @@
     <ClCompile Include="stage\CaveMap.cpp" />
     <ClCompile Include="stage\CaveShop.cpp" />
     <ClCompile Include="stage\DarkTemple.cpp" />
-    <ClCompile Include="..\..\..\ciel\scene\SelectScene.cpp" />
     <ClCompile Include="stage\WaMap.cpp" />
     <ClCompile Include="stage\WaShop.cpp" />
+    <ClCompile Include="stage\WaMap.cpp" />
+    <ClCompile Include="stage\WaShop.cpp" />
+    <ClCompile Include="scene\Obj\BGM.cpp" />
+
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
