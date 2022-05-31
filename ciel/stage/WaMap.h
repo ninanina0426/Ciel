@@ -22,7 +22,9 @@ private:
 	int GetMapChip(Vector2 pos) override;
 	MAP_ID GetStageID(void) { return MAP_ID::WA; };
 
+
 	Player mPlayer;
+
 
 
 	int layer1;

@@ -2,7 +2,7 @@
 #include <memory>
 #include "TitleScene.h"
 #include "GameScene.h"
-#include "Input/Keyboard.h"
+//#include "Input/Keyboard.h"
 TitleScene::TitleScene()
 {
     Init();
@@ -16,8 +16,7 @@ TitleScene::~TitleScene()
 uniquBaseScn TitleScene::Update(uniquBaseScn own)
 {
     key_.Update();
-    
-    if (CheckHitKey(KEY_INPUT_SPACE))
+    if (key_.getKeyDown(KEY_INPUT_SPACE))
     {
         return std::make_unique<GameScene>();
     }
@@ -36,7 +35,6 @@ void TitleScene::DrawOwnScn()
     }*/
     //DrawBox(0, 0, 1080, 604, 0xffffff, false);
     //DrawString(500, 300, "タイトル表示するよ", 0xffffff);
-
 }
 
 bool TitleScene::Init(void)

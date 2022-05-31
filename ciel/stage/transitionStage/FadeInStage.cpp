@@ -1,8 +1,7 @@
 #include <DxLib.h>
 #include "FadeInStage.h"
 
-FadeInStage::FadeInStage(uniquStage beforStage, uniquStage nextStage):
-    TraStage(std::move(beforStage),std::move(nextStage))
+FadeInStage::FadeInStage()
 {
     count_ = 0;
     DrawOwnScn();
@@ -27,12 +26,12 @@ void FadeInStage::DrawOwnScn(void)
 	if (count_ < 256)
 	{
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 - count_);
-		beforStage_->Draw();
+		DrawBox(0, 0, 1080, 609, 0x000000, true);
 	}
 	else
 	{
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, count_ - 255);
-		nextStage_->Draw();
+		//DrawBox(0, 0, 1080, 609, 0x000000, true);
 	}
 
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);

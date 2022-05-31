@@ -11,17 +11,19 @@ class TraStage
 {
 public:
 	TraStage() {};
-	TraStage(uniquStage beforStage, uniquStage nextStage);
+	//TraStage(uniquStage beforStage, uniquStage nextStage);
 	 ~TraStage();
-private:
 	 virtual bool UpdataTrangetion(void) = 0;
 	 virtual void DrawOwnScn(void) = 0;
+private:
+	
 	 void Update(uniquStage own);		
 	 bool Init(void) ;
 
+	 bool ChangeFlg_;
 	
 protected:
-	uniquStage beforStage_;
-	uniquStage nextStage_;
+	/*uniquStage beforStage_;
+	uniquStage nextStage_;*/
 };
 

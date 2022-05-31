@@ -1,4 +1,5 @@
 #pragma once
+#include <chrono>
 #include "BaseScene.h"
 #include"../scene/Input/Keyboard.h"
 #include"../scene/Obj/Player.h"
@@ -55,11 +56,25 @@ private:
 
     Vector2 mMapOffset;
 
+    //ŽžŠÔŠÖŒW
+    void TimeManeger(void);
+    bool AMflg_;            //’©
+    bool PMflg_;            //—[•û
+    bool Nightflg_;         //–é
+    int count_;
+    int night_;
+    int evening_;
+    std::chrono::system_clock::time_point nowTime_;
+    std::chrono::system_clock::time_point oldTime_;
+
+
+
     Keyboard key_;
 
     BGM*mBgm;
 
     int x;
+
 
 };
 

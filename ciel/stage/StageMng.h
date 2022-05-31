@@ -2,6 +2,7 @@
 #include <DxLib.h>
 #include "../common/Vector2.h"
 #include"../scene/Obj/Player.h"
+
 #include "Stage.h"
 
 class Player;
@@ -54,8 +55,9 @@ private:
 	MAP_ID mNextMapID;
 	Vector2 mNextPos;
 
-	bool flg;
+	bool flg;		//ƒJƒƒ‰ƒtƒ‰ƒO
 
+	
 	friend Stage;
 };
 

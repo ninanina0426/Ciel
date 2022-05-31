@@ -4,7 +4,7 @@ class FadeInStage :
     public TraStage
 {
 public:
-	FadeInStage(uniquStage beforStage, uniquStage nextStage);
+	FadeInStage();
 	~FadeInStage();
 private:
 	bool UpdataTrangetion(void) override;
