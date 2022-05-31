@@ -380,11 +380,18 @@ bool DarkTemple::CheckMapChip(Vector2 pos)
 		
 		switch (layer2)
 		{
+		case -1:
+		case 231:
 		case 240:
 			
 			switch (layer3)
 			{
-		//	case :
+			case -1:
+			case 92:
+			case 174: 
+			case 175:
+			case 184:
+			case 185:
 			
 				flg = true;
 				break;

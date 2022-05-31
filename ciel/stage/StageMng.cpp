@@ -204,23 +204,7 @@ bool StageMng::GetEvent(Vector2 pos)
 
 		}
 	}
-	//sweetw
-	if (lpMapMng.mMapID == MAP_ID::SWEETS)
-	{
-		if (chipID == 2654 || chipID == 2655 || chipID == 2656)
-		{
-			mMapChange = true;
-			//マップを切り替えることになった
-			/*mNextMapID = MAP_ID::FORESTIN;*/
-			mNextPos = { 820,305 };
-			stage_ = std::move(std::make_unique<SweetsOutMap>());
-			mMapID = MAP_ID::SWEETSOUT;
-		}
-		else
-		{
-			mMapChange = false;
-		}
-	}
+	
 	//FORESTINからFORESTへ
 	if (lpMapMng.mMapID == MAP_ID::FORESTIN)
 	{
@@ -245,18 +229,7 @@ bool StageMng::GetEvent(Vector2 pos)
 	//TEMPLEからTEMPLEINへ
 	if (lpMapMng.mMapID == MAP_ID::TEMPLE)
 	{
-		if (chipID == 470)
-		{
-			mMapChange = true;
-
-
-			//マップを切り替えることになった
-
-			mNextPos = { 1425,1545 };
-			stage_ = std::move(std::make_unique<TempleInMap>());
-			mMapID = MAP_ID::TEMPLEIN;
-
-		}
+		
 
 		if (chipID == 470)
 		{
@@ -389,36 +362,7 @@ bool StageMng::GetEvent(Vector2 pos)
 		}
 
 	}
-	if (lpMapMng.mMapID == MAP_ID::SWEETS)
-	{
-
-		if (chipID == 2669 || chipID == 2670 || chipID == 2671)
-		{
-			mMapChange = true;
-			mNextPos = { 665,1405 };
-			stage_ = std::move(std::make_unique<SweetsOutMap>());
-			mMapID = MAP_ID::SWEETSOUT;
-		}
-		//SWEETSからCANDYへ
-		if (chipID == 2654 || chipID == 2655 || chipID == 2656)
-		{
-			mMapChange = true;
-
-			if (lpMapMng.mMapID == MAP_ID::SWEETS)
-			{
-				//マップを切り替えることになった
-				mNextPos = { 820,305 };
-				mDir = DIR_DOWN;
-				stage_ = std::move(std::make_unique<SweetsOutMap>());
-				mMapID = MAP_ID::SWEETSOUT;
-
-			}
-			else
-			{
-				mMapChange = false;
-			}
-		}
-
+	
 		//SWEETSからCANDYへ
 		if (chipID == 2654 || chipID == 2655 || chipID == 2656)
 		{
@@ -496,8 +440,8 @@ bool StageMng::GetEvent(Vector2 pos)
 				mMapChange = false;
 			}
 		}
-		//SWEETSからSWEETSSCHOOL1へ
 
+		//SWEETSからSWEETSSCHOOL1へ
 		if (chipID == 2660 || chipID == 2661 || chipID == 2662)
 		{
 
@@ -569,7 +513,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			}
 		}
 
-	}
+	
 	return mMapChange;
 }
 
