@@ -15,7 +15,7 @@ TitleScene::~TitleScene()
 
 uniquBaseScn TitleScene::Update(uniquBaseScn own)
 {
-
+    key_.Update();
     
     if (key_.getKeyDown(KEY_INPUT_SPACE))
     {
@@ -36,8 +36,6 @@ void TitleScene::DrawOwnScn()
     //}
     //DrawBox(0, 0, 1080, 604, 0xffffff, false);
     //DrawString(500, 300, "タイトル表示するよ", 0xffffff);
->>>>>>> f24996e4e0ad12600b7d95cd93c919c1cb3e8240
-    
 }
 
 bool TitleScene::Init(void)

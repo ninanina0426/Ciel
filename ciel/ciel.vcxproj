@@ -151,11 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="scene\Obj\BGM.cpp" />
     <ClCompile Include="stage\CaveMap.cpp" />
     <ClCompile Include="stage\CaveShop.cpp" />
     <ClCompile Include="stage\DarkTemple.cpp" />
     <ClCompile Include="stage\ForestMap.cpp" />
-    <ClCompile Include="..\..\..\ciel\scene\SelectScene.cpp" />
     <ClCompile Include="scene\Input\Keyboard.cpp" />
     <ClCompile Include="scene\Obj\Aitem.cpp" />
     <ClCompile Include="scene\Obj\Menu.cpp" />
@@ -188,6 +188,7 @@
   <ItemGroup>
     <ClInclude Include="common\details\Vector2.h" />
     <ClInclude Include="common\Vector2.h" />
+    <ClInclude Include="scene\Obj\BGM.h" />
     <ClInclude Include="stage\CaveMap.h" />
     <ClInclude Include="stage\CaveShop.h" />
     <ClInclude Include="stage\DarkTemple.h" />

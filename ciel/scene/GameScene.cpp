@@ -1,5 +1,7 @@
 #include <DxLib.h>
 #include "GameScene.h"
+#include"../scene/Obj/BGM.h"
+#include"../scene/Input/Keyboard.h"
 #include"../scene/Obj/Aitem.h"
 #include "../stage/StageMng.h"
 
@@ -91,6 +93,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         return std::make_unique<GameScene>(std::move(own));
     }*/
     //ポーズ機能
+    key_.Update();
     if (mPose == false)
     {
         if (CheckHitKey(KEY_INPUT_F))
@@ -107,6 +110,30 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         }
     }
 
+
+    //BGM---------------------------------------------
+    //if (key_.getKeyDownHold(KEY_INPUT_DOWN))
+    //{
+    //    x += 1;
+    //    if (x > 100)
+    //    {
+    //        x = 100;
+    //    }
+    //}
+    //if (key_.getKeyDownHold(KEY_INPUT_UP))
+    //{
+    //    x -= 1;
+    //    if (x < 0)
+    //    {
+    //        x = 0;
+    //    }
+    //}
+    //int move = 255 * x;
+
+    //// 音量の設定
+    //ChangeVolumeSoundMem(move/100, SHandle);
+    //---------------------------------------------------------
+
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
     PlayerPos = mPlayer.GetPos();
@@ -118,7 +145,9 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
  
    /* mAitem->Update();*/
 
-    /*mMenu.Update();*/
+    mMenu.Update();
+
+    mBgm->Update(mMenu.OpBgm());
 
    
     return std::move(own);
@@ -134,7 +163,7 @@ void GameScene::DrawOwnScn()
 
     /* mAitem->Draw(mMapOffset);*/
 
-    /* mMenu.Draw();*/
+     mMenu.Draw();
     
 }
 
@@ -144,11 +173,22 @@ bool GameScene::Init(void)
     /* mPlayer = new Player();
     mPlayer->init(this);*/
 
+    //BGM--------------------------------------------
+   // x = 0;
+   // SHandle = LoadSoundMem("bgm/yume.mp3");
+   // PlaySoundMem(SHandle, DX_PLAYTYPE_BACK);
+   ///* DeleteSoundMem(SHandle);*/
+    //-----------------------------------------------
+
+
     // ポーズフラグ
-        mPose = false;
+    mPose = false;
 
     mAitem = new Aitem();
 
     mMenu.init(this);
-	return true;
+
+    mBgm = new BGM();
+
+   	return true;
 }

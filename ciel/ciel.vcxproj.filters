@@ -28,6 +28,12 @@
     <ClCompile Include="stage\transitionStage\FadeInStage.cpp" />
     <ClCompile Include="scene\Input\Keyboard.cpp" />
     <ClCompile Include="scene\SelectScene.cpp" />
+    <ClCompile Include="stage\CaveMap.cpp" />
+    <ClCompile Include="stage\CaveShop.cpp" />
+    <ClCompile Include="stage\DarkTemple.cpp" />
+    <ClCompile Include="stage\WaMap.cpp" />
+    <ClCompile Include="stage\WaShop.cpp" />
+    <ClCompile Include="scene\Obj\BGM.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,75 +69,8 @@
     <ClCompile Include="stage\ForestMap.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="stage\WaMap.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="stage\CaveMap.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="stage\WaShop.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="stage\CaveShop.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="stage\DarkTemple.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="scene\BaseScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="common\details\Vector2.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="common\Vector2.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="_debug\_DebugConOut.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="_debug\_DebugDispOut.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\SceneMng.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\TitleScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\GameScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\EndScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="stage\Stage.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="stage\StageMng.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="stage\ForestMap.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="stage\WaMap.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="stage\CaveMap.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="stage\WaShop.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="stage\CaveShop.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="stage\DarkTemple.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-
     <ClInclude Include="common\details\Vector2.h" />
     <ClInclude Include="common\Vector2.h" />
     <ClInclude Include="scene\BaseScene.h" />
@@ -151,7 +90,6 @@
     <ClInclude Include="stage\templeMap.h" />
     <ClInclude Include="stage\ForestInMap.h" />
     <ClInclude Include="stage\ForestMap.h" />
-
     <ClInclude Include="scene\Obj\Aitem.h" />
     <ClInclude Include="scene\Obj\Menu.h" />
     <ClInclude Include="scene\Transition\CrossOver.h" />
@@ -162,6 +100,23 @@
     <ClInclude Include="scene\Input\Input.h" />
     <ClInclude Include="scene\Input\Keyboard.h" />
     <ClInclude Include="scene\SelectScene.h" />
-
+    <ClInclude Include="common\details\Vector2.h" />
+    <ClInclude Include="common\Vector2.h" />
+    <ClInclude Include="stage\CaveMap.h" />
+    <ClInclude Include="stage\CaveShop.h" />
+    <ClInclude Include="stage\DarkTemple.h" />
+    <ClInclude Include="stage\ForestMap.h" />
+    <ClInclude Include="scene\BaseScene.h" />
+    <ClInclude Include="scene\EndScene.h" />
+    <ClInclude Include="scene\GameScene.h" />
+    <ClInclude Include="scene\SceneMng.h" />
+    <ClInclude Include="scene\TitleScene.h" />
+    <ClInclude Include="stage\StageMng.h" />
+    <ClInclude Include="stage\Stage.h" />
+    <ClInclude Include="stage\WaMap.h" />
+    <ClInclude Include="stage\WaShop.h" />
+    <ClInclude Include="_debug\_DebugConOut.h" />
+    <ClInclude Include="_debug\_DebugDispOut.h" />
+    <ClInclude Include="scene\Obj\BGM.h" />
   </ItemGroup>
 </Project>

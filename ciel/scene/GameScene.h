@@ -1,10 +1,12 @@
 #pragma once
 #include "BaseScene.h"
+#include"../scene/Input/Keyboard.h"
 #include"../scene/Obj/Player.h"
 #include"../scene/Obj/Menu.h"
 #include "../stage/stage.h"
 class SceneMng;
 class Aitem;
+class BGM;
 
 
 class GameScene : public BaseScene
@@ -30,6 +32,8 @@ public:
 
     bool mEnd();
 
+    int SHandle;
+
     bool mPose;
 private:
     uniquBaseScn Update(uniquBaseScn own) override;     //タイトルシーンUpdata
@@ -50,6 +54,12 @@ private:
     Vector2 mNextPos;
 
     Vector2 mMapOffset;
+
+    Keyboard key_;
+
+    BGM*mBgm;
+
+    int x;
 
 };
 

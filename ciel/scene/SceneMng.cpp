@@ -8,6 +8,8 @@
 
 //SceneMng* SceneMng::s_Instance = nullptr;
 
+
+
 void SceneMng::Run(void)
 {
 
@@ -35,12 +37,12 @@ void SceneMng::Run(void)
 		SetDrawScreen(DX_SCREEN_BACK);//転写するだけのバックバッファ
 		ClsDrawScreen();
 
-
-		
 		scene_->Draw();				//シーンのDraw
-		
+
 		_dbgDraw();
 		ScreenFlip();
+
+		
 	}
 }
 

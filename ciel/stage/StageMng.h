@@ -26,6 +26,7 @@ public:
 	bool cheakMapChip(Vector2 pos);
 	bool GetEvent(Vector2 pos);
 	Vector2 mOffset;
+	MAP_ID mMapOldID;
 	MAP_ID mMapID;
 	DIR mDir;
 
@@ -37,6 +38,7 @@ public:
 
 	Vector2 GetPos(void);
 	MAP_ID GetMapId(void);
+	MAP_ID GetMapIdOld(void);
 private:
 	StageMng();
 	~StageMng();

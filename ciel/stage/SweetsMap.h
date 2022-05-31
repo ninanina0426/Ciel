@@ -1,5 +1,6 @@
 #pragma once
 #include "Stage.h"
+#include"../scene/Input/Keyboard.h"
 #include"../scene/Obj/Player.h"
 
 
@@ -14,6 +15,7 @@ public:
 	int mMap[MAP_Y][MAP_X];
 	
 	
+
 private:
 	void Update(Vector2 offset) override;
 	void DrawOwnScn() override;
@@ -23,6 +25,10 @@ private:
 	MAP_ID GetStageID(void) { return MAP_ID::SWEETS; };
 
 	Player mPlayer;
+
+	Keyboard key_;
+
+	int x;
 
 	int layer1;
 	int layer2;
