@@ -434,6 +434,8 @@ void ForestMap::SetMap(MAP_ID mapID)
 void ForestMap::Update(Vector2 offset)
 {
 	mOffset = { offset.x_,offset.y_ };   
+	//PlaySoundMem(BGM_, DX_PLAYTYPE_BACK);
+	
 }
 
 void ForestMap::DrawOwnScn()
@@ -456,6 +458,7 @@ void ForestMap::DrawOwnScn()
 
 		}
 	}
+	
 }
 
 bool ForestMap::Init(void)
@@ -464,6 +467,9 @@ bool ForestMap::Init(void)
 	{
 		return false;
 	}
+	BGM_ = LoadSoundMem("./image/music/f1.ogg");
+	PlaySoundMem(BGM_, DX_PLAYTYPE_LOOP);
+	
 	return true;
 }
 

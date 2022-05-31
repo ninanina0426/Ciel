@@ -1,4 +1,5 @@
 #pragma once
+#include <chrono>
 #include "BaseScene.h"
 #include"../scene/Obj/Player.h"
 #include"../scene/Obj/Menu.h"
@@ -50,6 +51,18 @@ private:
     Vector2 mNextPos;
 
     Vector2 mMapOffset;
+
+
+    //ŽžŠÔŠÖŒW
+    void TimeManeger(void);
+    bool AMflg_;            //’©
+    bool PMflg_;            //—[•û
+    bool Nightflg_;         //–é
+    int count_;
+    int night_;
+    int evening_;
+    std::chrono::system_clock::time_point nowTime_;
+    std::chrono::system_clock::time_point oldTime_;
 
 };
 

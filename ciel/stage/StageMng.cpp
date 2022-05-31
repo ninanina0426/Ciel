@@ -12,7 +12,7 @@
 #include "templeMap.h"
 #include "TempleInMap.h"
 #include "ForestInMap.h"
-#include "transitionStage/FadeInStage.h"
+
 
 
 
@@ -22,7 +22,7 @@ bool StageMng::Init()
 	stage_ = std::make_unique<SweetsMap>();
 
 	mMapID = MAP_ID::SWEETS;
-
+	
 	flg = false;
 
     return true;
@@ -31,10 +31,12 @@ bool StageMng::Init()
 void StageMng::Draw()
 {
 	stage_->DrawOwnScn();		//‚»‚ê‚¼‚ê‚Ìƒ}ƒbƒv‚ð•`‰æ
-
+	
 	DrawFormatString(0, 50, GetColor(255, 255, 255), "chipId=%d", mChipId);
-
+	
 }
+
+
 
 Vector2 StageMng::Update(Vector2 mPlayerset)
 {
@@ -160,6 +162,10 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 		stage_ = std::move(std::make_unique<CaveMap>());
 		mMapID = MAP_ID::CAVE;
 	}
+
+	
+	
+	
 	stage_->Update(mOffset);
 
 	mChipId = stage_->GetMapChip(mPlayerset);
@@ -189,6 +195,8 @@ bool StageMng::cheakMapChip(Vector2 pos)
 
 bool StageMng::GetEvent(Vector2 pos)
 {
+	int chipID = stage_->GetMapChip(pos);
+
 	if (chipID == 1407)
 	{
 		mMapChange = true;
