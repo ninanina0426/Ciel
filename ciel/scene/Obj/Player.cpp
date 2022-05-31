@@ -86,12 +86,7 @@ Vector2 Player::Update(void)
 		if (keyDir == DIR_DOWN)
 		{
 			copyPos.y_ += mMoveSpeed;
-			if (copyPos.y_ > 4000)
-			{
-				copyPos.y_ = 4000;
-			}
-
-
+		
 			if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
 			{
 				if (copyPos.y_ > 1600)
@@ -111,94 +106,52 @@ Vector2 Player::Update(void)
 		if (keyDir == DIR_RIGHT)
 		{
 			copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
-			if (copyPos.x_ > 3000)
+			if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
 			{
-				copyPos.x_ = 3000;
+				if (copyPos.x_ > 1600)
+				{
+					copyPos.x_ = 1600;
+				}
+			}
+			else
+			{
+				if (copyPos.x_ > 3200)
+				{
+					copyPos.x_ = 3200;
 
+				}
 			}
 		}
-		//	if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
-		//	{
-		//		if (copyPos.x_ > 1600)
-		//		{
-		//			copyPos.x_ = 1600;
-		//		}
-		//	}
-		//	else
-		//	{
-		//		if (copyPos.x_ > 3200)
-		//		{
-		//			copyPos.x_ = 3200;
-		//		}
-
-		//	}
-		//}
-
 		if (keyDir == DIR_LEFT)
 		{
-			copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
-
-			if (copyPos.x_ > 3000)
+			copyPos.x_ -= mMoveSpeed;
+			if (copyPos.x_ < 0)
 			{
-				copyPos.x_ = 3000;
-
+				copyPos.x_ = 0;
 			}
 		}
-		if (copyPos.x_ > 4000)
+		//移動チップに当たっている時
+		if (lpMapMng.GetEvent(copyPos) == true)
 		{
-			copyPos.x_ = 4000;
+			//切り替え先のSetposをもらう
+			copyPos = lpMapMng.GetPos();
+			mMoveDir = lpMapMng.GetDir();
+			lpMapMng.mMapChange = false;
 
 		}
-		if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
+		else if (lpMapMng.GetEvent(copyPos) == false)
 		{
-			if (copyPos.x_ > 1600)
-			{
-				copyPos.x_ = 1600;
-			}
+			lpMapMng.GetEvent(copyPos);
 		}
-		else
+		//当たり判定
+		if (lpMapMng.cheakMapChip(copyPos))
 		{
-			if (copyPos.x_ > 3200)
-			{
-				copyPos.x_ = 3200;
-			}
-
-
-		}
-	}
-
-	if (keyDir == DIR_LEFT)
-	{
-		copyPos.x_ -= mMoveSpeed;
-		if (copyPos.x_ < 0)
-		{
-			copyPos.x_ = 0;
+			mPos = copyPos;
 		}
 
-	}
-	//移動チップに当たっている時
-	if (lpMapMng.GetEvent(copyPos) == true)
-	{
-		//切り替え先のSetposをもらう
-		copyPos = lpMapMng.GetPos();
-		mMoveDir = lpMapMng.GetDir();
-		lpMapMng.mMapChange = false;
-
-	}
-	else if (lpMapMng.GetEvent(copyPos) == false)
-	{
-		lpMapMng.GetEvent(copyPos);
-	}
-	//当たり判定
-	if (lpMapMng.cheakMapChip(copyPos))
-	{
-		mPos = copyPos;
+		mDamyPos = copyPos;
 	}
 
-	mDamyPos = copyPos;
-
-
-	
 
 		mAnmCnt++;
 
