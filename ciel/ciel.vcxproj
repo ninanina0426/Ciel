@@ -155,7 +155,6 @@
     <ClCompile Include="stage\CaveShop.cpp" />
     <ClCompile Include="stage\DarkTemple.cpp" />
     <ClCompile Include="stage\ForestMap.cpp" />
-    <ClCompile Include="..\..\..\ciel\scene\SelectScene.cpp" />
     <ClCompile Include="scene\Input\Keyboard.cpp" />
     <ClCompile Include="scene\Obj\Aitem.cpp" />
     <ClCompile Include="scene\Obj\Menu.cpp" />

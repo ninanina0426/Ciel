@@ -334,11 +334,15 @@ void SweetsOutMap::DrawOwnScn()
 		for (int x = 0; x < MAP_X; x++)
 		{
 
+
 			DrawGraph(16 * x - mOffset.x_, 16 * y - mOffset.y_, mChipImage[mMapOutNomal[y][x]], true);
 
 			DrawGraph(16 * x - mOffset.x_, 16 * y - mOffset.y_, mChipImage[mMapOutRoad[y][x]], true);
 
 			DrawGraph(16 * x - mOffset.x_, 16 * y - mOffset.y_, mChipImage[mMapOutObj[y][x]], true);
+
+			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", mMapOutObj[y][x]);
+
 
 		}
 	}

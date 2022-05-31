@@ -340,7 +340,7 @@ void ForestInMap::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[fi_obj1[y][x]], true);
 			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 0, 0), "%d", fi_obj1[y][x]);
 
-			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 0, 0), "%d", fi_soil[y][x]);
+			
 			DrawFormatString(0, 10, GetColor(255, 255, 255), "mapPos=(%d,%d)", mOffset.x_, mOffset.y_);
 		}
 	}
@@ -419,6 +419,6 @@ bool ForestInMap::CheckMapChip(Vector2 pos)
 
 int ForestInMap::GetMapChip(Vector2 pos)
 {
-	return fi_obj1[pos.y_ / 32][pos.x_ / 32];
+	return fi_tree[pos.y_ / 32][pos.x_ / 32];
 }
 

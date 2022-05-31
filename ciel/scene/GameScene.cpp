@@ -86,7 +86,7 @@ bool GameScene::mEnd()
 
 uniquBaseScn GameScene::Update(uniquBaseScn own)
 {
-    /*if (CheckHitKey(KEY_INPUT_SPACE))
+   /* if (CheckHitKey(KEY_INPUT_SPACE))
     {
         return std::make_unique<GameScene>(std::move(own));
     }*/

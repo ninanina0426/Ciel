@@ -352,7 +352,7 @@ void CaveMap::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[cave_ground[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[cave_wall[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[cave_obj[y][x]], true);
-			/*DrawFormatString(32 * x - mOffset.X, 32 * y - mOffset.Y, GetColor(255, 255, 255), "%d", mMap[y][x]);*/
+			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 0, 0), "%d", cave_ground[y][x]);
 
 		}
 	}
@@ -373,9 +373,9 @@ bool CaveMap::Init(void)
 bool CaveMap::CheckMapChip(Vector2 pos)
 {
 	
-	layer1 = cave_ground[pos.y_ / 16][pos.x_ / 16];
-	layer2 = cave_wall[pos.y_ / 16][pos.x_ / 16];
-	layer3 = cave_obj[pos.y_ / 16][pos.x_ / 16];
+	layer1 = cave_ground[pos.y_ / 32][pos.x_ / 32];
+	layer2 = cave_wall[pos.y_ / 32][pos.x_ / 32];
+	layer3 = cave_obj[pos.y_ / 32][pos.x_ / 32];
 	
 
 	bool flg = true;	//true=playerÇ™ï‡ÇØÇÈ
@@ -383,9 +383,27 @@ bool CaveMap::CheckMapChip(Vector2 pos)
 		//à⁄ìÆîÕàÕÇçsÇ§
 	switch (layer1)
 	{
-	//case 3330:
+	case 28:
+	case 73:
 
-		/*flg=true;*/
+		switch (layer2)
+		{
+		case -1:
+		case 72:
+
+			switch (layer3)
+			{
+			case -1:
+
+				flg = true;
+				break;
+			default:
+				break;
+			}
+			break;
+		default:
+			break;
+		}
 		break;
 	default:
 		break;
