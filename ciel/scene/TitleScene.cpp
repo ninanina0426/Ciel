@@ -17,7 +17,7 @@ uniquBaseScn TitleScene::Update(uniquBaseScn own)
 {
     key_.Update();
     
-    if (key_.getKeyDown(KEY_INPUT_SPACE))
+    if (CheckHitKey(KEY_INPUT_SPACE))
     {
         return std::make_unique<GameScene>();
     }
@@ -30,12 +30,13 @@ void TitleScene::DrawOwnScn()
     SetDrawScreen(sceneScrID_);
     ClsDrawScreen();
 
-    //if (//key_->getKeyDown(KEY_INPUT_A))
-    //{
-    //    DrawString(100, 100, "aaaaaaaa", 0xffffff);
-    //}
+    /*if (key_->getKeyDown(KEY_INPUT_A))
+    {
+        DrawString(100, 100, "aaaaaaaa", 0xffffff);
+    }*/
     //DrawBox(0, 0, 1080, 604, 0xffffff, false);
     //DrawString(500, 300, "タイトル表示するよ", 0xffffff);
+
 }
 
 bool TitleScene::Init(void)

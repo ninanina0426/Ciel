@@ -1,5 +1,6 @@
 #pragma once
 #include "Stage.h"
+#include"../scene/Obj/Player.h"
 
 
 class WaMap :
@@ -20,6 +21,9 @@ private:
 	bool CheckMapChip(Vector2 pos) override;
 	int GetMapChip(Vector2 pos) override;
 	MAP_ID GetStageID(void) { return MAP_ID::WA; };
+
+	Player mPlayer;
+
 
 	int layer1;
 	int layer2;
