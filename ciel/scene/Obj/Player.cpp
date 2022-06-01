@@ -149,13 +149,9 @@ Vector2 Player::Update(void)
 		//“–‚½‚è”»’è
 		if (lpMapMng.cheakMapChip(copyPos))
 		{
-			if (copyPos.x_ > 3200)
-			{
-				copyPos.x_ = 3200;
-			}
-
-
+			mPos = copyPos;
 		}
+
 		mDamyPos = copyPos;
 	}
 
