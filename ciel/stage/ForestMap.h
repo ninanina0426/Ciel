@@ -22,6 +22,6 @@ private:
 	 int mMap2[MAP_Y][MAP_X];
 	 int mMap3[MAP_Y][MAP_X];
 	 int mMap4[MAP_Y][MAP_X];
-	 //int BGM_;
+
 };
 

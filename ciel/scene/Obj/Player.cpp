@@ -86,7 +86,7 @@ Vector2 Player::Update(void)
 		if (keyDir == DIR_DOWN)
 		{
 			copyPos.y_ += mMoveSpeed;
-		
+
 			if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
 			{
 				if (copyPos.y_ > 1600)
@@ -129,8 +129,11 @@ Vector2 Player::Update(void)
 			{
 				copyPos.x_ = 0;
 			}
+
 		}
-		//移動チップに当たっている時
+
+
+		// 移動チップに当たっている時
 		if (lpMapMng.GetEvent(copyPos) == true)
 		{
 			//切り替え先のSetposをもらう
@@ -146,12 +149,15 @@ Vector2 Player::Update(void)
 		//当たり判定
 		if (lpMapMng.cheakMapChip(copyPos))
 		{
-			mPos = copyPos;
-		}
+			if (copyPos.x_ > 3200)
+			{
+				copyPos.x_ = 3200;
+			}
 
+
+		}
 		mDamyPos = copyPos;
 	}
-
 
 		mAnmCnt++;
 
