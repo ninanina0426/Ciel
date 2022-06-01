@@ -154,8 +154,8 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 	}
 	if (CheckHitKey(KEY_INPUT_D))
 	{
-		stage_ = std::move(std::make_unique<SweetsMap>());
-		mMapID = MAP_ID::SWEETS;
+		stage_ = std::move(std::make_unique<CaveMap>());
+		mMapID = MAP_ID::CAVE;
 	}
 
 	
@@ -333,9 +333,10 @@ bool StageMng::GetEvent(Vector2 pos)
 		}
 	}
 	//CAVEÇ©ÇÁDARKTEMPLEÇ÷
-	if (lpMapMng.mMapID == MAP_ID::CAVE)
+	
+	if (chipID == 105)
 	{
-		if (chipID == 105)
+		if (lpMapMng.mMapID == MAP_ID::CAVE)
 		{
 			mMapChange = true;
 			//É}ÉbÉvÇêÿÇËë÷Ç¶ÇÈÇ±Ç∆Ç…Ç»Ç¡ÇΩ
@@ -344,11 +345,12 @@ bool StageMng::GetEvent(Vector2 pos)
 			stage_ = std::move(std::make_unique<DarkTemple>());
 			mMapID = MAP_ID::DARK;
 		}
-		else
-		{
-			mMapChange = false;
-		}
 	}
+	else
+	{
+		mMapChange = false;
+	}
+	
 	//DARKTEMPLEÇ©ÇÁCAVEÇ÷
 	if (lpMapMng.mMapID == MAP_ID::DARK)
 	{
