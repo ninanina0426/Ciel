@@ -208,7 +208,7 @@ bool StageMng::GetEvent(Vector2 pos)
 		}
 	}
 
-	sweetw
+	//sweetw
 	if (lpMapMng.mMapID == MAP_ID::SWEETS)
 	{
 		if (chipID == 2654 || chipID == 2655 || chipID == 2656)

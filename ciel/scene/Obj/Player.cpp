@@ -150,41 +150,6 @@ Vector2 Player::Update(void)
 		}
 
 
-		//// 移動チップに当たっている時
-		//if (lpMapMng.GetEvent(copyPos) == true)
-		//{
-		//	//切り替え先のSetposをもらう
-		//	copyPos = lpMapMng.GetPos();
-		//	mMoveDir = lpMapMng.GetDir();
-		//	lpMapMng.mMapChange = false;
-
-		//}
-		//else if (lpMapMng.GetEvent(copyPos) == false)
-		//{
-		//	lpMapMng.GetEvent(copyPos);
-		//}
-		////当たり判定
-		//if (lpMapMng.cheakMapChip(copyPos))
-		//{
-		//	if (copyPos.x_ > 3200)
-		//	{
-		//		copyPos.x_ = 3200;
-		//	}
-
-
-		//}
-
-
-
-		if (keyDir == DIR_LEFT)
-		{
-			copyPos.x_ -= mMoveSpeed;
-			if (copyPos.x_ < 0)
-			{
-				copyPos.x_ = 0;
-			}
-
-		}
 		//移動チップに当たっている時
 		if (lpMapMng.GetEvent(copyPos) == true)
 		{
@@ -206,17 +171,12 @@ Vector2 Player::Update(void)
 
 		mDamyPos = copyPos;
 
-
-
-
-
 	}
-
 
 		mAnmCnt++;
 
 		return mPos;
-	}
+	
 }
 
 
