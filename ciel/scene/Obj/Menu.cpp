@@ -474,7 +474,7 @@ void Menu::Menus(void)
 			}
 			mPos.y_ = -10;
 		}
-		if (key_.getKeyDown(KEY_INPUT_M))
+		if (key_.getKeyDown(KEY_INPUT_F)/* || key_.getKeyDown(KEY_INPUT_RETURN)*/)
 		{
 			if (y == 1)
 			{
@@ -560,7 +560,7 @@ void Menu::Select(void)
 
 		}
 	}
-	if (key_.getKeyDown(KEY_INPUT_M))
+	if (key_.getKeyDown(KEY_INPUT_F)/*|| key_.getKeyDown(KEY_INPUT_RETURN)*/)
 	{
 		if (xx == 1)
 		{
@@ -579,7 +579,7 @@ void Menu::Select(void)
 			yyy = 1;
 		}
 	}
-	if (key_.getKeyDown(KEY_INPUT_B))
+	if (key_.getKeyDown(KEY_INPUT_Q))
 	{
 		ChangeState(MENU_SELECT::MENU_ID);
 		xx = 0;
@@ -612,7 +612,7 @@ void Menu::Nomal(void)
 			}
 		}
 	}
-	if (key_.getKeyDown(KEY_INPUT_B))
+	if (key_.getKeyDown(KEY_INPUT_Q))
 	{
 		ChangeAitem(AITEM_SELECT::AITEM_ID);
 		xxx = 0;
@@ -644,7 +644,7 @@ void Menu::Heal(void)
 			}
 		}
 	}
-	if (key_.getKeyDown(KEY_INPUT_B))
+	if (key_.getKeyDown(KEY_INPUT_Q))
 	{
 		ChangeAitem(AITEM_SELECT::AITEM_ID);
 		xxx = 0;
@@ -716,7 +716,7 @@ void Menu::Important(void)
 			
 		}
 	}
-	if (key_.getKeyDown(KEY_INPUT_B))
+	if (key_.getKeyDown(KEY_INPUT_Q))
 	{
 		ChangeAitem(AITEM_SELECT::AITEM_ID);
 		xxx = 0;
@@ -745,7 +745,7 @@ void Menu::Hint(void)
 			}
 		}
 	}
-	if (key_.getKeyDown(KEY_INPUT_B))
+	if (key_.getKeyDown(KEY_INPUT_Q))
 	{
 		ChangeState(MENU_SELECT::MENU_ID);
 		xxxxx = 0;
@@ -796,7 +796,7 @@ int Menu::Opution(void)
 		}
 	}
 
-	if (key_.getKeyDown(KEY_INPUT_B))
+	if (key_.getKeyDown(KEY_INPUT_Q))
 	{
 		ChangeState(MENU_SELECT::MENU_ID);
 		xxxx = 0;
@@ -890,7 +890,7 @@ int Menu::Opution(void)
 
 void Menu::End(void)
 {
-	if (CheckHitKey(KEY_INPUT_B))
+	if (CheckHitKey(KEY_INPUT_Q))
 	{
 		ChangeState(MENU_SELECT::MENU_ID);
 		x = 0;
