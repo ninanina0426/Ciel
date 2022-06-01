@@ -65,8 +65,7 @@ void BGM::Update(int num)
         default:
             break;
         }
-        
-        
+  
     }
 }
 

@@ -97,14 +97,14 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     key_.Update();
     if (mPose == false)
     {
-        if (CheckHitKey(KEY_INPUT_F))
+        if (CheckHitKey(KEY_INPUT_ESCAPE))
         {
             mPose = true;
         }
     }
     else
     {
-        if (CheckHitKey(KEY_INPUT_F))
+        if (CheckHitKey(KEY_INPUT_ESCAPE))
         {
             mPose = false;
             mMenu.init(this);
@@ -166,7 +166,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
-    /* mAitem->Update();*/
+     mAitem->Update();
 
      /*mMenu.Update();*/
 
@@ -197,7 +197,7 @@ void GameScene::DrawOwnScn()
      auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
      int delta = msec / 1000000.0; //•b‚É•ÏŠ·  
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
-    /* mAitem->Draw(mMapOffset);*/
+     mAitem->Draw(mMapOffset);
 
      mMenu.Draw();
     
