@@ -376,6 +376,7 @@ bool DarkTemple::CheckMapChip(Vector2 pos)
 	switch (layer1)
 	{
 	case 73:
+	case 28:
 	
 		
 		switch (layer2)

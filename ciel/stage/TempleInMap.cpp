@@ -367,6 +367,6 @@ bool TempleInMap::CheckMapChip(Vector2 pos)
 
 int TempleInMap::GetMapChip(Vector2 pos)
 {
-	return 0;
+	return ti_obj1[pos.y_ / 32][pos.x_ / 32];
 }
 

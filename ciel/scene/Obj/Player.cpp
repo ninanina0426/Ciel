@@ -134,7 +134,7 @@ Vector2 Player::Update(void)
 
 
 		//ˆÚ“®ƒ`ƒbƒv‚É“–‚½‚Á‚Ä‚¢‚é
-		if (lpMapMng.GetEvent(copyPos) == true)
+ 		if (lpMapMng.GetEvent(copyPos) == true)
 		{
 			//Ø‚è‘Ö‚¦æ‚ÌSetpos‚ğ‚à‚ç‚¤
 			copyPos = lpMapMng.GetPos();
