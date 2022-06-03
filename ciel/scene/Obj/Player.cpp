@@ -101,7 +101,6 @@ Vector2 Player::Update(void)
 				}
 			}
 		}
-
 		if (keyDir == DIR_RIGHT)
 		{
 			copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
@@ -121,6 +120,7 @@ Vector2 Player::Update(void)
 				}
 			}
 		}
+
 		if (keyDir == DIR_LEFT)
 		{
 			copyPos.x_ -= mMoveSpeed;
@@ -132,8 +132,8 @@ Vector2 Player::Update(void)
 		}
 
 
-		// 移動チップに当たっている時
-		if (lpMapMng.GetEvent(copyPos) == true)
+		//移動チップに当たっている時
+ 		if (lpMapMng.GetEvent(copyPos) == true)
 		{
 			//切り替え先のSetposをもらう
 			copyPos = lpMapMng.GetPos();
@@ -149,15 +149,19 @@ Vector2 Player::Update(void)
 		if (lpMapMng.cheakMapChip(copyPos))
 		{
 			mPos = copyPos;
-
 		}
+
 		mDamyPos = copyPos;
+
 	}
+	mAnmCnt++;
 
-		mAnmCnt++;
 
-		return mPos;
+	return mPos;
+
+
 }
+
 
 void Player::Draw(Vector2 offset)
 {
