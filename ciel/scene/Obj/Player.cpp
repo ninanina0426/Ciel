@@ -19,14 +19,13 @@ bool Player::init(void)
 	/*mParent = parent;*/
 
 
-	/*mPos.x_ = 260;
-	mPos.y_ = 175;*/
+	mPos.x_ = 785;
+	mPos.y_ = 1400;
 
-	
 	mSizeOffset.x_ = 0;
 	mSizeOffset.y_= 0;
 	mMoveSpeed = 5;
-	mMoveDir = DIR_DOWN;
+	mMoveDir = DIR_UP;
 	mSize.x_ = 32;
 	mSize.y_ = 32;
 	mSizeOffset.x_ = mSize.x_ / 2;
@@ -149,11 +148,7 @@ Vector2 Player::Update(void)
 		//“–‚½‚è”»’è
 		if (lpMapMng.cheakMapChip(copyPos))
 		{
-			if (copyPos.x_ > 3200)
-			{
-				copyPos.x_ = 3200;
-			}
-
+			mPos = copyPos;
 
 		}
 		mDamyPos = copyPos;
@@ -202,7 +197,7 @@ Vector2 Player::GetSiz(void)
 
 Vector2 Player::GetPos(void)
 {
-	return mDamyPos;
+	return mPos;
 }
 
 
