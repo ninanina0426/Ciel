@@ -445,16 +445,11 @@ void ForestMap::DrawOwnScn()
 	{
 		for (int y = 0; y < MAP_Y; y++)
 		{
-			mMap1[y][x] = soil[y][x];
-			mMap2[y][x] = Tree[y][x];
-			mMap3[y][x] = obj1[y][x];
-			mMap4[y][x] = obj2[y][x];
-
-			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[mMap1[y][x]], true);
-			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[mMap2[y][x]], true);
-			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[mMap3[y][x]], true);
-			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[mMap4[y][x]], true);
-			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", mMap3[y][x]);
+			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[soil[y][x]], true);
+			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[Tree[y][x]], true);
+			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[obj1[y][x]], true);
+			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[obj2[y][x]], true);
+			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", obj1[y][x]);
 
 		}
 	}
@@ -472,14 +467,67 @@ bool ForestMap::Init(void)
 
 bool ForestMap::CheckMapChip(Vector2 pos)
 {
-	bool Flg = true;
+	bool Flg = false;
+
+	mMap1 = soil[pos.y_ / 32][pos.x_ / 32];
+	mMap2 = Tree[pos.y_ / 32][pos.x_ / 32];
+	mMap3 = obj1[pos.y_ / 32][pos.x_ / 32];
+	mMap4 = obj2[pos.y_ / 32][pos.x_ / 32];
+
+	switch (mMap1)
+	{
+	case -1:
+	case 337:
+	case 454:
+	case 566:
+	case 896:
+	case 286:
+	case 287:
+	case 897:
+	
+		switch (mMap2)
+		{
+		case -1:
+		case 841:
+		case 337:
+		case 286:
+
+			switch (mMap3)
+			{
+			case -1:
+			case 2269:
+			case 1329:
+			case 2133:
+			case 2132:
+			case 2128:
+			case 902:
+			case 846:
+			case 790:
+			case 2134:
+				Flg = true;
+
+
+				break;
+			default:
+				break;
+			}
+			break;
+		default:
+			break;
+		}
+
+		
+		break;
+	default:
+		break;
+	}
 
 	return Flg;
 }
 
 int ForestMap::GetMapChip(Vector2 pos)
 {
-	return mMap3[pos.y_ / 32][pos.x_ / 32];
+	return obj1[pos.y_ / 32][pos.x_ / 32];
 }
 
 

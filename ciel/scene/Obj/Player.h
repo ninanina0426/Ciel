@@ -12,6 +12,23 @@ enum DIR		//向き管理用
 	DIR_MAX
 };
 
+//キャラ状態
+enum class PL_ST
+{
+	NON,		//キャラ未選択
+	ALIVE,		//生存
+	MAX
+};
+
+//キャラ種類
+enum class PlayerID
+{
+	iti,
+	Calendula,
+	Soy,
+	Max
+};
+
 class Player
 {
 private:

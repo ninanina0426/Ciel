@@ -19,8 +19,8 @@ bool Player::init(void)
 	/*mParent = parent;*/
 
 
-	/*mPos.x_ = 260;
-	mPos.y_ = 175;*/
+	mPos.x_ = 100;
+	mPos.y_ = 100;
 
 	
 	mSizeOffset.x_ = 0;

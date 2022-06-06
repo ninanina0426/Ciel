@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseScene.h"
+#include "Obj/Player.h"
 
 class Player;
 class SelectScene :
@@ -10,10 +11,10 @@ public:
     ~SelectScene();
 
 
-    ////キャラ選択  （プレイヤー　キー方向　ID変更量　最後のキャラ　最後から最初へ戻ってくるキャラ）*でポインターになる
-    //bool SlectChar(Player* player, DIR dir, int count, CHAR_ID limID, CHAR_ID setID);
-    ////キャラ状態　（プレイヤー　キー方向　状態ID）
-    //bool DicideChar(Player* player, DIR dir, PL_ST plID);
+    //キャラ選択  （プレイヤー　キー方向　ID変更量　最後のキャラ　最後から最初へ戻ってくるキャラ）*でポインターになる
+    bool SlectChar(Player* player, DIR dir, int count, PlayerID limID, PlayerID setID);
+    //キャラ状態　（プレイヤー　キー方向　状態ID）
+    bool DicideChar(Player* player, DIR dir, PL_ST plID);
 private:
     uniquBaseScn Update(uniquBaseScn own) override;     //タイトルシーンUpdata
     void DrawOwnScn() override;                         //タイトルシーンDraw
@@ -22,7 +23,7 @@ private:
 
 
    
-   // Player player[PLAYER_MAX];
+   Player player[3];
 
 };
 

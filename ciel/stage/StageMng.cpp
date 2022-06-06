@@ -19,9 +19,9 @@
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<SweetsMap>();
+	stage_ = std::make_unique<ForestMap>();
 
-	mMapID = MAP_ID::SWEETS;
+	mMapID = MAP_ID::FOREST;
 	
 	flg = false;
 
@@ -205,6 +205,15 @@ bool StageMng::GetEvent(Vector2 pos)
 			stage_ = std::move(std::make_unique<ForestInMap>());
 			mMapID = MAP_ID::FORESTIN;
 
+		}
+		if (chipID == 2269)
+		{
+			mMapChange = true;
+			//É}ÉbÉvÇêÿÇËë÷Ç¶ÇÈÇ±Ç∆Ç…Ç»Ç¡ÇΩ
+			mNextPos = { 1645,715 };
+			mDir = DIR_DOWN;
+			stage_ = std::move(std::make_unique<templeMap>());
+			mMapID = MAP_ID::TEMPLE;
 		}
 	}
 
