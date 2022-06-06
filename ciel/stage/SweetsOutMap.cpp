@@ -343,7 +343,7 @@ void SweetsOutMap::DrawOwnScn()
 
 			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", mMapOutObj[y][x]);
 
-
+			DrawFormatString(0, 10, GetColor(0, 0, 255), "mapPos=(%d,%d)", mOffset.x_, mOffset.y_);
 		}
 	}
 
@@ -367,14 +367,162 @@ bool SweetsOutMap::CheckMapChip(Vector2 pos)
 	layer2 = mMapOutRoad[pos.y_ / 16][pos.x_ / 16];
 	layer3 = mMapOutObj[pos.y_ / 16][pos.x_ / 16];
 	
-	bool flg = true;	//true=playerÇ™ï‡ÇØÇÈ
+	bool flg = false;	//true=playerÇ™ï‡ÇØÇÈ
 
 		//à⁄ìÆîÕàÕÇçsÇ§
 	switch (layer1)
 	{
-	case 6618:
-		/*flg=true;*/
+	case 6708:
+	case 6709:
+	case 6808:
+	case 6809:
+	case 2505:
+	case 2504:
+	case 2405:
+	case 2404:
+	case 2105:
+	case 2104:
+	case 2005:
+	case 2004:
+	case 2305:
+	case 2304:
+	case 2204:
+	case 2205:
+		flg=true;
 		break;
+	default:
+		break;
+	}
+	switch (layer2)
+	{
+	case 7727:
+	case 7728:
+	case 7729:
+	case 7827:
+	case 7828:
+	case 7829:
+	case 7927:
+	case 7928:
+	case 7929:
+	case 8027:
+	case 8028:
+	case 8029:
+	case 5700:
+	case 5600:
+	case 5500:
+	case 3012:
+	case 3013:
+	case 3616:
+	case 3617:
+	case 3618:
+	case 3619:
+	case 3620:
+	case 3621:
+	case 4422:
+	case 4423:
+	case 3112:
+	case 3113:
+	case 3716:
+	case 3717:
+	case 3718:
+	case 3719:
+	case 3720:
+	case 3721:
+	case 4722:
+	case 4723:
+	case 2614:
+	case 2615:
+	case 2620:
+	case 2621:
+	case 2622:
+	case 2623:
+	case 2714:
+	case 2715:
+	case 3212:
+	case 3213:
+	case 3816:
+	case 3817:
+	case 3818:
+	case 3819:
+	case 3820:
+	case 3821:
+	case 4822:
+	case 4823:
+	case 2770:
+	case 2721:
+	case 2723:
+	case 2722:
+	case 2804:
+	case 2805:
+	case 3312:
+	case 3313:
+	case 3916:
+	case 3917:
+	case 3918:
+	case 3919:
+	case 3920:
+	case 3921:
+	case 4922:
+	case 4923:
+	case 2820:
+	case 2821:
+	case 2822:
+	case 2823:
+	case 2904:
+	case 2905:
+	case 5022:
+	case 5023:
+	case 2920:
+	case 2921:
+	case 2922:
+	case 2923:
+	case 5406:
+	case 5407:
+	case 5122:
+	case 5123:
+	case 5506:
+	case 5507:
+	case 5210:
+	case 5211:
+	case 5212:
+	case 5213:
+	case 5214:
+	case 5215:
+	case 5503:
+	case 5310:
+	case 5311:
+	case 5312:
+	case 5313:
+	case 5314:
+	case 5315:
+	case 5603:
+	case 5510:
+	case 5511:
+	case 5512:
+	case 5513:
+	case 5514:
+	case 5515:
+	case 5703:
+	case 5610:
+	case 5611:
+	case 5612:
+	case 5614:
+	case 5615:
+	case 5712:
+	case 5714:
+	case 5715:
+	case 2824:
+	case 2825:
+	case 2924:
+	case 2925:
+		flg = false;
+		break;
+	default:
+		break;
+	}
+	switch (layer3)
+	{
+
 	default:
 		break;
 	}

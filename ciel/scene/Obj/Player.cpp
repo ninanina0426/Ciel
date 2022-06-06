@@ -51,21 +51,22 @@ Vector2 Player::Update(void)
 
 	MAP_ID mapID = lpMapMng.GetMapId();
 
+	key_.Update();
 
 	//ÉvÉåÉCÉÑÅ[ÇÃëÄçÏ
-	if (CheckHitKey(KEY_INPUT_DOWN))
+	if (key_.getKeyDownHold(KEY_INPUT_DOWN))
 	{
 		keyDir = DIR_DOWN;
 	}
-	if (CheckHitKey(KEY_INPUT_UP))
+	if (key_.getKeyDownHold(KEY_INPUT_UP))
 	{
 		keyDir = DIR_UP;
 	}
-	if (CheckHitKey(KEY_INPUT_LEFT))
+	if (key_.getKeyDownHold(KEY_INPUT_LEFT))
 	{
 		keyDir = DIR_LEFT;
 	}
-	if (CheckHitKey(KEY_INPUT_RIGHT))
+	if (key_.getKeyDownHold(KEY_INPUT_RIGHT))
 	{
 		keyDir = DIR_RIGHT;
 	}
