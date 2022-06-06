@@ -26,7 +26,7 @@ void SceneMng::Run(void)
 	
 
 
-	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0) //ProcessMessage()はウィンドウにメッセージを送る
+	while (ProcessMessage() == 0 ) //ProcessMessage()はウィンドウにメッセージを送る
 	{
 		_dbgStartDraw();		//デバッグDraw
 

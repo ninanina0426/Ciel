@@ -18,15 +18,14 @@ bool Player::init(void)
 {
 	/*mParent = parent;*/
 
+	mPos.x_ = 785;
+	mPos.y_ = 1400;
 
-	mPos.x_ = 100;
-	mPos.y_ = 100;
 
-	
 	mSizeOffset.x_ = 0;
 	mSizeOffset.y_= 0;
 	mMoveSpeed = 5;
-	mMoveDir = DIR_DOWN;
+	mMoveDir = DIR_UP;
 	mSize.x_ = 32;
 	mSize.y_ = 32;
 	mSizeOffset.x_ = mSize.x_ / 2;
@@ -121,6 +120,7 @@ Vector2 Player::Update(void)
 				}
 			}
 		}
+
 		if (keyDir == DIR_LEFT)
 		{
 			copyPos.x_ -= mMoveSpeed;
@@ -130,8 +130,10 @@ Vector2 Player::Update(void)
 			}
 
 		}
+
+
 		//à⁄ìÆÉ`ÉbÉvÇ…ìñÇΩÇ¡ÇƒÇ¢ÇÈéû
-		if (lpMapMng.GetEvent(copyPos) == true)
+ 		if (lpMapMng.GetEvent(copyPos) == true)
 		{
 			//êÿÇËë÷Ç¶êÊÇÃSetposÇÇ‡ÇÁÇ§
 			copyPos = lpMapMng.GetPos();
@@ -150,10 +152,13 @@ Vector2 Player::Update(void)
 		}
 
 		mDamyPos = copyPos;
+
 	}
 	mAnmCnt++;
 
+
 	return mPos;
+
 
 }
 
@@ -196,7 +201,7 @@ Vector2 Player::GetSiz(void)
 
 Vector2 Player::GetPos(void)
 {
-	return mDamyPos;
+	return mPos;
 }
 
 

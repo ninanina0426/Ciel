@@ -23,12 +23,12 @@ bool Aitem::init()
 	mSize.x_ = 32;
 	mSize.y_ = 32;
 
+	//ŠŠÇ——p
 	mKami1 = true;
 	mKami2 = true;
 	mKami3 = true;
 	mKami4 = true;
-	mKami5 = true;
-
+	//mKami5 = true;
 	mTma = true;
 	mMasinngan = true;
 	mHoutai = true;

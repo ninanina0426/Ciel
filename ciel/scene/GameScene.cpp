@@ -97,17 +97,17 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     key_.Update();
     if (mPose == false)
     {
-        if (CheckHitKey(KEY_INPUT_ESCAPE))
+        if (key_.getKeyDown(KEY_INPUT_ESCAPE))
         {
             mPose = true;
         }
     }
     else
     {
-        if (CheckHitKey(KEY_INPUT_ESCAPE))
+        if (key_.getKeyDown(KEY_INPUT_ESCAPE))
         {
             mPose = false;
-            mMenu.init(this);
+           /* mMenu.init(this);*/
         }
     }
 
@@ -159,9 +159,11 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     PlayerPos = mPlayer.GetPos();
 
+    mPlayer.Update();
+
     mMapOffset = lpMapMng.Update(PlayerPos);
 
-    mPlayer.Update();
+    
 
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
@@ -169,8 +171,11 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
      mAitem->Update();
 
      /*mMenu.Update();*/
-
-    mMenu.Update();
+     if (mPose == true)
+     {
+         mMenu.Update();
+     }
+  
 
     mBgm->Update(mMenu.OpBgm());
 
@@ -187,7 +192,7 @@ void GameScene::DrawOwnScn()
     lpMapMng.Draw();
 
     //ƒvƒŒƒCƒ„[
-	 mPlayer.Draw(GameScene::mMapOffset);
+	 mPlayer.Draw(mMapOffset);
     
      //ŽžŠÔ‘Ñ
      TimeManeger();
@@ -199,7 +204,11 @@ void GameScene::DrawOwnScn()
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
      mAitem->Draw(mMapOffset);
 
-     mMenu.Draw();
+     if (mPose == true)
+     {
+         mMenu.Draw();
+     }
+    
     
 }
 
