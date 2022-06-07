@@ -3,6 +3,7 @@
 #include"../scene/Obj/BGM.h"
 #include"../scene/Input/Keyboard.h"
 #include"../scene/Obj/Aitem.h"
+#include"../scene/Obj/Npc.h"
 #include "../stage/StageMng.h"
 
 
@@ -159,16 +160,19 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     PlayerPos = mPlayer.GetPos();
 
-    mPlayer.Update();
-
     mMapOffset = lpMapMng.Update(PlayerPos);
 
+    mPlayer.Update();
+
+    mNpc->Update();
     
 
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
      mAitem->Update();
+
+
 
      /*mMenu.Update();*/
      if (mPose == true)
@@ -190,6 +194,8 @@ void GameScene::DrawOwnScn()
 
     //マップ
     lpMapMng.Draw();
+
+    mNpc->Draw(mMapOffset);
 
     //プレイヤー
 	 mPlayer.Draw(mMapOffset);
@@ -233,6 +239,8 @@ bool GameScene::Init(void)
     count_ = 0;
 
     mBgm = new BGM();
+
+    mNpc = new Npc();
 
    	return true;
 

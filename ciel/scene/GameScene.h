@@ -8,6 +8,7 @@
 class SceneMng;
 class Aitem;
 class BGM;
+class Npc;
 
 
 class GameScene : public BaseScene
@@ -48,6 +49,8 @@ private:
 
     Menu mMenu;
     Aitem*mAitem;
+
+    Npc* mNpc;
 
     //マップの変更処理
     bool mMapChange;

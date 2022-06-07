@@ -370,46 +370,46 @@ bool DarkTemple::CheckMapChip(Vector2 pos)
 	layer3 = dt_obj[pos.y_ / 32][pos.x_ / 32];
 
 
-	bool flg = false;	//true=player‚ª•à‚¯‚é
+	bool flg = true;	//true=player‚ª•à‚¯‚é
 
-		//ˆÚ“®”ÍˆÍ‚ğs‚¤
-	switch (layer1)
-	{
-	case 73:
-	case 28:
-	
-		
-		switch (layer2)
-		{
-		//case -1:
-		case 231:
-		case 240:
-			
-			switch (layer3)
-			{
-			//case -1:
-			case 92:
-			case 174: 
-			case 175:
-			case 184:
-			case 185:
-			
-				flg = true;
-				break;
-			default:
-				break;
-			}
-			break;
-		default:
-			break;
-		}
+	//	//ˆÚ“®”ÍˆÍ‚ğs‚¤
+	//switch (layer1)
+	//{
+	//case 73:
+	//case 28:
+	//
+	//	
+	//	switch (layer2)
+	//	{
+	//	//case -1:
+	//	case 231:
+	//	case 240:
+	//		
+	//		switch (layer3)
+	//		{
+	//		//case -1:
+	//		case 92:
+	//		case 174: 
+	//		case 175:
+	//		case 184:
+	//		case 185:
+	//		
+	//			flg = true;
+	//			break;
+	//		default:
+	//			break;
+	//		}
+	//		break;
+	//	default:
+	//		break;
+	//	}
 
-		break;
-	default:
-		break;
-	}
+	//	break;
+	//default:
+	//	break;
+	//}
 
-	
+	//
 
 	return flg;
 

@@ -34,7 +34,7 @@
     <ClCompile Include="stage\WaMap.cpp" />
     <ClCompile Include="stage\WaShop.cpp" />
     <ClCompile Include="scene\Obj\BGM.cpp" />
-
+    <ClCompile Include="scene\Obj\Npc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -116,5 +116,7 @@
     <ClInclude Include="stage\WaShop.h" />
     <ClInclude Include="_debug\_DebugConOut.h" />
     <ClInclude Include="_debug\_DebugDispOut.h" />
+    <ClInclude Include="scene\Obj\BGM.h" />
+    <ClInclude Include="scene\Obj\Npc.h" />
   </ItemGroup>
 </Project>
