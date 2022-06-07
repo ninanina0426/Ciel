@@ -4,6 +4,7 @@
 #include"../scene/Input/Keyboard.h"
 #include"../scene/Obj/Aitem.h"
 #include"../scene/Obj/Npc.h"
+#include"../scene/Obj/Chat.h"
 #include "../stage/StageMng.h"
 
 
@@ -160,12 +161,13 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     PlayerPos = mPlayer.GetPos();
 
+    PlayerSize = mPlayer.GetSiz();
+
     mMapOffset = lpMapMng.Update(PlayerPos);
 
     mPlayer.Update();
 
-    mNpc->Update();
-    
+    mNpc->Update(PlayerPos,PlayerSize, mChat->Update(mNpc->Getflg(), mNpc->Num()));
 
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
@@ -210,6 +212,8 @@ void GameScene::DrawOwnScn()
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
      mAitem->Draw(mMapOffset);
 
+     mChat->Draw(mMapOffset);
+
      if (mPose == true)
      {
          mMenu.Draw();
@@ -241,6 +245,8 @@ bool GameScene::Init(void)
     mBgm = new BGM();
 
     mNpc = new Npc();
+
+    mChat = new Chat();
 
    	return true;
 

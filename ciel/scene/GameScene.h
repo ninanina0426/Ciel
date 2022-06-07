@@ -9,6 +9,7 @@ class SceneMng;
 class Aitem;
 class BGM;
 class Npc;
+class Chat;
 
 
 class GameScene : public BaseScene
@@ -44,6 +45,7 @@ private:
     SceneID GetSceneID(void) override { return SceneID::GAME; };   //sceneIDÇÉ^ÉCÉgÉãÇ…ê›íË
 
     Vector2 PlayerPos;
+    Vector2 PlayerSize;
     //player
     Player mPlayer;
 
@@ -70,7 +72,7 @@ private:
     std::chrono::system_clock::time_point nowTime_;
     std::chrono::system_clock::time_point oldTime_;
 
-
+    Chat* mChat;
 
     Keyboard key_;
 
