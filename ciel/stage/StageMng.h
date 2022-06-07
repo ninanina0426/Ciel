@@ -2,7 +2,7 @@
 #include <DxLib.h>
 #include "../common/Vector2.h"
 #include"../scene/Obj/Player.h"
-
+#include"../scene/Input/Keyboard.h"
 #include "Stage.h"
 
 class Player;
@@ -48,7 +48,11 @@ private:
 
 	uniquStage stage_;		//ステージ管理
 
-	
+	Vector2 movePos;
+
+	Vector2 OldPos;
+
+	Keyboard key_;
 
 	 //マップの変更処理
 
