@@ -1,6 +1,6 @@
 #pragma once
 #include "../../common/Vector2.h"
-
+#include"../Input/Keyboard.h"
 
 
 enum DIR		//向き管理用
@@ -43,7 +43,7 @@ private:
 	Vector2 mPos;		//キャラクターの地図上の座標
 	Vector2 mPlayer;
 
-
+	Keyboard key_;
 
 	Vector2 mDamyPos;
 
