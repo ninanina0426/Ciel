@@ -18,8 +18,10 @@ bool Player::init(void)
 {
 	/*mParent = parent;*/
 
-	mPos.x_ = 785;
-	mPos.y_ = 1400;
+	mPos.x_ = 1635;
+	mPos.y_ = 2580;
+	/*mPos.x_ = 785;
+	mPos.y_ = 1400;*/
 
 
 	mSizeOffset.x_ = 0;
