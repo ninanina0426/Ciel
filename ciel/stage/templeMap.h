@@ -14,11 +14,18 @@ private:
 	int GetMapChip(Vector2 pos) override;
 	MAP_ID GetStageID(void) { return MAP_ID::TEMPLE; };
 
-	int mMap1[MAP_Y][MAP_X];
+	/*int mMap1[MAP_Y][MAP_X];
 	int mMap2[MAP_Y][MAP_X];
 	int mMap3[MAP_Y][MAP_X];
 	int mMap4[MAP_Y][MAP_X];
-	int mMap5[MAP_Y][MAP_X];
+	int mMap5[MAP_Y][MAP_X];*/
+
+	int obj1_;
+	int wall_;
+	int temple_;
+	int pillar_;
+	int soil_;
+
 };
 
 

@@ -352,15 +352,21 @@ bool TempleInMap::Init(void)
 	{
 		return false;
 	}
-	//mPlayer = new Player();
-	//mPlayer->init();
-
+	
 	return true;
 }
 
 bool TempleInMap::CheckMapChip(Vector2 pos)
 {
+	soil = ti_soil[pos.y_ / 32][pos.x_ / 32];
+	obj1 = ti_obj1[pos.y_ / 32][pos.x_ / 32];
+	obj2 = ti_obj2[pos.y_ / 32][pos.x_ / 32];
+
 	bool Flg = true;
+
+
+
+
 
 	return Flg;
 }

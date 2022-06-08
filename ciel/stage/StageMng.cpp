@@ -16,9 +16,9 @@
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<ForestMap>();
+	stage_ = std::make_unique<templeMap>();
 
-	mMapID = MAP_ID::FOREST;
+	mMapID = MAP_ID::TEMPLE;
 
 	mOffset = (mPlayer.GetPos() / Vector2{ 4,4 }) * Vector2{ 2,3 };
 
@@ -457,6 +457,17 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_DOWN;
 			stage_ = std::move(std::make_unique<SweetsSchoolMap>());
 			mMapID = MAP_ID::SWEETSSCHOOL;
+			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
+		}
+		//SweetsÇ©ÇÁtempleÇ÷
+		if (chipID == 4220|| chipID == 4221 || chipID == 4320 || chipID == 4321)
+		{
+			mMapChange = true;
+			//É}ÉbÉvÇêÿÇËë÷Ç¶ÇÈÇ±Ç∆Ç…Ç»Ç¡ÇΩ
+			mNextPos = { 1645,715 };
+			mDir = DIR_DOWN;
+			stage_ = std::move(std::make_unique<templeMap>());
+			mMapID = MAP_ID::TEMPLE;
 			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
 		}
 	}
