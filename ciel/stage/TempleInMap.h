@@ -21,5 +21,6 @@ private:
 	int soil;
 	int obj1;
 	int obj2;
+	int obj3;
 };
 
