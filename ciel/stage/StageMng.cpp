@@ -16,11 +16,12 @@
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<SweetsMap>();
+	stage_ = std::make_unique<TempleInMap>();
 
-	mMapID = MAP_ID::SWEETS;
+	mMapID = MAP_ID::TEMPLEIN;
 
-	mOffset = (mPlayer.GetPos() / Vector2{4,4}) * Vector2{2,3};
+	mOffset = (mPlayer.GetPos() / Vector2{ 4,4 }) * Vector2{ 2,3 };
+
 	
 	flg = false;
 
@@ -263,6 +264,15 @@ bool StageMng::GetEvent(Vector2 pos)
 			mMapID = MAP_ID::FORESTIN;
 			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
 		}
+		if (chipID == 2269)
+		{
+			mMapChange = true;
+			//マップを切り替えることになった
+			mNextPos = { 1645,715 };
+			mDir = DIR_DOWN;
+			stage_ = std::move(std::make_unique<templeMap>());
+			mMapID = MAP_ID::TEMPLE;
+		}
 	}
 	//FORESTINからFORESTへ
 	if (lpMapMng.mMapID == MAP_ID::FORESTIN)
@@ -411,7 +421,7 @@ bool StageMng::GetEvent(Vector2 pos)
 		if (chipID == 7006 || chipID == 7110 || chipID == 7011)
 		{
 			mMapChange = true;
-			mNextPos = { 1045,1405 };
+			mNextPos = { 1065,1410 };
 			mDir = DIR_UP;
 			stage_ = std::move(std::make_unique<SweetsOutMap>());
 			mMapID = MAP_ID::SWEETSOUT;
@@ -447,6 +457,17 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_DOWN;
 			stage_ = std::move(std::make_unique<SweetsSchoolMap>());
 			mMapID = MAP_ID::SWEETSSCHOOL;
+			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
+		}
+		//Sweetsからtempleへ
+		if (chipID == 4220|| chipID == 4221 || chipID == 4320 || chipID == 4321)
+		{
+			mMapChange = true;
+			//マップを切り替えることになった
+			mNextPos = { 1645,715 };
+			mDir = DIR_DOWN;
+			stage_ = std::move(std::make_unique<templeMap>());
+			mMapID = MAP_ID::TEMPLE;
 			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
 		}
 	}

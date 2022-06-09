@@ -5,7 +5,6 @@
 #include"../scene/Input/Keyboard.h"
 #include "Stage.h"
 
-class Player;
 
 #define lpMapMng StageMng::GetInstance()
 

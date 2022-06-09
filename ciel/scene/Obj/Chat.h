@@ -1,0 +1,29 @@
+#pragma once
+#include "../../common/Vector2.h"
+#include"../Input/Keyboard.h"
+class Npc;
+
+class Chat
+{
+private:
+	int mImage[100];
+	int mNum;
+
+	Vector2 mPos;		//キャラクターの地図上の座標
+	int mAnmCnt;
+
+	bool mFlg;
+
+	Keyboard key_;
+
+	Npc*mNpc;
+public:
+	Chat();
+	~Chat();
+
+	bool init(void);		//初期化
+	bool Update(bool flg,int num);		//更新
+	void Draw(Vector2 offset);		//描画
+	bool Release(void);		//開放
+};
+

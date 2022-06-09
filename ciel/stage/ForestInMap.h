@@ -17,12 +17,10 @@ private:
 	int GetMapChip(Vector2 pos) override;
 	MAP_ID GetStageID(void) { return MAP_ID::FORESTIN; };
 
-
-	
-
 	int soil;
 	int tree;
 	int obj1;
+	int obj2;
 
 };
 

@@ -8,12 +8,15 @@
 class SceneMng;
 class Aitem;
 class BGM;
+class Npc;
+class Chat;
 
 
 class GameScene : public BaseScene
 {
 public:
-    GameScene(/*SceneMng* manager*/);
+    GameScene(/*SceneMng* manager*/) {};
+    GameScene(PlayerID playerID);
     ~GameScene();
 
     //アイテム
@@ -43,11 +46,14 @@ private:
     SceneID GetSceneID(void) override { return SceneID::GAME; };   //sceneIDをタイトルに設定
 
     Vector2 PlayerPos;
+    Vector2 PlayerSize;
     //player
     Player mPlayer;
 
     Menu mMenu;
     Aitem*mAitem;
+
+    Npc* mNpc;
 
     //マップの変更処理
     bool mMapChange;
@@ -67,7 +73,7 @@ private:
     std::chrono::system_clock::time_point nowTime_;
     std::chrono::system_clock::time_point oldTime_;
 
-
+    Chat* mChat;
 
     Keyboard key_;
 

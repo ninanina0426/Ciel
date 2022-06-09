@@ -18,10 +18,10 @@ private:
 	 int GetMapChip(Vector2 pos) override;
 	 MAP_ID GetStageID(void) { return MAP_ID::FOREST; };
 
-	 int mMap1[MAP_Y][MAP_X];
-	 int mMap2[MAP_Y][MAP_X];
-	 int mMap3[MAP_Y][MAP_X];
-	 int mMap4[MAP_Y][MAP_X];
+	 int mMap1;
+	 int mMap2;
+	 int mMap3;
+	 int mMap4;
 
 };
 

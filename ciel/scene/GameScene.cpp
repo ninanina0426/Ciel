@@ -3,13 +3,17 @@
 #include"../scene/Obj/BGM.h"
 #include"../scene/Input/Keyboard.h"
 #include"../scene/Obj/Aitem.h"
+#include"../scene/Obj/Npc.h"
+#include"../scene/Obj/Chat.h"
 #include "../stage/StageMng.h"
 
 
 
-GameScene::GameScene(/*SceneMng* manager*/)
+
+GameScene::GameScene(PlayerID playerID)
 {
     Init();
+    mPlayer.plID_ = playerID;
     DrawOwnScn();
 }
 
@@ -159,16 +163,20 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     PlayerPos = mPlayer.GetPos();
 
-    mPlayer.Update();
+    PlayerSize = mPlayer.GetSiz();
 
     mMapOffset = lpMapMng.Update(PlayerPos);
 
-    
+    mPlayer.Update();
+
+    mNpc->Update(PlayerPos,PlayerSize, mChat->Update(mNpc->Getflg(), mNpc->Num()));
 
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
      mAitem->Update();
+
+
 
      /*mMenu.Update();*/
      if (mPose == true)
@@ -191,6 +199,8 @@ void GameScene::DrawOwnScn()
     //マップ
     lpMapMng.Draw();
 
+    mNpc->Draw(mMapOffset);
+
     //プレイヤー
 	 mPlayer.Draw(mMapOffset);
     
@@ -203,6 +213,8 @@ void GameScene::DrawOwnScn()
      int delta = msec / 1000000.0; //秒に変換  
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
      mAitem->Draw(mMapOffset);
+
+     mChat->Draw(mMapOffset);
 
      if (mPose == true)
      {
@@ -233,6 +245,10 @@ bool GameScene::Init(void)
     count_ = 0;
 
     mBgm = new BGM();
+
+    mNpc = new Npc();
+
+    mChat = new Chat();
 
    	return true;
 
