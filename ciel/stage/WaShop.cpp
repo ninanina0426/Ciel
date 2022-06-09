@@ -239,7 +239,7 @@ void WaShop::DrawOwnScn()
 
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[ws_floor[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[ws_obj[y][x]], true);
-			/*DrawFormatString(32 * x - mOffset.X, 32 * y - mOffset.Y, GetColor(255, 255, 255), "%d", mMap[y][x]);*/
+			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", ws_floor[y][x]);
 
 		}
 	}
@@ -260,8 +260,8 @@ bool WaShop::Init(void)
 bool WaShop::CheckMapChip(Vector2 pos)
 {
 	
-	layer1 = ws_floor[pos.y_ / 16][pos.x_ / 16];
-	layer2 = ws_obj[pos.y_ / 16][pos.x_ / 16];
+	layer1 = ws_floor[pos.y_ / 32][pos.x_ / 32];
+	layer2 = ws_obj[pos.y_ / 32][pos.x_ / 32];
 	
 
 	bool flg = true;	//true=playerÇ™ï‡ÇØÇÈ
@@ -269,9 +269,38 @@ bool WaShop::CheckMapChip(Vector2 pos)
 		//à⁄ìÆîÕàÕÇçsÇ§
 	switch (layer1)
 	{
-	case -1:
 
-		flg=true;
+	case 1274:
+	case 1275:
+	case 1772:
+	case 1802:
+	{
+		flg = false;
+		break;
+	}
+
+		switch (layer2)
+		{
+
+		case 2970:
+		case 2975:
+		case 3014:
+		case 3015:
+		case 3153:
+		case 3180:
+		case 3182:
+		case 3184:
+		case 3185:
+		{
+			flg = false;
+			break;
+		}
+
+			break;
+		default:
+			break;
+		}
+
 		break;
 	default:
 		break;
