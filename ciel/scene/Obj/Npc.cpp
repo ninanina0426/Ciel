@@ -125,7 +125,7 @@ Vector2 Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 		mNpcType = NpcType::TM_NPC;
 		break;
 	case MAP_ID::TEMPLEIN:
-		mNpcType = NpcType::TM_NPC;
+		mNpcType = NpcType::TI_NPC;
 		break;
 	case MAP_ID::SWEETS:
 		mNpcType = NpcType::SM_NPC;
@@ -155,7 +155,7 @@ Vector2 Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 		mNpcType = NpcType::SS_NPC;
 		break;
 	case MAP_ID::TRANGETIONS:
-		mNpcType = NpcType::TI_NPC;
+		
 		break;
 	case MAP_ID::MAX:
 		break;

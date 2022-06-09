@@ -19,67 +19,6 @@ GameScene::~GameScene()
 {
 }
 
-//アイテムのフラグ ---------------------------
-bool GameScene::IsKami1(void)
-{
-    return mAitem->mKami1;
-}
-
-bool GameScene::IsKami2(void)
-{
-    return mAitem->mKami2;
-}
-
-bool GameScene::mKami3(void)
-{
-    return mAitem->mKami3;
-}
-
-bool GameScene::mKami4(void)
-{
-    return mAitem->mKami4;
-}
-
-bool GameScene::mKami5(void)
-{
-    return mAitem->mKami5;
-}
-
-bool GameScene::mTma(void)
-{
-    return mAitem->mTma;
-}
-
-bool GameScene::mMasinngan(void)
-{
-    return mAitem->mMasinngan;
-}
-
-bool GameScene::mHoutai(void)
-{
-    return mAitem->mHoutai;
-}
-
-bool GameScene::mHeal(void)
-{
-    return mAitem->mHeal;
-}
-
-bool GameScene::mKey(void)
-{
-    return mAitem->mKey;
-}
-
-bool GameScene::mbook(void)
-{
-    return mAitem->mbook;
-}
-
-bool GameScene::mMagazinn(void)
-{
-    return mAitem->mMagazinn;
-}
-
 bool GameScene::mEnd()
 {
     return false;
@@ -172,7 +111,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
-     mAitem->Update();
+     mAitem->Update(PlayerPos, PlayerSize);
 
 
 

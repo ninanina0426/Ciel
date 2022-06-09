@@ -18,21 +18,6 @@ public:
     GameScene(/*SceneMng* manager*/);
     ~GameScene();
 
-    //ƒAƒCƒeƒ€
-    bool IsKami1(void);
-    bool IsKami2(void);
-    bool mKami3(void);
-    bool mKami4(void);
-    bool mKami5(void);
-
-    bool mTma(void);
-    bool mMasinngan(void);
-    bool mHoutai(void);
-    bool mHeal(void);
-    bool mKey(void);
-    bool mbook(void);
-    bool mMagazinn(void);
-
     bool mEnd();
 
     int SHandle;
