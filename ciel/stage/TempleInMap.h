@@ -17,5 +17,10 @@ private:
 	MAP_ID GetStageID(void) { return MAP_ID::TEMPLEIN; };
 
 	Player* mPlayer;
+
+	int soil;
+	int obj1;
+	int obj2;
+	int obj3;
 };
 
