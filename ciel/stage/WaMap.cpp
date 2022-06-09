@@ -468,7 +468,7 @@ void WaMap::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[wa_build1[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[wa_build2[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[wa_build3[y][x]], true);
-			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", layer2);
+			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", layer4);
 		}
 	}
 }
@@ -489,23 +489,90 @@ bool WaMap::CheckMapChip(Vector2 pos)
 {
 
 
-	layer1 = wa_ground[pos.y_ / 16][pos.x_ / 16];
-	layer2 = wa_build1[pos.y_ / 16][pos.x_ / 16];
-	layer3 = wa_build2[pos.y_ / 16][pos.x_ / 16];
-	layer4 = wa_build3[pos.y_ / 16][pos.x_ / 16];
+	layer1 = wa_ground[pos.y_ / 32][pos.x_ / 32];
+	layer2 = wa_build1[pos.y_ / 32][pos.x_ / 32];
+	layer3 = wa_build2[pos.y_ / 32][pos.x_ / 32];
+	layer4 = wa_build3[pos.y_ / 32][pos.x_ / 32];
 
-	bool flg = true;	//true=playerÇ™ï‡ÇØÇÈ
+	bool flg =false;	//true=playerÇ™ï‡ÇØÇÈ
 
 		//à⁄ìÆîÕàÕÇçsÇ§
 	switch (layer1)
 	{
-	case 3330:
+	case 720:
+	case 728:
+	case 750:
+	case 1680:
+	case 1681:
+	case 1682:
+	case 1475:
+	case 1534:
 	case 1595:
+	case 1747:
+	case 3330:
 	
-		/*flg=true;*/
-		break;
-
+		switch (layer2)
+		{
+		case -1:
+		case 1806:
+		case 2131:
+		case 2161:
+		case 2191:
+		case 2864:
+		case 2894:
+		case 4089:
+		case 4090:
+		case 4091:
+		case 4119:
+		case 4120:
+		case 4121:
+		case 4149:
+		case 4150:
+		case 4151:
 		
+			switch (layer3)
+			{
+			case -1:
+			case 2015:
+			case 2016:
+			case 2045:
+			case 2046:
+			case 2075:
+			case 2076:
+			case 2105:
+			case 2106:
+
+				switch (layer4)
+				{
+				case -1:
+				case 4170:
+				case 4176:
+				case 4177:
+				case 4200:
+				case 4237:
+				case 4320:
+				case 4327:
+				case 4350:
+				case 4351:
+				case 4352:
+				case 4355:
+				case 4356:
+				case 4357:
+
+					flg = true;
+					break;
+				default:
+					break;
+				}
+				break;
+			default:
+				break;
+			}
+			break;
+		default:
+			break;
+		}
+		break;
 	default:
 		break;
 	}

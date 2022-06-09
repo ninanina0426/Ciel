@@ -271,9 +271,24 @@ bool CaveShop::CheckMapChip(Vector2 pos)
 		//ˆÚ“®”ÍˆÍ‚ğs‚¤
 	switch (layer1)
 	{
-		//case 3330:
+		
+	case 73:
+	
+		switch(layer2)
+		{
 
-		flg=true;
+		case 18:
+		case 20:
+		case 138:
+		{
+			flg = false;
+			break;
+		}
+			break;
+		default:
+			break;
+		}
+
 		break;
 	default:
 		break;
