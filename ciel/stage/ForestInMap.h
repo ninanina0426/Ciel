@@ -20,6 +20,7 @@ private:
 	int soil;
 	int tree;
 	int obj1;
+	int obj2;
 
 };
 
