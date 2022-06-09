@@ -16,9 +16,9 @@
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<templeMap>();
+	stage_ = std::make_unique<TempleInMap>();
 
-	mMapID = MAP_ID::TEMPLE;
+	mMapID = MAP_ID::TEMPLEIN;
 
 	mOffset = (mPlayer.GetPos() / Vector2{ 4,4 }) * Vector2{ 2,3 };
 
@@ -421,7 +421,7 @@ bool StageMng::GetEvent(Vector2 pos)
 		if (chipID == 7006 || chipID == 7110 || chipID == 7011)
 		{
 			mMapChange = true;
-			mNextPos = { 1045,1405 };
+			mNextPos = { 1065,1410 };
 			mDir = DIR_UP;
 			stage_ = std::move(std::make_unique<SweetsOutMap>());
 			mMapID = MAP_ID::SWEETSOUT;

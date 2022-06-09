@@ -17,8 +17,9 @@ Player::~Player()
 bool Player::init(void)
 {
 	/*mParent = parent;*/
-	mPos.x_ = 1635;
-	mPos.y_ = 2580;
+	mPos.x_ = 1425;
+	mPos.y_ = 1250;
+
 	/*mPos.x_ = 785;
 	mPos.y_ = 1400;*/
 

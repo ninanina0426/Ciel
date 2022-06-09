@@ -560,6 +560,6 @@ bool SweetsOutMap::CheckMapChip(Vector2 pos)
 
 int SweetsOutMap::GetMapChip(Vector2 pos)
 {
-	return mMapOutRoad[pos.y_ / 16][pos.x_ / 16];
+	return mMapOutObj[pos.y_ / 16][pos.x_ / 16];
 }
 
