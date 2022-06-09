@@ -30,13 +30,13 @@ void SceneMng::Run(void)
 	{
 		_dbgStartDraw();		//デバッグDraw
 
+		
 		scene_ = scene_->Update(std::move(scene_));			//シーンのUpdata呼び出し
 
-
+		
 
 		SetDrawScreen(DX_SCREEN_BACK);//転写するだけのバックバッファ
 		ClsDrawScreen();
-
 		scene_->Draw();				//シーンのDraw
 
 		_dbgDraw();
@@ -68,6 +68,7 @@ bool SceneMng::SysInit(void)
 	SetWindowText("Ciel");
 	//システム処理
 	SetGraphMode(ScreenSizeX, ScreenSizeY, 16);			//720×405ドット65536色モードに設定
+	SetWindowSizeChangeEnableFlag(true);
 	ChangeWindowMode(true);				//true:window false:フルスクリーン
 
 	//DXライブラリ初期化処理

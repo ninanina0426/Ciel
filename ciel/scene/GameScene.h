@@ -15,7 +15,8 @@ class Chat;
 class GameScene : public BaseScene
 {
 public:
-    GameScene(/*SceneMng* manager*/);
+    GameScene(/*SceneMng* manager*/) {};
+    GameScene(PlayerID playerID);
     ~GameScene();
 
     //ƒAƒCƒeƒ€

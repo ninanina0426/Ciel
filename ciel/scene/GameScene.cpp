@@ -9,9 +9,11 @@
 
 
 
-GameScene::GameScene(/*SceneMng* manager*/)
+
+GameScene::GameScene(PlayerID playerID)
 {
     Init();
+    mPlayer.plID_ = playerID;
     DrawOwnScn();
 }
 
