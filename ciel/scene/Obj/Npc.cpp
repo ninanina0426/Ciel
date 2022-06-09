@@ -275,6 +275,7 @@ bool Npc::Getflg()
 	default:
 		break;
 	}
+
 }
 
 

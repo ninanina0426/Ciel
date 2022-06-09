@@ -37,13 +37,16 @@ private:
 	/*GameScene* mParent;*/
 	/*GameScene* mParent;*/
 
-	int mImage[16];		//画像の格納領域
+	int mImage1[16];		//画像の格納領域
+	int mImage2[16];		//画像の格納領域
+	int mImage3[16];		//画像の格納領域
 
 	DIR mMoveDir;		//キャラクターの向き
 	Vector2 mPos;		//キャラクターの地図上の座標
 	Vector2 mPlayer;
 
 	Keyboard key_;
+	
 
 	Vector2 mDamyPos;
 
@@ -59,7 +62,7 @@ public:
 
 	bool flg;
 
-	bool init(void);		//初期化
+	bool init(PlayerID playerid);		//初期化
 	Vector2 Update(void);		//更新
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
@@ -68,6 +71,9 @@ public:
 	void SetPos(Vector2 pos);
 	Vector2 GetSiz(void);
 	Vector2 GetPos(void);
+
+	PL_ST state_;
+	PlayerID plID_;
 	
 };
 

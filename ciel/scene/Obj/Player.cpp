@@ -7,14 +7,14 @@
 
 Player::Player()
 {
-	init();
+	init(PlayerID::Max);
 }
 
 Player::~Player()
 {
 }
 
-bool Player::init(void)
+bool Player::init(PlayerID playerid)
 {
 	/*mParent = parent;*/
 	/*mPos.x_ = 1425;
@@ -23,6 +23,12 @@ bool Player::init(void)
 	mPos.x_ = 785;
 	mPos.y_ = 1400;
 
+	//playerの種別関係
+	if (plID_ != PlayerID::Max)
+	{
+		plID_ = playerid;
+		state_ = PL_ST::NON;
+	}
 	mSizeOffset.x_ = 0;
 	mSizeOffset.y_= 0;
 	mMoveSpeed = 5;
@@ -36,7 +42,16 @@ bool Player::init(void)
 	mAnmCnt = 0;
 
 
-	if (LoadDivGraph("image/100.png", 16, 4, 4, 32, 32, &mImage[0]) == -1)
+	//グラフィックの読み込み
+	if (LoadDivGraph("image/100.png", 16, 4, 4, 32, 32, &mImage1[0]) == -1)
+	{
+		return false;
+	}
+	if (LoadDivGraph("image/101.png", 16, 4, 4, 32, 32, &mImage2[0]) == -1)
+	{
+		return false;
+	}
+	if (LoadDivGraph("image/102.png", 16, 4, 4, 32, 32, &mImage3[0]) == -1)
 	{
 		return false;
 	}
@@ -167,8 +182,21 @@ Vector2 Player::Update(void)
 
 void Player::Draw(Vector2 offset)
 {
-	DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - mSizeOffset.y_, mImage[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+	if (plID_ == PlayerID::iti)
+	{
+		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - mSizeOffset.y_, mImage1[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+	}
+	if (plID_ == PlayerID::Soy)
+	{
+		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - mSizeOffset.y_, mImage2[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+	}
+	if (plID_ == PlayerID::Calendula)
+	{
+		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - mSizeOffset.y_, mImage3[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+	}
+
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
+	DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
 
 }
 
@@ -176,7 +204,7 @@ bool Player::Release(void)
 {
 	for (int i = 0; i < 16; i++)
 	{
-		DeleteGraph(mImage[i]);
+		DeleteGraph(mImage1[i]);
 	}
 	return true;
 }
@@ -205,5 +233,7 @@ Vector2 Player::GetPos(void)
 {
 	return mPos;
 }
+
+
 
 

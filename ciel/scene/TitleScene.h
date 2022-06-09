@@ -17,5 +17,8 @@ private:
     Keyboard key_;
 
     //グラフィック関係
+
+    int title_;
+
 };
 
