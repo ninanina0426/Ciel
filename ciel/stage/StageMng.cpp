@@ -16,9 +16,9 @@
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<SweetsMap>();
+	stage_ = std::make_unique<CaveMap>();
 
-	mMapID = MAP_ID::SWEETS;
+	mMapID = MAP_ID::CAVE;
 
 	mOffset = (mPlayer.GetPos() / Vector2{ 4,4 }) * Vector2{ 2,3 };
 

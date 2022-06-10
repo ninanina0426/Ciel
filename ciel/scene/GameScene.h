@@ -10,6 +10,7 @@ class Aitem;
 class BGM;
 class Npc;
 class Chat;
+class Layer;
 
 
 class GameScene : public BaseScene
@@ -63,6 +64,8 @@ private:
     Keyboard key_;
 
     BGM*mBgm;
+
+    Layer* mLayer;
 
     int x;
 

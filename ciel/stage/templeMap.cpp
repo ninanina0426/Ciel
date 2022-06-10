@@ -705,23 +705,23 @@ bool templeMap::CheckMapChip(Vector2 pos)
 	case 2072:
 	case 292:
 	case 2042:
-	case 2133:
+	/*case 2133:
 	case 2016:
 	case 2017:
 	case 2018:
 	case 2019:
-	case 2020:
-	case 1964:
+	case 2020:*/
+	/*case 1964:
 	case 1963:
 	case 1962:
 	case 1961:
-	case 1960:
+	case 1960:*/
 	case 2709:
-	case 1904:
-	case 1905:
-	case 1906:
-	case 1907:
-	case 1908:
+	//case 1904:
+	//case 1905:
+	//case 1906:
+	//case 1907:
+	//case 1908:
 	case 684:
 	case 1918:
 	case 1919:

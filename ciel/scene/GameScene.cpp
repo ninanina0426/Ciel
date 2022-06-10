@@ -5,6 +5,7 @@
 #include"../scene/Obj/Aitem.h"
 #include"../scene/Obj/Npc.h"
 #include"../scene/Obj/Chat.h"
+#include"../stage/Layer.h"
 #include "../stage/StageMng.h"
 
 
@@ -142,7 +143,9 @@ void GameScene::DrawOwnScn()
 
     //ƒvƒŒƒCƒ„[
 	 mPlayer.Draw(mMapOffset);
-    
+
+     mLayer->Draw(mMapOffset);
+
      //ŽžŠÔ‘Ñ
      TimeManeger();
 
@@ -188,6 +191,8 @@ bool GameScene::Init(void)
     mNpc = new Npc();
 
     mChat = new Chat();
+
+    mLayer = new Layer();
 
    	return true;
 

@@ -372,7 +372,6 @@ bool DarkTemple::CheckMapChip(Vector2 pos)
 
 	bool flg = true;	//true=player‚ª•à‚¯‚é
 
-<<<<<<< HEAD
 		//ˆÚ“®”ÍˆÍ‚ðs‚¤
 	switch (layer1)
 	{

@@ -139,8 +139,6 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 		break;
 	}
 
-	
-	
 
 	ItemAnimcount++;
 
