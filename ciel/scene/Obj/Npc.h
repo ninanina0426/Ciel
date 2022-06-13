@@ -2,6 +2,7 @@
 #include "../../common/Vector2.h"
 #include"../Input/Keyboard.h"
 
+
 enum class NpcType
 {
 	CM_NPC,
@@ -36,6 +37,8 @@ private:
 	Keyboard key_;
 
 	int i;
+
+	
 public:
 	Npc();
 	~Npc();

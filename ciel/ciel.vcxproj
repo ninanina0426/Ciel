@@ -154,6 +154,7 @@
     <ClCompile Include="scene\Obj\BGM.cpp" />
     <ClCompile Include="scene\Obj\Chat.cpp" />
     <ClCompile Include="scene\Obj\Npc.cpp" />
+    <ClCompile Include="scene\Obj\Quest.cpp" />
     <ClCompile Include="stage\CaveMap.cpp" />
     <ClCompile Include="stage\CaveShop.cpp" />
     <ClCompile Include="stage\DarkTemple.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="scene\Obj\BGM.h" />
     <ClInclude Include="scene\Obj\Chat.h" />
     <ClInclude Include="scene\Obj\Npc.h" />
+    <ClInclude Include="scene\Obj\Quest.h" />
     <ClInclude Include="stage\CaveMap.h" />
     <ClInclude Include="stage\CaveShop.h" />
     <ClInclude Include="stage\DarkTemple.h" />

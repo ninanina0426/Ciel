@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include"../../stage/StageMng.h"
 #include "Npc.h"
+#include "Quest.h"
 
 
 Npc::Npc()
@@ -142,6 +143,7 @@ Vector2 Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
 					mSoflg = true;
+					
 					i = 1;
 				}
 			}
@@ -165,6 +167,12 @@ Vector2 Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 
 	mAnmCnt++;
 
+	//クエスト
+	if (!mSoflg)
+	{
+		QuestIns.UpDate(mapID, QuestState::ALIVE, QuestType::MAIN);
+	}
+	
 	return mPos;
 }
 

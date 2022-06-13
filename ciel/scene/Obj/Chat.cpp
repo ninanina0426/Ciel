@@ -12,6 +12,11 @@ Chat::~Chat()
 {
 }
 
+bool Chat::GetfinalC(void)
+{
+	return finalC_;
+}
+
 bool Chat::init(void)
 {
 
@@ -26,7 +31,8 @@ bool Chat::init(void)
 	mNum = 0;
 
 	mFlg = false;
-	
+	finalC_ = false;
+
 	mNpc = new Npc();
 
 	return true;
@@ -50,6 +56,7 @@ bool Chat::Update(bool flg, int num)
 			if (mNum ==4)
 			{
 				mFlg = false;
+				finalC_ = true;
 				mNum = 0;
 			}
 			
