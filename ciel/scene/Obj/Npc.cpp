@@ -15,24 +15,19 @@ Npc::~Npc()
 bool Npc::init(void)
 {
 
-	mNpcType = NpcType::TM_NPC;
+	mNpcType = NpcType::SO_NPC;
 
-	mFmflg = false;
-	mWmflg = false;
-	mWsflg = false;
-	mCmflg = false;
-	mCsflg = false;
-	mDtflg = false;
-	mFiflg = false;
-	mTmflg = false;
-	mTiflg = false;
-	mSmflg = false;
-	mSoflg = false;
-	mSsflg = false;
-	mTiflg = false;
+	mSoNpc1 = false;
+	mSoNpc2 = false;
+	mSmNpc1 = false;
+
+	mQSoNpc1 = false;
+	mQSoNpc2 = false;
+	mQSmNpc1 = false;
 
 	mPos.x_ = 0;
 	mPos.y_ = 0;
+
 
 	switch (mNpcType)
 	{
@@ -52,9 +47,24 @@ bool Npc::init(void)
 	case NpcType::SM_NPC:
 		break;
 	case NpcType::SO_NPC:
-		mMoveDir = DIR_UP;
-		mSize.x_ = 32;
-		mSize.y_ = 64;
+		switch (mNumType)
+		{
+		case NumType::NPC_1:
+			mMoveDir = DIR_UP;
+			mSize.x_ = 32;
+			mSize.y_ = 64;
+			break;
+		case NumType::NPC_2:
+			break;
+		case NumType::NPC_3:
+			break;
+		case NumType::NPC_4:
+			break;
+		case NumType::NPC_5:
+			break;
+		default:
+			break;
+		}
 		break;
 	case NpcType::SS_NPC:
 		break;
@@ -76,6 +86,16 @@ bool Npc::init(void)
 		return false;
 	}
 
+	if (LoadDivGraph("image/npc/watch.png", 16, 4, 4, 32, 64, &mImage1[0][0]) == -1)
+	{
+		return false;
+	}
+
+	if (LoadDivGraph("image/102.png", 16, 4, 4, 32, 32, &mImage2[0][0]) == -1)
+	{
+		return false;
+	}
+
 	mSizeOffset.x_ = mSize.x_ / 2;
 	mSizeOffset.y_ = mSize.y_ / 2;
 
@@ -89,7 +109,7 @@ bool Npc::init(void)
 	return true;;
 }
 
-Vector2 Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
+int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 {
 	MAP_ID mapID = lpMapMng.GetMapId();
 
@@ -132,24 +152,6 @@ Vector2 Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 		break;
 	case MAP_ID::SWEETSOUT:
 		mNpcType = NpcType::SO_NPC;
-		if ((playerPos.y_ - playerSize.y_ / 2< mPos.y_ + 675 + 64 / 2 ) &&
-			(mPos.y_ + 675 - 64 / 2  < playerPos.y_ + playerSize.y_ / 2) &&
-			(playerPos.x_ - playerSize.x_ / 2< mPos.x_ + 1355 + 32 / 2) &&
-			(mPos.x_ + 1355 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
-		{
-			if (mSoflg == false)
-			{
-				if (key_.getKeyDown(KEY_INPUT_F))
-				{
-					mSoflg = true;
-					i = 1;
-				}
-			}
-			else
-			{
-				mSoflg = flg;
-			}
-		}
 		break;
 	case MAP_ID::SWEETSSCHOOL:
 		mNpcType = NpcType::SS_NPC;
@@ -163,9 +165,126 @@ Vector2 Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 		break;
 	}
 
+	switch (mNpcType)
+	{
+	case NpcType::CM_NPC:
+		break;
+	case NpcType::CS_NPC:
+		break;
+	case NpcType::DT_NPC:
+		break;
+	case NpcType::FI_NPC:
+		break;
+	case NpcType::FM_NPC:
+		break;
+	case NpcType::SM_NPC:
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 830 + 32 / 2) &&
+			(mPos.y_ + 830 - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 830 + 32 / 2) &&
+			(mPos.x_ + 830 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			mNumType = NumType::NPC_1;
+			if (mSmNpc1 == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mSmNpc1 = true;
+					i = 20;
+				}
+			}
+			else
+			{
+				if (flg==false)
+				{
+					mSmNpc1 = false;
+					i = 0;
+					if (mQSmNpc1 == false)
+					{
+						mQSmNpc1 = true;
+					}
+				}
+				
+			}
+		}
+		break;
+	case NpcType::SO_NPC:
+	{
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 675 + 64 / 2) &&
+			(mPos.y_ + 675 - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 1355 + 32 / 2) &&
+			(mPos.x_ + 1355 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			mNumType = NumType::NPC_1;
+			if (mSoNpc1 == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mSoNpc1 = true;
+					i = 1;
+				}
+			}
+			else
+			{
+				if (flg == false)
+				{
+					mSoNpc1 = false;
+					i = 0;
+					if (mQSoNpc1 == false)
+					{
+						mQSoNpc1 = true;
+					}
+				}
+
+			}
+
+		}
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 1200 + 64 / 2) &&
+			(mPos.y_ + 1200 - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 800 + 32 / 2) &&
+			(mPos.x_ + 800 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			mNumType = NumType::NPC_2;
+			if (mSoNpc2 == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mSoNpc2 = true;
+					i = 4;
+				}
+			}
+			else
+			{
+				if (flg == false)
+				{
+					mSoNpc2 = false;
+					i = 0;
+					if (mQSoNpc2 == false)
+					{
+						mQSoNpc2 = true;
+					}
+				}
+			}
+		}
+	}
+	break;
+	case NpcType::SS_NPC:
+		break;
+	case NpcType::TI_NPC:
+		break;
+	case NpcType::TM_NPC:
+		break;
+	case NpcType::WM_NPC:
+		break;
+	case NpcType::WS_NPC:
+		break;
+	default:
+		break;
+	}
+
+
 	mAnmCnt++;
 
-	return mPos;
+	return i;
 }
 
 void Npc::Draw(Vector2 offset)
@@ -183,9 +302,11 @@ void Npc::Draw(Vector2 offset)
 	case NpcType::FM_NPC:
 		break;
 	case NpcType::SM_NPC:
+		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 830, mPos.y_ - offset.y_ - mSizeOffset.y_ + 830, mImage2[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 		break;
 	case NpcType::SO_NPC:
-		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_+1355, mPos.y_ - offset.y_ - mSizeOffset.y_+605, mImage[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 1355, mPos.y_ - offset.y_ - mSizeOffset.y_ + 605, mImage[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 800, mPos.y_ - offset.y_ - mSizeOffset.y_ + 1200, mImage1[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 		break;
 	case NpcType::SS_NPC:
 		break;
@@ -200,6 +321,8 @@ void Npc::Draw(Vector2 offset)
 	default:
 		break;
 	}
+
+
 
 }
 
@@ -237,40 +360,72 @@ bool Npc::Getflg()
 	switch (mNpcType)
 	{
 	case NpcType::CM_NPC:
-		return mCmflg;
+		
 		break;
 	case NpcType::CS_NPC:
-		return mCsflg;
+		
 		break;
 	case NpcType::DT_NPC:
-		return mDtflg;
+		
 		break;
 	case NpcType::FI_NPC:
-		return mFiflg;
+		
 		break;
 	case NpcType::FM_NPC:
-		return mFmflg;
+		
 		break;
 	case NpcType::SM_NPC:
-		return mSmflg;
+		switch (mNumType)
+		{
+		case NumType::NPC_1:
+			return mSmNpc1;
+			break;
+		case NumType::NPC_2:
+			break;
+		case NumType::NPC_3:
+			break;
+		case NumType::NPC_4:
+			break;
+		case NumType::NPC_5:
+			break;
+		default:
+			break;
+		}
 		break;
 	case NpcType::SO_NPC:
-		return mSoflg;
+		switch (mNumType)
+		{
+		case NumType::NPC_1:
+			return mSoNpc1;
+			break;
+		case NumType::NPC_2:
+			return mSoNpc2;
+			break;
+		case NumType::NPC_3:
+			break;
+		case NumType::NPC_4:
+			break;
+		case NumType::NPC_5:
+			break;
+		default:
+			break;
+		}
+		
 		break;
 	case NpcType::SS_NPC:
-		return mSsflg;
+		
 		break;
 	case NpcType::TI_NPC:
-		return mTiflg;
+		
 		break;
 	case NpcType::TM_NPC:
-		return mTmflg;
+		
 		break;
 	case NpcType::WM_NPC:
-		return mWmflg;
+		
 		break;
 	case NpcType::WS_NPC:
-		return mWsflg;
+		
 		break;
 	default:
 		break;

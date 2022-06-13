@@ -14,6 +14,8 @@ private:
 
 	bool mFlg;
 
+	int mNumType;
+
 	Keyboard key_;
 
 	Npc*mNpc;
@@ -25,5 +27,7 @@ public:
 	bool Update(bool flg,int num);		//XV
 	void Draw(Vector2 offset);		//•`‰æ
 	bool Release(void);		//ŠJ•ú
+
+	bool Getflg();
 };
 

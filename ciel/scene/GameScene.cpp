@@ -109,7 +109,9 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mPlayer.Update();
 
-    mNpc->Update(PlayerPos,PlayerSize, mChat->Update(mNpc->Getflg(), mNpc->Num()));
+    mNpc->Update(PlayerPos,PlayerSize,mChat->Getflg());
+
+    mChat->Update(mNpc->Getflg(), mNpc->Num());
 
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
