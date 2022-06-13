@@ -410,7 +410,6 @@ bool Npc::Getflg()
 		default:
 			break;
 		}
-		
 		break;
 	case NpcType::SS_NPC:
 		
@@ -431,6 +430,82 @@ bool Npc::Getflg()
 		break;
 	}
 
+}
+
+bool Npc::GetQflg()
+{
+	switch (mNpcType)
+	{
+	case NpcType::CM_NPC:
+
+		break;
+	case NpcType::CS_NPC:
+
+		break;
+	case NpcType::DT_NPC:
+
+		break;
+	case NpcType::FI_NPC:
+
+		break;
+	case NpcType::FM_NPC:
+
+		break;
+	case NpcType::SM_NPC:
+		switch (mNumType)
+		{
+		case NumType::NPC_1:
+			return mQSmNpc1;
+			break;
+		case NumType::NPC_2:
+			break;
+		case NumType::NPC_3:
+			break;
+		case NumType::NPC_4:
+			break;
+		case NumType::NPC_5:
+			break;
+		default:
+			break;
+		}
+		break;
+	case NpcType::SO_NPC:
+		switch (mNumType)
+		{
+		case NumType::NPC_1:
+			return mQSoNpc1;
+			break;
+		case NumType::NPC_2:
+			return mQSoNpc2;
+			break;
+		case NumType::NPC_3:
+			break;
+		case NumType::NPC_4:
+			break;
+		case NumType::NPC_5:
+			break;
+		default:
+			break;
+		}
+		break;
+	case NpcType::SS_NPC:
+
+		break;
+	case NpcType::TI_NPC:
+
+		break;
+	case NpcType::TM_NPC:
+
+		break;
+	case NpcType::WM_NPC:
+
+		break;
+	case NpcType::WS_NPC:
+
+		break;
+	default:
+		break;
+	}
 }
 
 

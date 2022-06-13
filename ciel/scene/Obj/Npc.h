@@ -66,6 +66,8 @@ public:
 
 	bool Getflg();
 
+	bool GetQflg();
+
 	bool mSoNpc1;
 	bool mSoNpc2;
 
