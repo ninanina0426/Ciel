@@ -17,11 +17,11 @@ Player::~Player()
 bool Player::init(PlayerID playerid)
 {
 	/*mParent = parent;*/
-	mPos.x_ = 1425;
-	mPos.y_ = 1250;
+	/*mPos.x_ = 1425;
+	mPos.y_ = 1250;*/
 
-	/*mPos.x_ = 785;
-	mPos.y_ = 1400;*/
+	mPos.x_ = 785;
+	mPos.y_ = 1400;
 
 	//player‚ÌŽí•ÊŠÖŒW
 	if (plID_ != PlayerID::Max)

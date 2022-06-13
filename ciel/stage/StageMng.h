@@ -58,9 +58,6 @@ private:
 	MAP_ID mNextMapID;
 	Vector2 mNextPos;
 
-	bool flg;		//ƒJƒƒ‰ƒtƒ‰ƒO
-
-	
 	friend Stage;
 };
 

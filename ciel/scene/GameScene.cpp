@@ -5,6 +5,7 @@
 #include"../scene/Obj/Aitem.h"
 #include"../scene/Obj/Npc.h"
 #include"../scene/Obj/Chat.h"
+#include"../stage/Layer.h"
 #include "../stage/StageMng.h"
 
 
@@ -19,67 +20,6 @@ GameScene::GameScene(PlayerID playerID)
 
 GameScene::~GameScene()
 {
-}
-
-//アイテムのフラグ ---------------------------
-bool GameScene::IsKami1(void)
-{
-    return mAitem->mKami1;
-}
-
-bool GameScene::IsKami2(void)
-{
-    return mAitem->mKami2;
-}
-
-bool GameScene::mKami3(void)
-{
-    return mAitem->mKami3;
-}
-
-bool GameScene::mKami4(void)
-{
-    return mAitem->mKami4;
-}
-
-bool GameScene::mKami5(void)
-{
-    return mAitem->mKami5;
-}
-
-bool GameScene::mTma(void)
-{
-    return mAitem->mTma;
-}
-
-bool GameScene::mMasinngan(void)
-{
-    return mAitem->mMasinngan;
-}
-
-bool GameScene::mHoutai(void)
-{
-    return mAitem->mHoutai;
-}
-
-bool GameScene::mHeal(void)
-{
-    return mAitem->mHeal;
-}
-
-bool GameScene::mKey(void)
-{
-    return mAitem->mKey;
-}
-
-bool GameScene::mbook(void)
-{
-    return mAitem->mbook;
-}
-
-bool GameScene::mMagazinn(void)
-{
-    return mAitem->mMagazinn;
 }
 
 bool GameScene::mEnd()
@@ -160,14 +100,16 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mPlayer.Update();
 
-    mNpc->Update(PlayerPos,PlayerSize, mChat->Update(mNpc->Getflg(), mNpc->Num()));
+    mNpc->Update(PlayerPos,PlayerSize,mChat->Getflg());
+
+    mChat->Update(mNpc->Getflg(), mNpc->Num());
 
    
 
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
-     mAitem->Update();
+     mAitem->Update(PlayerPos, PlayerSize);
 
 
 
@@ -196,7 +138,9 @@ void GameScene::DrawOwnScn()
 
     //プレイヤー
 	 mPlayer.Draw(mMapOffset);
-    
+
+     mLayer->Draw(mMapOffset);
+
      //時間帯
      TimeManeger();
 
@@ -242,6 +186,8 @@ bool GameScene::Init(void)
     mNpc = new Npc();
 
     mChat = new Chat();
+
+    mLayer = new Layer();
 
    	return true;
 

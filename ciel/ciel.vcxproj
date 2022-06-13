@@ -174,6 +174,7 @@
     <ClCompile Include="scene\Transition\FadeInOut.cpp" />
     <ClCompile Include="scene\Transition\TransitionScene.cpp" />
     <ClCompile Include="stage\ForestInMap.cpp" />
+    <ClCompile Include="stage\Layer.cpp" />
     <ClCompile Include="stage\StageMng.cpp" />
     <ClCompile Include="stage\Stage.cpp" />
     <ClCompile Include="stage\WaMap.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="scene\Transition\FadeInOut.h" />
     <ClInclude Include="scene\Transition\TransitionScene.h" />
     <ClInclude Include="stage\ForestInMap.h" />
+    <ClInclude Include="stage\Layer.h" />
     <ClInclude Include="stage\StageMng.h" />
     <ClInclude Include="stage\Stage.h" />
     <ClInclude Include="stage\WaMap.h" />

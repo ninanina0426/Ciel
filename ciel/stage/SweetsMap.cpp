@@ -1,5 +1,4 @@
 #include <DxLib.h>
-
 #include "SweetsMap.h"
 
 int mMapNomal[MAP_Y][MAP_X] = {
@@ -429,11 +428,7 @@ SweetsMap::~SweetsMap()
 
 void SweetsMap::Update(Vector2 offset)
 {
-
-	
-
 	mOffset = { offset.x_,offset.y_ };
-
 }
 
 void SweetsMap::DrawOwnScn()
@@ -454,7 +449,7 @@ void SweetsMap::DrawOwnScn()
 
 			//DrawFormatString(16 * x - mOffset.x_, 16 * y - mOffset.y_, GetColor(255, 255, 255), "%d", mMapObj[y][x]);
 
-			DrawFormatString(0,10, GetColor(0, 0, 255), "mapPos=(%d,%d)", mOffset.x_, mOffset.y_);
+			/*DrawFormatString(0,10, GetColor(0, 0, 255), "mapPos=(%d,%d)", mOffset.x_, mOffset.y_);*/
 		}
 	}
 }
@@ -466,9 +461,6 @@ bool SweetsMap::Init(void)
 	{
 		return false;
 	}
-
-	
-	//SetMap(mapID);
 
 	return true;
 }
