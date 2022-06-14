@@ -17,25 +17,30 @@ bool Aitem::init()
 	//parent->Draw();		//ゲームシーンのドローってこと
 
 	ItemAnimcount = 0;
-
+	
+	
 	mPos.x_ = 0;
 	mPos.y_ = 0;
 	mSize.x_ = 32;
 	mSize.y_ = 32;
 
 	//所持管理用
-	mKami1 = true;
-	mKami2 = true;
-	mKami3 = true;
-	mKami4 = true;
-	//mKami5 = true;
-	mTma = true;
-	mMasinngan = true;
-	mHoutai = true;
-	mHeal = true;
-	mKey = true;
-	mbook = true;
-	mMagazinn = true;
+	mTama1 = true;
+	mTama2 = true;
+	mTama3 = true;
+	mTama4 = true;
+	mTama5 = true;
+
+	mKinomi1 = true;
+	mKinomi2 = true;
+	mKinomi3 = true;
+	mKinomi4 = true;
+	mKinomi5 = true;
+
+	mHaori = true;
+
+	mRantan = true;
+	
 
 	if (LoadDivGraph("image/item.png", 12, 3, 4, mSize.x_, mSize.y_, &mImage[0][0]) == -1)
 	{
@@ -46,6 +51,9 @@ bool Aitem::init()
 
 Vector2 Aitem::Update(void)
 {
+
+	
+
 	ItemAnimcount++;
 
 	return mPos;
@@ -57,117 +65,122 @@ void Aitem::Draw(Vector2 mMapoffset)
 
 	if (mapID == MAP_ID::SWEETS)
 	{
-		if (mKami1 == true)
+
+		//キーアイテム
+		if (mTama1 == true)
 		{
-			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
 			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
 			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_, mPos.y_ - 10 - mMapoffset.y_, mImage[0][mAnimCnt], true);
+				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 430, mPos.y_ - 10 - mMapoffset.y_ + 420, mImage[3][mAnimCnt], true);
 			}
 		}
-		if (mKami2 == true)
-		{
-			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
-			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
-			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 50, mPos.y_ - 10 - mMapoffset.y_, mImage[0][mAnimCnt], true);
-			}
-		}
+
+
 	}
+
 	if (mapID == MAP_ID::SWEETSOUT)
 	{
-		if (mKami3 == true)
-		{
-			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
-			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
-			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 100, mPos.y_ - 10 - mMapoffset.y_, mImage[0][mAnimCnt], true);
-			}
-		}
-		if (mKami4 == true)
-		{
-			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
-			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
-			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 150, mPos.y_ - 10 - mMapoffset.y_, mImage[0][mAnimCnt], true);
-			}
-		}
+		
 	}
+
 	if (mapID == MAP_ID::FOREST)
 	{
-		if (mKami5 == true)
+		//木の実１
+		if (mKinomi1 == true)
 		{
-			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
 			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
 			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 200, mPos.y_ - 10 - mMapoffset.y_, mImage[0][mAnimCnt], true);
+				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 2535, mPos.y_ - 10 - mMapoffset.y_ + 1635, mImage[1][mAnimCnt], true);
 			}
 		}
-		if (mTma == true)
+
+		//木の実2
+		if (mKinomi2 == true)
 		{
-			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
 			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
 			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 250, mPos.y_ - 10 - mMapoffset.y_, mImage[0][mAnimCnt], true);
+				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 2805, mPos.y_ - 10 - mMapoffset.y_ + 780, mImage[1][mAnimCnt], true);
+			}
+		}
+
+		//木の実3
+		if (mKinomi3 == true)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 155, mPos.y_ - 10 - mMapoffset.y_ + 930, mImage[1][mAnimCnt], true);
+			}
+		}
+
+		//木の実4
+		if (mKinomi4 == true)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 560, mPos.y_ - 10 - mMapoffset.y_ + 160, mImage[1][mAnimCnt], true);
+			}
+		}
+
+		//木の実5
+		if (mKinomi5 == true)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 2300, mPos.y_ - 10 - mMapoffset.y_ + 120, mImage[1][mAnimCnt], true);
 			}
 		}
 	}
+
+	if (mapID == MAP_ID::FORESTIN)
+	{
+		//キーアイテム
+		if (mTama2 == true)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 1430, mPos.y_ - 10 - mMapoffset.y_ + 290, mImage[3][mAnimCnt], true);
+			}
+		}
+	}
+
 	if (mapID == MAP_ID::CAVE)
 	{
-		if (mMasinngan == true)
+		
+	}
+
+	if (mapID == MAP_ID::DARK)
+	{
+		//キーアイテム
+		if (mTama3 == true)
 		{
-			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
 			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
 			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 300, mPos.y_ - 10 - mMapoffset.y_, mImage[0][mAnimCnt], true);
-			}
-		}
-		if (mHoutai == true)
-		{
-			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
-			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
-			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_, mPos.y_ - 10 - mMapoffset.y_ + 50, mImage[0][mAnimCnt], true);
-			}
-		}
-		if (mHeal == true)
-		{
-			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
-			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
-			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 50, mPos.y_ - 10 - mMapoffset.y_ + 50, mImage[0][mAnimCnt], true);
-			}
-		}
-		if (mKey == true)
-		{
-			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
-			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
-			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 100, mPos.y_ - 10 - mMapoffset.y_ + 50, mImage[0][mAnimCnt], true);
-			}
-		}
-		if (mbook == true)
-		{
-			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
-			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
-			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 150, mPos.y_ - 10 - mMapoffset.y_ + 50, mImage[0][mAnimCnt], true);
-			}
-		}
-		if (mMagazinn == true)
-		{
-			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
-			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
-			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 200, mPos.y_ - 10 - mMapoffset.y_ + 50, mImage[0][mAnimCnt], true);
+				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 1595, mPos.y_ - 10 - mMapoffset.y_ + 1070, mImage[3][mAnimCnt], true);
 			}
 		}
 	}
 	
-	
-	
-	
-	
+	if (mapID == MAP_ID::WA)
+	{
+		//キーアイテム
+		if (mTama4 == true)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 475, mPos.y_ - 10 - mMapoffset.y_ + 510, mImage[3][mAnimCnt], true);
+			}
+		}
+	}
+
 }
 
 bool Aitem::Release(void)

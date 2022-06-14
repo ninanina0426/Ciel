@@ -22,65 +22,68 @@ GameScene::~GameScene()
 }
 
 //アイテムのフラグ ---------------------------
-bool GameScene::IsKami1(void)
+
+bool GameScene::IsTama1(void)
 {
-    return mAitem->mKami1;
+    return mAitem->mTama1;
 }
 
-bool GameScene::IsKami2(void)
+bool GameScene::IsTama2(void)
 {
-    return mAitem->mKami2;
+    return mAitem->mTama2;
 }
 
-bool GameScene::mKami3(void)
+bool GameScene::IsTama3(void)
 {
-    return mAitem->mKami3;
+    return mAitem->mTama3;
 }
 
-bool GameScene::mKami4(void)
+bool GameScene::IsTama4(void)
 {
-    return mAitem->mKami4;
+    return mAitem->mTama4;
 }
 
-bool GameScene::mKami5(void)
+bool GameScene::IsTama5(void)
 {
-    return mAitem->mKami5;
+    return mAitem->mTama5;
 }
 
-bool GameScene::mTma(void)
+bool GameScene::IsKinomi1(void)
 {
-    return mAitem->mTma;
+    return mAitem->mKinomi1;
 }
 
-bool GameScene::mMasinngan(void)
+bool GameScene::IsKinomi2(void)
 {
-    return mAitem->mMasinngan;
+    return mAitem->mKinomi2;
 }
 
-bool GameScene::mHoutai(void)
+bool GameScene::IsKinomi3(void)
 {
-    return mAitem->mHoutai;
+    return mAitem->mKinomi3;
 }
 
-bool GameScene::mHeal(void)
+bool GameScene::IsKinomi4(void)
 {
-    return mAitem->mHeal;
+    return mAitem->mKinomi4;
 }
 
-bool GameScene::mKey(void)
+bool GameScene::IsKinomi5(void)
 {
-    return mAitem->mKey;
+    return mAitem->mKinomi5;
 }
 
-bool GameScene::mbook(void)
+bool GameScene::IsHaori(void)
 {
-    return mAitem->mbook;
+    return mAitem->mHaori;
 }
 
-bool GameScene::mMagazinn(void)
+bool GameScene::IsRantan(void)
 {
-    return mAitem->mMagazinn;
+    return mAitem->mRantan;
 }
+
+
 
 bool GameScene::mEnd()
 {
@@ -159,6 +162,12 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     }
 
 
+    if (key_.getKeyDown(KEY_INPUT_F))
+    {
+        ItemOwnCnt++;
+    }
+
+
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
     PlayerPos = mPlayer.GetPos();
@@ -212,7 +221,9 @@ void GameScene::DrawOwnScn()
      auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
      int delta = msec / 1000000.0; //秒に変換  
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
+
      mAitem->Draw(mMapOffset);
+     DrawFormatString(0, 150, 0xffffff, "TamaCount:%d", ItemOwnCnt);
 
      mChat->Draw(mMapOffset);
 
@@ -243,6 +254,8 @@ bool GameScene::Init(void)
     PMflg_ = false;
     Nightflg_ = false;
     count_ = 0;
+
+    ItemOwnCnt = 0;
 
     mBgm = new BGM();
 

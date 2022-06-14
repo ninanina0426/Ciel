@@ -20,19 +20,21 @@ public:
     ~GameScene();
 
     //ƒAƒCƒeƒ€
-    bool IsKami1(void);
-    bool IsKami2(void);
-    bool mKami3(void);
-    bool mKami4(void);
-    bool mKami5(void);
+    bool IsTama1(void);
+    bool IsTama2(void);
+    bool IsTama3(void);
+    bool IsTama4(void);
+    bool IsTama5(void);
 
-    bool mTma(void);
-    bool mMasinngan(void);
-    bool mHoutai(void);
-    bool mHeal(void);
-    bool mKey(void);
-    bool mbook(void);
-    bool mMagazinn(void);
+    bool IsKinomi1(void);
+    bool IsKinomi2(void);
+    bool IsKinomi3(void);
+    bool IsKinomi4(void);
+    bool IsKinomi5(void);
+
+    bool IsHaori(void);
+
+    bool IsRantan(void);
 
     bool mEnd();
 
@@ -80,6 +82,7 @@ private:
     BGM*mBgm;
 
     int x;
+    int ItemOwnCnt;
 
 
 };

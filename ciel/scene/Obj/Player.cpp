@@ -86,6 +86,13 @@ Vector2 Player::Update(void)
 	{
 		keyDir = DIR_RIGHT;
 	}
+	
+	//デバッグ用
+	if (key_.getKeyDownHold(KEY_INPUT_Q))
+	{
+		mPos = { 0,0 };
+	}
+
 
 	if (keyDir != DIR_MAX)
 	{

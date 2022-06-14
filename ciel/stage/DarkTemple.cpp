@@ -344,7 +344,7 @@ void DarkTemple::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[dt_ground[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[dt_wall[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[dt_obj[y][x]], true);
-			/*DrawFormatString(32 * x - mOffset.X, 32 * y - mOffset.Y, GetColor(255, 255, 255), "%d", mMap[y][x]);*/
+			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", dt_obj[y][x]);
 
 		}
 	}
@@ -372,95 +372,81 @@ bool DarkTemple::CheckMapChip(Vector2 pos)
 
 	bool flg = true;	//true=player‚ª•à‚¯‚é
 
-<<<<<<< HEAD
+
 		//ˆÚ“®”ÍˆÍ‚ðs‚¤
 	switch (layer1)
 	{
-	case 73:
-		
-		switch (layer2)
-		{
-		//case -1:
-		case 231:
-		case 240:
-		{
-			flg = true;
-			break;
-		}
-
-	
-
-		case 189:
-		case 190:
-		case 191:
-		case 192:
-		case 193:
-		case 198:
-		case 200:
-		case 207:
-		case 209:
-		case 213:
-		case 216:
-		case 217:
-		case 218:
-		case 222:
-		case 225:
-		case 234:
-		case 227:
-		case 235:
-		case 236:
-		case 239:
-		case 241:
-		case 248:
-		case 249:
-		case 250:
-		case 281:
-		case 290:
-		{
-			flg = false;
-			break;
-		}
-			
-			switch (layer3)
-			{
-			case -1:
-			case 92:
-			case 93:
-			case 174: 
-			case 175:
-			case 183:
-			case 184:
-			case 185:
-			case 264:
-			case 265:
-			case 273:
-			case 274:
-			case 283:
-			case 292:
-			{
-				flg = false;
-				break;
-			}
-
-			
-				break;
-			default:
-				break;
-			}
-			break;
-		default:
-			break;
-		}
 
 		break;
 	default:
 		break;
 	}
 
+	switch (layer2)
+	{
+
+	case 189:
+	case 190:
+	case 191:
+	case 192:
+	case 193:
+	case 198:
+	case 200:
+	case 207:
+	case 209:
+	case 213:
+	case 216:
+	case 217:
+	case 218:
+	case 222:
+	case 225:
+	case 234:
+	case 227:
+	case 235:
+	case 236:
+	case 239:
+	case 241:
+	case 248:
+	case 249:
+	case 250:
+	case 281:
+	case 290:
+	{
+		flg = false;
+		break;
+	}
 	
+	
+	break;
+	default:
+		break;
+
+	}
+
+
+	switch (layer3)
+	{
+	
+	
+	case 185:
+	case 246:
+	case 247:
+	case 255:
+	case 256:
+	case 273:
+	case 292:
+	{
+		flg = false;
+		break;
+	}
+
+	default:
+		break;
+
+
+	}
 
 	return flg;
-
 }
 
 int DarkTemple::GetMapChip(Vector2 pos)

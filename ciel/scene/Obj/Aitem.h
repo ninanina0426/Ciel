@@ -26,20 +26,21 @@ public:
 	bool Release(void);		//開放
 	Vector2 GetSize(void);
 
-	bool mKami1;
-	bool mKami2;
-	bool mKami3;
-	bool mKami4;
-	bool mKami5;
+	bool mTama1;
+	bool mTama2;
+	bool mTama3;
+	bool mTama4;
+	bool mTama5;
 
-	bool mTma;
-	bool mMasinngan;
-	bool mHoutai;
-	bool mHeal;
-	bool mKey;
-	bool mbook;
-	bool mMagazinn;
+	bool mKinomi1;
+	bool mKinomi2;
+	bool mKinomi3;
+	bool mKinomi4;
+	bool mKinomi5;
+	
+	bool mHaori;
 
+	bool mRantan;
 
 
 private:
@@ -49,5 +50,6 @@ private:
 	Vector2 mPos;		//キャラクターの地図上の座標
 
 	int ItemAnimcount;
+	
 };
 

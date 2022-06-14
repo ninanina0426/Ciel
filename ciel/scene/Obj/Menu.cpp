@@ -261,30 +261,30 @@ void Menu::Draw(void)
 		DrawGraph(0, 0, mImageGet[y][xx], true);
 		if (xx == 1)
 		{
-			if (mParent->mTma() == false)
+			/*if (mParent->mTma() == false)
 			{
 				DrawRectGraph(0, 0, 0, 0, 400, 250, mImagSelect[1][1], true, false);
 			}
 			if (mParent->mMasinngan() == false)
 			{
 				DrawRectGraph(0, 250, 0, 250, 400, 250, mImagSelect[1][1], true, false);
-			}
+			}*/
 		}
 		if (xx == 2)
 		{
-			if (mParent->mHoutai() == false)
+			/*if (mParent->mHoutai() == false)
 			{
 				DrawRectGraph(0, 0, 0, 0, 400, 250, mImagSelect[1][2], true, false);
 			}
 			if (mParent->mHeal() == false)
 			{
 				DrawRectGraph(0, 250, 0, 250, 400, 250, mImagSelect[1][2], true, false);
-			}
+			}*/
 		}
 		if (xx == 3)
 		{
 		
-			if (mParent->IsKami1() == false)
+			/*if (mParent->IsKami1() == false)
 			{
 				DrawRectGraph(0, 200,0, 200, 400, 50, mImagSelect[1][3], true, false);
 			}
@@ -315,7 +315,7 @@ void Menu::Draw(void)
 			if (mParent->mMagazinn() == false)
 			{
 				DrawRectGraph(390, 300, 390, 300, 400, 50, mImagSelect[1][3], true, false);
-			}
+			}*/
 		}
 		
 		break;
@@ -346,7 +346,7 @@ void Menu::Draw(void)
 	case Menu::AITEM_SELECT::AITEM_HEAL:
 		if (xx == 2)
 		{
-			if (mParent->mHoutai() == false)
+			/*if (mParent->mHoutai() == false)
 			{
 				
 				if (yyy == 1)
@@ -361,7 +361,7 @@ void Menu::Draw(void)
 				{
 					DrawGraph(mPos.x_, 0, mAImage[3], true);
 				}
-			}
+			}*/
 		}
 		break;
 	case Menu::AITEM_SELECT::AITEM_IMPORTANT:
@@ -369,35 +369,35 @@ void Menu::Draw(void)
 		{
 			if (xxx == 0)
 			{
-				if (mParent->IsKami1() == false)
+				if (mParent->IsTama1() == false)
 				{
 					if (yyy == 1)
 					{
 						DrawGraph(mPos.x_, 0, mAImage[5], true);
 					}
 				}
-				if (mParent->IsKami2() == false)
+				if (mParent->IsTama2() == false)
 				{
 					if (yyy == 2)
 					{
 						DrawGraph(mPos.x_, 0, mAImage[5], true);
 					}
 				}
-				if (mParent->mKami3() == false)
+				if (mParent->IsTama3() == false)
 				{
 					if (yyy == 3)
 					{
 						DrawGraph(mPos.x_, 0, mAImage[5], true);
 					}
 				}
-				if (mParent->mKami4() == false)
+				if (mParent->IsTama4() == false)
 				{
 					if (yyy == 4)
 					{
 						DrawGraph(mPos.x_, 0, mAImage[5], true);
 					}
 				}
-				if (mParent->mKami5() == false)
+				if (mParent->IsTama5() == false)
 				{
 					if (yyy == 5)
 					{
@@ -408,7 +408,7 @@ void Menu::Draw(void)
 		
 			if (xxx == 1)
 			{
-				if (mParent->mKey() == false)
+				/*if (mParent->mKey() == false)
 				{
 					if (yyy == 1)
 					{
@@ -423,7 +423,7 @@ void Menu::Draw(void)
 						DrawGraph(mPos.x_, 0, mAImage[1], true);
 					}
 
-				}
+				}*/
 
 			}
 			

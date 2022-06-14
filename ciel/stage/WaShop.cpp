@@ -279,29 +279,31 @@ bool WaShop::CheckMapChip(Vector2 pos)
 		break;
 	}
 
-		switch (layer2)
-		{
-
-		case 2970:
-		case 2975:
-		case 3014:
-		case 3015:
-		case 3153:
-		case 3180:
-		case 3182:
-		case 3184:
-		case 3185:
-		{
-			flg = false;
-			break;
-		}
-
-			break;
-		default:
-			break;
-		}
+		
 
 		break;
+	default:
+		break;
+	}
+
+	switch (layer2)
+	{
+
+	case 2970:
+	case 2975:
+	case 3014:
+	case 3015:
+	case 3153:
+	case 3180:
+	case 3182:
+	case 3184:
+	case 3185:
+	{
+		flg = false;
+		break;
+	}
+
+	break;
 	default:
 		break;
 	}
