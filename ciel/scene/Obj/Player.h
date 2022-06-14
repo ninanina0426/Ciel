@@ -37,10 +37,12 @@ private:
 	/*GameScene* mParent;*/
 	/*GameScene* mParent;*/
 
-	int mImage1[16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
-	int mImage2[16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
-	int mImage3[16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
-	int mImage4[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage1[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage2[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage3[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	//int mImage4[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	//int mImage5[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	//int mImage6[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 
 	DIR mMoveDir;		//ƒLƒƒƒ‰ƒNƒ^[‚ÌŒü‚«
 	Vector2 mPos;		//ƒLƒƒƒ‰ƒNƒ^[‚Ì’n}ã‚ÌÀ•W
@@ -50,6 +52,8 @@ private:
 	
 	int i;
 	int num;
+
+	bool moveFlg;
 
 	Vector2 mDamyPos;
 
