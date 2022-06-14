@@ -38,6 +38,7 @@ bool Player::init(PlayerID playerid)
 	mSizeOffset.x_ = mSize.x_ / 2;
 	mSizeOffset.y_ = mSize.y_ / 2;
 	flg = false;
+	moveFlg = false;
 	
 	mAnmCnt = 0;
 
@@ -47,22 +48,19 @@ bool Player::init(PlayerID playerid)
 
 
 	//グラフィックの読み込み
-	if (LoadDivGraph("image/100.png", 16, 4, 4, 32, 32, &mImage1[0]) == -1)
+	if (LoadDivGraph("image/106.png", 32, 4, 8, 32, 48, &mImage1[0]) == -1)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/101.png", 16, 4, 4, 32, 32, &mImage2[0]) == -1)
+	if (LoadDivGraph("image/108.png", 32, 4, 8, 32, 48, &mImage2[0]) == -1)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/102.png", 16, 4, 4, 32, 32, &mImage3[0]) == -1)
+	if (LoadDivGraph("image/107.png", 32, 4, 8, 32, 48, &mImage3[0]) == -1)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/105.png", 32, 4, 8, 32, 48, &mImage4[0]) == -1)
-	{
-		return false;
-	}
+	
 	
 
 	return true;
@@ -78,27 +76,7 @@ Vector2 Player::Update(void)
 
 	key_.Update();
 
-	//プレイヤーの操作
-	if (key_.getKeyDownHold(KEY_INPUT_DOWN))
-	{
-		keyDir = DIR_DOWN;
-		num = 6;
-	}
-	if (key_.getKeyDownHold(KEY_INPUT_UP))
-	{
-		keyDir = DIR_UP;
-		num = 4;
-	}
-	if (key_.getKeyDownHold(KEY_INPUT_LEFT))
-	{
-		keyDir = DIR_LEFT;
-		num = 7;
-	}
-	if (key_.getKeyDownHold(KEY_INPUT_RIGHT))
-	{
-		keyDir = DIR_RIGHT;
-		num = 5;
-	}
+	
 
 	//デバッグ用
 	if (key_.getKeyDownHold(KEY_INPUT_Q))
@@ -112,105 +90,134 @@ Vector2 Player::Update(void)
 		if (i == 0)
 		{
 			i = 1;
+			moveFlg = true;
 		}
 		else if (i == 1)
 		{
 			i = 0;
+			moveFlg = false;
 		}
 	}
 	
-
-	if (keyDir != DIR_MAX)
+	if (moveFlg == false)
 	{
-		mMoveDir = keyDir;
-
-		//プレイヤーのコピー
-		if (keyDir == DIR_UP)
+		//プレイヤーの操作
+		if (key_.getKeyDownHold(KEY_INPUT_DOWN))
 		{
-			copyPos.y_ -= mMoveSpeed;
-			if (copyPos.y_ < 0)
-			{
-				copyPos.y_ = 0;
-			}
-			
+			keyDir = DIR_DOWN;
+			num = 6;
 		}
-		if (keyDir == DIR_DOWN)
+		if (key_.getKeyDownHold(KEY_INPUT_UP))
 		{
-			copyPos.y_ += mMoveSpeed;
-
-			if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
-			{
-				if (copyPos.y_ > 1600)
-				{
-					copyPos.y_ = 1600;
-				}
-			}
-			else
-			{
-				if (copyPos.y_ > 3200)
-				{
-					copyPos.y_ = 3200;
-				}
-			}
+			keyDir = DIR_UP;
+			num = 4;
 		}
-		if (keyDir == DIR_RIGHT)
+		if (key_.getKeyDownHold(KEY_INPUT_LEFT))
 		{
-			copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
+			keyDir = DIR_LEFT;
+			num = 7;
+		}
+		if (key_.getKeyDownHold(KEY_INPUT_RIGHT))
+		{
+			keyDir = DIR_RIGHT;
+			num = 5;
+		}
 
-			
-			if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
+
+		if (keyDir != DIR_MAX)
+		{
+			mMoveDir = keyDir;
+
+			//プレイヤーのコピー
+			if (keyDir == DIR_UP)
 			{
-				if (copyPos.x_ > 1600)
+				copyPos.y_ -= mMoveSpeed;
+				if (copyPos.y_ < 0)
 				{
-					copyPos.x_ = 1600;
+					copyPos.y_ = 0;
 				}
 
 			}
-			else
+			if (keyDir == DIR_DOWN)
 			{
-				if (copyPos.x_ > 3200)
-				{
-					copyPos.x_ = 3200;
+				copyPos.y_ += mMoveSpeed;
 
+				if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
+				{
+					if (copyPos.y_ > 1600)
+					{
+						copyPos.y_ = 1600;
+					}
+				}
+				else
+				{
+					if (copyPos.y_ > 3200)
+					{
+						copyPos.y_ = 3200;
+					}
 				}
 			}
-		}
-
-		if (keyDir == DIR_LEFT)
-		{
-			copyPos.x_ -= mMoveSpeed;
-			if (copyPos.x_ < 0)
+			if (keyDir == DIR_RIGHT)
 			{
-				copyPos.x_ = 0;
+				copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
+
+
+				if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
+				{
+					if (copyPos.x_ > 1600)
+					{
+						copyPos.x_ = 1600;
+					}
+
+				}
+				else
+				{
+					if (copyPos.x_ > 3200)
+					{
+						copyPos.x_ = 3200;
+
+					}
+				}
 			}
 
-			
+			if (keyDir == DIR_LEFT)
+			{
+				copyPos.x_ -= mMoveSpeed;
+				if (copyPos.x_ < 0)
+				{
+					copyPos.x_ = 0;
+				}
+
+
+
+			}
+
+
+			//移動チップに当たっている時
+			if (lpMapMng.GetEvent(copyPos) == true)
+			{
+				//切り替え先のSetposをもらう
+				copyPos = lpMapMng.GetPos();
+				mMoveDir = lpMapMng.GetDir();
+				lpMapMng.mMapChange = false;
+
+			}
+			else if (lpMapMng.GetEvent(copyPos) == false)
+			{
+				lpMapMng.GetEvent(copyPos);
+			}
+			//当たり判定
+			if (lpMapMng.cheakMapChip(copyPos))
+			{
+				mPos = copyPos;
+			}
+
+			mDamyPos = copyPos;
 
 		}
-
-
-		//移動チップに当たっている時
- 		if (lpMapMng.GetEvent(copyPos) == true)
-		{
-			//切り替え先のSetposをもらう
-			copyPos = lpMapMng.GetPos();
-			mMoveDir = lpMapMng.GetDir();
-			lpMapMng.mMapChange = false;
-
-		}
-		else if (lpMapMng.GetEvent(copyPos) == false)
-		{
-			lpMapMng.GetEvent(copyPos);
-		}
-		//当たり判定
-		if (lpMapMng.cheakMapChip(copyPos))
-		{
-			mPos = copyPos;
-		}
-
-		mDamyPos = copyPos;
-
 	}
+
+	
 	mAnmCnt++;
 
 
@@ -222,28 +229,37 @@ Vector2 Player::Update(void)
 
 void Player::Draw(Vector2 offset)
 {
-	/*if (plID_ == PlayerID::iti)
+	if (plID_ == PlayerID::iti)
 	{
-		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - mSizeOffset.y_, mImage1[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		if (i == 0)
+		{
+			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage1[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		}
+		else if (i == 1)
+		{
+			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage1[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		}
 	}
 	if (plID_ == PlayerID::Soy)
 	{
-		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - mSizeOffset.y_, mImage2[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		if (i == 0)
+		{
+			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage2[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		}
+		else if (i == 1)
+		{
+			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage2[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		}
 	}
-	if (plID_ == PlayerID::Calendula)
-	{
-		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - mSizeOffset.y_, mImage3[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
-	}*/
-
 	if (plID_ == PlayerID::Calendula)
 	{
 		if (i == 0)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage4[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage3[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 		}
 		else if (i == 1)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage4[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage3[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 		}
 		
 	}
