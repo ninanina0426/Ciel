@@ -412,7 +412,7 @@ void Menu::Draw(void)
 					{
 						DrawGraph(mPos.x_, 0, mAImage[5], true);
 					}
-				}*/
+				}
 			}
 		
 			if (xxx == 1)
