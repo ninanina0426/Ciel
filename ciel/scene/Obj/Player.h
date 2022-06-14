@@ -40,6 +40,7 @@ private:
 	int mImage1[16];		//画像の格納領域
 	int mImage2[16];		//画像の格納領域
 	int mImage3[16];		//画像の格納領域
+	int mImage4[32];		//画像の格納領域
 
 	DIR mMoveDir;		//キャラクターの向き
 	Vector2 mPos;		//キャラクターの地図上の座標
@@ -47,6 +48,8 @@ private:
 
 	Keyboard key_;
 	
+	int i;
+	int num;
 
 	Vector2 mDamyPos;
 

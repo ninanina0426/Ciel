@@ -32,7 +32,7 @@ bool Player::init(PlayerID playerid)
 	mSizeOffset.x_ = 0;
 	mSizeOffset.y_= 0;
 	mMoveSpeed = 5;
-	mMoveDir = DIR_UP;
+	mMoveDir = DIR_DOWN;
 	mSize.x_ = 32;
 	mSize.y_ = 32;
 	mSizeOffset.x_ = mSize.x_ / 2;
@@ -40,6 +40,10 @@ bool Player::init(PlayerID playerid)
 	flg = false;
 	
 	mAnmCnt = 0;
+
+	i = 0;
+
+	num = 0;
 
 
 	//グラフィックの読み込み
@@ -55,6 +59,11 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
+	if (LoadDivGraph("image/105.png", 32, 4, 8, 32, 48, &mImage4[0]) == -1)
+	{
+		return false;
+	}
+	
 
 	return true;
 
@@ -73,20 +82,24 @@ Vector2 Player::Update(void)
 	if (key_.getKeyDownHold(KEY_INPUT_DOWN))
 	{
 		keyDir = DIR_DOWN;
+		num = 6;
 	}
 	if (key_.getKeyDownHold(KEY_INPUT_UP))
 	{
 		keyDir = DIR_UP;
+		num = 4;
 	}
 	if (key_.getKeyDownHold(KEY_INPUT_LEFT))
 	{
 		keyDir = DIR_LEFT;
+		num = 7;
 	}
 	if (key_.getKeyDownHold(KEY_INPUT_RIGHT))
 	{
 		keyDir = DIR_RIGHT;
+		num = 5;
 	}
-	
+
 	//デバッグ用
 	if (key_.getKeyDownHold(KEY_INPUT_Q))
 	{
@@ -94,9 +107,23 @@ Vector2 Player::Update(void)
 	}
 
 
+	if (key_.getKeyDown(KEY_INPUT_F))
+	{
+		if (i == 0)
+		{
+			i = 1;
+		}
+		else if (i == 1)
+		{
+			i = 0;
+		}
+	}
+	
+
 	if (keyDir != DIR_MAX)
 	{
 		mMoveDir = keyDir;
+
 		//プレイヤーのコピー
 		if (keyDir == DIR_UP)
 		{
@@ -105,6 +132,7 @@ Vector2 Player::Update(void)
 			{
 				copyPos.y_ = 0;
 			}
+			
 		}
 		if (keyDir == DIR_DOWN)
 		{
@@ -128,12 +156,15 @@ Vector2 Player::Update(void)
 		if (keyDir == DIR_RIGHT)
 		{
 			copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
+
+			
 			if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
 			{
 				if (copyPos.x_ > 1600)
 				{
 					copyPos.x_ = 1600;
 				}
+
 			}
 			else
 			{
@@ -152,6 +183,8 @@ Vector2 Player::Update(void)
 			{
 				copyPos.x_ = 0;
 			}
+
+			
 
 		}
 
@@ -189,7 +222,7 @@ Vector2 Player::Update(void)
 
 void Player::Draw(Vector2 offset)
 {
-	if (plID_ == PlayerID::iti)
+	/*if (plID_ == PlayerID::iti)
 	{
 		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - mSizeOffset.y_, mImage1[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 	}
@@ -200,7 +233,21 @@ void Player::Draw(Vector2 offset)
 	if (plID_ == PlayerID::Calendula)
 	{
 		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - mSizeOffset.y_, mImage3[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+	}*/
+
+	if (plID_ == PlayerID::Calendula)
+	{
+		if (i == 0)
+		{
+			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage4[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		}
+		else if (i == 1)
+		{
+			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage4[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		}
+		
 	}
+	
 
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
 	DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
