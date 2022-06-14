@@ -12,6 +12,11 @@ Chat::~Chat()
 {
 }
 
+bool Chat::GetfinalC(void)
+{
+	return finalC_;
+}
+
 bool Chat::init(void)
 {
 
@@ -27,7 +32,8 @@ bool Chat::init(void)
 	mNum = 100;
 
 	mFlg = false;
-	
+	finalC_ = false;
+
 	mNpc = new Npc();
 
 	return true;
@@ -50,9 +56,11 @@ bool Chat::Update(bool flg, int num)
 
 			if (mNum == 100)
 			{
+				mFlg = false;
+				finalC_ = true;
 				mNum = num;
 			}
-			if ((key_.getKeyDown(KEY_INPUT_F))&& (mNum != 100))
+			if ((key_.getKeyDown(KEY_INPUT_F)) && (mNum != 100))
 			{
 				mNum += 1;
 				if (mNum == 4)

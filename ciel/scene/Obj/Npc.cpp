@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include"../../stage/StageMng.h"
 #include "Npc.h"
+#include "Quest.h"
 
 
 Npc::Npc()
@@ -152,6 +153,26 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 		break;
 	case MAP_ID::SWEETSOUT:
 		mNpcType = NpcType::SO_NPC;
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 675 + 64 / 2) &&
+			(mPos.y_ + 675 - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 1355 + 32 / 2) &&
+			(mPos.x_ + 1355 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if (mSoflg == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mSoflg = true;
+
+					i = 1;
+				}
+			}
+			else
+			{
+				mSoflg = flg;
+			}
+		}
+
 		break;
 	case MAP_ID::SWEETSSCHOOL:
 		mNpcType = NpcType::SS_NPC;
@@ -283,8 +304,14 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 
 
 	mAnmCnt++;
+	//クエスト
+	if (!mSoflg)
+	{
+		QuestIns.UpDate(mapID, QuestState::ALIVE, QuestType::MAIN);
+	}
 
 	return i;
+
 }
 
 void Npc::Draw(Vector2 offset)

@@ -16,7 +16,7 @@ class Layer;
 class GameScene : public BaseScene
 {
 public:
-    GameScene(/*SceneMng* manager*/) {};
+    GameScene() {};
     GameScene(PlayerID playerID);
     ~GameScene();
 
@@ -45,6 +45,8 @@ private:
     bool mMapChange;
     MAP_ID mNextMapID;
     Vector2 mNextPos;
+
+    
 
     Vector2 mMapOffset;
 

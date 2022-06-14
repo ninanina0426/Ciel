@@ -14,6 +14,7 @@ private:
 
 	bool mFlg;
 
+	bool finalC_;
 	int mNumType;
 
 	Keyboard key_;
@@ -23,6 +24,7 @@ public:
 	Chat();
 	~Chat();
 
+	bool GetfinalC(void);
 	bool init(void);		//‰Šú‰»
 	bool Update(bool flg,int num);		//XV
 	void Draw(Vector2 offset);		//•`‰æ

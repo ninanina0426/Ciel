@@ -77,13 +77,6 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         PMflg_ = false;
         count_ = 0;
     }
-    /* if (PMflg_ && !AMflg_ && delta % Day == 121)
-     {
-         AMflg_ = true;
-         Nightflg_ = false;
-         count_ = 0;
-     }*/
-
     if (delta % Day == 0)
     {
         AMflg_ = true;
@@ -91,8 +84,6 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         Nightflg_ = false;
         count_ = 0;
     }
-
-
     if (count_ <= 60)
     {
         count_++;
@@ -112,6 +103,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     mNpc->Update(PlayerPos,PlayerSize,mChat->Getflg());
 
     mChat->Update(mNpc->Getflg(), mNpc->Num());
+
+   
 
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
@@ -154,7 +147,7 @@ void GameScene::DrawOwnScn()
      //デバッグ用
      auto elTime = nowTime_ - oldTime_;
      auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
-     int delta = msec / 1000000.0; //秒に変換  
+     int delta = static_cast<int>(msec / 1000000.0); //秒に変換  
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
      mAitem->Draw(mMapOffset);
 
