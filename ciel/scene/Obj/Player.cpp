@@ -52,11 +52,11 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/108.png", 32, 4, 8, 32, 48, &mImage2[0]) == -1)
+	if (LoadDivGraph("image/107.png", 32, 4, 8, 32, 48, &mImage2[0]) == -1)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/107.png", 32, 4, 8, 32, 48, &mImage3[0]) == -1)
+	if (LoadDivGraph("image/108.png", 32, 4, 8, 32, 48, &mImage3[0]) == -1)
 	{
 		return false;
 	}
@@ -67,16 +67,16 @@ bool Player::init(PlayerID playerid)
 
 }
 
-Vector2 Player::Update(void)
+Vector2 Player::Update(int chipId)
 {
 	DIR keyDir = DIR_MAX;		//キー入力の方向
 	Vector2 copyPos = mPos;
 
 	MAP_ID mapID = lpMapMng.GetMapId();
 
-	key_.Update();
+	mChipId = chipId;
 
-	
+	key_.Update();
 
 	//デバッグ用
 	if (key_.getKeyDownHold(KEY_INPUT_Q))
@@ -84,21 +84,23 @@ Vector2 Player::Update(void)
 		mPos = { 0,0 };
 	}
 
-
-	if (key_.getKeyDown(KEY_INPUT_F))
+	if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
 	{
-		if (i == 0)
+		if (key_.getKeyDown(KEY_INPUT_F))
 		{
-			i = 1;
-			moveFlg = true;
-		}
-		else if (i == 1)
-		{
-			i = 0;
-			moveFlg = false;
+			if (i == 0)
+			{
+				i = 1;
+				moveFlg = true;
+			}
+			else if (i == 1)
+			{
+				i = 0;
+				moveFlg = false;
+			}
 		}
 	}
-	
+
 	if (moveFlg == false)
 	{
 		//プレイヤーの操作

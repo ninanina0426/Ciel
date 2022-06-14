@@ -453,3 +453,8 @@ int DarkTemple::GetMapChip(Vector2 pos)
 {
 	return dt_wall[pos.y_ / 32][pos.x_ / 32];;
 }
+
+int DarkTemple::GetTMapChip(Vector2 pos)
+{
+	return dt_ground[pos.y_ / 32][pos.x_ / 32];;
+}

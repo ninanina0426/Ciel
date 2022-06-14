@@ -579,3 +579,8 @@ int SweetsOutMap::GetMapChip(Vector2 pos)
 	return mMapOutObj[pos.y_ / 16][pos.x_ / 16];
 }
 
+int SweetsOutMap::GetTMapChip(Vector2 pos)
+{
+	return mMapOutNomal[pos.y_ / 16][pos.x_ / 16];
+}
+

@@ -1,6 +1,7 @@
 #pragma once
 #include "../../common/Vector2.h"
 #include"../Input/Keyboard.h"
+#include"../../stage/Stage.h"
 
 
 enum DIR		//向き管理用
@@ -55,12 +56,15 @@ private:
 
 	bool moveFlg;
 
+	int mChipId;
+
 	Vector2 mDamyPos;
 
 	Vector2 mSizeOffset;//キャラクターのオフセットサイズ　　半分の値
 	Vector2 mSize;		//キャラクター画像のサイズ
 	int mMoveSpeed;		//キャラクター移動スピード
 	int mAnmCnt;
+	
 public:
 	Player();
 	~Player();
@@ -70,7 +74,7 @@ public:
 	bool flg;
 
 	bool init(PlayerID playerid);		//初期化
-	Vector2 Update(void);		//更新
+	Vector2 Update(int chipid);		//更新
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
 	DIR GetDIR(void);

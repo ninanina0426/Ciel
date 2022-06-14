@@ -588,4 +588,9 @@ int WaMap::GetMapChip(Vector2 pos)
 	return wa_build3[pos.y_ / 32][pos.x_ / 32];
 }
 
+int WaMap::GetTMapChip(Vector2 pos)
+{
+	return wa_ground[pos.y_ / 32][pos.x_ / 32];
+}
+
 

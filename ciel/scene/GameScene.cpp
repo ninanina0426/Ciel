@@ -163,7 +163,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mMapOffset = lpMapMng.Update(PlayerPos);
 
-    mPlayer.Update();
+    mPlayer.Update(lpMapMng.GetChipId());
 
     mNpc->Update(PlayerPos,PlayerSize,mChat->Getflg());
 

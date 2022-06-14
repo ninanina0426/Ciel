@@ -354,3 +354,8 @@ int SweetsSchoolMap::GetMapChip(Vector2 pos)
 	return mMapSchoolObj[pos.y_ / 16][pos.x_ / 16];
 }
 
+int SweetsSchoolMap::GetTMapChip(Vector2 pos)
+{
+	return mMapSchoolNomal[pos.y_ / 16][pos.x_ / 16];
+}
+

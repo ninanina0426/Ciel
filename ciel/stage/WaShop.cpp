@@ -316,3 +316,8 @@ int WaShop::GetMapChip(Vector2 pos)
 {
 	return ws_obj[pos.y_ / 32][pos.x_ / 32];
 }
+
+int WaShop::GetTMapChip(Vector2 pos)
+{
+	return ws_floor[pos.y_ / 32][pos.x_ / 32];
+}

@@ -247,7 +247,9 @@ bool StageMng::cheakMapChip(Vector2 pos)
 
 bool StageMng::GetEvent(Vector2 pos)
 {
-	int chipID = stage_->GetMapChip(pos);
+	chipID = stage_->GetMapChip(pos);
+
+	mTchipId = stage_->GetTMapChip(pos);
 
 	//FORESTÇ©ÇÁFORESTINÇ÷
 	if (lpMapMng.mMapID == MAP_ID::FOREST)
@@ -401,7 +403,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_UP;
 			stage_ = std::move(std::make_unique<SweetsOutMap>());
 			mMapID = MAP_ID::SWEETSOUT;
-			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
+			
 		}
 		//SWEETSÇ©ÇÁCOOKIEÇ÷
 		if (chipID == 2669 || chipID == 2670 || chipID == 2671)
@@ -411,7 +413,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_UP;
 			stage_ = std::move(std::make_unique<SweetsOutMap>());
 			mMapID = MAP_ID::SWEETSOUT;
-			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
+			
 		}
 
 		//SWEETSÇ©ÇÁGUMMYÇ÷
@@ -422,7 +424,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_UP;
 			stage_ = std::move(std::make_unique<SweetsOutMap>());
 			mMapID = MAP_ID::SWEETSOUT;
-			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
+			
 		}
 		//SWEETSÇ©ÇÁSWEETSSHOPÇ÷
 		if (chipID == 2663 || chipID == 2664 || chipID == 2665)
@@ -432,7 +434,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_UP;
 			stage_ = std::move(std::make_unique<SweetsOutMap>());
 			mMapID = MAP_ID::SWEETSOUT;
-			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
+			
 		}
 
 		//SWEETSÇ©ÇÁSWEETSSCHOOL1Ç÷
@@ -443,7 +445,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			stage_ = std::move(std::make_unique<SweetsSchoolMap>());
 			mMapID = MAP_ID::SWEETSSCHOOL;
 			mDir = DIR_UP;
-			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
+			
 		}
 
 		//ROOFTOPÇ©ÇÁSCHOOL3Ç÷
@@ -454,7 +456,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_DOWN;
 			stage_ = std::move(std::make_unique<SweetsSchoolMap>());
 			mMapID = MAP_ID::SWEETSSCHOOL;
-			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
+			
 		}
 		//SweetsÇ©ÇÁtempleÇ÷
 		if (chipID == 4220|| chipID == 4221 || chipID == 4320 || chipID == 4321)
@@ -465,7 +467,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_DOWN;
 			stage_ = std::move(std::make_unique<templeMap>());
 			mMapID = MAP_ID::TEMPLE;
-			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
+			
 		}
 	}
 	//SWEETSSCHOOLÅ`
@@ -522,7 +524,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_DOWN;
 			stage_ = std::move(std::make_unique<SweetsMap>());
 			mMapID = MAP_ID::SWEETS;
-			mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
+			
 		}
 	}
 
@@ -588,6 +590,11 @@ MAP_ID StageMng::GetMapId(void)
 MAP_ID StageMng::GetMapIdOld(void)
 {
 	return mMapOldID;
+}
+
+int StageMng::GetChipId(void)
+{
+	return mTchipId;
 }
 
 StageMng::StageMng()
