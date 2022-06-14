@@ -261,7 +261,11 @@ void Menu::Draw(void)
 		DrawGraph(0, 0, mImageGet[y][xx], true);
 		if (xx == 1)
 		{
+
 			/*if (mParent->mTma() == false)
+=======
+	/*		if (mParent->mTma() == false)
+>>>>>>> 749e17614945b7ff443b5ff6f94ee2399a9f27be
 			{
 				DrawRectGraph(0, 0, 0, 0, 400, 250, mImagSelect[1][1], true, false);
 			}
@@ -346,7 +350,11 @@ void Menu::Draw(void)
 	case Menu::AITEM_SELECT::AITEM_HEAL:
 		if (xx == 2)
 		{
+
 			/*if (mParent->mHoutai() == false)
+=======
+		/*	if (mParent->mHoutai() == false)
+>>>>>>> 749e17614945b7ff443b5ff6f94ee2399a9f27be
 			{
 				
 				if (yyy == 1)
@@ -369,6 +377,7 @@ void Menu::Draw(void)
 		{
 			if (xxx == 0)
 			{
+
 				if (mParent->IsTama1() == false)
 				{
 					if (yyy == 1)
@@ -403,12 +412,15 @@ void Menu::Draw(void)
 					{
 						DrawGraph(mPos.x_, 0, mAImage[5], true);
 					}
-				}
+				}*/
 			}
 		
 			if (xxx == 1)
 			{
 				/*if (mParent->mKey() == false)
+=======
+			/*	if (mParent->mKey() == false)
+>>>>>>> 749e17614945b7ff443b5ff6f94ee2399a9f27be
 				{
 					if (yyy == 1)
 					{

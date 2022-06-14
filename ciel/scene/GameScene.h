@@ -10,14 +10,16 @@ class Aitem;
 class BGM;
 class Npc;
 class Chat;
+class Layer;
 
 
 class GameScene : public BaseScene
 {
 public:
-    GameScene(/*SceneMng* manager*/) {};
+    GameScene() {};
     GameScene(PlayerID playerID);
     ~GameScene();
+
 
     //ƒAƒCƒeƒ€
     bool IsTama1(void);
@@ -35,6 +37,7 @@ public:
     bool IsHaori(void);
 
     bool IsRantan(void);
+
 
     bool mEnd();
 
@@ -62,6 +65,8 @@ private:
     MAP_ID mNextMapID;
     Vector2 mNextPos;
 
+    
+
     Vector2 mMapOffset;
 
     //ŽžŠÔŠÖŒW
@@ -81,8 +86,10 @@ private:
 
     BGM*mBgm;
 
+    Layer* mLayer;
+
     int x;
-    int ItemOwnCnt;
+    
 
 
 };

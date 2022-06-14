@@ -5,6 +5,7 @@
 #include"../scene/Obj/Aitem.h"
 #include"../scene/Obj/Npc.h"
 #include"../scene/Obj/Chat.h"
+#include"../stage/Layer.h"
 #include "../stage/StageMng.h"
 
 
@@ -20,6 +21,7 @@ GameScene::GameScene(PlayerID playerID)
 GameScene::~GameScene()
 {
 }
+
 
 //アイテムのフラグ ---------------------------
 
@@ -140,13 +142,6 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         PMflg_ = false;
         count_ = 0;
     }
-    /* if (PMflg_ && !AMflg_ && delta % Day == 121)
-     {
-         AMflg_ = true;
-         Nightflg_ = false;
-         count_ = 0;
-     }*/
-
     if (delta % Day == 0)
     {
         AMflg_ = true;
@@ -154,17 +149,9 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         Nightflg_ = false;
         count_ = 0;
     }
-
-
     if (count_ <= 60)
     {
         count_++;
-    }
-
-
-    if (key_.getKeyDown(KEY_INPUT_F))
-    {
-        ItemOwnCnt++;
     }
 
 
@@ -178,12 +165,16 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mPlayer.Update();
 
-    mNpc->Update(PlayerPos,PlayerSize, mChat->Update(mNpc->Getflg(), mNpc->Num()));
+    mNpc->Update(PlayerPos,PlayerSize,mChat->Getflg());
+
+    mChat->Update(mNpc->Getflg(), mNpc->Num());
+
+   
 
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
-     mAitem->Update();
+     mAitem->Update(PlayerPos, PlayerSize);
 
 
 
@@ -212,18 +203,20 @@ void GameScene::DrawOwnScn()
 
     //プレイヤー
 	 mPlayer.Draw(mMapOffset);
-    
+
+     mLayer->Draw(mMapOffset);
+
      //時間帯
      TimeManeger();
 
      //デバッグ用
      auto elTime = nowTime_ - oldTime_;
      auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
-     int delta = msec / 1000000.0; //秒に変換  
+     int delta = static_cast<int>(msec / 1000000.0); //秒に変換  
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
 
      mAitem->Draw(mMapOffset);
-     DrawFormatString(0, 150, 0xffffff, "TamaCount:%d", ItemOwnCnt);
+    
 
      mChat->Draw(mMapOffset);
 
@@ -255,13 +248,13 @@ bool GameScene::Init(void)
     Nightflg_ = false;
     count_ = 0;
 
-    ItemOwnCnt = 0;
-
     mBgm = new BGM();
 
     mNpc = new Npc();
 
     mChat = new Chat();
+
+    mLayer = new Layer();
 
    	return true;
 
