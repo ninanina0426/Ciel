@@ -79,6 +79,8 @@ public:
 
 	bool mQSmNpc1;
 
+	bool mSoflg;
+
 	int mPosBottom;	//キャラクターの足元のY座標
 };
 

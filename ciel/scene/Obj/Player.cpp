@@ -48,6 +48,7 @@ bool Player::init(PlayerID playerid)
 
 
 	//グラフィックの読み込み
+
 	if (LoadDivGraph("image/106.png", 32, 4, 8, 32, 48, &mImage1[0]) == -1)
 	{
 		return false;
@@ -60,7 +61,7 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
-	
+
 	
 
 	return true;
