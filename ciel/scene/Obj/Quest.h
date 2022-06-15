@@ -1,16 +1,19 @@
 #pragma once
 #include <string>
 #include "../../stage/Stage.h"
+#include "Player.h"
+#include "Aitem.h"
 
 #define QuestIns Quest::GetInstance()
 
+//
 enum class QuestType
 {
 	MAIN,
 	SUB,
 	MAX
 };
-
+//
 enum class QuestState
 {
 	NON,		//クエスト未完了
@@ -18,6 +21,17 @@ enum class QuestState
 	COMP,		//クエスト完了
 	MAX
 };
+//
+enum class QUEST
+{
+	MAX,
+	QUEST_1,
+	QUEST_2,
+	QUEST_3,
+	QUEST_4,
+	QUEST_5
+};
+
 
 class Quest
 {
@@ -29,7 +43,7 @@ public:
 	}
 	
 
-	void UpDate(MAP_ID mapid, QuestState qstate, QuestType qtype);
+	void UpDate(bool stateFlg, int q,Vector2 plPos,MAP_ID mapid);
 	void Draw(void);
 
 private:
@@ -37,11 +51,15 @@ private:
 	~Quest();
 	bool Init(void);
 
-	void SweetQuest(QuestType qtype);
+	Aitem aitem_;
+	//Player *player_;
 
 
 	bool QFlg_;
+	bool CompFlg_;
 	std::string QTxt_;
+	QUEST quest_;
+	QUEST quest_old;
 	QuestState state_;
 	QuestType type_;
 	MAP_ID mapID_;

@@ -157,13 +157,15 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     DrawOwnScn();//ŒÂ•Ê‚ÌDrawˆ—‚Èˆ×•K‚¸‘‚­
 
-    PlayerPos = mPlayer.GetPos();
-
-    PlayerSize = mPlayer.GetSiz();
+   
 
     mMapOffset = lpMapMng.Update(PlayerPos);
 
     mPlayer.Update(lpMapMng.GetChipId());
+
+    PlayerPos = mPlayer.GetPos();
+
+    PlayerSize = mPlayer.GetSiz();
 
     mNpc->Update(PlayerPos,PlayerSize,mChat->Getflg());
 

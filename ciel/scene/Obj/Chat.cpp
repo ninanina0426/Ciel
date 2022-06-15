@@ -53,10 +53,8 @@ bool Chat::Update(bool flg, int num)
 		{
 		case 1:
 		{
-
 			if (mNum == 100)
 			{
-				mFlg = false;
 				finalC_ = true;
 				mNum = num;
 			}

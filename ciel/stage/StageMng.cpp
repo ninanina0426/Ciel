@@ -16,11 +16,11 @@
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<CaveMap>();
+	stage_ = std::make_unique<templeMap>();
 
-	mMapID = MAP_ID::CAVE;
+	mMapID = MAP_ID::TEMPLE;
 
-	mOffset = (mPlayer.GetPos() / Vector2{ 4,4 }) * Vector2{ 2,3 };
+	mOffset = mPlayer.GetPos()-Vector2{540,0};
 
     return true;
 }
@@ -30,6 +30,8 @@ void StageMng::Draw()
 	stage_->DrawOwnScn();		//‚»‚ê‚¼‚ê‚Ìƒ}ƒbƒv‚ð•`‰æ
 	
 	DrawFormatString(0, 50, GetColor(255, 255, 255), "chipId=%d", mChipId);
+	DrawFormatString(0, 80, GetColor(255, 0, 0), "offset=(%d,%d)", mOffset.x_,mOffset.y_);
+
 	
 }
 
@@ -120,13 +122,11 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 		if (movePos.x_ < 1370)
 		{
 			mOffset.x_ -= 4;
-
 		}
 		//ƒJƒƒ‰‰ºˆÚ“®§ŒÀ
 		if (movePos.y_ < 450)
 		{
 			mOffset.y_ -= 4;
-
 		}
 		if (movePos.y_ > 400)
 		{
@@ -196,12 +196,12 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 		}
 
 	}
-
+	
+	//GetEvent(mPlayerset);
 
 	if (CheckHitKey(KEY_INPUT_W))
 	{
-		stage_ = std::move(std::make_unique<SweetsMap>());
-		mMapID = MAP_ID::SWEETS;
+		
 	}
 	if (CheckHitKey(KEY_INPUT_A))
 	{
@@ -251,6 +251,7 @@ bool StageMng::GetEvent(Vector2 pos)
 
 	mTchipId = stage_->GetTMapChip(pos);
 
+
 	//FOREST‚©‚çFORESTIN‚Ö
 	if (lpMapMng.mMapID == MAP_ID::FOREST)
 	{
@@ -286,7 +287,6 @@ bool StageMng::GetEvent(Vector2 pos)
 
 		}
 	}
-
 	//TEMPLE‚©‚çTEMPLEIN‚Ö
 	if (lpMapMng.mMapID == MAP_ID::TEMPLE)
 	{
@@ -311,7 +311,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			mMapID = MAP_ID::TEMPLE;
 		}
 	}
-
 	//WA‚©‚çWASHOP‚Ö
 	if (lpMapMng.mMapID == MAP_ID::WA)
 	{
@@ -324,7 +323,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			mMapID = MAP_ID::WASHOP;
 		}
 	}
-
 	//WASHOP‚©‚çWA‚Ö
 	if (lpMapMng.mMapID == MAP_ID::WASHOP)
 	{
@@ -337,9 +335,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			stage_ = std::move(std::make_unique<WaMap>());
 			mMapID = MAP_ID::WA;
 		}
-	}
-
-	
+	}	
 	if (lpMapMng.mMapID == MAP_ID::CAVE)
 	{
 		//CAVE‚©‚çCAVESHOP‚Ö
@@ -363,7 +359,6 @@ bool StageMng::GetEvent(Vector2 pos)
 
 		}
 	}
-
 	//CAVESHOP‚©‚çCAVE‚Ö
 	if (lpMapMng.mMapID == MAP_ID::CAVESHOP)
 	{
@@ -375,9 +370,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			stage_ = std::move(std::make_unique<CaveMap>());
 			mMapID = MAP_ID::CAVE;
 		}
-	}
-	
-
+	}	
 	//DARKTEMPLE‚©‚çCAVE‚Ö
 	if (lpMapMng.mMapID == MAP_ID::DARK)
 	{
@@ -391,7 +384,6 @@ bool StageMng::GetEvent(Vector2 pos)
 
 		}
 	}
-
 	//SWEETS`
 	if (lpMapMng.mMapID == MAP_ID::SWEETS)
 	{
@@ -527,7 +519,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			
 		}
 	}
-
 	//SWEETSOUT`
 	if (lpMapMng.mMapID == MAP_ID::SWEETSOUT)
 	{
@@ -567,6 +558,36 @@ bool StageMng::GetEvent(Vector2 pos)
 			mMapID = MAP_ID::SWEETS;
 
 		}
+	}
+
+	return mMapChange;
+}
+
+bool StageMng::GetMapChange(Vector2 pos)
+{
+	int chipID = stage_->GetMapChip(pos);
+
+	if (lpMapMng.mMapID == MAP_ID::TEMPLE)
+	{
+		//if (chipID == -1)
+		{
+			
+			if (pos.x_ >= 1380 && pos.x_ < 1450 &&
+				pos.y_ >= 730 && pos.y_ < 750)
+			{
+				mMapChange = true;
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mMapChange = true;
+					mNextPos = pos;
+					mNextPos = { 820,1520 };
+					mDir = DIR_UP;
+					mMapID = MAP_ID::SWEETS;
+					stage_ = std::move(std::make_unique<SweetsMap>());
+				}
+			}
+		}
+
 	}
 
 	return mMapChange;
