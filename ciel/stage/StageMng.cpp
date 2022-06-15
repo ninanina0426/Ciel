@@ -565,29 +565,20 @@ bool StageMng::GetEvent(Vector2 pos)
 
 bool StageMng::GetMapChange(Vector2 pos)
 {
-	int chipID = stage_->GetMapChip(pos);
-
 	if (lpMapMng.mMapID == MAP_ID::TEMPLE)
 	{
-		//if (chipID == -1)
+		if (pos.x_ >= 1380 && pos.x_ < 1450 &&
+			pos.y_ >= 730 && pos.y_ < 750)
 		{
-			
-			if (pos.x_ >= 1380 && pos.x_ < 1450 &&
-				pos.y_ >= 730 && pos.y_ < 750)
+			if (key_.getKeyDown(KEY_INPUT_F))
 			{
 				mMapChange = true;
-				if (key_.getKeyDown(KEY_INPUT_F))
-				{
-					mMapChange = true;
-					mNextPos = pos;
-					mNextPos = { 820,1520 };
-					mDir = DIR_UP;
-					mMapID = MAP_ID::SWEETS;
-					stage_ = std::move(std::make_unique<SweetsMap>());
-				}
+				mNextPos = { 820,1520 };
+				mDir = DIR_UP;
+				mMapID = MAP_ID::SWEETS;
+				stage_ = std::move(std::make_unique<SweetsMap>());
 			}
 		}
-
 	}
 
 	return mMapChange;

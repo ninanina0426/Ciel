@@ -210,23 +210,28 @@ Vector2 Player::Update(int chipId)
 				lpMapMng.GetEvent(copyPos);
 			}
 
-			if (lpMapMng.GetMapChange(copyPos))
-			{
-				//Ø‚è‘Ö‚¦æ‚ÌSetpos‚ğ‚à‚ç‚¤
-				copyPos = lpMapMng.GetPos();
-				mMoveDir = lpMapMng.GetDir();
-				//lpMapMng.mMapChange = false;
-			}
+			
+
 			//“–‚½‚è”»’è
 			if (lpMapMng.cheakMapChip(copyPos))
 			{
 				mPos = copyPos;
 			}
 
-			mDamyPos = copyPos;
+			/*mDamyPos = copyPos;*/
 
 		}
+		if (lpMapMng.GetMapChange(copyPos) == true)
+		{
+			//Ø‚è‘Ö‚¦æ‚ÌSetpos‚ğ‚à‚ç‚¤
+			copyPos = lpMapMng.GetPos();
+			mMoveDir = lpMapMng.GetDir();
+			lpMapMng.mMapChange = false;
 
+			mPos = copyPos;
+		}
+		
+	
 	}
 
 	

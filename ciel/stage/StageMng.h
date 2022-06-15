@@ -35,7 +35,7 @@ public:
 	int mTchipId;
 
 	int mChipImage[10000];
-	bool mMapChange;
+	bool mMapChange;;
 	DIR GetDir(void);
 
 	Vector2 GetPos(void);
