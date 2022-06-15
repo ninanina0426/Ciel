@@ -38,6 +38,7 @@
     <ClCompile Include="scene\Obj\Chat.cpp" />
     <ClCompile Include="scene\Obj\Quest.cpp" />
     <ClCompile Include="stage\Layer.cpp" />
+    <ClCompile Include="scene\Obj\shop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -124,5 +125,6 @@
     <ClInclude Include="scene\Obj\Chat.h" />
     <ClInclude Include="scene\Obj\Quest.h" />
     <ClInclude Include="stage\Layer.h" />
+    <ClInclude Include="scene\Obj\shop.h" />
   </ItemGroup>
 </Project>
