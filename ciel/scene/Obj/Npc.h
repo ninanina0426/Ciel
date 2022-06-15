@@ -76,6 +76,9 @@ public:
 
 	bool mQSoNpc1;
 	bool mQSoNpc2;
+	int qnum_;
+	//クエストon・offフラグ
+	bool qflg_ ;
 
 	bool mQSmNpc1;
 

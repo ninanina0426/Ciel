@@ -25,6 +25,7 @@ public:
 	int GetMapChipMng(Vector2 pos);
 	bool cheakMapChip(Vector2 pos);
 	bool GetEvent(Vector2 pos);
+	bool GetMapChange(Vector2 pos);
 	Vector2 mOffset;
 	MAP_ID mMapOldID;
 	MAP_ID mMapID;

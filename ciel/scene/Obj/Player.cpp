@@ -17,11 +17,11 @@ Player::~Player()
 bool Player::init(PlayerID playerid)
 {
 	/*mParent = parent;*/
-	/*mPos.x_ = 1425;
-	mPos.y_ = 1250;*/
+	mPos.x_ = 1590;
+	mPos.y_ = 2915;
 
-	mPos.x_ = 785;
-	mPos.y_ = 1400;
+	/*mPos.x_ = 785;
+	mPos.y_ = 1400;*/
 
 	//player‚Ìí•ÊŠÖŒW
 	if (plID_ != PlayerID::Max)
@@ -162,6 +162,15 @@ Vector2 Player::Update(void)
 		{
 			lpMapMng.GetEvent(copyPos);
 		}
+		
+		if (lpMapMng.GetMapChange(copyPos))
+		{
+			//Ø‚è‘Ö‚¦æ‚ÌSetpos‚ğ‚à‚ç‚¤
+			copyPos = lpMapMng.GetPos();
+			mMoveDir = lpMapMng.GetDir();
+			//lpMapMng.mMapChange = false;
+		}
+
 		//“–‚½‚è”»’è
 		if (lpMapMng.cheakMapChip(copyPos))
 		{

@@ -547,7 +547,7 @@ void templeMap::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[temple[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[wall[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[tobj1[y][x]], true);
-			/*DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(0, 0, 255), "%d", tsoil[y][x]);*/
+			//DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(0, 0, 255), "%d", tsoil[y][x]);
 
 		}
 	}

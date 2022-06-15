@@ -25,6 +25,8 @@ bool Npc::init(void)
 	mQSoNpc1 = false;
 	mQSoNpc2 = false;
 	mQSmNpc1 = false;
+	qnum_ = 0;
+	qflg_ = false;
 
 	mPos.x_ = 0;
 	mPos.y_ = 0;
@@ -153,26 +155,6 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 		break;
 	case MAP_ID::SWEETSOUT:
 		mNpcType = NpcType::SO_NPC;
-		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 675 + 64 / 2) &&
-			(mPos.y_ + 675 - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
-			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 1355 + 32 / 2) &&
-			(mPos.x_ + 1355 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
-		{
-			if (mSoflg == false)
-			{
-				if (key_.getKeyDown(KEY_INPUT_F))
-				{
-					mSoflg = true;
-
-					i = 1;
-				}
-			}
-			else
-			{
-				mSoflg = flg;
-			}
-		}
-
 		break;
 	case MAP_ID::SWEETSSCHOOL:
 		mNpcType = NpcType::SS_NPC;
@@ -186,6 +168,7 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 		break;
 	}
 
+	
 	switch (mNpcType)
 	{
 	case NpcType::CM_NPC:
@@ -282,6 +265,8 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 					if (mQSoNpc2 == false)
 					{
 						mQSoNpc2 = true;
+						qflg_ = mQSoNpc2;
+						qnum_ = 2;
 					}
 				}
 			}
@@ -293,6 +278,7 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 	case NpcType::TI_NPC:
 		break;
 	case NpcType::TM_NPC:
+		qnum_ = 1;
 		break;
 	case NpcType::WM_NPC:
 		break;
@@ -305,10 +291,9 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 
 	mAnmCnt++;
 	//クエスト
-	if (!mSoflg)
-	{
-		QuestIns.UpDate(mapID, QuestState::ALIVE, QuestType::MAIN);
-	}
+	
+	QuestIns.UpDate(qflg_, qnum_, playerPos,mapID);
+
 
 	return i;
 
