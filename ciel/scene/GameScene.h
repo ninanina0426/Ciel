@@ -20,6 +20,25 @@ public:
     GameScene(PlayerID playerID);
     ~GameScene();
 
+
+    //ƒAƒCƒeƒ€
+    bool IsTama1(void);
+    bool IsTama2(void);
+    bool IsTama3(void);
+    bool IsTama4(void);
+    bool IsTama5(void);
+
+    bool IsKinomi1(void);
+    bool IsKinomi2(void);
+    bool IsKinomi3(void);
+    bool IsKinomi4(void);
+    bool IsKinomi5(void);
+
+    bool IsHaori(void);
+
+    bool IsRantan(void);
+
+
     bool mEnd();
 
     int SHandle;
@@ -70,6 +89,7 @@ private:
     Layer* mLayer;
 
     int x;
+    
 
 
 };

@@ -22,6 +22,71 @@ GameScene::~GameScene()
 {
 }
 
+
+//アイテムのフラグ ---------------------------
+
+bool GameScene::IsTama1(void)
+{
+    return mAitem->mTama1;
+}
+
+bool GameScene::IsTama2(void)
+{
+    return mAitem->mTama2;
+}
+
+bool GameScene::IsTama3(void)
+{
+    return mAitem->mTama3;
+}
+
+bool GameScene::IsTama4(void)
+{
+    return mAitem->mTama4;
+}
+
+bool GameScene::IsTama5(void)
+{
+    return mAitem->mTama5;
+}
+
+bool GameScene::IsKinomi1(void)
+{
+    return mAitem->mKinomi1;
+}
+
+bool GameScene::IsKinomi2(void)
+{
+    return mAitem->mKinomi2;
+}
+
+bool GameScene::IsKinomi3(void)
+{
+    return mAitem->mKinomi3;
+}
+
+bool GameScene::IsKinomi4(void)
+{
+    return mAitem->mKinomi4;
+}
+
+bool GameScene::IsKinomi5(void)
+{
+    return mAitem->mKinomi5;
+}
+
+bool GameScene::IsHaori(void)
+{
+    return mAitem->mHaori;
+}
+
+bool GameScene::IsRantan(void)
+{
+    return mAitem->mRantan;
+}
+
+
+
 bool GameScene::mEnd()
 {
     return false;
@@ -96,7 +161,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mMapOffset = lpMapMng.Update(PlayerPos);
 
-    mPlayer.Update();
+    mPlayer.Update(lpMapMng.GetChipId());
 
     PlayerPos = mPlayer.GetPos();
 
@@ -151,7 +216,9 @@ void GameScene::DrawOwnScn()
      auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
      int delta = static_cast<int>(msec / 1000000.0); //秒に変換  
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
+
      mAitem->Draw(mMapOffset);
+    
 
      mChat->Draw(mMapOffset);
 

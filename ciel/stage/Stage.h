@@ -42,6 +42,7 @@ public:
 	virtual bool Init(void) = 0;
 	virtual bool CheckMapChip(Vector2 pos)=0;  //“–‚½‚è”»’è
 	virtual int GetMapChip(Vector2 pos) = 0;
+	virtual int GetTMapChip(Vector2 pos) = 0;
 	virtual MAP_ID GetStageID(void) = 0;
 	Vector2 GetOffSet(void);
 	void SetOffSet(Vector2 offset);

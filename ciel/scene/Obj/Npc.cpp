@@ -291,9 +291,8 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 
 	mAnmCnt++;
 	//クエスト
-	
-	QuestIns.UpDate(qflg_, qnum_, playerPos,mapID);
 
+	QuestIns.UpDate(qflg_, qnum_, playerPos, mapID);
 
 	return i;
 

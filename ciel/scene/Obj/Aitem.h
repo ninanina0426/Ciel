@@ -20,6 +20,23 @@ public:
 	Vector2 GetSize(void);
 	Vector2 GetPos(void);
 
+
+	bool mTama1;
+	bool mTama2;
+	bool mTama3;
+	bool mTama4;
+	bool mTama5;
+
+	bool mKinomi1;
+	bool mKinomi2;
+	bool mKinomi3;
+	bool mKinomi4;
+	bool mKinomi5;
+	
+	bool mHaori;
+
+	bool mRantan;
+
 	int Num();
 
 	bool Getflg();
@@ -40,5 +57,6 @@ private:
 	Vector2 mNum[100];
 
 	int i;
+
 };
 

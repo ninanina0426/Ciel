@@ -32,6 +32,7 @@ public:
 	DIR mDir;
 
 	int mChipId;
+	int mTchipId;
 
 	int mChipImage[10000];
 	bool mMapChange;
@@ -40,6 +41,9 @@ public:
 	Vector2 GetPos(void);
 	MAP_ID GetMapId(void);
 	MAP_ID GetMapIdOld(void);
+
+	int GetChipId(void);
+
 private:
 	StageMng();
 	~StageMng();
@@ -53,6 +57,8 @@ private:
 	Vector2 OldPos;
 
 	Keyboard key_;
+
+	int chipID;
 
 	 //マップの変更処理
 

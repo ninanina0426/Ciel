@@ -352,7 +352,7 @@ void CaveMap::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[cave_ground[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[cave_wall[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[cave_obj[y][x]], true);
-			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 0, 0), "%d", cave_ground[y][x]);
+			//DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 0, 0), "%d", cave_obj[y][x]);
 
 			/*DrawFormatString(0, 10, GetColor(0, 0, 255), "mapPos=(%d,%d)", mOffset.x_, mOffset.y_);*/
 
@@ -454,4 +454,9 @@ bool CaveMap::CheckMapChip(Vector2 pos)
 int CaveMap::GetMapChip(Vector2 pos)
 {
 	return cave_wall[pos.y_ / 32][pos.x_ / 32];
+}
+
+int CaveMap::GetTMapChip(Vector2 pos)
+{
+	return cave_ground[pos.y_ / 32][pos.x_ / 32];;
 }

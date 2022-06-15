@@ -302,3 +302,8 @@ int CaveShop::GetMapChip(Vector2 pos)
 {
 	return cs_ground[pos.y_ / 32][pos.x_ / 32];;
 }
+
+int CaveShop::GetTMapChip(Vector2 pos)
+{
+	return cs_ground[pos.y_ / 32][pos.x_ / 32];;
+}

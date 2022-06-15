@@ -526,3 +526,8 @@ int ForestInMap::GetMapChip(Vector2 pos)
 	return fi_tree[pos.y_ / 32][pos.x_ / 32];
 }
 
+int ForestInMap::GetTMapChip(Vector2 pos)
+{
+	return fi_soil[pos.y_ / 32][pos.x_ / 32];;
+}
+

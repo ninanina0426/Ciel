@@ -449,7 +449,7 @@ void ForestMap::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[Tree[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[obj1[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[obj2[y][x]], true);
-			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", obj1[y][x]);
+		//	DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", obj1[y][x]);
 
 		}
 	}
@@ -534,6 +534,11 @@ bool ForestMap::CheckMapChip(Vector2 pos)
 int ForestMap::GetMapChip(Vector2 pos)
 {
 	return obj1[pos.y_ / 32][pos.x_ / 32];
+}
+
+int ForestMap::GetTMapChip(Vector2 pos)
+{
+	return soil[pos.y_ / 32][pos.x_ / 32];;
 }
 
 

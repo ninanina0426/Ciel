@@ -767,3 +767,8 @@ int templeMap::GetMapChip(Vector2 pos)
 	return temple[pos.y_ / 32][pos.x_ / 32];
 }
 
+int templeMap::GetTMapChip(Vector2 pos)
+{
+	return tsoil[pos.y_ / 32][pos.x_ / 32];;
+}
+

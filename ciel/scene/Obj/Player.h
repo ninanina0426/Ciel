@@ -1,6 +1,7 @@
 #pragma once
 #include "../../common/Vector2.h"
 #include"../Input/Keyboard.h"
+#include"../../stage/Stage.h"
 
 
 enum DIR		//向き管理用
@@ -37,9 +38,12 @@ private:
 	/*GameScene* mParent;*/
 	/*GameScene* mParent;*/
 
-	int mImage1[16];		//画像の格納領域
-	int mImage2[16];		//画像の格納領域
-	int mImage3[16];		//画像の格納領域
+	int mImage1[32];		//画像の格納領域
+	int mImage2[32];		//画像の格納領域
+	int mImage3[32];		//画像の格納領域
+	//int mImage4[32];		//画像の格納領域
+	//int mImage5[32];		//画像の格納領域
+	//int mImage6[32];		//画像の格納領域
 
 	DIR mMoveDir;		//キャラクターの向き
 	Vector2 mPos;		//キャラクターの地図上の座標
@@ -47,6 +51,12 @@ private:
 
 	Keyboard key_;
 	
+	int i;
+	int num;
+
+	bool moveFlg;
+
+	int mChipId;
 
 	Vector2 mDamyPos;
 
@@ -54,6 +64,7 @@ private:
 	Vector2 mSize;		//キャラクター画像のサイズ
 	int mMoveSpeed;		//キャラクター移動スピード
 	int mAnmCnt;
+	
 public:
 	Player();
 	~Player();
@@ -63,7 +74,7 @@ public:
 	bool flg;
 
 	bool init(PlayerID playerid);		//初期化
-	Vector2 Update(void);		//更新
+	Vector2 Update(int chipid);		//更新
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
 	DIR GetDIR(void);
