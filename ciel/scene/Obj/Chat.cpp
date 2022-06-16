@@ -33,6 +33,7 @@ bool Chat::init(void)
 
 	mFlg = false;
 	finalC_ = false;
+	mSNum = 0;
 
 	mNpc = new Npc();
 
@@ -64,6 +65,7 @@ bool Chat::Update(bool flg, int num)
 				if (mNum == 4)
 				{
 					mFlg = false;
+					mSNum = mNum;
 					mNum = 0;
 				}
 			}
@@ -160,6 +162,11 @@ bool Chat::Release(void)
 bool Chat::Getflg()
 {
 	return mFlg;
+}
+
+int Chat::GetNum(void)
+{
+	return mSNum;
 }
 
 

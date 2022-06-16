@@ -42,6 +42,9 @@ bool Aitem::init()
 	
 	mAitem = 10;
 
+	mNumKinomi = 0;
+	mApple = 0;
+
 	mNum[0] ={0,0}; //posx
 	mNum[1] = { 1355,675 }; //posx
 	mNum[2] = { 785,1335 }; //posx
@@ -106,6 +109,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
+					mNumKinomi += 1;
 					mAitem -= 1;
 					mNum[2] = mNum[0];
 					i = 2;
@@ -122,6 +126,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
+					mApple += 1;
 					mAitem -= 1;
 					mNum[3] = mNum[0];
 					i = 3;
@@ -140,6 +145,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
+					mNumKinomi += 1;
 					mAitem -= 1;
 					mNum[1] = mNum[0];
 					i = 1;
@@ -344,6 +350,16 @@ bool Aitem::Getflg()
 {
 
 	return true;
+}
+
+int Aitem::KnomiNum(void)
+{
+	return mNumKinomi;
+}
+
+int Aitem::AppleNum(void)
+{
+	return mApple;
 }
 
 

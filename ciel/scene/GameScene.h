@@ -4,6 +4,7 @@
 #include"../scene/Input/Keyboard.h"
 #include"../scene/Obj/Player.h"
 #include"../scene/Obj/Menu.h"
+#include"Obj/shop.h"
 #include "../stage/stage.h"
 class SceneMng;
 class Aitem;
@@ -11,7 +12,6 @@ class BGM;
 class Npc;
 class Chat;
 class Layer;
-
 
 class GameScene : public BaseScene
 {
@@ -57,6 +57,7 @@ private:
 
     Menu mMenu;
     Aitem*mAitem;
+    shop mShop;
 
     Npc* mNpc;
 

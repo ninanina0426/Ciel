@@ -1,11 +1,9 @@
 #pragma once
 #include "../../common/Vector2.h"
 #include"../Input/Keyboard.h"
+#include"Player.h"
 
 #define ITEM_ANIM_MAX 3
-
-
-
 
 class Aitem
 {
@@ -41,7 +39,13 @@ public:
 
 	bool Getflg();
 
+	int KnomiNum(void);
+	int AppleNum(void);
+
 	int mAitem;
+
+	int mNumKinomi;
+	int mApple;
 	
 
 private:

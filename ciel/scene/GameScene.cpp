@@ -1,10 +1,10 @@
 #include <DxLib.h>
 #include "GameScene.h"
-#include"../scene/Obj/BGM.h"
+#include"Obj/BGM.h"
 #include"../scene/Input/Keyboard.h"
-#include"../scene/Obj/Aitem.h"
-#include"../scene/Obj/Npc.h"
-#include"../scene/Obj/Chat.h"
+#include"Obj/Aitem.h"
+#include"Obj/Npc.h"
+#include"Obj/Chat.h"
 #include"../stage/Layer.h"
 #include "../stage/StageMng.h"
 
@@ -186,6 +186,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
          mMenu.Update();
      }
   
+     mShop.Update(mChat->GetNum());
 
     mBgm->Update(mMenu.OpBgm());
 
@@ -226,6 +227,8 @@ void GameScene::DrawOwnScn()
      {
          mMenu.Draw();
      }
+
+     mShop.Draw(mAitem->KnomiNum(), mAitem->AppleNum());
     
     
 }
@@ -239,6 +242,8 @@ bool GameScene::Init(void)
     mAitem = new Aitem();
 
     mMenu.init(this);
+
+    mShop.init(this);
 
     //ŠÔŒn‰Šú‰»
     evening_ = LoadGraph("./image/yukoku.png");
