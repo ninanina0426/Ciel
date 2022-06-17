@@ -33,6 +33,7 @@ void BGM::Update(int num)
         switch (mapID)
         {
         case MAP_ID::FOREST:
+            SHandle = LoadSoundMem("image/music/forest.ogg");
             break;
         case MAP_ID::WA:
             break;
@@ -45,6 +46,7 @@ void BGM::Update(int num)
         case MAP_ID::DARK:
             break;
         case MAP_ID::FORESTIN:
+            SHandle = LoadSoundMem("image/music/forestIn.ogg");
             break;
         case MAP_ID::TEMPLE:
             break;
@@ -72,7 +74,7 @@ void BGM::Update(int num)
 
 void BGM::Move(void)
 {
-    PlaySoundMem(SHandle, DX_PLAYTYPE_BACK);
+    PlaySoundMem(SHandle, DX_PLAYTYPE_LOOP);
 }
 
 

@@ -136,23 +136,23 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 		}
 		break;
 	case MAP_ID::SWEETSOUT:
-		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[1].y_ + 64 / 2) &&
-			(mPos.y_ + mNum[1].y_ - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
-			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[1].x_ + 32 / 2) &&
-			(mPos.x_ + mNum[1].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
-		{
-			if ((mAitem != 0) && (mAitem <= 10))
-			{
-				if (key_.getKeyDown(KEY_INPUT_F))
-				{
-					mNumKinomi += 1;
-					mAitem -= 1;
-					mNum[1] = mNum[0];
-					i = 1;
-				}
+		//if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[1].y_ + 64 / 2) &&
+		//	(mPos.y_ + mNum[1].y_ - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+		//	(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[1].x_ + 32 / 2) &&
+		//	(mPos.x_ + mNum[1].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		//{
+		//	if ((mAitem != 0) && (mAitem <= 10))
+		//	{
+		//		if (key_.getKeyDown(KEY_INPUT_F))
+		//		{
+		//			mNumKinomi += 1;
+		//			mAitem -= 1;
+		//			mNum[1] = mNum[0];
+		//			i = 1;
+		//		}
 
-			}
-		}
+		//	}
+		//}
 		break;
 	case MAP_ID::SWEETSSCHOOL:
 		break;

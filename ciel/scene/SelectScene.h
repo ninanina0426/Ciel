@@ -29,5 +29,7 @@ private:
     int carenImage_;    //カレンデュラのグラフィックID
     int titi_;          //
 
+    int SHandle;
+
 };
 

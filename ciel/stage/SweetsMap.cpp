@@ -472,406 +472,406 @@ bool SweetsMap::CheckMapChip(Vector2 pos)
 	layer3 = mMapObj[pos.y_ / 16][pos.x_ / 16];
 	layer4 = mMapShadow[pos.y_ / 16][pos.x_ / 16];
 
-	bool flg = true;	//true=playerが歩ける
+	bool flg = false;	//true=playerが歩ける
 
-	////移動範囲を行う
-	//switch (layer1)
-	//{
-	//case 7019:
-	//case 7020:
-	//case 7021:
-	//	//水
-	//case 6600:
-	//case 6601:
-	//case 6602:
-	//case 6603:
-	//case 6604:
-	//case 6605:
-	//case 6705:
-	//case 6805:
-	//case 6905:
-	//case 7005:
-	//case 7105:
-	//case 7205:
-	//case 7305:
-	//case 7405:
-	//case 7505:
-	//case 7605:
-	//case 7705:
-	//case 7004:
-	//case 7003:
-	//case 7002:
-	//case 7001:
-	//case 7000:
-	//case 6900:
-	//case 6800:
-	//case 6700:
-	//case 7700:
-	//case 7600:
-	//case 7500:
-	//case 7400:
-	//case 7300:
-	//case 7200:
-	//case 7100:
-	//case 6701:
-	//case 6702:
-	//case 6703:
-	//case 6704:
-	//case 6802:
-	//case 6803:
-	//case 6902:
-	//case 6903:
-	//case 6904:
-	//case 7204:
-	//case 7304:
-	//case 7404:
-	//case 7504:
-	//case 7604:
-	//case 7704:
-	//case 6804:
-	//case 6801:
-	//case 6901:
-	//case 7201:
-	//case 7301:
-	//case 7401:
-	//case 7501:
-	//case 7601:
-	//case 7701:
-	//case 7102:
-	//case 7202:
-	//case 7302:
-	//case 7402:
-	//case 7502:
-	//case 7602:
-	//case 7702:
-	//case 7101:
-	//case 7103:
-	//case 7104:
-	//case 7203:
-	//case 7303:
-	//case 7403:
-	//case 7503:
-	//case 7603:
-	//case 7703:
-	//case 6921:
-	//{
-	//	flg = true;
-	//	break;
-	//}
-	//case 7122:
-	//case 7121:
-	//case 7219:
-	//case 7220:
-	//case 7622:
-	//case 7620:
-	//case 7720:
-	//case 7722:
-	//{
-	//	switch (layer3)
-	//	{
-	//	case 2407:
-	//	case 2506:
+	//移動範囲を行う
+	switch (layer1)
+	{
+	case 7019:
+	case 7020:
+	case 7021:
+		//水
+	case 6600:
+	case 6601:
+	case 6602:
+	case 6603:
+	case 6604:
+	case 6605:
+	case 6705:
+	case 6805:
+	case 6905:
+	case 7005:
+	case 7105:
+	case 7205:
+	case 7305:
+	case 7405:
+	case 7505:
+	case 7605:
+	case 7705:
+	case 7004:
+	case 7003:
+	case 7002:
+	case 7001:
+	case 7000:
+	case 6900:
+	case 6800:
+	case 6700:
+	case 7700:
+	case 7600:
+	case 7500:
+	case 7400:
+	case 7300:
+	case 7200:
+	case 7100:
+	case 6701:
+	case 6702:
+	case 6703:
+	case 6704:
+	case 6802:
+	case 6803:
+	case 6902:
+	case 6903:
+	case 6904:
+	case 7204:
+	case 7304:
+	case 7404:
+	case 7504:
+	case 7604:
+	case 7704:
+	case 6804:
+	case 6801:
+	case 6901:
+	case 7201:
+	case 7301:
+	case 7401:
+	case 7501:
+	case 7601:
+	case 7701:
+	case 7102:
+	case 7202:
+	case 7302:
+	case 7402:
+	case 7502:
+	case 7602:
+	case 7702:
+	case 7101:
+	case 7103:
+	case 7104:
+	case 7203:
+	case 7303:
+	case 7403:
+	case 7503:
+	case 7603:
+	case 7703:
+	case 6921:
+	{
+		flg = true;
+		break;
+	}
+	case 7122:
+	case 7121:
+	case 7219:
+	case 7220:
+	case 7622:
+	case 7620:
+	case 7720:
+	case 7722:
+	{
+		switch (layer3)
+		{
+		case 2407:
+		case 2506:
 
-	//	{
-	//		flg = true;
-	//		break;
-	//	}
-	//	default:
-	//		break;
-	//	}
-	//	break;
-	//}
-	//case 7520:	//道
-	//{
-	//	flg = true;
-	//	switch (layer2)
-	//	{
-	//		//青の家
-	//	case 1018:
-	//	case 1118:
-	//	case 1218:
-	//	case 1418:
-	//	case 1518:
-	//	case 1618:
-	//	case 1918:
-	//	case 2018:
-	//	case 2118:
-	//	case 2119:
-	//	case 2120:
-	//	case 2121:
-	//	case 2122:
-	//	case 2123:
-	//	case 2023:
-	//	case 1923:
-	//	case 1623:
-	//	case 1523:
-	//	case 1423:
-	//	case 1223:
-	//	case 1123:
-	//	case 1023:
-	//	case 1022:
-	//	case 1021:
-	//	case 1020:
-	//	case 1019:
-	//		//二軒
-	//	case 1000:
-	//	case 1001:
-	//	case 1002:
-	//	case 1003:
-	//	case 1004:
-	//	case 1005:
-	//	case 1100:
-	//	case 1200:
-	//	case 1300:
-	//	case 1400:
-	//	case 1500:
-	//	case 5100:
-	//	case 5200:
-	//	case 5300:
-	//	case 5400:
-	//	case 5500:
-	//	case 5600:
-	//	case 5700:
-	//	case 5800:
-	//	case 5900:
-	//	case 6100:
-	//	case 6200:
-	//	case 6201:
-	//	case 6202:
-	//	case 6203:
-	//	case 6204:
-	//	case 6205:
-	//	case 1105:
-	//	case 1205:
-	//	case 1305:
-	//	case 1405:
-	//	case 1505:
-	//	case 5105:
-	//	case 5205:
-	//	case 5305:
-	//	case 5405:
-	//	case 5505:
-	//	case 5605:
-	//	case 5705:
-	//	case 5805:
-	//	case 5905:
-	//	case 6105:
-	//		//クッキー
-	//	case 1006:
-	//	case 1007:
-	//	case 1008:
-	//	case 1009:
-	//	case 1010:
-	//	case 1011:
-	//	case 1106:
-	//	case 1206:
-	//	case 1306:
-	//	case 1406:
-	//	case 1506:
-	//	case 1606:
-	//	case 1706:
-	//	case 1906:
-	//	case 2106:
-	//	case 2107:
-	//	case 2108:
-	//	case 2109:
-	//	case 2110:
-	//	case 2111:
-	//	case 2011:
-	//	case 1911:
-	//	case 1811:
-	//	case 1611:
-	//	case 1511:
-	//	case 1411:
-	//	case 1311:
-	//	case 1211:
-	//	case 1111:
-	//	case 2006:
-	//		//ゼリー
-	//	case 6606:
-	//	case 6706:
-	//	case 6906:
-	//	case 6806:
-	//	case 7006:
-	//	case 7106:
-	//	case 7206:
-	//	case 7506:
-	//	case 7606:
-	//	case 7706:
-	//	case 7710:
-	//	case 7711:
-	//	case 7611:
-	//	case 7511:
-	//	case 7211:
-	//	case 7111:
-	//	case 7011:
-	//	case 6711:
-	//	case 6611:
-	//	case 6610:
-	//	case 6607:
-	//		//shop
-	//	case 5112:
-	//	case 5113:
-	//	case 5114:
-	//	case 5115:
-	//	case 5116:
-	//	case 5117:
-	//	case 5217:
-	//	case 5317:
-	//	case 5417:
-	//	case 5517:
-	//	case 5617:
-	//	case 5717:
-	//	case 5817:
-	//	case 6217:
-	//	case 6216:
-	//	case 6213:
-	//	case 3212:
-	//	case 5812:
-	//	case 5712:
-	//	case 5612:
-	//	case 5512:
-	//	case 5412:
-	//	case 5312:
-	//	case 5212:
-	//		//school
-	//	case 6618:
-	//	case 6718:
-	//	case 6818:
-	//	case 6418:
-	//	case 6918:
-	//	case 7018:
-	//	case 7118:
-	//	case 7218:
-	//	case 7518:
-	//	case 7618:
-	//	case 7718:
-	//	case 7719:
-	//	case 7720:
-	//	case 7721:
-	//	case 7722:
-	//	case 7723:
-	//	case 7623:
-	//	case 7523:
-	//	case 7223:
-	//	case 7123:
-	//	case 7023:
-	//	case 6923:
-	//	case 6420:
-	//	case 6823:
-	//	case 6723:
-	//	case 6623:
-	//	case 6620:
-	//	case 6619:
-	//	case 6622:
-	//	case 6621:
-	//	case 6318:
-	//	case 6320:
-	//	case 7204:
-	//	case 7121:
-	//	case 6820:
-	//	case 7120:
-	//	case 7122:
-	//	case 7119:
-	//	{
-	//		flg = false;
-	//		break;
-	//	}
-	//	default:
-	//		break;
-	//	}
-	//	switch (layer3)
-	//	{
-	//	case 2654:
-	//	case 2655:
-	//	case 2656:
-	//	case 2445:
-	//	case 2545:
-	//	case 2645:
-	//	case 2444:
-	//	case 2544:
-	//	case 2644:
-	//	case 2447:
-	//	case 2844:
-	//	case 2944:
-	//	case 2943:
-	//	case 2843:
-	//	case 2743:
-	//	case 2660:
-	//	case 2661:
-	//	case 2662:
-	//	case 2663:
-	//	case 2664:
-	//	case 2665:
-	//	case 7006:
-	//	case 7110:
-	//	case 7011:
-	//	case 2669:
-	//	case 2670:
-	//		//公園
-	//	case 4537:
-	//	case 3614:
-	//	case 3714:
-	//	case 3814:
-	//	case 3914:
-	//	case 3605:
-	//	case 4637:
-	//	case 3615:
-	//	case 4564:
-	//	case 4664:
-	//	case 4674:
-	//	case 3815:
-	//	case 3915:
-	//	case 4560:
-	//	case 4561:
-	//	case 4562:
-	//	case 4660:
-	//	case 4661:
-	//	case 4662:
-	//	case 4760:
-	//	case 4761:
-	//	case 4762:
-	//	case 100:
-	//	case 101:
-	//	case 102:
-	//	case 103:
-	//	case 200:
-	//	case 300:
-	//	case 400:
-	//	case 7:
-	//	case 6:
-	//	case 5:
-	//	case 4:
-	//	case 3:
-	//	case 2:
-	//	case 1:
-	//	case 0:
-	//	case 104:
-	//	case 204:
-	//	case 304:
-	//	case 804:
-	//	case 904:
-	//	case 905:
-	//	case 906:
-	//	case 907:
-	//	case 807:
-	//	case 707:
-	//	case 607:
-	//	case 503:
-	//	case 403:
-	//	case 303:
-	//	case 203:
-	//	
-	//	{
-	//		flg = false;
-	//		break;
-	//	}
-	//	default:
-	//		break;
-	//	}
-	//	break;
-	//}
-	//}
+		{
+			flg = true;
+			break;
+		}
+		default:
+			break;
+		}
+		break;
+	}
+	case 7520:	//道
+	{
+		flg = true;
+		switch (layer2)
+		{
+			//青の家
+		case 1018:
+		case 1118:
+		case 1218:
+		case 1418:
+		case 1518:
+		case 1618:
+		case 1918:
+		case 2018:
+		case 2118:
+		case 2119:
+		case 2120:
+		case 2121:
+		case 2122:
+		case 2123:
+		case 2023:
+		case 1923:
+		case 1623:
+		case 1523:
+		case 1423:
+		case 1223:
+		case 1123:
+		case 1023:
+		case 1022:
+		case 1021:
+		case 1020:
+		case 1019:
+			//二軒
+		case 1000:
+		case 1001:
+		case 1002:
+		case 1003:
+		case 1004:
+		case 1005:
+		case 1100:
+		case 1200:
+		case 1300:
+		case 1400:
+		case 1500:
+		case 5100:
+		case 5200:
+		case 5300:
+		case 5400:
+		case 5500:
+		case 5600:
+		case 5700:
+		case 5800:
+		case 5900:
+		case 6100:
+		case 6200:
+		case 6201:
+		case 6202:
+		case 6203:
+		case 6204:
+		case 6205:
+		case 1105:
+		case 1205:
+		case 1305:
+		case 1405:
+		case 1505:
+		case 5105:
+		case 5205:
+		case 5305:
+		case 5405:
+		case 5505:
+		case 5605:
+		case 5705:
+		case 5805:
+		case 5905:
+		case 6105:
+			//クッキー
+		case 1006:
+		case 1007:
+		case 1008:
+		case 1009:
+		case 1010:
+		case 1011:
+		case 1106:
+		case 1206:
+		case 1306:
+		case 1406:
+		case 1506:
+		case 1606:
+		case 1706:
+		case 1906:
+		case 2106:
+		case 2107:
+		case 2108:
+		case 2109:
+		case 2110:
+		case 2111:
+		case 2011:
+		case 1911:
+		case 1811:
+		case 1611:
+		case 1511:
+		case 1411:
+		case 1311:
+		case 1211:
+		case 1111:
+		case 2006:
+			//ゼリー
+		case 6606:
+		case 6706:
+		case 6906:
+		case 6806:
+		case 7006:
+		case 7106:
+		case 7206:
+		case 7506:
+		case 7606:
+		case 7706:
+		case 7710:
+		case 7711:
+		case 7611:
+		case 7511:
+		case 7211:
+		case 7111:
+		case 7011:
+		case 6711:
+		case 6611:
+		case 6610:
+		case 6607:
+			//shop
+		case 5112:
+		case 5113:
+		case 5114:
+		case 5115:
+		case 5116:
+		case 5117:
+		case 5217:
+		case 5317:
+		case 5417:
+		case 5517:
+		case 5617:
+		case 5717:
+		case 5817:
+		case 6217:
+		case 6216:
+		case 6213:
+		case 3212:
+		case 5812:
+		case 5712:
+		case 5612:
+		case 5512:
+		case 5412:
+		case 5312:
+		case 5212:
+			//school
+		case 6618:
+		case 6718:
+		case 6818:
+		case 6418:
+		case 6918:
+		case 7018:
+		case 7118:
+		case 7218:
+		case 7518:
+		case 7618:
+		case 7718:
+		case 7719:
+		case 7720:
+		case 7721:
+		case 7722:
+		case 7723:
+		case 7623:
+		case 7523:
+		case 7223:
+		case 7123:
+		case 7023:
+		case 6923:
+		case 6420:
+		case 6823:
+		case 6723:
+		case 6623:
+		case 6620:
+		case 6619:
+		case 6622:
+		case 6621:
+		case 6318:
+		case 6320:
+		case 7204:
+		case 7121:
+		case 6820:
+		case 7120:
+		case 7122:
+		case 7119:
+		{
+			flg = false;
+			break;
+		}
+		default:
+			break;
+		}
+		switch (layer3)
+		{
+		case 2654:
+		case 2655:
+		case 2656:
+		case 2445:
+		case 2545:
+		case 2645:
+		case 2444:
+		case 2544:
+		case 2644:
+		case 2447:
+		case 2844:
+		case 2944:
+		case 2943:
+		case 2843:
+		case 2743:
+		case 2660:
+		case 2661:
+		case 2662:
+		case 2663:
+		case 2664:
+		case 2665:
+		case 7006:
+		case 7110:
+		case 7011:
+		case 2669:
+		case 2670:
+			//公園
+		case 4537:
+		case 3614:
+		case 3714:
+		case 3814:
+		case 3914:
+		case 3605:
+		case 4637:
+		case 3615:
+		case 4564:
+		case 4664:
+		case 4674:
+		case 3815:
+		case 3915:
+		case 4560:
+		case 4561:
+		case 4562:
+		case 4660:
+		case 4661:
+		case 4662:
+		case 4760:
+		case 4761:
+		case 4762:
+		case 100:
+		case 101:
+		case 102:
+		case 103:
+		case 200:
+		case 300:
+		case 400:
+		case 7:
+		case 6:
+		case 5:
+		case 4:
+		case 3:
+		case 2:
+		case 1:
+		case 0:
+		case 104:
+		case 204:
+		case 304:
+		case 804:
+		case 904:
+		case 905:
+		case 906:
+		case 907:
+		case 807:
+		case 707:
+		case 607:
+		case 503:
+		case 403:
+		case 303:
+		case 203:
+		
+		{
+			flg = false;
+			break;
+		}
+		default:
+			break;
+		}
+		break;
+	}
+	}
 	return flg;
 	
 }

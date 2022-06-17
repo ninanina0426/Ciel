@@ -10,6 +10,7 @@ SelectScene::SelectScene()
 
 SelectScene::~SelectScene()
 {
+    DeleteSoundMem(SHandle);
 }
 
 bool SelectScene::SlectChar(Player player, int count, PlayerID limID, PlayerID setID)
@@ -94,6 +95,19 @@ bool SelectScene::Init(void)
     soyImage_ = LoadGraph("./image/player/soy.png");
     carenImage_ = LoadGraph("./image/player/caren.png");
     titi_ = LoadGraph("./image/player/titi.png");
+
+    SHandle = LoadSoundMem("image/music/select.ogg");
+
+    // âπó ÇÃê›íË
+    ChangeVolumeSoundMem(100, SHandle);
+
+
+
+    if (CheckSoundMem(SHandle) == 0)
+    {
+        PlaySoundMem(SHandle, DX_PLAYTYPE_LOOP);
+    }
+
 
     return true;
 }

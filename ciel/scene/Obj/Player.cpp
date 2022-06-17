@@ -89,10 +89,10 @@ Vector2 Player::Update(int chipId)
 		mMoveSpeed = 3;
 	}
 	//デバッグ用
-	if (key_.getKeyDownHold(KEY_INPUT_Q))
+	/*if (key_.getKeyDownHold(KEY_INPUT_Q))
 	{
 		mPos = { 0,0 };
-	}
+	}*/
 
 	if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
 	{
