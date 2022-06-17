@@ -31,7 +31,7 @@ bool Player::init(PlayerID playerid)
 	}
 	mSizeOffset.x_ = 0;
 	mSizeOffset.y_= 0;
-	mMoveSpeed = 5;
+	mMoveSpeed = 3;
 	mMoveDir = DIR_DOWN;
 	mSize.x_ = 32;
 	mSize.y_ = 32;

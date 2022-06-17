@@ -37,8 +37,8 @@ void StageMng::Draw()
 		fadein_.DrawOwnScn();
 	}
 
-	DrawFormatString(0, 50, GetColor(255, 255, 255), "chipId=%d", mChipId);
-	DrawFormatString(0, 80, GetColor(255, 0, 0), "offset=(%d,%d)", mOffset.x_,mOffset.y_);
+	/*DrawFormatString(0, 50, GetColor(255, 255, 255), "chipId=%d", mChipId);
+	DrawFormatString(0, 80, GetColor(255, 0, 0), "offset=(%d,%d)", mOffset.x_,mOffset.y_);*/
 
 	
 }
@@ -64,28 +64,28 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 			{
 				if (key_.getKeyDownHold(KEY_INPUT_RIGHT))
 				{
-					mOffset.x_ += 4;
+					mOffset.x_ += 3;
 				}
 			}
 			if (movePos.x_ < 880)
 			{
 				if (key_.getKeyDownHold(KEY_INPUT_LEFT))
 				{
-					mOffset.x_ -= 4;
+					mOffset.x_ -= 1;
 				}
 			}
 			if (movePos.y_ > 100)
 			{
 				if (key_.getKeyDownHold(KEY_INPUT_DOWN))
 				{
-					mOffset.y_ += 4;
+					mOffset.y_ += 3;
 				}
 			}
 			if (movePos.y_ < 509)
 			{
 				if (key_.getKeyDownHold(KEY_INPUT_UP))
 				{
-					mOffset.y_ -= 4;
+					mOffset.y_ -= 3;
 				}
 			}
 		}
@@ -95,28 +95,28 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 			{
 				if (key_.getKeyDownHold(KEY_INPUT_RIGHT))
 				{
-					mOffset.x_ += 4;
+					mOffset.x_ += 3;
 				}
 			}
 			if (movePos.x_ < 500)
 			{
 				if (key_.getKeyDownHold(KEY_INPUT_LEFT))
 				{
-					mOffset.x_ -= 4;
+					mOffset.x_ -= 1;
 				}
 			}
 			if (movePos.y_ > 100)
 			{
 				if (key_.getKeyDownHold(KEY_INPUT_DOWN))
 				{
-					mOffset.y_ += 4;
+					mOffset.y_ += 3;
 				}
 			}
 			if (movePos.y_ < 509)
 			{
 				if (key_.getKeyDownHold(KEY_INPUT_UP))
 				{
-					mOffset.y_ -= 4;
+					mOffset.y_ -= 3;
 				}
 			}
 		}
@@ -126,20 +126,20 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 		//	//カメラ追従
 		if (movePos.x_ > 500)
 		{
-			mOffset.x_ += 4;
+			mOffset.x_ += 2;
 		}
 		if (movePos.x_ < 1370)
 		{
-			mOffset.x_ -= 4;
+			mOffset.x_ -= 2;
 		}
 		//カメラ下移動制限
 		if (movePos.y_ < 450)
 		{
-			mOffset.y_ -= 4;
+			mOffset.y_ -= 2;
 		}
 		if (movePos.y_ > 400)
 		{
-			mOffset.y_ += 4;
+			mOffset.y_ += 2;
 		}
 	}
 	else
@@ -147,22 +147,22 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 		//カメラ追従
 		if (movePos.x_ > 500)
 		{
-			mOffset.x_ += 4;
+			mOffset.x_ += 2;
 		}
 		if (movePos.x_ < 800)
 		{
-			mOffset.x_ -= 4;
+			mOffset.x_ -= 2;
 
 		}
 		//カメラ下移動制限
 		if (movePos.y_ < 400)
 		{
-			mOffset.y_ -= 4;
+			mOffset.y_ -= 2;
 
 		}
 		if (movePos.y_ > 380)
 		{
-			mOffset.y_ += 4;
+			mOffset.y_ += 2;
 		}
 	}
 	//カメラ端
