@@ -752,7 +752,7 @@ bool templeMap::CheckMapChip(Vector2 pos)
 	case 1426:
 	case 2381:
 	case 2325:
-	case 2269:
+	/*case 2269:*/
 		Flg = false;
 		break;
 	default:

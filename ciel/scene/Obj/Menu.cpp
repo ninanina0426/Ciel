@@ -147,7 +147,7 @@ bool Menu::init(GameScene* parent)
 void Menu::Update(void)
 {
 	key_.Update();
-	key_.getKeyDown(KEY_INPUT_DOWN);
+	/*key_.getKeyDown(KEY_INPUT_DOWN);*/
 
 	switch (mSelect)
 	{
@@ -181,6 +181,7 @@ void Menu::Update(void)
 
 void Menu::Draw(void)
 {
+	//box‚Ì•\Ž¦
 	switch (mSelect)
 	{
 	case Menu::MENU_SELECT::MENU_ID:
