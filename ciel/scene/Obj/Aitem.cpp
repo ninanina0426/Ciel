@@ -285,7 +285,7 @@ void Aitem::Draw(Vector2 mMapoffset)
 			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
 			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
 			{
-				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 430, mPos.y_ - 10 - mMapoffset.y_ + 420, mImage[3][mAnimCnt], true);
+				DrawGraph(mPos.x_ - 10 - mMapoffset.x_ + 565, mPos.y_ - 10 - mMapoffset.y_ + 570, mImage[3][mAnimCnt], true);
 			}
 		}
 		if (mAitem != 0)

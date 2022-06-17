@@ -33,7 +33,6 @@ void BGM::Update(int num)
         switch (mapID)
         {
         case MAP_ID::FOREST:
-            SHandle = LoadSoundMem("bgm/yume.mp3");
             break;
         case MAP_ID::WA:
             break;
@@ -52,7 +51,7 @@ void BGM::Update(int num)
         case MAP_ID::TEMPLEIN:
             break;
         case MAP_ID::SWEETS:
-            SHandle = LoadSoundMem("bgm/retroparty.mp3");
+            SHandle = LoadSoundMem("bgm/retroparty.ogg");
             break;
         case MAP_ID::SWEETSOUT:
             break;
@@ -77,7 +76,7 @@ void BGM::Move(void)
 
 bool BGM::Init(void)
 {
-    SHandle = LoadSoundMem("bgm/retroparty.mp3");
+   /* SHandle = LoadSoundMem("bgm/retroparty.ogg");*/
    // /*MAP_ID mapID = lpMapMng.GetMapId();
 
    // if (mapID == MAP_ID::FOREST)
