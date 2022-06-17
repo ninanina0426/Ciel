@@ -22,10 +22,10 @@ bool FadeInStage::UpdataTrangetion(void)
 	}
 	DrawOwnScn();
 	
-	count_ += 5;
+	count_ += 10;
 	if (flg_)
 	{
-		cnt_ +=5;
+		cnt_ +=10;
 	}
 	return (count_ > 510);
 }

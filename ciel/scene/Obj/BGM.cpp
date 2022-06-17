@@ -49,6 +49,7 @@ void BGM::Update(int num)
             SHandle = LoadSoundMem("image/music/forestIn.ogg");
             break;
         case MAP_ID::TEMPLE:
+            SHandle = LoadSoundMem("image/music/titel.ogg");
             break;
         case MAP_ID::TEMPLEIN:
             SHandle = LoadSoundMem("image/music/templeIn.ogg");
@@ -104,6 +105,6 @@ bool BGM::Init(void)
    // SHandle[11] = LoadSoundMem("bgm/retroparty.mp3");
    // SHandle[12] = LoadSoundMem("bgm/retroparty.mp3");
    // SHandle[13] = LoadSoundMem("bgm/retroparty.mp3");*/
-
+    SHandle = LoadSoundMem("image/music/titel.ogg");
     return true;
 }
