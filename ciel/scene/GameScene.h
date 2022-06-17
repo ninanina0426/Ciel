@@ -56,7 +56,7 @@ private:
     Player mPlayer;
 
     Menu mMenu;
-    Aitem*mAitem;
+    Aitem *mAitem;
 
     Npc* mNpc;
 

@@ -41,6 +41,8 @@ public:
 
 	bool Getflg();
 
+	int mTama;
+	int mKinomi;
 	int mAitem;
 	
 

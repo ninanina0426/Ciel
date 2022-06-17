@@ -215,8 +215,8 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 	}
 	if (CheckHitKey(KEY_INPUT_D))
 	{
-		stage_ = std::move(std::make_unique<WaMap>());
-		mMapID = MAP_ID::WA;
+		stage_ = std::move(std::make_unique<CaveMap>());
+		mMapID = MAP_ID::CAVE;
 	}
 	stage_->Update(mOffset);
 
