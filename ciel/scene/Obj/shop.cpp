@@ -24,7 +24,7 @@ bool shop::init(GameScene* parent)
     xx = 0;
     yy = 0;
 
-    moveFlg = true;
+    moveFlg = false;
 
     mBoxSe[0] = { 80,75 };
     mBoxSe[1] = { 80,75 };
@@ -65,6 +65,7 @@ void shop::Update(int num)
     if (num==4)
     {
         moveFlg = true;
+        ChangeState(SHOP_SELECT::SELECT);
     }
    
     if (moveFlg == true)
@@ -291,6 +292,8 @@ void shop::Sell(void)
 void shop::Cansel(void)
 {
     moveFlg = false;
+    
+    x = 0;
 }
 
 void shop::ChangeState(SHOP_SELECT select)

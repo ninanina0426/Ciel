@@ -120,7 +120,7 @@ bool Chat::Update(bool flg, int num)
 	{
 		mNum = 100;
 		/*mFlg = false;*/
-
+		mSNum = 0;
 	}
 
 	return mFlg;
