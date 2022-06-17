@@ -20,6 +20,8 @@ private:
 	Keyboard key_;
 
 	Npc*mNpc;
+
+	int mSNum;
 public:
 	Chat();
 	~Chat();
@@ -31,5 +33,7 @@ public:
 	bool Release(void);		//ŠJ•ú
 
 	bool Getflg();
+
+	int GetNum(void);
 };
 

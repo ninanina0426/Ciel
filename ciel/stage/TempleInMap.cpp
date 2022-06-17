@@ -625,3 +625,8 @@ int TempleInMap::GetMapChip(Vector2 pos)
 	return ti_obj1[pos.y_ / 32][pos.x_ / 32];
 }
 
+int TempleInMap::GetTMapChip(Vector2 pos)
+{
+	return ti_soil[pos.y_ / 32][pos.x_ / 32];
+}
+

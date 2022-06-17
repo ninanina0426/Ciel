@@ -4,14 +4,16 @@
 #include"../scene/Input/Keyboard.h"
 #include"../scene/Obj/Player.h"
 #include"../scene/Obj/Menu.h"
+#include"Obj/shop.h"
 #include "../stage/stage.h"
+#include "../stage/transitionStage/FadeInStage.h"
+
 class SceneMng;
 class Aitem;
 class BGM;
 class Npc;
 class Chat;
 class Layer;
-
 
 class GameScene : public BaseScene
 {
@@ -56,7 +58,11 @@ private:
     Player mPlayer;
 
     Menu mMenu;
+
     Aitem *mAitem;
+
+    shop mShop;
+
 
     Npc* mNpc;
 
@@ -65,6 +71,7 @@ private:
     MAP_ID mNextMapID;
     Vector2 mNextPos;
 
+    FadeInStage fadein_;
     
 
     Vector2 mMapOffset;

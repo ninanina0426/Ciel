@@ -1,10 +1,10 @@
 #include <DxLib.h>
 #include "GameScene.h"
-#include"../scene/Obj/BGM.h"
+#include"Obj/BGM.h"
 #include"../scene/Input/Keyboard.h"
-#include"../scene/Obj/Aitem.h"
-#include"../scene/Obj/Npc.h"
-#include"../scene/Obj/Chat.h"
+#include"Obj/Aitem.h"
+#include"Obj/Npc.h"
+#include"Obj/Chat.h"
 #include"../stage/Layer.h"
 #include "../stage/StageMng.h"
 
@@ -130,13 +130,15 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     int min = 60;    //一分間のフレーム数
     int Day = min * 10;      //一日の秒数
 
-    if (delta % Day == 300)
+    //yuugata
+    if (delta % Day == 120)
     {
         AMflg_ = false;
         PMflg_ = true;
         count_ = 0;
     }
-    if (!AMflg_ && PMflg_ && delta % Day == 420)
+    //yoru
+    if (!AMflg_ && PMflg_ && delta % Day == 180)
     {
         Nightflg_ = true;
         PMflg_ = false;
@@ -157,34 +159,46 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
+   
+   
+    mMapOffset = lpMapMng.Update(PlayerPos);
+
+    mPlayer.Update(lpMapMng.GetChipId());
+
+
     PlayerPos = mPlayer.GetPos();
 
     PlayerSize = mPlayer.GetSiz();
-
-    mMapOffset = lpMapMng.Update(PlayerPos);
-
-    mPlayer.Update();
 
     mNpc->Update(PlayerPos,PlayerSize,mChat->Getflg());
 
     mChat->Update(mNpc->Getflg(), mNpc->Num());
 
-   
+  
 
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
      mAitem->Update(PlayerPos, PlayerSize);
 
-
+    
 
      /*mMenu.Update();*/
      if (mPose == true)
      {
          mMenu.Update();
      }
-  
+     mShop.Update(mChat->GetNum());
 
+
+      //フェードイン
+     if (lpMapMng.fadeinFlg_)
+     {
+         if (fadein_.UpdataTrangetion())
+         {
+             lpMapMng.fadeinFlg_ = false;
+         }
+     }
     mBgm->Update(mMenu.OpBgm());
 
 
@@ -220,11 +234,21 @@ void GameScene::DrawOwnScn()
 
      mChat->Draw(mMapOffset);
 
+     
+
+
      if (mPose == true)
      {
          mMenu.Draw();
      }
+
+     mShop.Draw(mAitem->KnomiNum(), mAitem->AppleNum());
     
+     //フェードイン
+     if (lpMapMng.fadeinFlg_)
+     {
+         fadein_.DrawOwnScn();
+     }
     
 }
 
@@ -237,6 +261,8 @@ bool GameScene::Init(void)
     mAitem = new Aitem();
 
     mMenu.init(this);
+
+    mShop.init(this);
 
     //時間系初期化
     evening_ = LoadGraph("./image/yukoku.png");
@@ -268,6 +294,7 @@ void GameScene::TimeManeger(void)
     switch (mapID)
     {
     case MAP_ID::FOREST:
+        Flg = true;
         break;
     case MAP_ID::WA:
         Flg = true;
@@ -283,6 +310,7 @@ void GameScene::TimeManeger(void)
     case MAP_ID::FORESTIN:
         break;
     case MAP_ID::TEMPLE:
+        Flg = true;
         break;
     case MAP_ID::TEMPLEIN:
         break;

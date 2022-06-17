@@ -47,7 +47,13 @@ bool Aitem::init()
 	
 	mAitem = 10;
 
-	mNum[0] = { 0,0 }; //posx
+
+
+	mNumKinomi = 0;
+	mApple = 0;
+
+	mNum[0] ={0,0}; //posx
+
 	mNum[1] = { 1355,675 }; //posx
 	mNum[2] = { 785,1335 }; //posx
 	mNum[3] = { 625,1275 }; //posx
@@ -261,6 +267,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
+					mNumKinomi += 1;
 					mAitem -= 1;
 					mNum[2] = mNum[0];
 					i = 2;
@@ -277,6 +284,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
+					mApple += 1;
 					mAitem -= 1;
 					mNum[3] = mNum[0];
 					i = 3;
@@ -304,22 +312,23 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 		}
 		break;
 	case MAP_ID::SWEETSOUT:
-		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[1].y_ + 64 / 2) &&
-			(mPos.y_ + mNum[1].y_ - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
-			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[1].x_ + 32 / 2) &&
-			(mPos.x_ + mNum[1].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
-		{
-			if ((mAitem != 0) && (mAitem <= 10))
-			{
-				if (key_.getKeyDown(KEY_INPUT_F))
-				{
-					mAitem -= 1;
-					mNum[1] = mNum[0];
-					i = 1;
-				}
+		//if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[1].y_ + 64 / 2) &&
+		//	(mPos.y_ + mNum[1].y_ - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+		//	(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[1].x_ + 32 / 2) &&
+		//	(mPos.x_ + mNum[1].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		//{
+		//	if ((mAitem != 0) && (mAitem <= 10))
+		//	{
+		//		if (key_.getKeyDown(KEY_INPUT_F))
+		//		{
+		//			mNumKinomi += 1;
+		//			mAitem -= 1;
+		//			mNum[1] = mNum[0];
+		//			i = 1;
+		//		}
 
-			}
-		}
+		//	}
+		//}
 		break;
 	case MAP_ID::SWEETSSCHOOL:
 		break;
@@ -453,7 +462,9 @@ void Aitem::Draw(Vector2 mMapoffset)
 			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
 			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
 			{
-				DrawGraph(mPos.x_ + mNum[5].x_ - mMapoffset.x_, mPos.y_ + mNum[5].y_ - mMapoffset.y_, mImage[3][mAnimCnt], true);
+ 
+			DrawGraph(mPos.x_ + mNum[5].x_ - mMapoffset.x_, mPos.y_ + mNum[5].y_ - mMapoffset.y_, mImage[3][mAnimCnt], true);
+
 			}
 		}
 		if (mAitem != 0)
@@ -519,6 +530,16 @@ bool Aitem::Getflg()
 {
 
 	return true;
+}
+
+int Aitem::KnomiNum(void)
+{
+	return mNumKinomi;
+}
+
+int Aitem::AppleNum(void)
+{
+	return mApple;
 }
 
 

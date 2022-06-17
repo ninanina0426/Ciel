@@ -239,7 +239,7 @@ void WaShop::DrawOwnScn()
 
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[ws_floor[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[ws_obj[y][x]], true);
-			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", ws_floor[y][x]);
+			/*DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", ws_floor[y][x]);*/
 
 		}
 	}
@@ -315,4 +315,9 @@ bool WaShop::CheckMapChip(Vector2 pos)
 int WaShop::GetMapChip(Vector2 pos)
 {
 	return ws_obj[pos.y_ / 32][pos.x_ / 32];
+}
+
+int WaShop::GetTMapChip(Vector2 pos)
+{
+	return ws_floor[pos.y_ / 32][pos.x_ / 32];
 }

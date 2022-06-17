@@ -12,6 +12,7 @@ TitleScene::TitleScene()
 
 TitleScene::~TitleScene()
 {
+    DeleteSoundMem(SHandle);
 }
 
 uniquBaseScn TitleScene::Update(uniquBaseScn own)
@@ -39,6 +40,20 @@ void TitleScene::DrawOwnScn()
 bool TitleScene::Init(void)
 {
     title_ = LoadGraph("./image/title.png");
+   
+    SHandle = LoadSoundMem("image/music/titel.ogg");
+
+    // âπó ÇÃê›íË
+    ChangeVolumeSoundMem(100, SHandle);
+
+   
+
+    if (CheckSoundMem(SHandle) == 0)
+    {
+        PlaySoundMem(SHandle, DX_PLAYTYPE_LOOP);
+    }
+
+
     return true;
 }
 

@@ -19,7 +19,7 @@ void BGM::Update(int num)
     move = 255 * x;
 
     // âπó ÇÃê›íË
-    ChangeVolumeSoundMem(move / 100, SHandle);
+    ChangeVolumeSoundMem(100, SHandle);
 
     MAP_ID coppymapID = lpMapMng.GetMapIdOld();
     MAP_ID mapID = lpMapMng.GetMapId();
@@ -33,7 +33,7 @@ void BGM::Update(int num)
         switch (mapID)
         {
         case MAP_ID::FOREST:
-            SHandle = LoadSoundMem("bgm/yume.mp3");
+            SHandle = LoadSoundMem("image/music/forest.ogg");
             break;
         case MAP_ID::WA:
             break;
@@ -46,19 +46,22 @@ void BGM::Update(int num)
         case MAP_ID::DARK:
             break;
         case MAP_ID::FORESTIN:
+            SHandle = LoadSoundMem("image/music/forestIn.ogg");
             break;
         case MAP_ID::TEMPLE:
             break;
         case MAP_ID::TEMPLEIN:
+            SHandle = LoadSoundMem("image/music/templeIn.ogg");
             break;
         case MAP_ID::SWEETS:
-            SHandle = LoadSoundMem("bgm/retroparty.mp3");
+            SHandle = LoadSoundMem("image/music/retroparty.ogg");
             break;
         case MAP_ID::SWEETSOUT:
             break;
         case MAP_ID::SWEETSSCHOOL:
             break;
         case MAP_ID::TRANGETIONS:
+            
             break;
         case MAP_ID::MAX:
             break;
@@ -71,13 +74,13 @@ void BGM::Update(int num)
 
 void BGM::Move(void)
 {
-    PlaySoundMem(SHandle, DX_PLAYTYPE_BACK);
+    PlaySoundMem(SHandle, DX_PLAYTYPE_LOOP);
 }
 
 
 bool BGM::Init(void)
 {
-    SHandle = LoadSoundMem("bgm/retroparty.mp3");
+   /* SHandle = LoadSoundMem("bgm/retroparty.ogg");*/
    // /*MAP_ID mapID = lpMapMng.GetMapId();
 
    // if (mapID == MAP_ID::FOREST)

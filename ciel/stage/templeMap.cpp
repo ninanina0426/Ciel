@@ -547,7 +547,7 @@ void templeMap::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[temple[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[wall[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[tobj1[y][x]], true);
-			/*DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(0, 0, 255), "%d", tsoil[y][x]);*/
+			//DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(0, 0, 255), "%d", tsoil[y][x]);
 
 		}
 	}
@@ -751,8 +751,8 @@ bool templeMap::CheckMapChip(Vector2 pos)
 	case 1424:
 	case 1426:
 	case 2381:
-	case 2325:
-	case 2269:
+	/*case 2325:*/
+	/*case 2269:*/
 		Flg = false;
 		break;
 	default:
@@ -765,5 +765,10 @@ bool templeMap::CheckMapChip(Vector2 pos)
 int templeMap::GetMapChip(Vector2 pos)
 {
 	return temple[pos.y_ / 32][pos.x_ / 32];
+}
+
+int templeMap::GetTMapChip(Vector2 pos)
+{
+	return tsoil[pos.y_ / 32][pos.x_ / 32];;
 }
 

@@ -11,17 +11,31 @@ Quest::~Quest()
 {
 }
 
-void Quest::UpDate(MAP_ID mapid, QuestState qstate, QuestType qtype)
+void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, MAP_ID mapid)
 {
-	mapID_ = mapid;
-	type_ = qtype;
 	//クエストを受けなかったら抜ける
-	if (QuestType::SUB==qtype&&QuestState::NON == qstate)
+	if (!stateFlg)
 	{
+		state_= QuestState::NON;
 		return;
 	}
+	
+	
+	quest_ = static_cast<QUEST>(q);
 
-	//場所ごとのクエスト
+	if (quest_ != quest_old)
+	{
+		state_ = QuestState::ALIVE;
+		CompFlg_ = false;
+	}
+	//クエスト用のアイテムフラグ
+	aitem_;
+	//アイテムのフラグがtrueになってたらstateを完了にする
+	/*if (aitem_)
+	{
+		state_ = QuestState::COMP;
+		QFlg_=false;
+	}*/
 	switch (mapid)
 	{
 	case MAP_ID::FOREST:
@@ -39,24 +53,65 @@ void Quest::UpDate(MAP_ID mapid, QuestState qstate, QuestType qtype)
 	case MAP_ID::FORESTIN:
 		break;
 	case MAP_ID::TEMPLE:
+		if (plPos.y_ < 1000)
+		{
+			CompFlg_ = true;
+		}
 		break;
 	case MAP_ID::TEMPLEIN:
 		break;
 	case MAP_ID::SWEETS:
-		SweetQuest(qtype);
 		break;
 	case MAP_ID::SWEETSOUT:
-		SweetQuest(qtype);
 		break;
 	case MAP_ID::SWEETSSCHOOL:
 		break;
 	case MAP_ID::TRANGETIONS:
+		
 		break;
 	case MAP_ID::MAX:
 		break;
 	default:
 		break;
 	}
+	
+
+	if (CompFlg_)
+	{
+		QFlg_ = false;
+		quest_old = quest_;
+		//quest_ = QUEST::MAX;
+		state_ = QuestState::COMP;
+	
+	}
+	
+
+	//場所ごとのクエスト
+	if (state_ == QuestState::ALIVE)
+	{
+		switch (quest_)
+		{
+		case QUEST::MAX:
+			break;
+		case QUEST::QUEST_1:
+			QFlg_ = true;
+			QTxt_ = "探索してみよう";
+			break;
+		case QUEST::QUEST_2:
+			QFlg_ = true;
+			QTxt_ = "スイーツの材料を集めよう";
+			break;
+		case QUEST::QUEST_3:
+			break;
+		case QUEST::QUEST_4:
+			break;
+		case QUEST::QUEST_5:
+			break;
+		default:
+			break;
+		}
+	}
+	
 
 	//クエストを受けるかどうか
 	//クエストの種類　メインは強制　サブは任意
@@ -66,24 +121,11 @@ void Quest::UpDate(MAP_ID mapid, QuestState qstate, QuestType qtype)
 
 void Quest::Draw()
 {
-	if (QuestType::MAIN==type_)
+	if (QFlg_)
 	{
-		if (QFlg_)
-		{
-
-			DrawFormatString(800, 0, 0xff0000, "□　メインクエスト\n  %s", QTxt_.c_str());
-		}
+		DrawFormatString(800, 0, 0xff0000, "クエスト受注しました");
+		DrawFormatString(900, 50, 0xff0000, "□　%s", QTxt_.c_str());
 	}
-	else if (QuestType::SUB == type_)
-	{
-		if (QFlg_)
-		{
-			DrawFormatString(800, 0, 0xff0000, "□　サブクエスト \n %s", QTxt_.c_str());
-		}
-	}
-	
-	
-	
 }
 
 bool Quest::Init(void)
@@ -92,44 +134,13 @@ bool Quest::Init(void)
 	state_ = QuestState::NON;
 	mapID_ = MAP_ID::MAX;
 	type_ = QuestType::MAX;
+	quest_old = QUEST::MAX;
 	QFlg_ = false;
+	CompFlg_ = false;
 	Item_ = 0;
+	aitem_.init();
+
 	return true;
 }
 
-void Quest::SweetQuest(QuestType qtype)
-{
-	//メインクエスト
-	if (QuestType::MAIN == qtype)
-	{
-		if (state_ == QuestState::NON)
-		{
-			Item_ = 5;
-			state_ = QuestState::ALIVE;
-		}
-		QTxt_ = " 商売あがったり！";
-
-		//アイテムの量を管理
-		Item_;
-
-		if (Item_ == 0)
-		{
-			//クエスト完了の時の処理
-			state_ = QuestState::COMP;
-			QFlg_ = false;
-		}
-		QFlg_ = true;
-	}
-	//サブクエスト
-	else if (QuestType::SUB == qtype)
-	{
-		QuestState state;
-		state = QuestState::NON;
-	}
-	else
-	{
-		return;
-	}
-
-}
 

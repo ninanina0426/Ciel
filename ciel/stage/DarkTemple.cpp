@@ -344,7 +344,7 @@ void DarkTemple::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[dt_ground[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[dt_wall[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[dt_obj[y][x]], true);
-			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", dt_obj[y][x]);
+			/*DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", dt_obj[y][x]);*/
 
 		}
 	}
@@ -452,4 +452,9 @@ bool DarkTemple::CheckMapChip(Vector2 pos)
 int DarkTemple::GetMapChip(Vector2 pos)
 {
 	return dt_wall[pos.y_ / 32][pos.x_ / 32];;
+}
+
+int DarkTemple::GetTMapChip(Vector2 pos)
+{
+	return dt_ground[pos.y_ / 32][pos.x_ / 32];;
 }

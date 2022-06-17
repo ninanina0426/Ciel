@@ -455,3 +455,8 @@ int CaveMap::GetMapChip(Vector2 pos)
 {
 	return cave_wall[pos.y_ / 32][pos.x_ / 32];
 }
+
+int CaveMap::GetTMapChip(Vector2 pos)
+{
+	return cave_ground[pos.y_ / 32][pos.x_ / 32];;
+}

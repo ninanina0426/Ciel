@@ -17,11 +17,11 @@ Player::~Player()
 bool Player::init(PlayerID playerid)
 {
 	/*mParent = parent;*/
-	/*mPos.x_ = 1425;
-	mPos.y_ = 1250;*/
+	mPos.x_ = 1590;
+	mPos.y_ = 2915;
 
-	mPos.x_ = 785;
-	mPos.y_ = 1400;
+	/*mPos.x_ = 785;
+	mPos.y_ = 1400;*/
 
 	//playerの種別関係
 	if (plID_ != PlayerID::Max)
@@ -31,7 +31,7 @@ bool Player::init(PlayerID playerid)
 	}
 	mSizeOffset.x_ = 0;
 	mSizeOffset.y_= 0;
-	mMoveSpeed = 5;
+	mMoveSpeed = 3;
 	mMoveDir = DIR_DOWN;
 	mSize.x_ = 32;
 	mSize.y_ = 32;
@@ -53,57 +53,64 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
-
-	if (LoadDivGraph("image/108.png", 32, 4, 8, 32, 48, &mImage2[0]) == -1)
+	if (LoadDivGraph("image/107.png", 32, 4, 8, 32, 48, &mImage2[0]) == -1)
+	{
+		return false;
+	}
+	if (LoadDivGraph("image/108.png", 32, 4, 8, 32, 48, &mImage3[0]) == -1)
 	{
 		return false;
 	}
 
-
-	if (LoadDivGraph("image/107.png", 32, 4, 8, 32, 48, &mImage3[0]) == -1)
-
-	{
-		return false;
-	}
-	
 	
 
 	return true;
 
 }
 
-Vector2 Player::Update(void)
+Vector2 Player::Update(int chipId)
 {
 	DIR keyDir = DIR_MAX;		//キー入力の方向
 	Vector2 copyPos = mPos;
 
 	MAP_ID mapID = lpMapMng.GetMapId();
 
+	mChipId = chipId;
+
 	key_.Update();
 
-	
 
+	if (key_.getKeyDownHold(KEY_INPUT_LSHIFT))
+	{
+		mMoveSpeed = 5;
+	}
+	else
+	{
+		mMoveSpeed = 3;
+	}
 	//デバッグ用
-	if (key_.getKeyDownHold(KEY_INPUT_Q))
+	/*if (key_.getKeyDownHold(KEY_INPUT_Q))
 	{
 		mPos = { 0,0 };
-	}
+	}*/
 
-
-	if (key_.getKeyDown(KEY_INPUT_F))
+	if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
 	{
-		if (i == 0)
+		if (key_.getKeyDown(KEY_INPUT_F))
 		{
-			i = 1;
-			moveFlg = true;
-		}
-		else if (i == 1)
-		{
-			i = 0;
-			moveFlg = false;
+			if (i == 0)
+			{
+				i = 1;
+				moveFlg = true;
+			}
+			else if (i == 1)
+			{
+				i = 0;
+				moveFlg = false;
+			}
 		}
 	}
-	
+
 	if (moveFlg == false)
 	{
 		//プレイヤーの操作
@@ -211,15 +218,29 @@ Vector2 Player::Update(void)
 			{
 				lpMapMng.GetEvent(copyPos);
 			}
+
+			
+
 			//当たり判定
 			if (lpMapMng.cheakMapChip(copyPos))
 			{
 				mPos = copyPos;
 			}
 
-			mDamyPos = copyPos;
+			/*mDamyPos = copyPos;*/
 
 		}
+		if (lpMapMng.GetMapChange(copyPos) == true)
+		{
+			//切り替え先のSetposをもらう
+			copyPos = lpMapMng.GetPos();
+			mMoveDir = lpMapMng.GetDir();
+			lpMapMng.mMapChange = false;
+
+			mPos = copyPos;
+		}
+		
+	
 	}
 
 	
@@ -270,8 +291,8 @@ void Player::Draw(Vector2 offset)
 	}
 	
 
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
-	DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
+	/*DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
+	DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);*/
 
 }
 

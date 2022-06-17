@@ -33,6 +33,7 @@ bool Chat::init(void)
 
 	mFlg = false;
 	finalC_ = false;
+	mSNum = 0;
 
 	mNpc = new Npc();
 
@@ -53,10 +54,8 @@ bool Chat::Update(bool flg, int num)
 		{
 		case 1:
 		{
-
 			if (mNum == 100)
 			{
-				mFlg = false;
 				finalC_ = true;
 				mNum = num;
 			}
@@ -66,6 +65,7 @@ bool Chat::Update(bool flg, int num)
 				if (mNum == 4)
 				{
 					mFlg = false;
+					mSNum = mNum;
 					mNum = 0;
 				}
 			}
@@ -120,7 +120,7 @@ bool Chat::Update(bool flg, int num)
 	{
 		mNum = 100;
 		/*mFlg = false;*/
-
+		mSNum = 0;
 	}
 
 	return mFlg;
@@ -149,7 +149,7 @@ void Chat::Draw(Vector2 offset)
 		break;
 	}
 
-	DrawFormatString(0, 70, GetColor(0,0,255), "Chat:%d", mNum);
+	/*DrawFormatString(0, 70, GetColor(0,0,255), "Chat:%d", mNum);*/
 
 	
 }
@@ -162,6 +162,11 @@ bool Chat::Release(void)
 bool Chat::Getflg()
 {
 	return mFlg;
+}
+
+int Chat::GetNum(void)
+{
+	return mSNum;
 }
 
 

@@ -155,6 +155,7 @@
     <ClCompile Include="scene\Obj\Chat.cpp" />
     <ClCompile Include="scene\Obj\Npc.cpp" />
     <ClCompile Include="scene\Obj\Quest.cpp" />
+    <ClCompile Include="scene\Obj\shop.cpp" />
     <ClCompile Include="stage\CaveMap.cpp" />
     <ClCompile Include="stage\CaveShop.cpp" />
     <ClCompile Include="stage\DarkTemple.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="stage\Layer.cpp" />
     <ClCompile Include="stage\StageMng.cpp" />
     <ClCompile Include="stage\Stage.cpp" />
+    <ClCompile Include="stage\transitionStage\FadeInStage.cpp" />
     <ClCompile Include="stage\WaMap.cpp" />
     <ClCompile Include="stage\WaShop.cpp" />
     <ClCompile Include="stage\SweetsMap.cpp" />
@@ -194,6 +196,7 @@
     <ClInclude Include="scene\Obj\Chat.h" />
     <ClInclude Include="scene\Obj\Npc.h" />
     <ClInclude Include="scene\Obj\Quest.h" />
+    <ClInclude Include="scene\Obj\shop.h" />
     <ClInclude Include="stage\CaveMap.h" />
     <ClInclude Include="stage\CaveShop.h" />
     <ClInclude Include="stage\DarkTemple.h" />
@@ -216,6 +219,7 @@
     <ClInclude Include="stage\Layer.h" />
     <ClInclude Include="stage\StageMng.h" />
     <ClInclude Include="stage\Stage.h" />
+    <ClInclude Include="stage\transitionStage\FadeInStage.h" />
     <ClInclude Include="stage\WaMap.h" />
     <ClInclude Include="stage\WaShop.h" />
     <ClInclude Include="stage\SweetsMap.h" />

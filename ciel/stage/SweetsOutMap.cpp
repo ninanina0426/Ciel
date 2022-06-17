@@ -346,7 +346,7 @@ void SweetsOutMap::DrawOwnScn()
 
 			/*DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", mMapOutObj[y][x]);*/
 
-			DrawFormatString(0, 10, GetColor(0, 0, 255), "mapPos=(%d,%d)", mOffset.x_, mOffset.y_);
+			/*DrawFormatString(0, 10, GetColor(0, 0, 255), "mapPos=(%d,%d)", mOffset.x_, mOffset.y_);*/
 		}
 	}
 
@@ -577,5 +577,10 @@ bool SweetsOutMap::CheckMapChip(Vector2 pos)
 int SweetsOutMap::GetMapChip(Vector2 pos)
 {
 	return mMapOutObj[pos.y_ / 16][pos.x_ / 16];
+}
+
+int SweetsOutMap::GetTMapChip(Vector2 pos)
+{
+	return mMapOutNomal[pos.y_ / 16][pos.x_ / 16];
 }
 

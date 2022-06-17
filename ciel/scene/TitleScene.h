@@ -20,5 +20,7 @@ private:
 
     int title_;
 
+    int SHandle;
+
 };
 
