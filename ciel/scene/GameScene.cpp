@@ -130,13 +130,15 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     int min = 60;    //一分間のフレーム数
     int Day = min * 10;      //一日の秒数
 
-    if (delta % Day == 300)
+    //yuugata
+    if (delta % Day == 120)
     {
         AMflg_ = false;
         PMflg_ = true;
         count_ = 0;
     }
-    if (!AMflg_ && PMflg_ && delta % Day == 420)
+    //yoru
+    if (!AMflg_ && PMflg_ && delta % Day == 180)
     {
         Nightflg_ = true;
         PMflg_ = false;
@@ -158,10 +160,11 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
    
-
+   
     mMapOffset = lpMapMng.Update(PlayerPos);
 
     mPlayer.Update(lpMapMng.GetChipId());
+
 
     PlayerPos = mPlayer.GetPos();
 
@@ -171,21 +174,29 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mChat->Update(mNpc->Getflg(), mNpc->Num());
 
-   
+  
 
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
      mAitem->Update(PlayerPos, PlayerSize);
 
-
+    
 
      /*mMenu.Update();*/
      if (mPose == true)
      {
          mMenu.Update();
      }
-  
+
+     //フェードイン
+     if (lpMapMng.fadeinFlg_)
+     {
+         if (fadein_.UpdataTrangetion())
+         {
+             lpMapMng.fadeinFlg_ = false;
+         }
+     }
 
     mBgm->Update(mMenu.OpBgm());
 
@@ -222,11 +233,19 @@ void GameScene::DrawOwnScn()
 
      mChat->Draw(mMapOffset);
 
+     
+
+
      if (mPose == true)
      {
          mMenu.Draw();
      }
     
+     //フェードイン
+     if (lpMapMng.fadeinFlg_)
+     {
+         fadein_.DrawOwnScn();
+     }
     
 }
 
@@ -270,6 +289,7 @@ void GameScene::TimeManeger(void)
     switch (mapID)
     {
     case MAP_ID::FOREST:
+        Flg = true;
         break;
     case MAP_ID::WA:
         Flg = true;
@@ -285,6 +305,7 @@ void GameScene::TimeManeger(void)
     case MAP_ID::FORESTIN:
         break;
     case MAP_ID::TEMPLE:
+        Flg = true;
         break;
     case MAP_ID::TEMPLEIN:
         break;

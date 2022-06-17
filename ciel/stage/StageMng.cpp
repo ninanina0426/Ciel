@@ -14,21 +14,29 @@
 #include "ForestInMap.h"
 
 
+
 bool StageMng::Init()
 {
 	stage_ = std::make_unique<templeMap>();
-
+	fadeinFlg_ = false;
 	mMapID = MAP_ID::TEMPLE;
-
+	fl_ = false;
 	mOffset = mPlayer.GetPos()-Vector2{540,0};
-
+	
     return true;
 }
 
 void StageMng::Draw()
 {
-	stage_->DrawOwnScn();		//それぞれのマップを描画
 	
+	stage_->DrawOwnScn();		//それぞれのマップを描画
+
+
+	if (lpMapMng.fadeinFlg_)
+	{
+		fadein_.DrawOwnScn();
+	}
+
 	DrawFormatString(0, 50, GetColor(255, 255, 255), "chipId=%d", mChipId);
 	DrawFormatString(0, 80, GetColor(255, 0, 0), "offset=(%d,%d)", mOffset.x_,mOffset.y_);
 
@@ -46,6 +54,7 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 	OldPos = mPlayer.GetPos();
 
 	key_.Update();
+	
 
 	if (OldPos != mPlayerset)
 	{
@@ -197,7 +206,7 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 
 	}
 	
-	//GetEvent(mPlayerset);
+	
 
 	if (CheckHitKey(KEY_INPUT_W))
 	{
@@ -219,6 +228,15 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 		mMapID = MAP_ID::WA;
 	}
 	stage_->Update(mOffset);
+
+	//フェードイン
+	if (fadeinFlg_)
+	{
+		if (fadein_.UpdataTrangetion())
+		{
+			fadeinFlg_ = false;
+		}
+	}
 
 	mChipId = stage_->GetMapChip(mPlayerset);
 
@@ -567,17 +585,144 @@ bool StageMng::GetMapChange(Vector2 pos)
 {
 	if (lpMapMng.mMapID == MAP_ID::TEMPLE)
 	{
+		//スイーツマップへ
 		if (pos.x_ >= 1380 && pos.x_ < 1450 &&
-			pos.y_ >= 730 && pos.y_ < 750)
+			pos.y_ >= 730 && pos.y_ < 760)
 		{
 			if (key_.getKeyDown(KEY_INPUT_F))
 			{
-				mMapChange = true;
-				mNextPos = { 820,1520 };
-				mDir = DIR_UP;
-				mMapID = MAP_ID::SWEETS;
-				stage_ = std::move(std::make_unique<SweetsMap>());
+				fadeinFlg_ = true;
+				fadein_.Setcnt(0);
 			}
+			if (fadeinFlg_)
+			{
+				if (fadein_.GetCnt() > 255)
+				{
+					mMapChange = true;
+					mNextPos = { 820,1520 };
+					mDir = DIR_UP;
+					mMapID = MAP_ID::SWEETS;
+					mOffset = mNextPos - Vector2{ 540,0 };
+					stage_ = std::move(std::make_unique<SweetsMap>());
+				}
+
+			}
+		}
+		//和マップへ
+		if (pos.x_ >= 1440 && pos.x_ < 1480 &&
+			pos.y_ >= 835 && pos.y_ < 860)
+		{
+			if (key_.getKeyDown(KEY_INPUT_F))
+			{
+				fadeinFlg_ = true;
+				fadein_.Setcnt(0);
+
+			}
+			if (fadeinFlg_)
+			{
+				if (fadein_.GetCnt() > 255)
+				{
+					mMapChange = true;
+					mNextPos = { 25, 2400 };
+					mDir = DIR_RIGHT;
+					mMapID = MAP_ID::WA;
+					mOffset = mNextPos - Vector2{ 540,300 };
+					stage_ = std::move(std::make_unique<WaMap>());
+				}
+			}
+		}
+		//森マップへ
+		if (pos.x_ >= 1825 && pos.x_ < 1855 &&
+			pos.y_ >= 835 && pos.y_ < 860)
+		{
+			if (key_.getKeyDown(KEY_INPUT_F))
+			{
+				fadeinFlg_ = true;
+				fadein_.Setcnt(0);
+			}
+			if (fadeinFlg_)
+			{
+				if (fadein_.GetCnt() > 255)
+				{
+					mMapChange = true;
+					mNextPos = { 1630, 2590 };
+					mDir = DIR_UP;
+					mMapID = MAP_ID::FOREST;
+					mOffset = mNextPos - Vector2{ 540,300 };
+					stage_ = std::move(std::make_unique<ForestMap>());
+				}
+			}
+		}
+		//洞窟マップへ
+		if (pos.x_ >= 1890 && pos.x_ < 1920 &&
+			pos.y_ >= 730 && pos.y_ < 760)
+		{
+			if (key_.getKeyDown(KEY_INPUT_F))
+			{
+				fadeinFlg_ = true;
+				fadein_.Setcnt(0);
+			}
+			if (fadeinFlg_)
+			{
+				if (fadein_.GetCnt() > 255)
+				{
+					mMapChange = true;
+					mNextPos = { 1600, 3050 };
+					mDir = DIR_UP;
+					mMapID = MAP_ID::CAVE;
+					mOffset = mNextPos - Vector2{ 540,300 };
+					stage_ = std::move(std::make_unique<CaveMap>());
+				}
+			}
+		}
+		//雪マップへ
+		if (pos.x_ >= 1825 && pos.x_ < 1855 &&
+			pos.y_ >= 640 && pos.y_ < 660)
+		{
+			if (key_.getKeyDown(KEY_INPUT_F))
+			{
+				fadeinFlg_ = true;
+				fadein_.Setcnt(0);
+			}
+			if (fadeinFlg_)
+			{
+				if (fadein_.GetCnt() > 255)
+				{
+					mMapChange = true;
+					mNextPos = { 1600, 3050 };
+					mDir = DIR_UP;
+					mMapID = MAP_ID::CAVE;
+					mOffset = mNextPos - Vector2{ 540,300 };
+					stage_ = std::move(std::make_unique<CaveMap>());
+				}
+			}
+		}
+	}
+
+	if (lpMapMng.mMapID == MAP_ID::WA)
+	{
+		if (pos.x_ < 20 && pos.y_ > 2275 && pos.y_ < 2495)
+		{
+			if (key_.getKeyDown(KEY_INPUT_F))
+			{
+				fadeinFlg_ = true;
+				fadein_.Setcnt(0);
+			}
+			if (fadeinFlg_)
+			{
+				if (fadein_.GetCnt() > 255)
+				{
+					mMapChange = true;
+					mNextPos = { 1645,715 };
+					mDir = DIR_DOWN;
+					mOffset = mNextPos - Vector2{ 540,300 };
+					mMapID = MAP_ID::TEMPLE;
+					stage_ = std::move(std::make_unique<templeMap>());
+					
+				}
+
+			}
+
 		}
 	}
 

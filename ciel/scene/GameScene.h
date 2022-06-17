@@ -5,6 +5,8 @@
 #include"../scene/Obj/Player.h"
 #include"../scene/Obj/Menu.h"
 #include "../stage/stage.h"
+#include "../stage/transitionStage/FadeInStage.h"
+
 class SceneMng;
 class Aitem;
 class BGM;
@@ -65,6 +67,7 @@ private:
     MAP_ID mNextMapID;
     Vector2 mNextPos;
 
+    FadeInStage fadein_;
     
 
     Vector2 mMapOffset;

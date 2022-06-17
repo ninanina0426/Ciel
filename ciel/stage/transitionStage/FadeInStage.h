@@ -1,14 +1,22 @@
 #pragma once
-#include "TraStage.h"
-class FadeInStage :
-    public TraStage
+
+class FadeInStage 
 {
 public:
 	FadeInStage();
 	~FadeInStage();
+	bool UpdataTrangetion(void);
+	void DrawOwnScn(void);
+	int GetCnt(void);
+	void Setcnt(int num);
 private:
-	bool UpdataTrangetion(void) override;
-	void DrawOwnScn(void) override;
+	void Init();
+	
+
+	int id_;
+	bool flg_;
+	bool ChangeFlg_;
 	int count_;
+	int cnt_;
 };
 

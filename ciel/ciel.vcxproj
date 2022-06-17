@@ -178,6 +178,7 @@
     <ClCompile Include="stage\Layer.cpp" />
     <ClCompile Include="stage\StageMng.cpp" />
     <ClCompile Include="stage\Stage.cpp" />
+    <ClCompile Include="stage\transitionStage\FadeInStage.cpp" />
     <ClCompile Include="stage\WaMap.cpp" />
     <ClCompile Include="stage\WaShop.cpp" />
     <ClCompile Include="stage\SweetsMap.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="stage\Layer.h" />
     <ClInclude Include="stage\StageMng.h" />
     <ClInclude Include="stage\Stage.h" />
+    <ClInclude Include="stage\transitionStage\FadeInStage.h" />
     <ClInclude Include="stage\WaMap.h" />
     <ClInclude Include="stage\WaShop.h" />
     <ClInclude Include="stage\SweetsMap.h" />

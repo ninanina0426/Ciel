@@ -3,6 +3,7 @@
 #include "../common/Vector2.h"
 #include"../scene/Obj/Player.h"
 #include"../scene/Input/Keyboard.h"
+#include "transitionStage/FadeInStage.h"
 #include "Stage.h"
 
 
@@ -35,7 +36,9 @@ public:
 	int mTchipId;
 
 	int mChipImage[10000];
-	bool mMapChange;;
+	bool mMapChange;
+
+	bool fadeinFlg_;
 	DIR GetDir(void);
 
 	Vector2 GetPos(void);
@@ -51,6 +54,9 @@ private:
 	Player mPlayer;
 
 	uniquStage stage_;		//ステージ管理
+	FadeInStage fadein_;
+	bool fl_;
+	int id_;
 
 	Vector2 movePos;
 

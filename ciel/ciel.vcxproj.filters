@@ -39,6 +39,7 @@
     <ClCompile Include="scene\Obj\Quest.cpp" />
     <ClCompile Include="stage\Layer.cpp" />
     <ClCompile Include="scene\Obj\shop.cpp" />
+    <ClCompile Include="stage\transitionStage\FadeInStage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -126,5 +127,6 @@
     <ClInclude Include="scene\Obj\Quest.h" />
     <ClInclude Include="stage\Layer.h" />
     <ClInclude Include="scene\Obj\shop.h" />
+    <ClInclude Include="stage\transitionStage\FadeInStage.h" />
   </ItemGroup>
 </Project>
