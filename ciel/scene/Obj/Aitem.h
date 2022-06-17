@@ -39,8 +39,13 @@ public:
 
 	bool Getflg();
 
+
+	int mTama;
+	int mKinomi;
+
 	int KnomiNum(void);
 	int AppleNum(void);
+
 
 	int mAitem;
 

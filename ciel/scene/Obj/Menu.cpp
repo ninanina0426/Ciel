@@ -353,9 +353,6 @@ void Menu::Draw(void)
 		{
 
 			/*if (mParent->mHoutai() == false)
-=======
-		/*	if (mParent->mHoutai() == false)
->>>>>>> 749e17614945b7ff443b5ff6f94ee2399a9f27be
 			{
 				
 				if (yyy == 1)
