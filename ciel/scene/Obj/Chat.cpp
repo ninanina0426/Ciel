@@ -40,13 +40,17 @@ bool Chat::init(void)
 	return true;
 }
 
-bool Chat::Update(bool flg, int num)
+bool Chat::Update(bool flg, int num,bool sflg)
 {
 	mFlg = flg;
 
+	shopFlg = sflg;
+
 	key_.Update();
 
-	if (mFlg == true)
+	
+
+	if ((mFlg == true))
 	{
 		mNumType = num;
 
@@ -54,19 +58,28 @@ bool Chat::Update(bool flg, int num)
 		{
 		case 1:
 		{
-			if (mNum == 100)
+			if (mNum == 100 )
 			{
 				finalC_ = true;
-				mNum = num;
+				mNum = num-1;
 			}
 			if ((key_.getKeyDown(KEY_INPUT_F)) && (mNum != 100))
 			{
 				mNum += 1;
+
+				if (mNum == 2)
+				{
+					mSNum = 4;
+				}
+				if (shopFlg == true)
+				{
+					mSNum = 3;
+					mNum = 3;
+				}
 				if (mNum == 4)
 				{
 					mFlg = false;
-					mSNum = mNum;
-					mNum = 0;
+					mNum =0;
 				}
 			}
 		}
@@ -116,12 +129,13 @@ bool Chat::Update(bool flg, int num)
 			break;
 		}
 	}
-	else
+	else if(mFlg==false)
 	{
 		mNum = 100;
 		/*mFlg = false;*/
 		mSNum = 0;
 	}
+	
 
 	return mFlg;
 }
@@ -149,7 +163,7 @@ void Chat::Draw(Vector2 offset)
 		break;
 	}
 
-	/*DrawFormatString(0, 70, GetColor(0,0,255), "Chat:%d", mNum);*/
+	DrawFormatString(0, 70, GetColor(0,0,255), "Chat:%d", mNum);
 
 	
 }

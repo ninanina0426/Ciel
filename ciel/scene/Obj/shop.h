@@ -26,6 +26,11 @@ public:
 	void Draw(int k,int a);		//•`‰æ
 	bool Release(void);		//ŠJ•ú
 
+	bool SPose(void);
+	bool CanselFlg(void);
+
+	bool Canflg;
+
 private:
 	
 	int FontSize;
@@ -48,6 +53,8 @@ private:
 	GameScene* mParent;
 
 	int num;
+
+	int moveSnum;
 
 	int x;
 	int y;

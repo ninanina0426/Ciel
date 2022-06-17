@@ -22,13 +22,15 @@ private:
 	Npc*mNpc;
 
 	int mSNum;
+
+	bool shopFlg;
 public:
 	Chat();
 	~Chat();
 
 	bool GetfinalC(void);
 	bool init(void);		//初期化
-	bool Update(bool flg,int num);		//更新
+	bool Update(bool flg,int num,bool sflg);		//更新
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
 

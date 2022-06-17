@@ -26,6 +26,8 @@ bool shop::init(GameScene* parent)
 
     moveFlg = false;
 
+    Canflg = false;
+
     mBoxSe[0] = { 80,75 };
     mBoxSe[1] = { 80,75 };
     mBoxSe[2] = { 250,75 };
@@ -55,6 +57,8 @@ bool shop::init(GameScene* parent)
 
     mAitems = new Aitem();
 
+    moveSnum = 0;
+
     return true;
 }
 
@@ -67,7 +71,12 @@ void shop::Update(int num)
         moveFlg = true;
         ChangeState(SHOP_SELECT::SELECT);
     }
-   
+
+    if (num == 3)
+    {
+        moveFlg = false;
+    }
+    
     if (moveFlg == true)
     {
         switch (mSelect)
@@ -178,6 +187,17 @@ bool shop::Release(void)
     return true;
 }
 
+bool shop::SPose(void)
+{
+    return moveFlg;
+}
+
+bool shop::CanselFlg(void)
+{
+    return Canflg;
+}
+
+
 void shop::Select(void)
 {
 
@@ -207,22 +227,25 @@ void shop::Select(void)
         if (x == 1)
         {
             ChangeState(SHOP_SELECT::BUY);
+            Canflg = false;
             yy = 1;
 
         }
         if (x == 2)
         {
             ChangeState(SHOP_SELECT::SELL);
+            Canflg = false;
             yy = 1;
         }
         if (x == 3)
         {
             ChangeState(SHOP_SELECT::CANSEL);
+            Canflg = true;
             yy = 1;
         }
     }
 
-
+    /*Canflg = false;*/
 }
 
 void shop::Buy(void)
@@ -255,6 +278,8 @@ void shop::Buy(void)
           
         }
     }
+
+   
 }
 
 void shop::Sell(void)
@@ -287,11 +312,15 @@ void shop::Sell(void)
 
         }
     }
+
+   
 }
 
 void shop::Cansel(void)
 {
     moveFlg = false;
+
+   
     
     x = 0;
 }
