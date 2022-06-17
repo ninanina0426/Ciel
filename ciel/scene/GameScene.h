@@ -58,8 +58,11 @@ private:
     Player mPlayer;
 
     Menu mMenu;
-    Aitem*mAitem;
+
+    Aitem *mAitem;
+
     shop mShop;
+
 
     Npc* mNpc;
 
