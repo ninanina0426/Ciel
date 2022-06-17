@@ -19,7 +19,7 @@ void BGM::Update(int num)
     move = 255 * x;
 
     // âπó ÇÃê›íË
-    ChangeVolumeSoundMem(move / 100, SHandle);
+    ChangeVolumeSoundMem(100, SHandle);
 
     MAP_ID coppymapID = lpMapMng.GetMapIdOld();
     MAP_ID mapID = lpMapMng.GetMapId();
@@ -49,15 +49,17 @@ void BGM::Update(int num)
         case MAP_ID::TEMPLE:
             break;
         case MAP_ID::TEMPLEIN:
+            SHandle = LoadSoundMem("image/music/templeIn.ogg");
             break;
         case MAP_ID::SWEETS:
-            SHandle = LoadSoundMem("bgm/retroparty.ogg");
+            SHandle = LoadSoundMem("image/music/retroparty.ogg");
             break;
         case MAP_ID::SWEETSOUT:
             break;
         case MAP_ID::SWEETSSCHOOL:
             break;
         case MAP_ID::TRANGETIONS:
+            
             break;
         case MAP_ID::MAX:
             break;

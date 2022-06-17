@@ -149,7 +149,7 @@ void Chat::Draw(Vector2 offset)
 		break;
 	}
 
-	DrawFormatString(0, 70, GetColor(0,0,255), "Chat:%d", mNum);
+	/*DrawFormatString(0, 70, GetColor(0,0,255), "Chat:%d", mNum);*/
 
 	
 }

@@ -79,6 +79,15 @@ Vector2 Player::Update(int chipId)
 
 	key_.Update();
 
+
+	if (key_.getKeyDownHold(KEY_INPUT_LSHIFT))
+	{
+		mMoveSpeed = 5;
+	}
+	else
+	{
+		mMoveSpeed = 3;
+	}
 	//デバッグ用
 	if (key_.getKeyDownHold(KEY_INPUT_Q))
 	{
@@ -282,8 +291,8 @@ void Player::Draw(Vector2 offset)
 	}
 	
 
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
-	DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
+	/*DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
+	DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);*/
 
 }
 

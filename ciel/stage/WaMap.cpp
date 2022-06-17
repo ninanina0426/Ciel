@@ -468,7 +468,7 @@ void WaMap::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[wa_build1[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[wa_build2[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[wa_build3[y][x]], true);
-			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", layer4);
+			/*DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", layer4);*/
 		}
 	}
 }
