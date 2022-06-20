@@ -159,37 +159,33 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
-   
-   
     mMapOffset = lpMapMng.Update(PlayerPos);
 
-    mPlayer.Update(lpMapMng.GetChipId());
-
+    if (mShop.SPose() == false)
+    {
+        mPlayer.Update(lpMapMng.GetChipId());
+    }
 
     PlayerPos = mPlayer.GetPos();
 
     PlayerSize = mPlayer.GetSiz();
 
-    mNpc->Update(PlayerPos,PlayerSize,mChat->Getflg());
+    mNpc->Update(PlayerPos, PlayerSize, mChat->Getflg());
 
-    mChat->Update(mNpc->Getflg(), mNpc->Num());
-
-  
-
+    mAitem->Update(PlayerPos, PlayerSize);
+    mChat->Update(mNpc->Getflg(), mNpc->Num(), mShop.CanselFlg(), mShop.SPose());
+   
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
-
-     mAitem->Update(PlayerPos, PlayerSize);
-
-    
 
      /*mMenu.Update();*/
      if (mPose == true)
      {
          mMenu.Update();
      }
-     mShop.Update(mChat->GetNum());
 
+
+     mShop.Update(mChat->GetNum());
 
       //フェードイン
      if (lpMapMng.fadeinFlg_)
