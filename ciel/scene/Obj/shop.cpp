@@ -71,12 +71,16 @@ void shop::Update(int num)
         moveFlg = true;
         ChangeState(SHOP_SELECT::SELECT);
     }
-
-    if (num == 3)
+    if (num == 20)
     {
-        moveFlg = false;
+        moveFlg = true;
     }
-    
+
+    //if (num == 3)
+    //{
+    //    moveFlg = false;
+    //}
+    //
     if (moveFlg == true)
     {
         switch (mSelect)
@@ -200,7 +204,7 @@ bool shop::CanselFlg(void)
 
 void shop::Select(void)
 {
-
+    Canflg = false;
     if (x >= 0)
     {
         if (key_.getKeyDown(KEY_INPUT_RIGHT))
@@ -227,29 +231,27 @@ void shop::Select(void)
         if (x == 1)
         {
             ChangeState(SHOP_SELECT::BUY);
-            Canflg = false;
             yy = 1;
-
         }
         if (x == 2)
         {
             ChangeState(SHOP_SELECT::SELL);
-            Canflg = false;
             yy = 1;
         }
         if (x == 3)
         {
-            ChangeState(SHOP_SELECT::CANSEL);
-            Canflg = true;
+            ChangeState(SHOP_SELECT::CANSEL); 
             yy = 1;
         }
+
     }
 
-    /*Canflg = false;*/
+    
 }
 
 void shop::Buy(void)
 {
+    Canflg = false;
     if (yy >= 0)
     {
         if (key_.getKeyDown(KEY_INPUT_DOWN))
@@ -284,6 +286,7 @@ void shop::Buy(void)
 
 void shop::Sell(void)
 {
+    Canflg = false;
     if (yy >= 0)
     {
         if (key_.getKeyDown(KEY_INPUT_DOWN))
@@ -312,16 +315,13 @@ void shop::Sell(void)
 
         }
     }
-
    
 }
 
 void shop::Cansel(void)
 {
     moveFlg = false;
-
-   
-    
+    Canflg = true;
     x = 0;
 }
 

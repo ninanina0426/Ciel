@@ -173,7 +173,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     mNpc->Update(PlayerPos, PlayerSize, mChat->Getflg());
 
     mAitem->Update(PlayerPos, PlayerSize);
-    mChat->Update(mNpc->Getflg(), mNpc->Num(), mShop.CanselFlg());
+    mChat->Update(mNpc->Getflg(), mNpc->Num(), mShop.CanselFlg(), mShop.SPose());
    
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/

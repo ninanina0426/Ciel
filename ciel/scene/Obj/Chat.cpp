@@ -40,7 +40,7 @@ bool Chat::init(void)
 	return true;
 }
 
-bool Chat::Update(bool flg, int num,bool sflg)
+bool Chat::Update(bool flg, int num,bool sflg,bool sPose)
 {
 	mFlg = flg;
 
@@ -58,29 +58,54 @@ bool Chat::Update(bool flg, int num,bool sflg)
 		{
 		case 1:
 		{
-			if (mNum == 100 )
+			if (mNum == 100)
 			{
 				finalC_ = true;
-				mNum = num-1;
+				mNum = num - 1;
 			}
-			if ((key_.getKeyDown(KEY_INPUT_F)) && (mNum != 100))
+			if ((key_.getKeyDown(KEY_INPUT_F)) && (mNum != 100) && (sPose == false))
 			{
-				mNum += 1;
 
+				mNum += 1;
 				if (mNum == 2)
 				{
 					mSNum = 4;
+					mNum = 20;
 				}
-				if (shopFlg == true)
-				{
-					mSNum = 3;
-					mNum = 3;
-				}
+				
 				if (mNum == 4)
 				{
 					mFlg = false;
-					mNum =0;
+					mNum = 0;
+
 				}
+			}
+
+			if (sPose == true)
+			{
+				if (mNum == 20)
+				{
+					mNum = 20;
+					mSNum = 20;
+				}
+				if (shopFlg == false)
+				{
+					if (mNum == 3)
+					{
+						mNum = 20;
+					}
+				}
+			}
+			else 
+			{
+				if (shopFlg == true)
+				{
+					if (mNum == 20)
+					{
+						mNum = 3;
+					}
+				}
+				
 			}
 		}
 		break;
