@@ -40,6 +40,9 @@ bool Player::init(PlayerID playerid)
 	flg = false;
 	moveFlg = false;
 	
+	Stamina_ = STAMINA;
+	Energy_ = ENERGY;
+
 	mAnmCnt = 0;
 
 	i = 0;
@@ -80,12 +83,17 @@ Vector2 Player::Update(int chipId)
 	key_.Update();
 
 
-	if (key_.getKeyDownHold(KEY_INPUT_LSHIFT))
+	if (key_.getKeyDownHold(KEY_INPUT_LSHIFT)&& Stamina_!=0)
 	{
+		Stamina_--;
 		mMoveSpeed = 5;
 	}
 	else
 	{
+		if (Stamina_ != STAMINA)
+		{
+			Stamina_++;
+		}
 		mMoveSpeed = 3;
 	}
 	//デバッグ用
@@ -293,6 +301,7 @@ void Player::Draw(Vector2 offset)
 
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
 	DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
+	DrawFormatString(0, 300, 0xff0000, "スタミナ%d", Stamina_);
 
 }
 
