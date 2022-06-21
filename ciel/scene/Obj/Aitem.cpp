@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include"../../stage/StageMng.h"
+#include"shop.h"
 #include "Aitem.h"
 
 
@@ -48,9 +49,13 @@ bool Aitem::init()
 	mAitem = 10;
 
 
-
 	mNumKinomi = 0;
 	mApple = 0;
+	mKinominoKusiyaki = 0;
+	mFruitDrink = 0;
+	mFishingRodS = 0;
+	mRagBag = 0;
+	mPickaxe = 0;
 
 	mNum[0] ={0,0}; //posx
 
@@ -73,6 +78,8 @@ bool Aitem::init()
 	mNum[13] = { 2300,120 };
 
 	i = 0;
+
+	mShop = new shop();
 
 
 	if (LoadDivGraph("image/item.png", 12, 3, 4, mSize.x_, mSize.y_, &mImage[0][0]) == -1)
@@ -271,6 +278,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mAitem -= 1;
 					mNum[2] = mNum[0];
 					i = 2;
+					
 				}
 
 			}
@@ -305,7 +313,6 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mTama -= 1;
 					mNum[5] = mNum[0];
 					mTama2 = true;
-
 				}
 
 			}
@@ -416,7 +423,6 @@ void Aitem::Draw(Vector2 mMapoffset)
 				DrawGraph(mPos.x_ + mNum[7].x_ - mMapoffset.x_ , mPos.y_ + mNum[7].y_ - mMapoffset.y_, mImage[3][mAnimCnt], true);
 			}
 		}
-
 		break;
 	case MAP_ID::WASHOP:
 
@@ -540,6 +546,41 @@ int Aitem::KnomiNum(void)
 int Aitem::AppleNum(void)
 {
 	return mApple;
+}
+
+int Aitem::KinominoKusiyakiNum(void)
+{
+	return mKinominoKusiyaki;
+}
+
+int Aitem::FruitDrinkNum(void)
+{
+	return mFruitDrink;
+}
+
+int Aitem::FishingRodSNum(void)
+{
+	return mFishingRodS;
+}
+
+int Aitem::RagBagNum(void)
+{
+	return mRagBag;
+}
+
+int Aitem::PickaxeNum(void)
+{
+	return mPickaxe;
+}
+
+int Aitem::mHaoriNum(void)
+{
+	return mHaoriN;
+}
+
+int Aitem::mRantanNum(void)
+{
+	return mRantanN;
 }
 
 

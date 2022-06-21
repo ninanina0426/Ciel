@@ -174,6 +174,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mAitem->Update(PlayerPos, PlayerSize);
     mChat->Update(mNpc->Getflg(), mNpc->Num(), mShop.CanselFlg(), mShop.SPose());
+
+    mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum());
    
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
@@ -238,7 +240,7 @@ void GameScene::DrawOwnScn()
          mMenu.Draw();
      }
 
-     mShop.Draw(mAitem->KnomiNum(), mAitem->AppleNum());
+     mShop.Draw();
     
      //フェードイン
      if (lpMapMng.fadeinFlg_)
