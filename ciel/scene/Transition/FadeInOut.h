@@ -9,7 +9,7 @@ public:
 	~FadeInOut();
 private:
 	bool UpdataTransition(void) override;;
-	void DrawOwnScn(void) override;;
+	void DrawOwnScn(void) override;
 	int count_;
 };
 

@@ -7,7 +7,7 @@
 #include"Obj/Chat.h"
 #include"../stage/Layer.h"
 #include "../stage/StageMng.h"
-
+#include "EventScene.h"
 
 
 
@@ -118,6 +118,10 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
             mPose = false;
            /* mMenu.init(this);*/
         }
+    }
+    if (key_.getKeyDown(KEY_INPUT_G))
+    {
+        return std::make_unique<EventScene>(std::move(own));
     }
 
     //ŽžŠÔ

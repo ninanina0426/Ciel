@@ -2,6 +2,8 @@
 #include "BaseScene.h"
 #include "Input/Keyboard.h"
 
+#define  BGSIZE (1200)
+
 class TitleScene :
     public BaseScene
 {
@@ -19,6 +21,13 @@ private:
     //グラフィック関係
 
     int title_;
+    int bgid_;
+    int bg1_;
+    int bg2_;
+    int push_;
+    int blink_;
+    Vector2 pos1_;
+    int alpha_;
 
     int SHandle;
 
