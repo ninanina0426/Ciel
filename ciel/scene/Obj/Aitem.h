@@ -2,6 +2,7 @@
 #include "../../common/Vector2.h"
 #include"../Input/Keyboard.h"
 #include"Player.h"
+class shop;
 
 #define ITEM_ANIM_MAX 3
 
@@ -30,6 +31,17 @@ public:
 	bool mKinomi3;
 	bool mKinomi4;
 	bool mKinomi5;
+
+	//shop
+	int mApple;
+	int mKinominoKusiyaki;
+	int mFruitDrink;
+	int mFishingRodS;
+	int mRagBag;
+	int mPickaxe;
+	int mHaoriN;
+	int mRantanN;
+	int mNumKinomi;
 	
 	bool mHaori;
 
@@ -43,17 +55,27 @@ public:
 	int mTama;
 	int mKinomi;
 
+	//èEÇ¡ÇΩîªíË
+	bool mGet;
+
 	int GetmKinomi(void);
 
 	int KnomiNum(void);
 	int AppleNum(void);
-
+	int KinominoKusiyakiNum(void);
+	int FruitDrinkNum(void);
+	int FishingRodSNum(void);
+	int RagBagNum(void);
+	int PickaxeNum(void);
+	int mHaoriNum(void);
+	int mRantanNum(void);
 
 	int mAitem;
 
-	int mNumKinomi;
-	int mApple;
 	
+	/*int mApple;*/
+	
+	bool GetAitem();
 
 private:
 
@@ -68,6 +90,8 @@ private:
 	Vector2 mNum[100];
 
 	int i;
+
+	shop* mShop;
 
 };
 
