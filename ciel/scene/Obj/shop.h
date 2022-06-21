@@ -3,7 +3,6 @@
 #include "../Input/Keyboard.h"
 class GameScene;
 
-
 class shop
 {
 public:
@@ -42,17 +41,23 @@ public:
 
 	void SSetNum(void);
 
+	void SsetAitem(bool flg);
+
 private:
 	
 	int FontSize;
 
 	int mImagSelect;
+	int mImagNomal;
 	int mImageHuve;
 	int mImageNHuve;
 	int mImageBsB;
+	int mImageBsS;
+	int mImageBuy;
 	
 	Vector2 mBoxSe[10];
 	Vector2 mBoxA[10][10];
+	Vector2 mBoxB[10][10];
 
 	Vector2 mPos;
 	Vector2 mSize;
@@ -121,7 +126,20 @@ private:
 	int sRantan;
 	int sHaori;
 
+	//‰ÁŒ¸ŽZ
+	int kApple;
+	int kKinominoKusiyaki;
+	int kFruitDrink;
+	int kFishingRodS;
+	int kRagBag;
+	int kPickaxe;
+	int kKinomi;
+	int kRantan;
+	int kHaori;
+
 	bool moveFlg;
+
+	int H;
 
 	void Select(void);
 	void Buy(void);

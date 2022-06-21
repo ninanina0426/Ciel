@@ -185,7 +185,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
      {
          mMenu.Update();
      }
-
+     mShop.SsetAitem(mAitem->GetAitem());
 
      mShop.Update(mChat->GetNum());
 

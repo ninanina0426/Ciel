@@ -41,6 +41,7 @@ public:
 	int mPickaxe;
 	int mHaoriN;
 	int mRantanN;
+	int mNumKinomi;
 	
 	bool mHaori;
 
@@ -53,6 +54,9 @@ public:
 
 	int mTama;
 	int mKinomi;
+
+	//èEÇ¡ÇΩîªíË
+	bool mGet;
 
 	int GetmKinomi(void);
 
@@ -68,9 +72,10 @@ public:
 
 	int mAitem;
 
-	int mNumKinomi;
+	
 	/*int mApple;*/
 	
+	bool GetAitem();
 
 private:
 

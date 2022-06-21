@@ -23,7 +23,7 @@ bool Aitem::init()
 	mSize.x_ = 32;
 	mSize.y_ = 32;
 
-	
+	mGet = false;
 
 	//èäéùä«óùóp
 
@@ -46,7 +46,7 @@ bool Aitem::init()
 	mTama = 5;
 	mKinomi = 5;
 	
-	mAitem = 10;
+	mAitem = 2;
 
 
 	mNumKinomi = 0;
@@ -56,6 +56,7 @@ bool Aitem::init()
 	mFishingRodS = 0;
 	mRagBag = 0;
 	mPickaxe = 0;
+	
 
 	mNum[0] ={0,0}; //posx
 
@@ -114,6 +115,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[9] = mNum[0];
 					mKinomi1 = true;
+					mNumKinomi += 1;
 
 				}
 
@@ -131,7 +133,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[10] = mNum[0];
 					mKinomi2 = true;
-
+					mNumKinomi += 1;
 				}
 
 			}
@@ -148,7 +150,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[11] = mNum[0];
 					mKinomi3 = true;
-
+					mNumKinomi += 1;
 				}
 
 			}
@@ -166,7 +168,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[12] = mNum[0];
 					mKinomi4 = true;
-
+					mNumKinomi += 1;
 				}
 
 			}
@@ -183,11 +185,18 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[13] = mNum[0];
 					mKinomi5 = true;
-
+					mNumKinomi += 1;
 				}
 
 			}
 		}
+		/*if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}*/
 		break;
 	case MAP_ID::WA:
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[7].y_ + 32 / 2) &&
@@ -207,7 +216,14 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 
 			}
 		}
-		
+
+		/*if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}*/
 		break;
 	case MAP_ID::WASHOP:
 		
@@ -236,7 +252,14 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 
 			}
 		}
-		
+
+		if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}
 		break;
 	case MAP_ID::FORESTIN:
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[4].y_ + 32 / 2) &&
@@ -256,7 +279,13 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 
 			}
 		}
-		
+		if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}
 		break;
 	case MAP_ID::TEMPLE:
 		
@@ -270,25 +299,25 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[2].x_  +32/ 2) &&
 			(mPos.x_ + mNum[2].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mAitem != 0) && (mAitem <= 10))
+			if ((mAitem != 0) && (mAitem <= 2))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					mNumKinomi += 1;
+					mApple += 1;
 					mAitem -= 1;
 					mNum[2] = mNum[0];
 					i = 2;
-					
+					mGet = true;
 				}
-
 			}
 		}
+		
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[3].y_ + 32 / 2) &&
 			(mPos.y_ + mNum[3].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[3].x_ + 32 / 2) &&
 			(mPos.x_ + mNum[3].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mAitem != 0) && (mAitem <= 10))
+			if ((mAitem != 0) && (mAitem <= 2))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
@@ -296,11 +325,11 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mAitem -= 1;
 					mNum[3] = mNum[0];
 					i = 3;
+					mGet = true;
 				}
-
 			}
 		}
-
+		
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[5].y_ + 32 / 2) &&
 			(mPos.y_ + mNum[5].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[5].x_ + 32 / 2) &&
@@ -317,6 +346,15 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 
 			}
 		}
+
+		if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}
+
 		break;
 	case MAP_ID::SWEETSOUT:
 		//if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[1].y_ + 64 / 2) &&
@@ -586,6 +624,11 @@ int Aitem::mHaoriNum(void)
 int Aitem::mRantanNum(void)
 {
 	return mRantanN;
+}
+
+bool Aitem::GetAitem()
+{
+	return mGet;
 }
 
 

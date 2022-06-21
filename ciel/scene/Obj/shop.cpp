@@ -35,6 +35,7 @@ bool shop::init(GameScene* parent)
     bRantan = 0;
     bHaori = 0;
 
+    H = -1;
 
     //ÝŒÉ
     maxApple=10;
@@ -48,7 +49,7 @@ bool shop::init(GameScene* parent)
     maxHaori=1;
 
 
-    SelectNum = 0;
+    SelectNum = 1;
     moveFlg = false;
     Canflg = false;
 
@@ -70,13 +71,24 @@ bool shop::init(GameScene* parent)
     mBoxA[0][7] = { 70,280};
     mBoxA[0][8] = { 70,320};
     mBoxA[0][9] = { 70,360};
+
+
+    /*mBoxB[0][0] = { 440,426 };*/
+    mBoxB[0][0] = { 440,426 };
+    mBoxB[1][0] = { 440,426 };
+    mBoxB[2][0] = { 534,426 };
+    mBoxB[3][0] = { 648,483 };
+    mBoxB[4][0] = { 648,483 };
    
 
     mImagSelect = LoadGraph("image/shop/shop1.png");
+    mImagNomal = LoadGraph("image/shop/shop10.png");
     mImageHuve= LoadGraph("image/shop/shop2.png");
     mImageNHuve= LoadGraph("image/shop/shop3.png");
 
     mImageBsB = LoadGraph("image/shop/shop4.png");
+    mImageBsS = LoadGraph("image/shop/shop5.png");
+    mImageBuy = LoadGraph("image/shop/shop6.png");
 
 
     FontSize = CreateFontToHandle(NULL, 40, 5);
@@ -166,18 +178,18 @@ void shop::Draw(void)
             break;
         }
 
-        //•¶Žš
-        DrawGraph(0, 0, mImageNHuve, true);
+        
 
         //box‚Ì•\Ž¦
         switch (mSelect)
         {
         case shop::SHOP_SELECT::SELECT:
-            DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sApple);
-            DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxApple);
+            //•¶Žš  
+            DrawGraph(0, 0, mImagNomal, true);
             break;
         case shop::SHOP_SELECT::BUY:
         {
+            DrawGraph(0, 0, mImageNHuve, true);
              if (mParent->IsKinomi1()==true)
              {
                  DrawRectGraph(70, mBoxA[0][1].y_+210, 70, mBoxA[0][1].y_+210,520,40, mImageHuve, true, false);
@@ -197,19 +209,57 @@ void shop::Draw(void)
                  DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sFruitDrink);
                  DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFruitDrink);
              }
+             if (yy == 4)
+             {
+                 DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sFishingRodS);
+                 DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFishingRodS);
+             }
+             if (yy == 5)
+             {
+                 DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sRagBag);
+                 DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxRagBag);
+             }
+             if (yy == 6)
+             {
+                 DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sPickaxe);
+                 DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxPickaxe);
+             }
         }
         break;
         case shop::SHOP_SELECT::SELL:
-            /* if (flg == true)
-             {
-                 DrawRectGraph(mPos.x_, mPos.y_, mPos.x_, mPos.y_, 0, 0, mImageHuve, true, false);
-             }*/
-            DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sApple);
-            DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxApple);
+            DrawGraph(0, 0, mImageBuy, true);
+            if (yy == 1)
+            {
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sApple);
+                /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxApple);*/
+            }
+            if (yy == 2)
+            {
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sKinominoKusiyaki);
+                /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxKinominoKusiyaki);*/
+            }
+            if (yy == 3)
+            {
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sFruitDrink);
+                /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFruitDrink);*/
+            }
+            if (yy == 4)
+            {
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sFishingRodS);
+                /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFishingRodS);*/
+            }
+            if (yy == 5)
+            {
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sRagBag);
+                /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxRagBag);*/
+            }
+            if (yy == 6)
+            {
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sPickaxe);
+               /* DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxPickaxe);*/
+            }
             break;
         case shop::SHOP_SELECT::CANSEL:
-            DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sApple);
-            DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxApple);
             break;
         case shop::SHOP_SELECT::MAX:
             break;
@@ -218,12 +268,13 @@ void shop::Draw(void)
         }
     }
 
-   
-    
     switch (mBS)
     {
     case shop::SHOP_BS::BS_BUY:
         DrawGraph(0, 0, mImageBsB, true);
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
+        DrawBox(mBoxB[SelectNum][0].x_, 418, mBoxB[SelectNum + 1][0].x_, 475, GetColor(255, 255, 255), true);
+        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
         if (yy == 1)
         {
             DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bApple);
@@ -236,14 +287,56 @@ void shop::Draw(void)
         {
             DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bFruitDrink);
         }
+        if (yy == 4)
+        {
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bFishingRodS);
+        }
+        if (yy == 5)
+        {
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bRagBag);
+        }
+        if (yy == 6)
+        {
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bPickaxe);
+        }
         break;
     case shop::SHOP_BS::BS_SELL:
+        DrawGraph(0, 0, mImageBsS, true);
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
+        DrawBox(mBoxB[SelectNum][0].x_, 416, mBoxB[SelectNum + 1][0].x_, 483, GetColor(255, 255, 255), true);
+        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+        if (yy == 1)
+        {
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bApple);
+        }
+        if (yy == 2)
+        {
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bKinominoKusiyaki);
+        }
+        if (yy == 3)
+        {
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bFruitDrink);
+        }
+        if (yy == 4)
+        {
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bFishingRodS);
+        }
+        if (yy == 5)
+        {
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bRagBag);
+        }
+        if (yy == 6)
+        {
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bPickaxe);
+        }
         break;
     case shop::SHOP_BS::BS_MAX:
         break;
     default:
         break;
     }
+
+    DrawFormatString(0, 200, GetColor(255,255,255), "%d", SelectNum);
 }
 
 bool shop::Release(void)
@@ -282,27 +375,43 @@ int shop::SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, 
 
 void shop::SSetNum(void)
 {
-    //‘‡
-    sApple = gApple/*+ bApple*/;
-    sKinominoKusiyaki = gKinominoKusiyaki/*+ bKinominoKusiyaki*/;
-    sFruitDrink = gFruitDrink/*+ bFruitDrink*/;
-    sFishingRodS = gFishingRodS;
-    sRagBag = gRagBag;
-    sPickaxe = sPickaxe;
-    sKinomi = gKinomi;
-    sRantan = gRantan;
-    sHaori = gHaori;
+    H += 1;
 
+    kApple = sApple-H;
+    kKinominoKusiyaki = sKinominoKusiyaki/* - H*/;
+    kFruitDrink = sFruitDrink/* - H*/;
+    kFishingRodS = sFishingRodS/* - H*/;
+    kRagBag = sRagBag/* - H*/;
+    kPickaxe = sPickaxe/* - H*/;
+    kKinomi = sKinomi/* - H*/;
+    kRantan = sRantan/* - H*/;
+    kHaori = sHaori/* - H*/;
+
+    sApple = gApple+ kApple;
+    sKinominoKusiyaki = gKinominoKusiyaki+ kKinominoKusiyaki;
+    sFruitDrink = gFruitDrink+ kFruitDrink;
+    sFishingRodS = gFishingRodS + kFishingRodS;
+    sRagBag = gRagBag+kRagBag;
+    sPickaxe = gPickaxe+ kPickaxe;
+    sKinomi = gKinomi+kKinomi;
+    sRantan = gRantan+ kRantan;
+    sHaori = gHaori+kHaori;
+
+}
+
+void shop::SsetAitem(bool flg)
+{
+    if ((flg==true))
+    {
+        SSetNum();
+    }
 }
 
 void shop::Select(void)
 {
    
     Canflg = false;
-    if (x == 0)
-    {
-        SSetNum();
-    }
+   
     if (x >= 0)
     {
         if (key_.getKeyDown(KEY_INPUT_RIGHT))
@@ -384,30 +493,19 @@ void shop::Buy(void)
         BSBuy();
         break;
     case shop::SHOP_BS::BS_SELL:
-        BSSell();
+     /*   BSSell();*/
         break;
     case shop::SHOP_BS::BS_MAX:
         break;
     default:
         break;
     }
-
-    //‘‡
-   /* sApple = gApple+ bApple;
-    sKinominoKusiyaki = gKinominoKusiyaki+ bKinominoKusiyaki;
-    sFruitDrink = gFruitDrink+ bFruitDrink;
-    sFishingRodS = gFruitDrink+ bFruitDrink;
-    sRagBag = gRagBag+ bRagBag;
-    sPickaxe = sPickaxe+ bPickaxe;
-    sKinomi = sKinomi+ bKinomi;
-    sRantan = sRantan+ bRantan;
-    sHaori = sHaori+ bHaori;*/
 }
 
 void shop::Sell(void)
 {
     Canflg = false;
-    if (yy >= 0)
+    if ((yy >= 0) && (xx == 0))
     {
         if (key_.getKeyDown(KEY_INPUT_DOWN))
         {
@@ -427,7 +525,8 @@ void shop::Sell(void)
         }
         if (key_.getKeyDown(KEY_INPUT_F)/* || key_.getKeyDown(KEY_INPUT_RETURN)*/)
         {
-
+            ChangeBS(SHOP_BS::BS_SELL);
+            xx = 1;
         }
         if (key_.getKeyDown(KEY_INPUT_Q))
         {
@@ -435,7 +534,19 @@ void shop::Sell(void)
 
         }
     }
-   
+    switch (mBS)
+    {
+    case shop::SHOP_BS::BS_BUY:
+        /*BSBuy();*/
+        break;
+    case shop::SHOP_BS::BS_SELL:
+        BSSell();
+        break;
+    case shop::SHOP_BS::BS_MAX:
+        break;
+    default:
+        break;
+    }
 }
 
 void shop::Cansel(void)
@@ -469,7 +580,7 @@ void shop::BSBuy(void)
         else if (key_.getKeyDown(KEY_INPUT_RIGHT))
         {
             SelectNum += 1;
-            if (SelectNum <= 2)
+            if (SelectNum >= 3)
             {
                 SelectNum = 1;
             }
@@ -478,7 +589,7 @@ void shop::BSBuy(void)
         else if (key_.getKeyDown(KEY_INPUT_LEFT))
         {
             SelectNum -= 1;
-            if (SelectNum >= 0)
+            if (SelectNum <= 0)
             {
                 SelectNum = 2;
             }
@@ -487,17 +598,16 @@ void shop::BSBuy(void)
         if (key_.getKeyDown(KEY_INPUT_F))
         {
            
-            if (SelectNum == 1)
+            if (SelectNum == 2)
             {
                 maxApple -= bApple;
-                /*SSetNum();*/
-                sApple += (/*gApple +*/ bApple);
+                sApple += (bApple);
                 xx = 0;
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bApple = 0;
             }
-            else if (SelectNum == 2)
+            else if (SelectNum == 1)
             {
                 sApple = sApple;
                 xx = 0;
@@ -546,16 +656,17 @@ void shop::BSBuy(void)
 
         if (key_.getKeyDown(KEY_INPUT_F))
         {
-            if (SelectNum == 1)
+
+            if (SelectNum == 2)
             {
                 maxKinominoKusiyaki -= bKinominoKusiyaki;
-                sKinominoKusiyaki += (gKinominoKusiyaki + bKinominoKusiyaki);
+                sKinominoKusiyaki += (bKinominoKusiyaki);
                 xx = 0;
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bKinominoKusiyaki = 0;
             }
-            else if (SelectNum == 2)
+            else if (SelectNum == 1)
             {
                 sKinominoKusiyaki = sKinominoKusiyaki;
                 xx = 0;
@@ -595,24 +706,26 @@ void shop::BSBuy(void)
         }
         else if (key_.getKeyDown(KEY_INPUT_LEFT))
         {
-            bApple -= 1;
+            SelectNum -= 1;
             if (SelectNum >= 0)
             {
                 SelectNum = 2;
             }
         }
+
         if (key_.getKeyDown(KEY_INPUT_F))
         {
-            if (SelectNum == 1)
+
+            if (SelectNum == 2)
             {
                 maxFruitDrink -= bFruitDrink;
-                sFruitDrink += (gFruitDrink + bFruitDrink);
+                sFruitDrink += (bFruitDrink);
                 xx = 0;
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bFruitDrink = 0;
             }
-            else if (SelectNum == 2)
+            else if (SelectNum == 1)
             {
                 sFruitDrink = sFruitDrink;
                 xx = 0;
@@ -622,10 +735,541 @@ void shop::BSBuy(void)
             }
         }
     }
+    if (yy == 4)
+    {
+        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        {
+            bFishingRodS -= 1;
+            if (bFishingRodS <= 0)
+            {
+                bFishingRodS = 0;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_UP))
+        {
+            bFishingRodS += 1;
+            if (bFishingRodS >= maxFishingRodS)
+            {
+                bFishingRodS = maxFishingRodS;
+            }
+        }
+        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+        {
+            SelectNum += 1;
+            if (SelectNum <= 2)
+            {
+                SelectNum = 1;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_LEFT))
+        {
+            SelectNum -= 1;
+            if (SelectNum >= 0)
+            {
+                SelectNum = 2;
+            }
+        }
+
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+
+            if (SelectNum == 2)
+            {
+                maxFishingRodS -= bFishingRodS;
+                sFishingRodS += (bFishingRodS);
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bFishingRodS = 0;
+            }
+            else if (SelectNum == 1)
+            {
+                sFishingRodS = sFishingRodS;
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bFishingRodS = 0;
+            }
+        }
+    }
+    if (yy == 5)
+    {
+        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        {
+            bRagBag -= 1;
+            if (bRagBag <= 0)
+            {
+                bRagBag = 0;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_UP))
+        {
+            bRagBag += 1;
+            if (bRagBag >= maxRagBag)
+            {
+                bRagBag = maxRagBag;
+            }
+        }
+        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+        {
+            SelectNum += 1;
+            if (SelectNum <= 2)
+            {
+                SelectNum = 1;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_LEFT))
+        {
+            SelectNum -= 1;
+            if (SelectNum >= 0)
+            {
+                SelectNum = 2;
+            }
+        }
+
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+
+            if (SelectNum == 2)
+            {
+                maxRagBag -= bRagBag;
+                sRagBag += (bRagBag);
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bRagBag = 0;
+            }
+            else if (SelectNum == 1)
+            {
+                sRagBag = sRagBag;
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bRagBag = 0;
+            }
+        }
+    }
+    if (yy == 6)
+    {
+        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        {
+            bPickaxe -= 1;
+            if (bPickaxe <= 0)
+            {
+                bPickaxe = 0;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_UP))
+        {
+            bPickaxe += 1;
+            if (bPickaxe >= maxPickaxe)
+            {
+                bPickaxe = maxPickaxe;
+            }
+        }
+        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+        {
+            SelectNum += 1;
+            if (SelectNum <= 2)
+            {
+                SelectNum = 1;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_LEFT))
+        {
+            SelectNum -= 1;
+            if (SelectNum >= 0)
+            {
+                SelectNum = 2;
+            }
+        }
+
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+
+            if (SelectNum == 2)
+            {
+                maxPickaxe -= bPickaxe;
+                sPickaxe += (bPickaxe);
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bPickaxe = 0;
+            }
+            else if (SelectNum == 1)
+            {
+                sPickaxe = sPickaxe;
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bPickaxe = 0;
+            }
+        }
+    }
 }
 
 void shop::BSSell(void)
 {
+    if (yy == 1)
+    {
+        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        {
+            bApple -= 1;
+            if (bApple <= 0)
+            {
+                bApple = 0;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_UP))
+        {
+            bApple += 1;
+            if (bApple >= sApple)
+            {
+                bApple = sApple;
+            }
+        }
+        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+        {
+            SelectNum += 1;
+            if (SelectNum >= 3)
+            {
+                SelectNum = 1;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_LEFT))
+        {
+            SelectNum -= 1;
+            if (SelectNum <= 0)
+            {
+                SelectNum = 2;
+            }
+        }
+
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+
+            if (SelectNum == 2)
+            {
+                sApple -= bApple;
+                /*sApple += (bApple);*/
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bApple = 0;
+            }
+            else if (SelectNum == 1)
+            {
+                sApple = sApple;
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bApple = 0;
+            }
+        }
+    }
+    if (yy == 2)
+    {
+        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        {
+            bKinominoKusiyaki -= 1;
+            if (bKinominoKusiyaki <= 0)
+            {
+                bKinominoKusiyaki = 0;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_UP))
+        {
+            bKinominoKusiyaki += 1;
+            if (bKinominoKusiyaki >= maxKinominoKusiyaki)
+            {
+                bKinominoKusiyaki = maxKinominoKusiyaki;
+            }
+        }
+        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+        {
+            SelectNum += 1;
+            if (SelectNum <= 2)
+            {
+                SelectNum = 1;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_LEFT))
+        {
+            SelectNum -= 1;
+            if (SelectNum >= 0)
+            {
+                SelectNum = 2;
+            }
+        }
+
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+
+            if (SelectNum == 2)
+            {
+                maxKinominoKusiyaki -= bKinominoKusiyaki;
+                sKinominoKusiyaki += (bKinominoKusiyaki);
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bKinominoKusiyaki = 0;
+            }
+            else if (SelectNum == 1)
+            {
+                sKinominoKusiyaki = sKinominoKusiyaki;
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bKinominoKusiyaki = 0;
+            }
+        }
+    }
+    if (yy == 3)
+    {
+        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        {
+            bFruitDrink -= 1;
+            if (bFruitDrink <= 0)
+            {
+                bFruitDrink = 0;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_UP))
+        {
+            bFruitDrink += 1;
+            if (bFruitDrink >= maxFruitDrink)
+            {
+                bFruitDrink = maxFruitDrink;
+            }
+        }
+        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+        {
+            SelectNum += 1;
+            if (SelectNum <= 2)
+            {
+                SelectNum = 1;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_LEFT))
+        {
+            SelectNum -= 1;
+            if (SelectNum >= 0)
+            {
+                SelectNum = 2;
+            }
+        }
+
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+
+            if (SelectNum == 2)
+            {
+                maxFruitDrink -= bFruitDrink;
+                sFruitDrink += (bFruitDrink);
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bFruitDrink = 0;
+            }
+            else if (SelectNum == 1)
+            {
+                sFruitDrink = sFruitDrink;
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bFruitDrink = 0;
+            }
+        }
+    }
+    if (yy == 4)
+    {
+        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        {
+            bFishingRodS -= 1;
+            if (bFishingRodS <= 0)
+            {
+                bFishingRodS = 0;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_UP))
+        {
+            bFishingRodS += 1;
+            if (bFishingRodS >= maxFishingRodS)
+            {
+                bFishingRodS = maxFishingRodS;
+            }
+        }
+        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+        {
+            SelectNum += 1;
+            if (SelectNum <= 2)
+            {
+                SelectNum = 1;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_LEFT))
+        {
+            SelectNum -= 1;
+            if (SelectNum >= 0)
+            {
+                SelectNum = 2;
+            }
+        }
+
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+
+            if (SelectNum == 2)
+            {
+                maxFishingRodS -= bFishingRodS;
+                sFishingRodS += (bFishingRodS);
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bFishingRodS = 0;
+            }
+            else if (SelectNum == 1)
+            {
+                sFishingRodS = sFishingRodS;
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bFishingRodS = 0;
+            }
+        }
+    }
+    if (yy == 5)
+    {
+        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        {
+            bRagBag -= 1;
+            if (bRagBag <= 0)
+            {
+                bRagBag = 0;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_UP))
+        {
+            bRagBag += 1;
+            if (bRagBag >= maxRagBag)
+            {
+                bRagBag = maxRagBag;
+            }
+        }
+        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+        {
+            SelectNum += 1;
+            if (SelectNum <= 2)
+            {
+                SelectNum = 1;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_LEFT))
+        {
+            SelectNum -= 1;
+            if (SelectNum >= 0)
+            {
+                SelectNum = 2;
+            }
+        }
+
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+
+            if (SelectNum == 2)
+            {
+                maxRagBag -= bRagBag;
+                sRagBag += (bRagBag);
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bRagBag = 0;
+            }
+            else if (SelectNum == 1)
+            {
+                sRagBag = sRagBag;
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bRagBag = 0;
+            }
+        }
+    }
+    if (yy == 6)
+    {
+        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        {
+            bPickaxe -= 1;
+            if (bPickaxe <= 0)
+            {
+                bPickaxe = 0;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_UP))
+        {
+            bPickaxe += 1;
+            if (bPickaxe >= maxPickaxe)
+            {
+                bPickaxe = maxPickaxe;
+            }
+        }
+        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+        {
+            SelectNum += 1;
+            if (SelectNum <= 2)
+            {
+                SelectNum = 1;
+            }
+
+        }
+        else if (key_.getKeyDown(KEY_INPUT_LEFT))
+        {
+            SelectNum -= 1;
+            if (SelectNum >= 0)
+            {
+                SelectNum = 2;
+            }
+        }
+
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+
+            if (SelectNum == 2)
+            {
+                maxPickaxe -= bPickaxe;
+                sPickaxe += (bPickaxe);
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bPickaxe = 0;
+            }
+            else if (SelectNum == 1)
+            {
+                sPickaxe = sPickaxe;
+                xx = 0;
+                ChangeBS(SHOP_BS::BS_MAX);
+                SelectNum = 0;
+                bPickaxe = 0;
+            }
+        }
+    }
 }
 
 void shop::BS(void)
