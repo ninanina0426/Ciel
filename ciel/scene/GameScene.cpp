@@ -128,7 +128,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     //ˆê“ú‚Ì—¬‚ê
     int min = 60;    //ˆê•ªŠÔ‚ÌƒtƒŒ[ƒ€”
-    int Day = min * 10;      //ˆê“ú‚Ì•b”
+    int Day = min * 5;      //ˆê“ú‚Ì•b”
 
     //yuugata
     if (delta % Day == 120)

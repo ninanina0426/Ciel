@@ -538,6 +538,11 @@ bool Aitem::Getflg()
 	return true;
 }
 
+int Aitem::GetmKinomi(void)
+{
+	return mKinomi;
+}
+
 int Aitem::KnomiNum(void)
 {
 	return mNumKinomi;

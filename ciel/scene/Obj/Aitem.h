@@ -54,6 +54,8 @@ public:
 	int mTama;
 	int mKinomi;
 
+	int GetmKinomi(void);
+
 	int KnomiNum(void);
 	int AppleNum(void);
 	int KinominoKusiyakiNum(void);

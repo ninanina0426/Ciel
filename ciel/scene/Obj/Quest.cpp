@@ -11,7 +11,7 @@ Quest::~Quest()
 {
 }
 
-void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, MAP_ID mapid)
+void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID mapid)
 {
 	//クエストを受けなかったら抜ける
 	if (!stateFlg)
@@ -28,14 +28,9 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, MAP_ID mapid)
 		state_ = QuestState::ALIVE;
 		CompFlg_ = false;
 	}
-	//クエスト用のアイテムフラグ
-	aitem_;
-	//アイテムのフラグがtrueになってたらstateを完了にする
-	/*if (aitem_)
-	{
-		state_ = QuestState::COMP;
-		QFlg_=false;
-	}*/
+
+	aitem_.Update(plPos,plsize);
+	
 	switch (mapid)
 	{
 	case MAP_ID::FOREST:
@@ -53,7 +48,7 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, MAP_ID mapid)
 	case MAP_ID::FORESTIN:
 		break;
 	case MAP_ID::TEMPLE:
-		if (plPos.y_ < 1000)
+		if (quest_==QUEST::QUEST_1&&plPos.y_ < 1000)
 		{
 			CompFlg_ = true;
 		}
@@ -63,6 +58,10 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, MAP_ID mapid)
 	case MAP_ID::SWEETS:
 		break;
 	case MAP_ID::SWEETSOUT:
+		if (quest_ == QUEST::QUEST_2&&aitem_.GetmKinomi()==0)
+		{
+			CompFlg_ = true;
+		}
 		break;
 	case MAP_ID::SWEETSSCHOOL:
 		break;
@@ -102,6 +101,8 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, MAP_ID mapid)
 			QTxt_ = "スイーツの材料を集めよう";
 			break;
 		case QUEST::QUEST_3:
+			QFlg_ = true;
+			QTxt_ = "寒い寒い地域の過ごし方";
 			break;
 		case QUEST::QUEST_4:
 			break;

@@ -30,6 +30,10 @@ enum class PlayerID
 	Max
 };
 
+//体力系定数
+constexpr int STAMINA = 100;
+constexpr int ENERGY = 100;
+
 class Player
 {
 private:
@@ -83,6 +87,9 @@ public:
 	Vector2 GetSiz(void);
 	Vector2 GetPos(void);
 
+
+	int Stamina_;		//スタミナ管理
+	int Energy_;		//エネルギー管理
 	PL_ST state_;
 	PlayerID plID_;
 	

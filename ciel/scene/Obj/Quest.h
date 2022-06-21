@@ -43,7 +43,7 @@ public:
 	}
 	
 
-	void UpDate(bool stateFlg, int q,Vector2 plPos,MAP_ID mapid);
+	void UpDate(bool stateFlg, int q,Vector2 plPos, Vector2 plsize,MAP_ID mapid);
 	void Draw(void);
 
 private:
