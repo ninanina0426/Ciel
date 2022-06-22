@@ -48,6 +48,9 @@ bool Aitem::init()
 	
 	mAitem = 2;
 
+	//‚¨‹à
+	Ru = 0;
+
 
 	mNumKinomi = 0;
 	mApple = 0;
@@ -99,6 +102,8 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 	Vector2 pSize = playerSize;
 
 	key_.Update();
+
+	
 
 	switch (mapID)
 	{
@@ -357,23 +362,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 
 		break;
 	case MAP_ID::SWEETSOUT:
-		//if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[1].y_ + 64 / 2) &&
-		//	(mPos.y_ + mNum[1].y_ - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
-		//	(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[1].x_ + 32 / 2) &&
-		//	(mPos.x_ + mNum[1].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
-		//{
-		//	if ((mAitem != 0) && (mAitem <= 10))
-		//	{
-		//		if (key_.getKeyDown(KEY_INPUT_F))
-		//		{
-		//			mNumKinomi += 1;
-		//			mAitem -= 1;
-		//			mNum[1] = mNum[0];
-		//			i = 1;
-		//		}
-
-		//	}
-		//}
+		
 		break;
 	case MAP_ID::SWEETSSCHOOL:
 		break;
@@ -545,7 +534,7 @@ void Aitem::Draw(Vector2 mMapoffset)
 
 
 	DrawFormatString(0,150, GetColor(255, 255, 255), "num=%d", mAitem);
-	DrawFormatString(0, 170, GetColor(255, 255, 255), "‹Ê=%d", mTama);
+	DrawFormatString(0, 170, GetColor(255, 255, 255), "‹Ê=%d", Ru);
 	
 
 }
@@ -563,6 +552,18 @@ Vector2 Aitem::GetSize(void)
 Vector2 Aitem::GetPos(void)
 {
 	return mPos;
+}
+
+int Aitem::Money(int ru, bool flg)
+{
+	int sRu = Ru;
+
+	if (flg == true)
+	{
+		Ru = sRu + ru;
+	}
+
+	return Ru;
 }
 
 int Aitem::Num()
@@ -630,6 +631,8 @@ bool Aitem::GetAitem()
 {
 	return mGet;
 }
+
+
 
 
 

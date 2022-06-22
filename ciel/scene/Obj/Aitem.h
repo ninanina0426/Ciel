@@ -19,6 +19,9 @@ public:
 	Vector2 GetSize(void);
 	Vector2 GetPos(void);
 
+	int Money(int ru,bool flg);
+
+
 
 	bool mTama1;
 	bool mTama2;
@@ -32,16 +35,8 @@ public:
 	bool mKinomi4;
 	bool mKinomi5;
 
-	//shop
-	int mApple;
-	int mKinominoKusiyaki;
-	int mFruitDrink;
-	int mFishingRodS;
-	int mRagBag;
-	int mPickaxe;
-	int mHaoriN;
-	int mRantanN;
-	int mNumKinomi;
+	
+
 	
 	bool mHaori;
 
@@ -60,6 +55,7 @@ public:
 
 	int GetmKinomi(void);
 
+	//shopÇ…îÚÇŒÇ∑
 	int KnomiNum(void);
 	int AppleNum(void);
 	int KinominoKusiyakiNum(void);
@@ -72,9 +68,6 @@ public:
 
 	int mAitem;
 
-	
-	/*int mApple;*/
-	
 	bool GetAitem();
 
 private:
@@ -92,6 +85,19 @@ private:
 	int i;
 
 	shop* mShop;
+
+	//èäéù
+	int mApple;
+	int mKinominoKusiyaki;
+	int mFruitDrink;
+	int mFishingRodS;
+	int mRagBag;
+	int mPickaxe;
+	int mHaoriN;
+	int mRantanN;
+	int mNumKinomi;
+
+	int Ru;
 
 };
 

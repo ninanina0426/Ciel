@@ -913,6 +913,20 @@ int Menu::OpBgm(void)
 	return b;
 }
 
+void Menu::SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h)
+{
+	//shopÇ©ÇÁÇÃÉfÅ[É^
+	ssApple=a;
+	ssKinominoKusiyaki=kk;
+	ssFruitDrink=fd;
+	ssFishingRodS=frs;
+	ssRagBag=rb;
+	ssPickaxe=p;
+	ssHaoriN=k;
+	ssRantanN=r;
+	ssNumKinomi=h;
+}
+
 void Menu::ChangeState(MENU_SELECT select)
 {
 	mSelect = select;
