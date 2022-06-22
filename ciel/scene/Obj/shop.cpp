@@ -646,16 +646,27 @@ void shop::BSBuy(void)
            
             if (SelectNum == 2)
             {
-                maxApple -= bApple;
-                sApple += (bApple);
-                xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
-                SelectNum = 0;
                 numRu = -(mA * (bApple));
-                MoneyFlg = true;
-                bApple = 0;
-               
-               
+                if (sMoney >= -(numRu))
+                {
+                    maxApple -= bApple;
+                    sApple += (bApple);
+                    xx = 0;
+                    ChangeBS(SHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    MoneyFlg = true;
+                    bApple = 0;
+                }
+                else
+                {
+                    sApple = sApple;
+                    xx = 0;
+                    ChangeBS(SHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bApple = 0;
+                    numRu = 0;
+                }
+                
             }
             else if (SelectNum == 1)
             {
@@ -710,14 +721,25 @@ void shop::BSBuy(void)
 
             if (SelectNum == 2)
             {
-                maxKinominoKusiyaki -= bKinominoKusiyaki;
-                sKinominoKusiyaki += (bKinominoKusiyaki);
-                xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
                 numRu = -(mKK * (bKinominoKusiyaki));
-                MoneyFlg = true;
-                SelectNum = 0;
-                bKinominoKusiyaki = 0;
+                if (sMoney >= -(numRu))
+                {
+                    maxKinominoKusiyaki -= bKinominoKusiyaki;
+                    sKinominoKusiyaki += (bKinominoKusiyaki);
+                    xx = 0;
+                    ChangeBS(SHOP_BS::BS_MAX);
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bKinominoKusiyaki = 0;
+                }
+                else
+                {
+                    sKinominoKusiyaki = sKinominoKusiyaki;
+                    xx = 0;
+                    ChangeBS(SHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bKinominoKusiyaki = 0;
+                }
             }
             else if (SelectNum == 1)
             {
@@ -771,14 +793,25 @@ void shop::BSBuy(void)
 
             if (SelectNum == 2)
             {
-                maxFruitDrink -= bFruitDrink;
-                sFruitDrink += (bFruitDrink);
-                xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
                 numRu = -(mFD * (bFruitDrink));
-                MoneyFlg = true;
-                SelectNum = 0;
-                bFruitDrink = 0;
+                if (sMoney >= -(numRu))
+                {
+                    maxFruitDrink -= bFruitDrink;
+                    sFruitDrink += (bFruitDrink);
+                    xx = 0;
+                    ChangeBS(SHOP_BS::BS_MAX);
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bFruitDrink = 0;
+                }
+                else
+                {
+                    sFruitDrink = sFruitDrink;
+                    xx = 0;
+                    ChangeBS(SHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bFruitDrink = 0;
+                }
             }
             else if (SelectNum == 1)
             {
@@ -832,14 +865,17 @@ void shop::BSBuy(void)
 
             if (SelectNum == 2)
             {
-                maxFishingRodS -= bFishingRodS;
-                sFishingRodS += (bFishingRodS);
-                xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
                 numRu = -(mFRS * (bFishingRodS));
-                MoneyFlg = true;
-                SelectNum = 0;
-                bFishingRodS = 0;
+                if (sMoney >= -(numRu))
+                {
+                    maxFishingRodS -= bFishingRodS;
+                    sFishingRodS += (bFishingRodS);
+                    xx = 0;
+                    ChangeBS(SHOP_BS::BS_MAX);
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bFishingRodS = 0;
+                }
             }
             else if (SelectNum == 1)
             {
@@ -893,14 +929,25 @@ void shop::BSBuy(void)
 
             if (SelectNum == 2)
             {
-                maxRagBag -= bRagBag;
-                sRagBag += (bRagBag);
-                xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
                 numRu = -(mRB * (bRagBag));
-                MoneyFlg = true;
-                SelectNum = 0;
-                bRagBag = 0;
+                if (sMoney >= -(numRu))
+                {
+                    maxRagBag -= bRagBag;
+                    sRagBag += (bRagBag);
+                    xx = 0;
+                    ChangeBS(SHOP_BS::BS_MAX);
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bRagBag = 0;
+                }
+                else
+                {
+                    sRagBag = sRagBag;
+                    xx = 0;
+                    ChangeBS(SHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bRagBag = 0;
+                }
             }
             else if (SelectNum == 1)
             {
@@ -954,14 +1001,26 @@ void shop::BSBuy(void)
 
             if (SelectNum == 2)
             {
-                maxPickaxe -= bPickaxe;
-                sPickaxe += (bPickaxe);
-                xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
                 numRu = -(mP * (bPickaxe));
-                MoneyFlg = true;
-                SelectNum = 0;
-                bPickaxe = 0;
+                if (sMoney >= -(numRu))
+                {
+                    maxPickaxe -= bPickaxe;
+                    sPickaxe += (bPickaxe);
+                    xx = 0;
+                    ChangeBS(SHOP_BS::BS_MAX);
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bPickaxe = 0;
+                }
+                else
+                {
+                    sPickaxe = sPickaxe;
+                    xx = 0;
+                    ChangeBS(SHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bPickaxe = 0;
+                }
+
             }
             else if (SelectNum == 1)
             {
@@ -978,6 +1037,7 @@ void shop::BSBuy(void)
 
 void shop::BSSell(void)
 {
+    
     if (yy == 1)
     {
         if (key_.getKeyDown(KEY_INPUT_DOWN))
@@ -1036,6 +1096,7 @@ void shop::BSSell(void)
                 SelectNum = 0;
                 bApple = 0;
             }
+            
 
         }
 
