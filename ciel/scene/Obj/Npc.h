@@ -35,6 +35,10 @@ private:
 	int mImage[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	int mImage1[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	int mImage2[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage3[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage4[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage5[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+
 
 	DIR mMoveDir;		//ƒLƒƒƒ‰ƒNƒ^[‚ÌŒü‚«
 	Vector2 mPos;		//ƒLƒƒƒ‰ƒNƒ^[‚Ì’n}ã‚ÌÀ•W
