@@ -37,15 +37,35 @@ public:
 
 	int SetAitem(int a, int kk, int fd, int frs, int rb, int p,int k,int r,int h);
 
+	int SetMoney();
+	bool GetMoney();
+
+	void AMoney(int money);
+
 	bool Canflg;
 
 	void SSetNum(void);
 
 	void SsetAitem(bool flg);
 
+	int SsApple(void);
+	int SsKinominoKusiyaki(void);
+	int SsFruitDrink(void);
+	int SsFishingRodS(void);
+	int SsRagBag(void);
+	int SsPickaxe(void);
+	int SsKinomi(void);
+	int SsRantan(void);
+	int SsHaori(void);
+
 private:
 	
+	bool MoneyFlg;
+	int sMoney;
+
 	int FontSize;
+
+	int numRu;
 
 	int mImagSelect;
 	int mImagNomal;
@@ -136,6 +156,17 @@ private:
 	int kKinomi;
 	int kRantan;
 	int kHaori;
+
+	//‚¨‹à
+	int mA;
+	int mKK;
+	int mFD;
+	int mFRS;
+	int mRB;
+	int mP;
+	int mK;
+	int mR;
+	int mH;
 
 	bool moveFlg;
 

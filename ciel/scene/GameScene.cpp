@@ -189,6 +189,10 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
      mShop.Update(mChat->GetNum());
 
+     mMenu.SetMenu(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori());
+
+     mShop.AMoney(mAitem->Money(mShop.SetMoney(),mShop.GetMoney()));
+
       //フェードイン
      if (lpMapMng.fadeinFlg_)
      {

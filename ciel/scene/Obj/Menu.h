@@ -65,7 +65,7 @@ public:
 	int menuScr;
 
 	
-
+	void SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h);
 
 private:
 
@@ -93,6 +93,16 @@ private:
 	AITEM_SELECT mAitem;
 
 	Keyboard key_;
+
+	int ssApple;
+	int ssKinominoKusiyaki;
+	int ssFruitDrink;
+	int ssFishingRodS;
+	int ssRagBag;
+	int ssPickaxe;
+	int ssHaoriN;
+	int ssRantanN;
+	int ssNumKinomi;
 
 	int b;
 
