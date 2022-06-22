@@ -129,7 +129,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     auto elTime = nowTime_ - oldTime_;                  //時間の差をとる
     auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
     int delta = msec / 1000000.0; //秒に変換
-
+    delta = delta * 10;
     //一日の流れ
     int min = 60;    //一分間のフレーム数
     int Day = min * 5;      //一日の秒数
@@ -160,7 +160,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         count_++;
     }
 
-
+    skycnt_++;
+    
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
     mMapOffset = lpMapMng.Update(PlayerPos);
@@ -211,6 +212,72 @@ void GameScene::DrawOwnScn()
 {
     SetDrawScreen(sceneScrID_);
     ClsDrawScreen();
+    auto mapID = lpMapMng.GetMapId();
+    switch (mapID)
+    {
+    case MAP_ID::FOREST:
+        skyflg_ = true;
+        break;
+    case MAP_ID::WA:
+        skyflg_ = true;
+        break;
+    case MAP_ID::WASHOP:
+        skyflg_ = false;
+        break;
+    case MAP_ID::CAVE:
+        skyflg_ = false;
+        break;
+    case MAP_ID::CAVESHOP:
+        skyflg_ = false;
+        break;
+    case MAP_ID::DARK:
+        skyflg_ = false;
+        break;
+    case MAP_ID::FORESTIN:
+        skyflg_ = false;
+        break;
+    case MAP_ID::TEMPLE:
+        skyflg_ = true;
+        break;
+    case MAP_ID::TEMPLEIN:
+        skyflg_ = false;
+        break;
+    case MAP_ID::SWEETS:
+        skyflg_ = true;
+        break;
+    case MAP_ID::SWEETSOUT:
+        skyflg_ = false;
+        break;
+    case MAP_ID::SWEETSSCHOOL:
+        skyflg_ = false;
+        break;
+    case MAP_ID::TRANGETIONS:
+        skyflg_ = false;
+        break;
+    case MAP_ID::MAX:
+        break;
+    default:
+        break;
+    }
+    if (skyflg_&& AMflg_)
+    {
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_);
+        DrawBox(0, 0, 1080, 609, 0x4169e1, true);
+        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+    }
+    if (skyflg_ && PMflg_)
+    {
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_-255);
+        DrawBox(0, 0, 1080, 609, 0xff6347, true);
+        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+    }
+    if (skyflg_ && Nightflg_)
+    {
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_-255);
+        DrawBox(0, 0, 1080, 609, 0x191970, true);
+        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+    }
+    
 
     //マップ
     lpMapMng.Draw();
@@ -275,6 +342,7 @@ bool GameScene::Init(void)
     PMflg_ = false;
     Nightflg_ = false;
     count_ = 0;
+    skycnt_ = 255;
 
     mBgm = new BGM();
 
