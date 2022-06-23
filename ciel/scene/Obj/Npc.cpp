@@ -98,11 +98,6 @@ bool Npc::init(void)
 		return false;
 	}
 
-	if (LoadDivGraph("image/102.png", 16, 4, 4, 32, 32, &mImage2[0][0]) == -1)
-	{
-		return false;
-	}
-
 	if (LoadDivGraph("image/npc/woodL.png", 16, 4, 4, 64,128, &mImage3[0][0]) == -1)
 	{
 		return false;

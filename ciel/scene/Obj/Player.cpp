@@ -55,15 +55,15 @@ bool Player::init(PlayerID playerid)
 
 	//グラフィックの読み込み
 
-	if (LoadDivGraph("image/106.png", 32, 4, 8, 32, 48, &mImage1[0]) == -1)
+	if (LoadDivGraph("image/char/106.png", 32, 4, 8, 32, 48, &mImage1[0]) == -1)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/107.png", 32, 4, 8, 32, 48, &mImage2[0]) == -1)
+	if (LoadDivGraph("image/char/107.png", 32, 4, 8, 32, 48, &mImage2[0]) == -1)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/108.png", 32, 4, 8, 32, 48, &mImage3[0]) == -1)
+	if (LoadDivGraph("image/char/108.png", 32, 4, 8, 32, 48, &mImage3[0]) == -1)
 	{
 		return false;
 	}

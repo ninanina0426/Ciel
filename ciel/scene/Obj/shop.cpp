@@ -168,7 +168,7 @@ void shop::Draw(void)
         //˜g
         DrawGraph(0, 0, mImagSelect, true);
 
-        DrawFormatStringToHandle(9000, 170, 0xff0000, FontSize, "%d", haveRu);
+        
         //Box
         switch (mSelect)
         {
@@ -285,6 +285,7 @@ void shop::Draw(void)
             break;
         }
 
+        DrawFormatStringToHandle(900, 170, 0xff0000, FontSize, "%d", haveRu);
     }
 
     switch (mBS)
