@@ -335,11 +335,11 @@ void Npc::Draw(Vector2 offset)
 		DrawGraph(mPos.x_ - offset.x_ - 32 + 286, mPos.y_ - offset.y_ - 64 + 1918, mImage3[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 		DrawGraph(mPos.x_ - offset.x_ - 32 + 128, mPos.y_ - offset.y_ - 64 + 800, mImage4[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 		DrawGraph(mPos.x_ - offset.x_ - 32 + 2879, mPos.y_ - offset.y_ - 64 + 769, mImage3[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
-		DrawGraph(mPos.x_ - offset.x_ - 32 + 2400, mPos.y_ - offset.y_ - 64 + 99, mImage4[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 2400, mPos.y_ - offset.y_ - 64 + 100, mImage4[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 		DrawGraph(mPos.x_ - offset.x_ - 32 + 2591, mPos.y_ - offset.y_ - 64 + 129, mImage3[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 		break;
 	case NpcType::SM_NPC:
-		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 830, mPos.y_ - offset.y_ - mSizeOffset.y_ + 830, mImage2[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		/*DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 830, mPos.y_ - offset.y_ - mSizeOffset.y_ + 830, mImage2[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);*/
 		break;
 	case NpcType::SO_NPC:
 		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 1355, mPos.y_ - offset.y_ - mSizeOffset.y_ + 605, mImage[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
