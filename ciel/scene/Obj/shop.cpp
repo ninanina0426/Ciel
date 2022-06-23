@@ -168,7 +168,7 @@ void shop::Draw(void)
         //˜g
         DrawGraph(0, 0, mImagSelect, true);
 
-        DrawFormatStringToHandle(9000, 170, 0xff0000, FontSize, "%d", haveRu);
+        
         //Box
         switch (mSelect)
         {
@@ -285,6 +285,7 @@ void shop::Draw(void)
             break;
         }
 
+        DrawFormatStringToHandle(900, 170, 0xff0000, FontSize, "%d", haveRu);
     }
 
     switch (mBS)
@@ -748,6 +749,7 @@ void shop::BSBuy(void)
                     MoneyFlg = true;
                     SelectNum = 0;
                     bKinominoKusiyaki = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
                 }
                 else
                 {
@@ -756,6 +758,7 @@ void shop::BSBuy(void)
                     ChangeBS(SHOP_BS::BS_MAX);
                     SelectNum = 0;
                     bKinominoKusiyaki = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
                 }
             }
             else if (SelectNum == 1)
@@ -765,6 +768,7 @@ void shop::BSBuy(void)
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bKinominoKusiyaki = 0;
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
     }
@@ -820,6 +824,7 @@ void shop::BSBuy(void)
                     MoneyFlg = true;
                     SelectNum = 0;
                     bFruitDrink = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
                 }
                 else
                 {
@@ -828,6 +833,7 @@ void shop::BSBuy(void)
                     ChangeBS(SHOP_BS::BS_MAX);
                     SelectNum = 0;
                     bFruitDrink = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
                 }
             }
             else if (SelectNum == 1)
@@ -837,6 +843,7 @@ void shop::BSBuy(void)
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bFruitDrink = 0;
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
     }
@@ -892,6 +899,17 @@ void shop::BSBuy(void)
                     MoneyFlg = true;
                     SelectNum = 0;
                     bFishingRodS = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+
+                }
+                else
+                {
+                    sFishingRodS = sFishingRodS;
+                    xx = 0;
+                    ChangeBS(SHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bFishingRodS = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
                 }
             }
             else if (SelectNum == 1)
@@ -901,6 +919,7 @@ void shop::BSBuy(void)
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bFishingRodS = 0;
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
     }
@@ -956,6 +975,7 @@ void shop::BSBuy(void)
                     MoneyFlg = true;
                     SelectNum = 0;
                     bRagBag = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
                 }
                 else
                 {
@@ -964,6 +984,7 @@ void shop::BSBuy(void)
                     ChangeBS(SHOP_BS::BS_MAX);
                     SelectNum = 0;
                     bRagBag = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
                 }
             }
             else if (SelectNum == 1)
@@ -973,6 +994,7 @@ void shop::BSBuy(void)
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bRagBag = 0;
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
     }
@@ -1028,6 +1050,7 @@ void shop::BSBuy(void)
                     MoneyFlg = true;
                     SelectNum = 0;
                     bPickaxe = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
                 }
                 else
                 {
@@ -1036,6 +1059,7 @@ void shop::BSBuy(void)
                     ChangeBS(SHOP_BS::BS_MAX);
                     SelectNum = 0;
                     bPickaxe = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
                 }
 
             }
@@ -1046,6 +1070,7 @@ void shop::BSBuy(void)
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bPickaxe = 0;
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
     }
@@ -1104,6 +1129,7 @@ void shop::BSSell(void)
                 MoneyFlg = true;
                 SelectNum = 0;
                 bApple = 0;
+                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
             }
             else if (SelectNum == 1)
             {
@@ -1112,6 +1138,7 @@ void shop::BSSell(void)
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bApple = 0;
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
             
 
@@ -1168,6 +1195,7 @@ void shop::BSSell(void)
                 MoneyFlg = true;
                 SelectNum = 0;
                 bKinominoKusiyaki = 0;
+                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
             }
             else if (SelectNum == 1)
             {
@@ -1176,6 +1204,7 @@ void shop::BSSell(void)
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bKinominoKusiyaki = 0;
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
     }
@@ -1229,6 +1258,7 @@ void shop::BSSell(void)
                 MoneyFlg = true;
                 SelectNum = 0;
                 bFruitDrink = 0;
+                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
             }
             else if (SelectNum == 1)
             {
@@ -1237,6 +1267,7 @@ void shop::BSSell(void)
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bFruitDrink = 0;
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
     }
@@ -1290,6 +1321,7 @@ void shop::BSSell(void)
                 MoneyFlg = true;
                 SelectNum = 0;
                 bFishingRodS = 0;
+                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
             }
             else if (SelectNum == 1)
             {
@@ -1298,6 +1330,7 @@ void shop::BSSell(void)
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bFishingRodS = 0;
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
     }
@@ -1351,6 +1384,7 @@ void shop::BSSell(void)
                 MoneyFlg = true;
                 SelectNum = 0;
                 bRagBag = 0;
+                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
             }
             else if (SelectNum == 1)
             {
@@ -1359,6 +1393,7 @@ void shop::BSSell(void)
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bRagBag = 0;
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
     }
@@ -1412,6 +1447,7 @@ void shop::BSSell(void)
                 MoneyFlg = true;
                 SelectNum = 0;
                 bPickaxe = 0;
+                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
             }
             else if (SelectNum == 1)
             {
@@ -1420,6 +1456,7 @@ void shop::BSSell(void)
                 ChangeBS(SHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bPickaxe = 0;
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
     }

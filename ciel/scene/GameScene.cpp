@@ -290,6 +290,8 @@ void GameScene::DrawOwnScn()
 
     mNpc->Draw(mMapOffset);
 
+    mAitem->Draw(mMapOffset);
+
     //ƒvƒŒƒCƒ„[
 	 mPlayer.Draw(mMapOffset);
 
@@ -304,7 +306,7 @@ void GameScene::DrawOwnScn()
      int delta = static_cast<int>(msec / 1000000.0); //•b‚É•ÏŠ·  
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
 
-     mAitem->Draw(mMapOffset);
+    
     
 
      mChat->Draw(mMapOffset);

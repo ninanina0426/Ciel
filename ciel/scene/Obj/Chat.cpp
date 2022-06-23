@@ -23,7 +23,7 @@ bool Chat::init(void)
 	mPos.x_ = 0;
 	mPos.y_ = 0;
 
-	mImage[1] = LoadGraph("image/talk/1.png");
+	mImage[1] = LoadGraph("image/talk/10.png");
 	mImage[2] = LoadGraph("image/talk/2.png");
 	mImage[3] = LoadGraph("image/talk/3.png");
 	mImage[4] = LoadGraph("image/talk/temple.png");
