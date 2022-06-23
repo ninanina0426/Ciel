@@ -129,7 +129,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     auto elTime = nowTime_ - oldTime_;                  //ŠÔ‚Ì·‚ğ‚Æ‚é
     auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
     int delta = msec / 1000000.0; //•b‚É•ÏŠ·
-    delta = delta * 10;
+    //delta = delta * 10;
     //ˆê“ú‚Ì—¬‚ê
     int min = 60;    //ˆê•ªŠÔ‚ÌƒtƒŒ[ƒ€”
     int Day = min * 5;      //ˆê“ú‚Ì•b”

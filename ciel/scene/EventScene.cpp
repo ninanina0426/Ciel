@@ -23,6 +23,10 @@ uniquBaseScn EventScene::Update(uniquBaseScn own)
         return std::move(gameScene_);
     }
     DrawOwnScn();
+    if (GetMovieStateToGraph(move1_) == 0)
+    {
+        flg_ = true;
+    }
     return std::move(own);
 }
 
@@ -32,13 +36,14 @@ void EventScene::DrawOwnScn()
     ClsDrawScreen();
 
     DrawBox(0, 0, 1080, 609, 0xffabcf, true);
-
+   // DrawExtendGraph(0, 0, 1080,609,move1_, false);
 }
 
 bool EventScene::Init(void)
 {
     flg_ = false;
-
+    //move1_ = LoadGraph("./image/move/video.avi");
+    PlayMovieToGraph(move1_);
     return true;
 }
 

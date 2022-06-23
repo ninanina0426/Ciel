@@ -17,5 +17,7 @@ public:
 private:
 	uniquBaseScn gameScene_;
 	bool flg_;		//イベントが終わった
+
+	int move1_;
 };
 
