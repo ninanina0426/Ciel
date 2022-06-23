@@ -67,6 +67,8 @@ public:
 	int mHaoriNum(void);
 	int mRantanNum(void);
 
+	int GetTam(void);
+
 	int mAitem;
 
 	bool GetAitem();

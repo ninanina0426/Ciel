@@ -632,6 +632,11 @@ int Aitem::mRantanNum(void)
 	return mRantanN;
 }
 
+int Aitem::GetTam(void)
+{
+	return mTama;
+}
+
 bool Aitem::GetAitem()
 {
 	return mGet;
