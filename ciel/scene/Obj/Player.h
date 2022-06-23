@@ -45,6 +45,9 @@ private:
 	int mImage1[32];		//画像の格納領域
 	int mImage2[32];		//画像の格納領域
 	int mImage3[32];		//画像の格納領域
+
+	int mImageC[25];		//
+	int mImageChat[100];	//
 	//int mImage4[32];		//画像の格納領域
 	//int mImage5[32];		//画像の格納領域
 	//int mImage6[32];		//画像の格納領域
@@ -58,6 +61,8 @@ private:
 	int i;
 	int num;
 
+	bool moveAnmCnt;
+
 	bool moveFlg;
 
 	int mChipId;
@@ -68,6 +73,9 @@ private:
 	Vector2 mSize;		//キャラクター画像のサイズ
 	int mMoveSpeed;		//キャラクター移動スピード
 	int mAnmCnt;
+
+	//効果音
+	int sHandle;
 	
 public:
 	Player();

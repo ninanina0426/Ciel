@@ -38,6 +38,7 @@ private:
 	int mImage3[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	int mImage4[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	int mImage5[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	
 
 
 	DIR mMoveDir;		//ƒLƒƒƒ‰ƒNƒ^[‚ÌŒü‚«
