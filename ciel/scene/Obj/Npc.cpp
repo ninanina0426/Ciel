@@ -103,6 +103,15 @@ bool Npc::init(void)
 		return false;
 	}
 
+	if (LoadDivGraph("image/npc/woodL.png", 16, 4, 4, 64,128, &mImage3[0][0]) == -1)
+	{
+		return false;
+	}
+	if (LoadDivGraph("image/npc/woodR.png", 16, 4, 4, 64, 128, &mImage4[0][0]) == -1)
+	{
+		return false;
+	}
+
 	mSizeOffset.x_ = mSize.x_ / 2;
 	mSizeOffset.y_ = mSize.y_ / 2;
 
@@ -322,6 +331,12 @@ void Npc::Draw(Vector2 offset)
 	case NpcType::FI_NPC:
 		break;
 	case NpcType::FM_NPC:
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 1535, mPos.y_ - offset.y_ - 64 + 2145, mImage4[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 286, mPos.y_ - offset.y_ - 64 + 1918, mImage3[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 128, mPos.y_ - offset.y_ - 64 + 800, mImage4[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 2879, mPos.y_ - offset.y_ - 64 + 769, mImage3[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 2400, mPos.y_ - offset.y_ - 64 + 99, mImage4[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 2591, mPos.y_ - offset.y_ - 64 + 129, mImage3[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 		break;
 	case NpcType::SM_NPC:
 		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 830, mPos.y_ - offset.y_ - mSizeOffset.y_ + 830, mImage2[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
