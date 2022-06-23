@@ -31,7 +31,7 @@ enum class PlayerID
 };
 
 //体力系定数
-constexpr int STAMINA = 100;
+constexpr int STAMINA = 500;
 constexpr int ENERGY = 100;
 
 class Player
@@ -90,6 +90,9 @@ public:
 
 	int Stamina_;		//スタミナ管理
 	int Energy_;		//エネルギー管理
+	bool staminaFlg_;	//スタミナのフラグ
+	int staminacnt_;
+
 	PL_ST state_;
 	PlayerID plID_;
 	

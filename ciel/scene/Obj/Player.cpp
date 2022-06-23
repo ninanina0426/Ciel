@@ -42,6 +42,8 @@ bool Player::init(PlayerID playerid)
 	
 	Stamina_ = STAMINA;
 	Energy_ = ENERGY;
+	staminaFlg_ = false;
+	staminacnt_ = 0;
 
 	mAnmCnt = 0;
 
@@ -82,20 +84,7 @@ Vector2 Player::Update(int chipId)
 
 	key_.Update();
 
-
-	if (key_.getKeyDownHold(KEY_INPUT_LSHIFT)&& Stamina_!=0)
-	{
-		Stamina_--;
-		mMoveSpeed = 5;
-	}
-	else
-	{
-		if (Stamina_ != STAMINA)
-		{
-			Stamina_++;
-		}
-		mMoveSpeed = 3;
-	}
+	
 	//デバッグ用
 	/*if (key_.getKeyDownHold(KEY_INPUT_Q))
 	{
@@ -143,6 +132,37 @@ Vector2 Player::Update(int chipId)
 			num = 5;
 		}
 
+		//走る
+		if (key_.getKeyDownHold(KEY_INPUT_LSHIFT) && Stamina_ != 0 && keyDir != DIR::DIR_MAX)
+		{
+			Stamina_--;
+			mMoveSpeed = 5;
+		}
+		else
+		{
+			if (Stamina_ == 0)
+			{
+				staminaFlg_ = true;
+			}
+			if (staminaFlg_)
+			{
+				mMoveSpeed = 2;
+				staminacnt_++;
+			}
+			if (staminacnt_ > 120)
+			{
+				staminacnt_ = 0;
+				staminaFlg_ = false;
+			}
+			if (!staminaFlg_)
+			{
+				if (Stamina_ != STAMINA)
+				{
+					Stamina_++;
+				}
+				mMoveSpeed = 3;
+			}
+		}
 
 		if (keyDir != DIR_MAX)
 		{
