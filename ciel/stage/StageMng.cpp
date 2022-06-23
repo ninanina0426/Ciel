@@ -543,7 +543,7 @@ bool StageMng::GetEvent(Vector2 pos)
 		{
 
 			mMapChange = true;
-			mNextPos = { 860,215 };
+			mNextPos = { 860,240 };
 			mDir = DIR_DOWN;
 			mOffset = mNextPos - Vector2{ 540,300 };
 		}
@@ -560,7 +560,7 @@ bool StageMng::GetEvent(Vector2 pos)
 		else if ((chipID == 7028 || chipID == 7029 || chipID == 7030 || chipID == 7031))
 		{
 			mMapChange = true;
-			mNextPos = { 1135,740 };
+			mNextPos = { 1135,758 };
 			mMapID = MAP_ID::SWEETSSCHOOL;
 			mDir = DIR_DOWN;
 			mOffset = mNextPos - Vector2{ 540,300 };

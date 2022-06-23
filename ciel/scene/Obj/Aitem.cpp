@@ -566,6 +566,11 @@ int Aitem::Money(int ru, bool flg)
 	return Ru;
 }
 
+int Aitem::HaveMoney()
+{
+	return Ru;
+}
+
 int Aitem::Num()
 {
 	return i;

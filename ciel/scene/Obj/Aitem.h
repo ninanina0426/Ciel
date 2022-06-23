@@ -21,6 +21,7 @@ public:
 
 	int Money(int ru,bool flg);
 
+	int HaveMoney();
 
 
 	bool mTama1;

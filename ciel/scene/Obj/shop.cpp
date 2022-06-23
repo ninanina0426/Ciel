@@ -103,6 +103,9 @@ bool shop::init(GameScene* parent)
     mImageBsS = LoadGraph("image/shop/shop5.png");
     mImageBuy = LoadGraph("image/shop/shop6.png");
 
+    cHandle = LoadSoundMem("image/Sound/ƒLƒƒƒ“ƒZƒ‹5.ogg");
+    kHandle = LoadSoundMem("image/Sound/‹àŠz•\Ž¦.ogg");
+
 
     FontSize = CreateFontToHandle(NULL, 40, 5);
 
@@ -164,6 +167,8 @@ void shop::Draw(void)
     {
         //˜g
         DrawGraph(0, 0, mImagSelect, true);
+
+        DrawFormatStringToHandle(9000, 170, 0xff0000, FontSize, "%d", haveRu);
         //Box
         switch (mSelect)
         {
@@ -279,6 +284,7 @@ void shop::Draw(void)
         default:
             break;
         }
+
     }
 
     switch (mBS)
@@ -349,7 +355,9 @@ void shop::Draw(void)
         break;
     }
 
-    DrawFormatString(0, 200, GetColor(255,255,255), "%d", SelectNum);
+    /*DrawFormatString(0, 200, GetColor(255,255,255), "%d", SelectNum);*/
+
+   
 }
 
 bool shop::Release(void)
@@ -394,6 +402,12 @@ int shop::SetMoney()
 bool shop::GetMoney()
 {
     return MoneyFlg;
+}
+
+void  shop::sHaveMoney(int ru)
+{
+    haveRu = ru;
+
 }
 
 void shop::AMoney(int money)
@@ -656,6 +670,7 @@ void shop::BSBuy(void)
                     SelectNum = 0;
                     MoneyFlg = true;
                     bApple = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
                 }
                 else
                 {
@@ -665,6 +680,7 @@ void shop::BSBuy(void)
                     SelectNum = 0;
                     bApple = 0;
                     numRu = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
                 }
                 
             }
@@ -676,6 +692,7 @@ void shop::BSBuy(void)
                 SelectNum = 0;
                 bApple = 0;
                 numRu = 0;
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
     }

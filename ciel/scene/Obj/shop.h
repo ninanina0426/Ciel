@@ -39,6 +39,7 @@ public:
 
 	int SetMoney();
 	bool GetMoney();
+	void sHaveMoney(int ru);
 
 	void AMoney(int money);
 
@@ -66,6 +67,7 @@ private:
 	int FontSize;
 
 	int numRu;
+	int haveRu;
 
 	int mImagSelect;
 	int mImagNomal;
@@ -169,6 +171,10 @@ private:
 	int mH;
 
 	bool moveFlg;
+
+	//Œø‰Ê‰¹
+	int kHandle;
+	int cHandle;
 
 	int H;
 

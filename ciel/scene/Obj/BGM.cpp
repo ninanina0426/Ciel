@@ -55,11 +55,13 @@ void BGM::Update(int num)
             SHandle = LoadSoundMem("image/music/templeIn.ogg");
             break;
         case MAP_ID::SWEETS:
-            SHandle = LoadSoundMem("image/music/retroparty.ogg");
+            SHandle = LoadSoundMem("image/music/Sweets.ogg");
             break;
         case MAP_ID::SWEETSOUT:
+            SHandle = LoadSoundMem("image/music/SweetsOut.ogg");
             break;
         case MAP_ID::SWEETSSCHOOL:
+            SHandle = LoadSoundMem("image/music/SweetSchool.ogg");
             break;
         case MAP_ID::TRANGETIONS:
             

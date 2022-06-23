@@ -193,6 +193,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
      mShop.AMoney(mAitem->Money(mShop.SetMoney(),mShop.GetMoney()));
 
+     mShop.sHaveMoney(mAitem->HaveMoney());
+
       //フェードイン
      if (lpMapMng.fadeinFlg_)
      {

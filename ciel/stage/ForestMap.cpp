@@ -467,14 +467,14 @@ bool ForestMap::Init(void)
 
 bool ForestMap::CheckMapChip(Vector2 pos)
 {
-	bool Flg = true;
+	bool Flg = false;
 
 	mMap1 = soil[pos.y_ / 32][pos.x_ / 32];
 	mMap2 = Tree[pos.y_ / 32][pos.x_ / 32];
 	mMap3 = obj1[pos.y_ / 32][pos.x_ / 32];
 	mMap4 = obj2[pos.y_ / 32][pos.x_ / 32];
 
-	/*switch (mMap1)
+	switch (mMap1)
 	{
 	case -1:
 	case 337:
@@ -526,7 +526,7 @@ bool ForestMap::CheckMapChip(Vector2 pos)
 		break;
 	default:
 		break;
-	}*/
+	}
 
 	return Flg;
 }
