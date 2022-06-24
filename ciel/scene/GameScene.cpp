@@ -7,7 +7,7 @@
 #include"Obj/Chat.h"
 #include"../stage/Layer.h"
 #include "../stage/StageMng.h"
-
+#include "EventScene.h"
 
 
 
@@ -119,16 +119,20 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
            /* mMenu.init(this);*/
         }
     }
+    if (key_.getKeyDown(KEY_INPUT_G))
+    {
+        return std::make_unique<EventScene>(std::move(own),mPlayer.plID_, mAitem->GetTam());
+    }
 
     //時間
     nowTime_ = std::chrono::system_clock::now();		//現在の時間を取得
     auto elTime = nowTime_ - oldTime_;                  //時間の差をとる
     auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
     int delta = msec / 1000000.0; //秒に変換
-
+    //delta = delta * 10;
     //一日の流れ
     int min = 60;    //一分間のフレーム数
-    int Day = min * 10;      //一日の秒数
+    int Day = min * 5;      //一日の秒数
 
     //yuugata
     if (delta % Day == 120)
@@ -156,40 +160,45 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         count_++;
     }
 
-
+    skycnt_++;
+    
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
-   
-   
     mMapOffset = lpMapMng.Update(PlayerPos);
 
-    mPlayer.Update(lpMapMng.GetChipId());
-
+    if (mShop.SPose() == false)
+    {
+        mPlayer.Update(lpMapMng.GetChipId());
+    }
 
     PlayerPos = mPlayer.GetPos();
 
     PlayerSize = mPlayer.GetSiz();
 
-    mNpc->Update(PlayerPos,PlayerSize,mChat->Getflg());
+    mNpc->Update(PlayerPos, PlayerSize, mChat->Getflg());
 
-    mChat->Update(mNpc->Getflg(), mNpc->Num());
+    mAitem->Update(PlayerPos, PlayerSize);
+    mChat->Update(mNpc->Getflg(), mNpc->Num(), mShop.CanselFlg(), mShop.SPose());
 
-  
-
+    mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum());
+   
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
-
-     mAitem->Update(PlayerPos, PlayerSize);
-
-    
 
      /*mMenu.Update();*/
      if (mPose == true)
      {
          mMenu.Update();
      }
+     mShop.SsetAitem(mAitem->GetAitem());
+
      mShop.Update(mChat->GetNum());
 
+     mMenu.SetMenu(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori());
+
+     mShop.AMoney(mAitem->Money(mShop.SetMoney(),mShop.GetMoney()));
+
+     mShop.sHaveMoney(mAitem->HaveMoney());
 
       //フェードイン
      if (lpMapMng.fadeinFlg_)
@@ -209,11 +218,79 @@ void GameScene::DrawOwnScn()
 {
     SetDrawScreen(sceneScrID_);
     ClsDrawScreen();
+    auto mapID = lpMapMng.GetMapId();
+    switch (mapID)
+    {
+    case MAP_ID::FOREST:
+        skyflg_ = true;
+        break;
+    case MAP_ID::WA:
+        skyflg_ = true;
+        break;
+    case MAP_ID::WASHOP:
+        skyflg_ = false;
+        break;
+    case MAP_ID::CAVE:
+        skyflg_ = false;
+        break;
+    case MAP_ID::CAVESHOP:
+        skyflg_ = false;
+        break;
+    case MAP_ID::DARK:
+        skyflg_ = false;
+        break;
+    case MAP_ID::FORESTIN:
+        skyflg_ = false;
+        break;
+    case MAP_ID::TEMPLE:
+        skyflg_ = true;
+        break;
+    case MAP_ID::TEMPLEIN:
+        skyflg_ = false;
+        break;
+    case MAP_ID::SWEETS:
+        skyflg_ = true;
+        break;
+    case MAP_ID::SWEETSOUT:
+        skyflg_ = false;
+        break;
+    case MAP_ID::SWEETSSCHOOL:
+        skyflg_ = false;
+        break;
+    case MAP_ID::TRANGETIONS:
+        skyflg_ = false;
+        break;
+    case MAP_ID::MAX:
+        break;
+    default:
+        break;
+    }
+    if (skyflg_&& AMflg_)
+    {
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_);
+        DrawBox(0, 0, 1080, 609, 0x4169e1, true);
+        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+    }
+    if (skyflg_ && PMflg_)
+    {
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_-255);
+        DrawBox(0, 0, 1080, 609, 0xff6347, true);
+        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+    }
+    if (skyflg_ && Nightflg_)
+    {
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_-255);
+        DrawBox(0, 0, 1080, 609, 0x191970, true);
+        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+    }
+    
 
     //マップ
     lpMapMng.Draw();
 
     mNpc->Draw(mMapOffset);
+
+    mAitem->Draw(mMapOffset);
 
     //プレイヤー
 	 mPlayer.Draw(mMapOffset);
@@ -229,7 +306,7 @@ void GameScene::DrawOwnScn()
      int delta = static_cast<int>(msec / 1000000.0); //秒に変換  
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
 
-     mAitem->Draw(mMapOffset);
+    
     
 
      mChat->Draw(mMapOffset);
@@ -242,7 +319,7 @@ void GameScene::DrawOwnScn()
          mMenu.Draw();
      }
 
-     mShop.Draw(mAitem->KnomiNum(), mAitem->AppleNum());
+     mShop.Draw();
     
      //フェードイン
      if (lpMapMng.fadeinFlg_)
@@ -273,6 +350,7 @@ bool GameScene::Init(void)
     PMflg_ = false;
     Nightflg_ = false;
     count_ = 0;
+    skycnt_ = 255;
 
     mBgm = new BGM();
 

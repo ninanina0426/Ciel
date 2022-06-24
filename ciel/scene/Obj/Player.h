@@ -30,6 +30,10 @@ enum class PlayerID
 	Max
 };
 
+//体力系定数
+constexpr int STAMINA = 500;
+constexpr int ENERGY = 100;
+
 class Player
 {
 private:
@@ -41,6 +45,9 @@ private:
 	int mImage1[32];		//画像の格納領域
 	int mImage2[32];		//画像の格納領域
 	int mImage3[32];		//画像の格納領域
+
+	int mImageC[25];		//
+	int mImageChat[100];	//
 	//int mImage4[32];		//画像の格納領域
 	//int mImage5[32];		//画像の格納領域
 	//int mImage6[32];		//画像の格納領域
@@ -54,6 +61,8 @@ private:
 	int i;
 	int num;
 
+	bool moveAnmCnt;
+
 	bool moveFlg;
 
 	int mChipId;
@@ -64,6 +73,9 @@ private:
 	Vector2 mSize;		//キャラクター画像のサイズ
 	int mMoveSpeed;		//キャラクター移動スピード
 	int mAnmCnt;
+
+	//効果音
+	int sHandle;
 	
 public:
 	Player();
@@ -82,6 +94,12 @@ public:
 	void SetPos(Vector2 pos);
 	Vector2 GetSiz(void);
 	Vector2 GetPos(void);
+
+
+	int Stamina_;		//スタミナ管理
+	int Energy_;		//エネルギー管理
+	bool staminaFlg_;	//スタミナのフラグ
+	int staminacnt_;
 
 	PL_ST state_;
 	PlayerID plID_;

@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include"../../stage/StageMng.h"
+#include"shop.h"
 #include "Aitem.h"
 
 
@@ -22,7 +23,7 @@ bool Aitem::init()
 	mSize.x_ = 32;
 	mSize.y_ = 32;
 
-	
+	mGet = false;
 
 	//èäéùä«óùóp
 
@@ -45,12 +46,20 @@ bool Aitem::init()
 	mTama = 5;
 	mKinomi = 5;
 	
-	mAitem = 10;
+	mAitem = 2;
 
+	//Ç®ã‡
+	Ru = 0;
 
 
 	mNumKinomi = 0;
 	mApple = 0;
+	mKinominoKusiyaki = 0;
+	mFruitDrink = 0;
+	mFishingRodS = 0;
+	mRagBag = 0;
+	mPickaxe = 0;
+	
 
 	mNum[0] ={0,0}; //posx
 
@@ -60,7 +69,7 @@ bool Aitem::init()
 
 	//ã 
 	mNum[4] = { 1420,280 };
-	mNum[5] = { 420,420 };
+	mNum[5] = { 553,565 };
 	mNum[6] = { 1585,1070 };
 	mNum[7] = { 465,500 };
 	mNum[8] = {};
@@ -73,6 +82,8 @@ bool Aitem::init()
 	mNum[13] = { 2300,120 };
 
 	i = 0;
+
+	mShop = new shop();
 
 
 	if (LoadDivGraph("image/item.png", 12, 3, 4, mSize.x_, mSize.y_, &mImage[0][0]) == -1)
@@ -92,6 +103,8 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 
 	key_.Update();
 
+	
+
 	switch (mapID)
 	{
 	case MAP_ID::FOREST:
@@ -107,6 +120,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[9] = mNum[0];
 					mKinomi1 = true;
+					mNumKinomi += 1;
 
 				}
 
@@ -124,7 +138,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[10] = mNum[0];
 					mKinomi2 = true;
-
+					mNumKinomi += 1;
 				}
 
 			}
@@ -141,7 +155,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[11] = mNum[0];
 					mKinomi3 = true;
-
+					mNumKinomi += 1;
 				}
 
 			}
@@ -159,7 +173,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[12] = mNum[0];
 					mKinomi4 = true;
-
+					mNumKinomi += 1;
 				}
 
 			}
@@ -176,11 +190,18 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[13] = mNum[0];
 					mKinomi5 = true;
-
+					mNumKinomi += 1;
 				}
 
 			}
 		}
+		/*if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}*/
 		break;
 	case MAP_ID::WA:
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[7].y_ + 32 / 2) &&
@@ -200,7 +221,14 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 
 			}
 		}
-		
+
+		/*if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}*/
 		break;
 	case MAP_ID::WASHOP:
 		
@@ -229,7 +257,14 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 
 			}
 		}
-		
+
+		if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}
 		break;
 	case MAP_ID::FORESTIN:
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[4].y_ + 32 / 2) &&
@@ -249,7 +284,13 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 
 			}
 		}
-		
+		if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}
 		break;
 	case MAP_ID::TEMPLE:
 		
@@ -263,24 +304,25 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[2].x_  +32/ 2) &&
 			(mPos.x_ + mNum[2].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mAitem != 0) && (mAitem <= 10))
+			if ((mAitem != 0) && (mAitem <= 2))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					mNumKinomi += 1;
+					mApple += 1;
 					mAitem -= 1;
 					mNum[2] = mNum[0];
 					i = 2;
+					mGet = true;
 				}
-
 			}
 		}
+		
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[3].y_ + 32 / 2) &&
 			(mPos.y_ + mNum[3].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[3].x_ + 32 / 2) &&
 			(mPos.x_ + mNum[3].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mAitem != 0) && (mAitem <= 10))
+			if ((mAitem != 0) && (mAitem <= 2))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
@@ -288,11 +330,11 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mAitem -= 1;
 					mNum[3] = mNum[0];
 					i = 3;
+					mGet = true;
 				}
-
 			}
 		}
-
+		
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[5].y_ + 32 / 2) &&
 			(mPos.y_ + mNum[5].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[5].x_ + 32 / 2) &&
@@ -305,30 +347,22 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mTama -= 1;
 					mNum[5] = mNum[0];
 					mTama2 = true;
-
 				}
 
 			}
 		}
+
+		if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}
+
 		break;
 	case MAP_ID::SWEETSOUT:
-		//if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[1].y_ + 64 / 2) &&
-		//	(mPos.y_ + mNum[1].y_ - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
-		//	(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[1].x_ + 32 / 2) &&
-		//	(mPos.x_ + mNum[1].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
-		//{
-		//	if ((mAitem != 0) && (mAitem <= 10))
-		//	{
-		//		if (key_.getKeyDown(KEY_INPUT_F))
-		//		{
-		//			mNumKinomi += 1;
-		//			mAitem -= 1;
-		//			mNum[1] = mNum[0];
-		//			i = 1;
-		//		}
-
-		//	}
-		//}
+		
 		break;
 	case MAP_ID::SWEETSSCHOOL:
 		break;
@@ -416,7 +450,6 @@ void Aitem::Draw(Vector2 mMapoffset)
 				DrawGraph(mPos.x_ + mNum[7].x_ - mMapoffset.x_ , mPos.y_ + mNum[7].y_ - mMapoffset.y_, mImage[3][mAnimCnt], true);
 			}
 		}
-
 		break;
 	case MAP_ID::WASHOP:
 
@@ -501,7 +534,7 @@ void Aitem::Draw(Vector2 mMapoffset)
 
 
 	DrawFormatString(0,150, GetColor(255, 255, 255), "num=%d", mAitem);
-	DrawFormatString(0, 170, GetColor(255, 255, 255), "ã =%d", mTama);
+	DrawFormatString(0, 170, GetColor(255, 255, 255), "ã =%d", Ru);
 	
 
 }
@@ -521,6 +554,23 @@ Vector2 Aitem::GetPos(void)
 	return mPos;
 }
 
+int Aitem::Money(int ru, bool flg)
+{
+	int sRu = Ru;
+
+	if (flg == true)
+	{
+		Ru = sRu + ru;
+	}
+
+	return Ru;
+}
+
+int Aitem::HaveMoney()
+{
+	return Ru;
+}
+
 int Aitem::Num()
 {
 	return i;
@@ -529,6 +579,11 @@ int Aitem::Num()
 bool Aitem::Getflg()
 {
 	return true;
+}
+
+int Aitem::GetmKinomi(void)
+{
+	return mKinomi;
 }
 
 int Aitem::KnomiNum(void)
@@ -540,6 +595,53 @@ int Aitem::AppleNum(void)
 {
 	return mApple;
 }
+
+int Aitem::KinominoKusiyakiNum(void)
+{
+	return mKinominoKusiyaki;
+}
+
+int Aitem::FruitDrinkNum(void)
+{
+	return mFruitDrink;
+}
+
+int Aitem::FishingRodSNum(void)
+{
+	return mFishingRodS;
+}
+
+int Aitem::RagBagNum(void)
+{
+	return mRagBag;
+}
+
+int Aitem::PickaxeNum(void)
+{
+	return mPickaxe;
+}
+
+int Aitem::mHaoriNum(void)
+{
+	return mHaoriN;
+}
+
+int Aitem::mRantanNum(void)
+{
+	return mRantanN;
+}
+
+int Aitem::GetTam(void)
+{
+	return mTama;
+}
+
+bool Aitem::GetAitem()
+{
+	return mGet;
+}
+
+
 
 
 

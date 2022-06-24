@@ -81,6 +81,8 @@ private:
     bool AMflg_;            //’©
     bool PMflg_;            //—[•û
     bool Nightflg_;         //–é
+    bool skyflg_;
+    int skycnt_;
     int count_;
     int night_;
     int evening_;

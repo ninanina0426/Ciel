@@ -21,6 +21,7 @@ private:
     bool Init(void) override;                           // セレクトシーン初期化
     SceneID GetSceneID(void) override { return SceneID::SELECT; };   //sceneIDをセレクトに設定
 
+    
 
     Keyboard key_;      //キー情報格納
     Player player_;     //プレイヤー情報格納

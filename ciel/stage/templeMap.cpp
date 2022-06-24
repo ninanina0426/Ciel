@@ -537,7 +537,8 @@ void templeMap::Update(Vector2 offset)
 
 void templeMap::DrawOwnScn()
 {
-	DrawBox(0, 0, 1080, 609, 0x0000ff, true);
+	//DrawBox(0, 0, 1080, 609, 0x4682b4, true);
+
 	for (int x = 0; x < MAP_X; x++)
 	{
 		for (int y = 0; y < MAP_Y; y++)

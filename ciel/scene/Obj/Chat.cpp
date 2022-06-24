@@ -23,7 +23,7 @@ bool Chat::init(void)
 	mPos.x_ = 0;
 	mPos.y_ = 0;
 
-	mImage[1] = LoadGraph("image/talk/1.png");
+	mImage[1] = LoadGraph("image/talk/10.png");
 	mImage[2] = LoadGraph("image/talk/2.png");
 	mImage[3] = LoadGraph("image/talk/3.png");
 	mImage[4] = LoadGraph("image/talk/temple.png");
@@ -40,13 +40,17 @@ bool Chat::init(void)
 	return true;
 }
 
-bool Chat::Update(bool flg, int num)
+bool Chat::Update(bool flg, int num,bool sflg,bool sPose)
 {
 	mFlg = flg;
 
+	shopFlg = sflg;
+
 	key_.Update();
 
-	if (mFlg == true)
+	
+
+	if ((mFlg == true))
 	{
 		mNumType = num;
 
@@ -57,17 +61,51 @@ bool Chat::Update(bool flg, int num)
 			if (mNum == 100)
 			{
 				finalC_ = true;
-				mNum = num;
+				mNum = num - 1;
 			}
-			if ((key_.getKeyDown(KEY_INPUT_F)) && (mNum != 100))
+			if ((key_.getKeyDown(KEY_INPUT_F)) && (mNum != 100) && (sPose == false))
 			{
+
 				mNum += 1;
+				if (mNum == 2)
+				{
+					mSNum = 4;
+					mNum = 20;
+				}
+				
 				if (mNum == 4)
 				{
 					mFlg = false;
-					mSNum = mNum;
 					mNum = 0;
+
 				}
+			}
+
+			if (sPose == true)
+			{
+				if (mNum == 20)
+				{
+					mNum = 20;
+					mSNum = 20;
+				}
+				if (shopFlg == false)
+				{
+					if (mNum == 3)
+					{
+						mNum = 20;
+					}
+				}
+			}
+			else 
+			{
+				if (shopFlg == true)
+				{
+					if (mNum == 20)
+					{
+						mNum = 3;
+					}
+				}
+				
 			}
 		}
 		break;
@@ -116,12 +154,13 @@ bool Chat::Update(bool flg, int num)
 			break;
 		}
 	}
-	else
+	else if(mFlg==false)
 	{
 		mNum = 100;
 		/*mFlg = false;*/
 		mSNum = 0;
 	}
+	
 
 	return mFlg;
 }
@@ -149,7 +188,7 @@ void Chat::Draw(Vector2 offset)
 		break;
 	}
 
-	/*DrawFormatString(0, 70, GetColor(0,0,255), "Chat:%d", mNum);*/
+	DrawFormatString(0, 70, GetColor(0,0,255), "Chat:%d", mNum);
 
 	
 }

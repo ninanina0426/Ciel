@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include "SelectScene.h"
 #include "GameScene.h"
+#include "EventScene.h"
 
 
 SelectScene::SelectScene()
@@ -56,7 +57,7 @@ uniquBaseScn SelectScene::Update(uniquBaseScn own)
     //キャラ選択が終わったらシーン移送
     if (DicideChar(player_))
     {
-        return std::make_unique<GameScene>(player_.plID_);
+        return std::make_unique<EventScene>(std::make_unique<GameScene>(player_.plID_), player_.plID_, 5);
     }
 
     //playerの選択

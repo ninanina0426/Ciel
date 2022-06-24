@@ -35,6 +35,11 @@ private:
 	int mImage[16][16];		//画像の格納領域
 	int mImage1[16][16];		//画像の格納領域
 	int mImage2[16][16];		//画像の格納領域
+	int mImage3[16][16];		//画像の格納領域
+	int mImage4[16][16];		//画像の格納領域
+	int mImage5[16][16];		//画像の格納領域
+	
+
 
 	DIR mMoveDir;		//キャラクターの向き
 	Vector2 mPos;		//キャラクターの地図上の座標
@@ -76,6 +81,8 @@ public:
 
 	bool mQSoNpc1;
 	bool mQSoNpc2;
+
+	bool mQTNpc;
 	int qnum_;
 	//クエストon・offフラグ
 	bool qflg_ ;

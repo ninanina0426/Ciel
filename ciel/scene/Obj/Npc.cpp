@@ -25,8 +25,12 @@ bool Npc::init(void)
 	mQSoNpc1 = false;
 	mQSoNpc2 = false;
 	mQSmNpc1 = false;
+
+	mQTNpc = false;
 	qnum_ = 0;
 	qflg_ = false;
+
+	
 
 	mPos.x_ = 0;
 	mPos.y_ = 0;
@@ -94,7 +98,11 @@ bool Npc::init(void)
 		return false;
 	}
 
-	if (LoadDivGraph("image/102.png", 16, 4, 4, 32, 32, &mImage2[0][0]) == -1)
+	if (LoadDivGraph("image/npc/woodL.png", 16, 4, 4, 64,128, &mImage3[0][0]) == -1)
+	{
+		return false;
+	}
+	if (LoadDivGraph("image/npc/woodR.png", 16, 4, 4, 64, 128, &mImage4[0][0]) == -1)
 	{
 		return false;
 	}
@@ -278,7 +286,14 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 	case NpcType::TI_NPC:
 		break;
 	case NpcType::TM_NPC:
-		qnum_ = 1;
+		//mQTNpc = false;
+		if (!mQTNpc)
+		{
+			mQTNpc = true;
+			qflg_ = mQTNpc;
+			qnum_ = 1;
+		}
+		
 		break;
 	case NpcType::WM_NPC:
 		break;
@@ -292,7 +307,7 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 	mAnmCnt++;
 	//クエスト
 
-	QuestIns.UpDate(qflg_, qnum_, playerPos, mapID);
+	QuestIns.UpDate(qflg_, qnum_, playerPos,playerSize, mapID);
 
 	return i;
 
@@ -311,9 +326,15 @@ void Npc::Draw(Vector2 offset)
 	case NpcType::FI_NPC:
 		break;
 	case NpcType::FM_NPC:
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 1535, mPos.y_ - offset.y_ - 64 + 2145, mImage4[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 286, mPos.y_ - offset.y_ - 64 + 1918, mImage3[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 128, mPos.y_ - offset.y_ - 64 + 800, mImage4[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 2879, mPos.y_ - offset.y_ - 64 + 769, mImage3[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 2400, mPos.y_ - offset.y_ - 64 + 100, mImage4[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 2591, mPos.y_ - offset.y_ - 64 + 129, mImage3[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 		break;
 	case NpcType::SM_NPC:
-		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 830, mPos.y_ - offset.y_ - mSizeOffset.y_ + 830, mImage2[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+		/*DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 830, mPos.y_ - offset.y_ - mSizeOffset.y_ + 830, mImage2[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);*/
 		break;
 	case NpcType::SO_NPC:
 		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 1355, mPos.y_ - offset.y_ - mSizeOffset.y_ + 605, mImage[0][mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);

@@ -14,6 +14,7 @@ enum class SceneID
 	SELECT,				//キャラ選択シーン
 	LOAD,				//ロードシーン
 	GAME,				//ゲームシーン
+	EVENT,				//イベントシーン
 	END,				//エンドシーン
 	MAX
 };
