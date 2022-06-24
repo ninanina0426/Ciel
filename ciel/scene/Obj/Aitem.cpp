@@ -528,7 +528,6 @@ int Aitem::Num()
 
 bool Aitem::Getflg()
 {
-
 	return true;
 }
 
