@@ -36,8 +36,10 @@ void BGM::Update(int num)
             SHandle = LoadSoundMem("image/music/forest.ogg");
             break;
         case MAP_ID::WA:
+            SHandle = LoadSoundMem("image/music/Wa.ogg");
             break;
         case MAP_ID::WASHOP:
+            SHandle = LoadSoundMem("image/music/WaShop.ogg");
             break;
         case MAP_ID::CAVE:
             break;
