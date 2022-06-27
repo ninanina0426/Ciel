@@ -24,13 +24,14 @@ private:
 	int mSNum;
 
 	bool shopFlg;
+	bool wshopFlg;
 public:
 	Chat();
 	~Chat();
 
 	bool GetfinalC(void);
 	bool init(void);		//初期化
-	bool Update(bool flg,int num,bool sflg, bool sPose);		//更新
+	bool Update(bool flg,int num,bool sflg, bool sPose, bool wflg, bool wPose);		//更新
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
 

@@ -28,6 +28,10 @@ bool Chat::init(void)
 	mImage[3] = LoadGraph("image/talk/3.png");
 	mImage[4] = LoadGraph("image/talk/temple.png");
 	mImage[5] = LoadGraph("image/talk/temple.png");
+	mImage[15] = LoadGraph("image/talk/temple.png");
+	mImage[16] = LoadGraph("image/talk/temple.png");
+	mImage[17] = LoadGraph("image/talk/3.png");
+	mImage[18] = LoadGraph("image/talk/3.png");
 
 	mNum = 100;
 
@@ -40,11 +44,12 @@ bool Chat::init(void)
 	return true;
 }
 
-bool Chat::Update(bool flg, int num,bool sflg,bool sPose)
+bool Chat::Update(bool flg, int num,bool sflg,bool sPose, bool wflg, bool wPose)
 {
 	mFlg = flg;
 
 	shopFlg = sflg;
+	wshopFlg = wflg;
 
 	key_.Update();
 
@@ -130,22 +135,56 @@ bool Chat::Update(bool flg, int num,bool sflg,bool sPose)
 			}
 		}
 		break;
-		case 20:
+		case 15:
 		{
 
 			if (mNum == 100)
 			{
-				mNum = num;
+				mNum = num - 1;
 			}
-			if (key_.getKeyDown(KEY_INPUT_F) && (mNum != 100))
+			if ((key_.getKeyDown(KEY_INPUT_F)) && (mNum != 100) && (wPose == false))
 			{
 
 				mNum += 1;
-				if (mNum == 24)
+				if (mNum == 16)
+				{
+					mSNum = 15;
+					mNum = 30;
+				}
+
+				if (mNum == 18)
 				{
 					mFlg = false;
 					mNum = 0;
+
 				}
+			}
+
+			if (wPose == true)
+			{
+				if (mNum == 30)
+				{
+					mNum = 30;
+					mSNum = 30;
+				}
+				if (wshopFlg == false)
+				{
+					if (mNum == 17)
+					{
+						mNum = 30;
+					}
+				}
+			}
+			else
+			{
+				if (wshopFlg == true)
+				{
+					if (mNum == 20)
+					{
+						mNum = 17;
+					}
+				}
+
 			}
 			
 		}
@@ -179,9 +218,9 @@ void Chat::Draw(Vector2 offset)
 		DrawGraph(mPos.x_ - offset.x_ + 750, mPos.y_ - offset.y_ + 1100, mImage[mNum], true);
 		break;
 	}
-	case 20:
+	case 15:
 	{
-		DrawGraph(mPos.x_ - offset.x_ + 800, mPos.y_ - offset.y_ + 800, mImage[mNum], true);
+		DrawGraph(mPos.x_ - offset.x_ + 1750, mPos.y_ - offset.y_ + 1650, mImage[mNum], true);
 		break;
 	}
 	default:

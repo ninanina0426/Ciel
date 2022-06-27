@@ -21,6 +21,7 @@ bool Npc::init(void)
 	mSoNpc1 = false;
 	mSoNpc2 = false;
 	mSmNpc1 = false;
+	mWsNpc1 = false;
 
 	mQSoNpc1 = false;
 	mQSoNpc2 = false;
@@ -103,6 +104,11 @@ bool Npc::init(void)
 		return false;
 	}
 	if (LoadDivGraph("image/npc/woodR.png", 16, 4, 4, 64, 128, &mImage4[0][0]) == -1)
+	{
+		return false;
+	}
+
+	if (LoadDivGraph("image/char/107.png", 16, 4, 4, 32, 48, &mImage5[0][0]) == -1)
 	{
 		return false;
 	}
@@ -298,11 +304,35 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 	case NpcType::WM_NPC:
 		break;
 	case NpcType::WS_NPC:
+	{
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 1750 + 64 / 2) &&
+			(mPos.y_ + 1750 - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 1825 + 32 / 2) &&
+			(mPos.x_ + 1825 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			mNumType = NumType::NPC_1;
+			if (mWsNpc1 == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mWsNpc1 = true;
+					i = 15;
+				}
+			}
+			else
+			{
+				if (flg == false)
+				{
+					mWsNpc1 = false;
+					i = 0;
+				}
+			}
+		}
 		break;
+	}
 	default:
 		break;
 	}
-
 
 	mAnmCnt++;
 	//クエスト
@@ -349,6 +379,7 @@ void Npc::Draw(Vector2 offset)
 	case NpcType::WM_NPC:
 		break;
 	case NpcType::WS_NPC:
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 1825, mPos.y_ - offset.y_ - 64 + 1750, mImage5[0][3], true);
 		break;
 	default:
 		break;
@@ -456,6 +487,22 @@ bool Npc::Getflg()
 		
 		break;
 	case NpcType::WS_NPC:
+		switch (mNumType)
+		{
+		case NumType::NPC_1:
+			return mWsNpc1;
+			break;
+		case NumType::NPC_2:
+			break;
+		case NumType::NPC_3:
+			break;
+		case NumType::NPC_4:
+			break;
+		case NumType::NPC_5:
+			break;
+		default:
+			break;
+		}
 		
 		break;
 	default:

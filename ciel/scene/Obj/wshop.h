@@ -2,11 +2,11 @@
 #include "../../common/Vector2.h"
 #include "../Input/Keyboard.h"
 
-class shop
+class wshop
 {
 public:
 
-	enum class SHOP_SELECT
+	enum class WSHOP_SELECT
 	{
 		SELECT,
 		BUY,
@@ -16,15 +16,15 @@ public:
 		MAX
 	};
 
-	enum class SHOP_BS
+	enum class WSHOP_BS
 	{
 		BS_BUY,
 		BS_SELL,
 		BS_MAX
 	};
 
-	shop();
-	~shop();
+	wshop();
+	~wshop();
 
 	bool init(void);		//èâä˙âª
 	void Update(int num);		//çXêV
@@ -34,7 +34,7 @@ public:
 	bool SPose(void);
 	bool CanselFlg(void);
 
-	int SetAitem(int a, int kk, int fd, int frs, int rb, int p,int k,int r,int h);
+	int SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h);
 
 	int SetMoney();
 	bool GetMoney();
@@ -48,9 +48,9 @@ public:
 
 	void SsetAitem(bool flg);
 
-	int SsApple(void);
-	int SsKinominoKusiyaki(void);
-	int SsFruitDrink(void);
+	int SsRice(void);
+	int SsDango(void);
+	int SsTea(void);
 	int SsFishingRodS(void);
 	int SsRagBag(void);
 	int SsPickaxe(void);
@@ -59,9 +59,9 @@ public:
 	int SsHaori(void);
 
 private:
-	
+
 	bool MoneyFlg;
-	int sMoney;
+	int wMoney;
 
 	int FontSize;
 
@@ -75,17 +75,17 @@ private:
 	int mImageBsB;
 	int mImageBsS;
 	int mImageBuy;
-	
+
 	Vector2 mBoxSe[10];
 	Vector2 mBoxA[10][10];
 	Vector2 mBoxB[10][10];
 
 	Vector2 mPos;
 	Vector2 mSize;
-	
-	SHOP_SELECT mSelect;
 
-	SHOP_BS mBS;
+	WSHOP_SELECT mSelect;
+
+	WSHOP_BS mBS;
 
 	Keyboard key_;
 
@@ -102,9 +102,9 @@ private:
 	int SelectNum;
 
 	//éùÇ¡ÇƒÇ¢ÇÈ
-	int gApple;
-	int gKinominoKusiyaki;
-	int gFruitDrink;
+	int gRice;
+	int gDango;
+	int gTea;
 	int gFishingRodS;
 	int gRagBag;
 	int gPickaxe;
@@ -113,9 +113,9 @@ private:
 	int gHaori;
 
 	//îÑîÉ
-	int bApple;
-	int bKinominoKusiyaki;
-	int bFruitDrink;
+	int bRice;
+	int bDango;
+	int bTea;
 	int bFishingRodS;
 	int bRagBag;
 	int bPickaxe;
@@ -124,9 +124,9 @@ private:
 	int bHaori;
 
 	//ç›å…
-	int maxApple;
-	int maxKinominoKusiyaki;
-	int maxFruitDrink;
+	int maxRice;
+	int maxDango;
+	int maxTea;
 	int maxFishingRodS;
 	int maxRagBag;
 	int maxPickaxe;
@@ -135,9 +135,9 @@ private:
 	int maxHaori;
 
 	//ëççá
-	int sApple;
-	int sKinominoKusiyaki;
-	int sFruitDrink;
+	int sRice;
+	int sDango;
+	int sTea;
 	int sFishingRodS;
 	int sRagBag;
 	int sPickaxe;
@@ -146,9 +146,9 @@ private:
 	int sHaori;
 
 	//â¡å∏éZ
-	int kApple;
-	int kKinominoKusiyaki;
-	int kFruitDrink;
+	int kRice;
+	int kDango;
+	int kTea;
 	int kFishingRodS;
 	int kRagBag;
 	int kPickaxe;
@@ -157,9 +157,9 @@ private:
 	int kHaori;
 
 	//Ç®ã‡
-	int mA;
-	int mKK;
-	int mFD;
+	int mRi;
+	int mD;
+	int mT;
 	int mFRS;
 	int mRB;
 	int mP;
@@ -186,7 +186,6 @@ private:
 	void BS(void);
 
 	//èÛë‘ëJà⁄
-	void ChangeState(SHOP_SELECT select);
-	void ChangeBS(SHOP_BS bs);
+	void ChangeState(WSHOP_SELECT select);
+	void ChangeBS(WSHOP_BS bs);
 };
-

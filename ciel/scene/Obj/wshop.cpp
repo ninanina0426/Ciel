@@ -1,19 +1,19 @@
 #include <DxLib.h>
 #include "../Input/Keyboard.h"
-#include "shop.h"
+#include "wshop.h"
 
-shop::shop()
+wshop::wshop()
 {
-   /* init();*/
+    /* init();*/
 }
 
-shop::~shop()
+wshop::~wshop()
 {
 }
 
-bool shop::init(void)
+bool wshop::init(void)
 {
-   
+
     num = 0;
     mPos = { 0,0 };
     y = 0;
@@ -26,12 +26,12 @@ bool shop::init(void)
     MoneyFlg = false;
 
     //”„”ƒ
-    bApple=0;
-    bKinominoKusiyaki = 0;
-    bFruitDrink = 0;
+    bRice = 0;
+    bDango = 0;
+    bTea = 0;
     bFishingRodS = 0;
     bRagBag = 0;
-    bPickaxe =0;
+    bPickaxe = 0;
     bKinomi = 0;
     bRantan = 0;
     bHaori = 0;
@@ -39,26 +39,26 @@ bool shop::init(void)
     H = -1;
 
     //ÝŒÉ
-    maxApple=10;
-    maxKinominoKusiyaki=5;
-    maxFruitDrink=5;
-    maxFishingRodS=1;
-    maxRagBag=1;
-    maxPickaxe=1;
-    maxKinomi=0;
-    maxRantan=0;
-    maxHaori=1;
+    maxRice = 10;
+    maxDango = 5;
+    maxTea = 5;
+    maxFishingRodS = 1;
+    maxRagBag = 1;
+    maxPickaxe = 1;
+    maxKinomi = 0;
+    maxRantan = 0;
+    maxHaori = 1;
 
     //‚¨‹à
-    mA=25;
-    mKK=30;
-    mFD=50;
-    mFRS=200;
-    mRB=500;
-    mP=200;
-    mK=0;
-    mR=0;
-    mH=0;
+    mRi = 30;
+    mD = 35;
+    mT = 20;
+    mFRS = 200;
+    mRB = 500;
+    mP = 200;
+    mK = 0;
+    mR = 0;
+    mH = 0;
 
     SelectNum = 1;
     moveFlg = false;
@@ -72,16 +72,16 @@ bool shop::init(void)
     mBoxSe[4] = { 650,75 };
 
 
-    mBoxA[0][0] = { 70,40};
-    mBoxA[0][1] = { 70,40};
-    mBoxA[0][2] = { 70,80};
-    mBoxA[0][3] = { 70,120};
-    mBoxA[0][4] = { 70,160};
-    mBoxA[0][5] = { 70,200};
-    mBoxA[0][6] = { 70,240};
-    mBoxA[0][7] = { 70,280};
-    mBoxA[0][8] = { 70,320};
-    mBoxA[0][9] = { 70,360};
+    mBoxA[0][0] = { 70,40 };
+    mBoxA[0][1] = { 70,40 };
+    mBoxA[0][2] = { 70,80 };
+    mBoxA[0][3] = { 70,120 };
+    mBoxA[0][4] = { 70,160 };
+    mBoxA[0][5] = { 70,200 };
+    mBoxA[0][6] = { 70,240 };
+    mBoxA[0][7] = { 70,280 };
+    mBoxA[0][8] = { 70,320 };
+    mBoxA[0][9] = { 70,360 };
 
 
     /*mBoxB[0][0] = { 440,426 };*/
@@ -90,16 +90,16 @@ bool shop::init(void)
     mBoxB[2][0] = { 534,426 };
     mBoxB[3][0] = { 648,483 };
     mBoxB[4][0] = { 648,483 };
-   
+
 
     mImagSelect = LoadGraph("image/shop/shop1.png");
     mImagNomal = LoadGraph("image/shop/shop10.png");
-    mImageHuve= LoadGraph("image/shop/shop2.png");
-    mImageNHuve= LoadGraph("image/shop/shop3.png");
+    mImageHuve = LoadGraph("image/shop/shop12.png");
+    mImageNHuve = LoadGraph("image/shop/shop3.png");
 
     mImageBsB = LoadGraph("image/shop/shop4.png");
     mImageBsS = LoadGraph("image/shop/shop5.png");
-    mImageBuy = LoadGraph("image/shop/shop13.png");
+    mImageBuy = LoadGraph("image/shop/shop11.png");
 
     cHandle = LoadSoundMem("image/Sound/ƒLƒƒƒ“ƒZƒ‹5.ogg");
     kHandle = LoadSoundMem("image/Sound/‹àŠz•\Ž¦.ogg");
@@ -107,26 +107,25 @@ bool shop::init(void)
 
     FontSize = CreateFontToHandle(NULL, 40, 5);
 
-    ChangeState(SHOP_SELECT::SELECT);
+    ChangeState(WSHOP_SELECT::SELECT);
 
-    ChangeBS(SHOP_BS::BS_MAX);
+    ChangeBS(WSHOP_BS::BS_MAX);
 
     moveSnum = 0;
 
     return true;
 }
 
-void shop::Update(int num)
+void wshop::Update(int num)
 {
     key_.Update();
 
-    if (num==4)
+    if (num == 15)
     {
         moveFlg = true;
-        ChangeState(SHOP_SELECT::SELECT);
-        
+        ChangeState(WSHOP_SELECT::SELECT);
     }
-    if (num == 20)
+    if (num == 30)
     {
         moveFlg = true;
     }
@@ -139,19 +138,19 @@ void shop::Update(int num)
     {
         switch (mSelect)
         {
-        case shop::SHOP_SELECT::SELECT:
+        case wshop::WSHOP_SELECT::SELECT:
             Select();
             break;
-        case shop::SHOP_SELECT::BUY:
+        case wshop::WSHOP_SELECT::BUY:
             Buy();
             break;
-        case shop::SHOP_SELECT::SELL:
+        case wshop::WSHOP_SELECT::SELL:
             Sell();
             break;
-        case shop::SHOP_SELECT::CANSEL:
+        case wshop::WSHOP_SELECT::CANSEL:
             Cansel();
             break;
-        case shop::SHOP_SELECT::MAX:
+        case wshop::WSHOP_SELECT::MAX:
             break;
         default:
             break;
@@ -161,105 +160,105 @@ void shop::Update(int num)
    
 }
 
-void shop::Draw(void)
+void wshop::Draw(void)
 {
-   
+
     if (moveFlg == true)
     {
         //˜g
         DrawGraph(0, 0, mImagSelect, true);
 
-        
+
         //Box
         switch (mSelect)
         {
-        case shop::SHOP_SELECT::SELECT:
+        case wshop::WSHOP_SELECT::SELECT:
             SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
             DrawBox(mBoxSe[x].x_, 155, mBoxSe[x + 1].x_, 210, GetColor(255, 255, 255), true);
             SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
             break;
-        case shop::SHOP_SELECT::BUY:
+        case wshop::WSHOP_SELECT::BUY:
             SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
             DrawBox(70, mBoxA[0][yy].y_ + 210, 545, mBoxA[0][yy + 1].y_ + 210, GetColor(255, 255, 255), true);
             SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
             break;
-        case shop::SHOP_SELECT::SELL:
+        case wshop::WSHOP_SELECT::SELL:
             SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
             DrawBox(70, mBoxA[0][yy].y_ + 210, 545, mBoxA[0][yy + 1].y_ + 210, GetColor(255, 255, 255), true);
             SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
             break;
-        case shop::SHOP_SELECT::CANSEL:
+        case wshop::WSHOP_SELECT::CANSEL:
 
             break;
-        case shop::SHOP_SELECT::MAX:
+        case wshop::WSHOP_SELECT::MAX:
             break;
         default:
             break;
         }
 
-        
+
 
         //box‚Ì•\Ž¦
         switch (mSelect)
         {
-        case shop::SHOP_SELECT::SELECT:
+        case wshop::WSHOP_SELECT::SELECT:
             //•¶Žš  
             DrawGraph(0, 0, mImagNomal, true);
             break;
-        case shop::SHOP_SELECT::BUY:
+        case wshop::WSHOP_SELECT::BUY:
         {
             DrawGraph(0, 0, mImageHuve, true);
-             /*if (mParent->IsKinomi1()==true)
-             {
-                 DrawRectGraph(70, mBoxA[0][1].y_+210, 70, mBoxA[0][1].y_+210,520,40, mImageHuve, true, false);
-             }*/
-             if (yy == 1)
-             {
-                 DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sApple);
-                 DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxApple);
-             }
-             if (yy == 2)
-             {
-                 DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sKinominoKusiyaki);
-                 DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxKinominoKusiyaki);
-             }
-             if (yy == 3)
-             {
-                 DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sFruitDrink);
-                 DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFruitDrink);
-             }
-             if (yy == 4)
-             {
-                 DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sFishingRodS);
-                 DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFishingRodS);
-             }
-             if (yy == 5)
-             {
-                 DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sRagBag);
-                 DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxRagBag);
-             }
-             if (yy == 6)
-             {
-                 DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sPickaxe);
-                 DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxPickaxe);
-             }
+            /*if (mParent->IsKinomi1()==true)
+            {
+                DrawRectGraph(70, mBoxA[0][1].y_+210, 70, mBoxA[0][1].y_+210,520,40, mImageHuve, true, false);
+            }*/
+            if (yy == 1)
+            {
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sRice);
+                DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxRice);
+            }
+            if (yy == 2)
+            {
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sDango);
+                DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxDango);
+            }
+            if (yy == 3)
+            {
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sTea);
+                DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxTea);
+            }
+            if (yy == 4)
+            {
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sFishingRodS);
+                DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFishingRodS);
+            }
+            if (yy == 5)
+            {
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sRagBag);
+                DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxRagBag);
+            }
+            if (yy == 6)
+            {
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sPickaxe);
+                DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxPickaxe);
+            }
         }
         break;
-        case shop::SHOP_SELECT::SELL:
+        case wshop::WSHOP_SELECT::SELL:
             DrawGraph(0, 0, mImageBuy, true);
             if (yy == 1)
             {
-                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sApple);
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sRice);
                 /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxApple);*/
             }
             if (yy == 2)
             {
-                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sKinominoKusiyaki);
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sDango);
                 /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxKinominoKusiyaki);*/
             }
             if (yy == 3)
             {
-                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sFruitDrink);
+                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sTea);
                 /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFruitDrink);*/
             }
             if (yy == 4)
@@ -275,12 +274,12 @@ void shop::Draw(void)
             if (yy == 6)
             {
                 DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", sPickaxe);
-               /* DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxPickaxe);*/
+                /* DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxPickaxe);*/
             }
             break;
-        case shop::SHOP_SELECT::CANSEL:
+        case wshop::WSHOP_SELECT::CANSEL:
             break;
-        case shop::SHOP_SELECT::MAX:
+        case wshop::WSHOP_SELECT::MAX:
             break;
         default:
             break;
@@ -291,22 +290,22 @@ void shop::Draw(void)
 
     switch (mBS)
     {
-    case shop::SHOP_BS::BS_BUY:
+    case wshop::WSHOP_BS::BS_BUY:
         DrawGraph(0, 0, mImageBsB, true);
         SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
         DrawBox(mBoxB[SelectNum][0].x_, 418, mBoxB[SelectNum + 1][0].x_, 475, GetColor(255, 255, 255), true);
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
         if (yy == 1)
         {
-            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bApple);
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bRice);
         }
         if (yy == 2)
         {
-            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bKinominoKusiyaki);
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bDango);
         }
         if (yy == 3)
         {
-            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bFruitDrink);
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bTea);
         }
         if (yy == 4)
         {
@@ -321,22 +320,22 @@ void shop::Draw(void)
             DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bPickaxe);
         }
         break;
-    case shop::SHOP_BS::BS_SELL:
+    case wshop::WSHOP_BS::BS_SELL:
         DrawGraph(0, 0, mImageBsS, true);
         SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
         DrawBox(mBoxB[SelectNum][0].x_, 418, mBoxB[SelectNum + 1][0].x_, 475, GetColor(255, 255, 255), true);
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
         if (yy == 1)
         {
-            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bApple);
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bRice);
         }
         if (yy == 2)
         {
-            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bKinominoKusiyaki);
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bDango);
         }
         if (yy == 3)
         {
-            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bFruitDrink);
+            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bTea);
         }
         if (yy == 4)
         {
@@ -351,7 +350,7 @@ void shop::Draw(void)
             DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bPickaxe);
         }
         break;
-    case shop::SHOP_BS::BS_MAX:
+    case wshop::WSHOP_BS::BS_MAX:
         break;
     default:
         break;
@@ -359,10 +358,10 @@ void shop::Draw(void)
 
     /*DrawFormatString(0, 200, GetColor(255,255,255), "%d", SelectNum);*/
 
-   
+
 }
 
-bool shop::Release(void)
+bool wshop::Release(void)
 {
     DeleteGraph(mImagSelect);
     DeleteGraph(mImageHuve);
@@ -371,27 +370,27 @@ bool shop::Release(void)
     return true;
 }
 
-bool shop::SPose(void)
+bool wshop::SPose(void)
 {
     return moveFlg;
 }
 
-bool shop::CanselFlg(void)
+bool wshop::CanselFlg(void)
 {
     return Canflg;
 }
 
-int shop::SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h)
+int wshop::SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h)
 {
-    gApple=a;
-    gKinominoKusiyaki=kk;
-    gFruitDrink=fd;
-    gFishingRodS=frs;
-    gRagBag=rb;
-    gPickaxe=p;
-    gKinomi=k;
-    gRantan=r;
-    gHaori=h;
+    gRice = a;
+    gDango = kk;
+    gTea = fd;
+    gFishingRodS = frs;
+    gRagBag = rb;
+    gPickaxe = p;
+    gKinomi = k;
+    gRantan = r;
+    gHaori = h;
 
     if (gFishingRodS == 1)
     {
@@ -427,34 +426,33 @@ int shop::SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, 
     return true;
 }
 
-int shop::SetMoney()
+int wshop::SetMoney()
 {
     return numRu;
 }
 
-bool shop::GetMoney()
+bool wshop::GetMoney()
 {
     return MoneyFlg;
 }
 
-void  shop::sHaveMoney(int ru)
+void  wshop::sHaveMoney(int ru)
 {
     haveRu = ru;
 
 }
 
-void shop::AMoney(int money)
+void wshop::AMoney(int money)
 {
-    sMoney = money;
+    wMoney = money;
 }
 
-void shop::SSetNum(void)
+void wshop::SSetNum(void)
 {
-    H += 1;
-
-    kApple = sApple-H;
-    kKinominoKusiyaki = sKinominoKusiyaki/* - H*/;
-    kFruitDrink = sFruitDrink/* - H*/;
+   
+    kRice = sRice;
+    kDango = sDango/* - H*/;
+    kTea = sTea/* - H*/;
     kFishingRodS = sFishingRodS/* - H*/;
     kRagBag = sRagBag/* - H*/;
     kPickaxe = sPickaxe/* - H*/;
@@ -462,21 +460,21 @@ void shop::SSetNum(void)
     kRantan = sRantan/* - H*/;
     kHaori = sHaori/* - H*/;
 
-    sApple = gApple+ kApple;
-    sKinominoKusiyaki = gKinominoKusiyaki+ kKinominoKusiyaki;
-    sFruitDrink = gFruitDrink+ kFruitDrink;
+    sRice = gRice + kRice;
+    sDango = gDango + kDango;
+    sTea = gTea + kTea;
     sFishingRodS = gFishingRodS + kFishingRodS;
-    sRagBag = gRagBag+kRagBag;
-    sPickaxe = gPickaxe+ kPickaxe;
-    sKinomi = gKinomi+kKinomi;
-    sRantan = gRantan+ kRantan;
-    sHaori = gHaori+kHaori;
+    sRagBag = gRagBag + kRagBag;
+    sPickaxe = gPickaxe + kPickaxe;
+    sKinomi = gKinomi + kKinomi;
+    sRantan = gRantan + kRantan;
+    sHaori = gHaori + kHaori;
 
 }
 
-void shop::SsetAitem(bool flg)
+void wshop::SsetAitem(bool flg)
 {
-    if ((flg==true))
+    if ((flg == true))
     {
         SSetNum();
     }
@@ -484,11 +482,11 @@ void shop::SsetAitem(bool flg)
 
 
 
-void shop::Select(void)
+void wshop::Select(void)
 {
-   
+
     Canflg = false;
-   
+
     if (x >= 0)
     {
         if (key_.getKeyDown(KEY_INPUT_RIGHT))
@@ -514,81 +512,23 @@ void shop::Select(void)
     {
         if (x == 1)
         {
-            ChangeState(SHOP_SELECT::BUY);
+            ChangeState(WSHOP_SELECT::BUY);
             yy = 1;
         }
         if (x == 2)
         {
-            ChangeState(SHOP_SELECT::SELL);
+            ChangeState(WSHOP_SELECT::SELL);
             yy = 1;
         }
         if (x == 3)
         {
-            ChangeState(SHOP_SELECT::CANSEL); 
+            ChangeState(WSHOP_SELECT::CANSEL);
             yy = 1;
         }
     }
 }
 
-void shop::Buy(void)
-{
-    Canflg = false;
-    if ((yy >= 0)&&(xx==0))
-    {
-        if (key_.getKeyDown(KEY_INPUT_DOWN))
-        {
-            yy += 1;
-            if (yy > 6)
-            {
-                yy = 1;
-            }
-        }
-        else if (key_.getKeyDown(KEY_INPUT_UP) && yy >= 0)
-        {
-            yy -= 1;
-            if (yy <= 0)
-            {
-                yy = 6;
-            }
-        }
-        if (key_.getKeyDown(KEY_INPUT_F)/* || key_.getKeyDown(KEY_INPUT_RETURN)*/)
-        {
-            ChangeBS(SHOP_BS::BS_BUY);
-            xx = 1;
-           /* BSBuy();*/
-        }
-        if (key_.getKeyDown(KEY_INPUT_Q))
-        {
-            ChangeState(SHOP_SELECT::SELECT);
-          
-        }
-    }
-
-    if (key_.getKeyDown(KEY_INPUT_F))
-    {
-    }
-    else
-    {
-        MoneyFlg = false;
-    }
-
-
-    switch (mBS)
-    {
-    case shop::SHOP_BS::BS_BUY:
-        BSBuy();
-        break;
-    case shop::SHOP_BS::BS_SELL:
-     /*   BSSell();*/
-        break;
-    case shop::SHOP_BS::BS_MAX:
-        break;
-    default:
-        break;
-    }
-}
-
-void shop::Sell(void)
+void wshop::Buy(void)
 {
     Canflg = false;
     if ((yy >= 0) && (xx == 0))
@@ -611,12 +551,69 @@ void shop::Sell(void)
         }
         if (key_.getKeyDown(KEY_INPUT_F)/* || key_.getKeyDown(KEY_INPUT_RETURN)*/)
         {
-            ChangeBS(SHOP_BS::BS_SELL);
+            ChangeBS(WSHOP_BS::BS_BUY);
+            xx = 1;
+            /* BSBuy();*/
+        }
+        if (key_.getKeyDown(KEY_INPUT_Q))
+        {
+            ChangeState(WSHOP_SELECT::SELECT);
+
+        }
+    }
+
+    if (key_.getKeyDown(KEY_INPUT_F))
+    {
+    }
+    else
+    {
+        MoneyFlg = false;
+    }
+
+    switch (mBS)
+    {
+    case wshop::WSHOP_BS::BS_BUY:
+        BSBuy();
+        break;
+    case wshop::WSHOP_BS::BS_SELL:
+        /*   BSSell();*/
+        break;
+    case wshop::WSHOP_BS::BS_MAX:
+        break;
+    default:
+        break;
+    }
+}
+
+void wshop::Sell(void)
+{
+    Canflg = false;
+    if ((yy >= 0) && (xx == 0))
+    {
+        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        {
+            yy += 1;
+            if (yy > 6)
+            {
+                yy = 1;
+            }
+        }
+        else if (key_.getKeyDown(KEY_INPUT_UP) && yy >= 0)
+        {
+            yy -= 1;
+            if (yy <= 0)
+            {
+                yy = 6;
+            }
+        }
+        if (key_.getKeyDown(KEY_INPUT_F)/* || key_.getKeyDown(KEY_INPUT_RETURN)*/)
+        {
+            ChangeBS(WSHOP_BS::BS_SELL);
             xx = 1;
         }
         if (key_.getKeyDown(KEY_INPUT_Q))
         {
-            ChangeState(SHOP_SELECT::SELECT);
+            ChangeState(WSHOP_SELECT::SELECT);
 
         }
     }
@@ -630,45 +627,45 @@ void shop::Sell(void)
 
     switch (mBS)
     {
-    case shop::SHOP_BS::BS_BUY:
+    case wshop::WSHOP_BS::BS_BUY:
         /*BSBuy();*/
         break;
-    case shop::SHOP_BS::BS_SELL:
+    case wshop::WSHOP_BS::BS_SELL:
         BSSell();
         break;
-    case shop::SHOP_BS::BS_MAX:
+    case wshop::WSHOP_BS::BS_MAX:
         break;
     default:
         break;
     }
 }
 
-void shop::Cansel(void)
+void wshop::Cansel(void)
 {
     moveFlg = false;
     Canflg = true;
     x = 1;
 }
 
-void shop::BSBuy(void)
+void wshop::BSBuy(void)
 {
     if (yy == 1)
     {
         if (key_.getKeyDown(KEY_INPUT_DOWN))
         {
-            bApple -= 1;
-            if (bApple <= 0)
+            bRice -= 1;
+            if (bRice <= 0)
             {
-                bApple = 0;
+                bRice = 0;
             }
 
         }
         else if (key_.getKeyDown(KEY_INPUT_UP))
         {
-            bApple += 1;
-            if (bApple >= maxApple)
+            bRice += 1;
+            if (bRice >= maxRice)
             {
-                bApple = maxApple;
+                bRice = maxRice;
             }
         }
         else if (key_.getKeyDown(KEY_INPUT_RIGHT))
@@ -691,40 +688,40 @@ void shop::BSBuy(void)
 
         if (key_.getKeyDown(KEY_INPUT_F))
         {
-           
+
             if (SelectNum == 2)
             {
-                numRu = -(mA * (bApple));
-                if (sMoney >= -(numRu))
+                numRu = -(mRi * (bRice));
+                if (wMoney >= -(numRu))
                 {
-                    maxApple -= bApple;
-                    sApple += (bApple);
+                    maxRice -= bRice;
+                    sRice += (bRice);
                     xx = 0;
-                    ChangeBS(SHOP_BS::BS_MAX);
+                    ChangeBS(WSHOP_BS::BS_MAX);
                     SelectNum = 0;
                     MoneyFlg = true;
-                    bApple = 0;
+                    bRice = 0;
                     PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
                 }
                 else
                 {
-                    sApple = sApple;
+                    sRice = sRice;
                     xx = 0;
-                    ChangeBS(SHOP_BS::BS_MAX);
+                    ChangeBS(WSHOP_BS::BS_MAX);
                     SelectNum = 0;
-                    bApple = 0;
+                    bRice = 0;
                     numRu = 0;
                     PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
                 }
-                
+
             }
             else if (SelectNum == 1)
             {
-                sApple = sApple;
+                sRice = sRice;
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 SelectNum = 0;
-                bApple = 0;
+                bRice = 0;
                 numRu = 0;
                 PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
@@ -734,19 +731,19 @@ void shop::BSBuy(void)
     {
         if (key_.getKeyDown(KEY_INPUT_DOWN))
         {
-            bKinominoKusiyaki -= 1;
-            if (bKinominoKusiyaki <= 0)
+            bDango -= 1;
+            if (bDango <= 0)
             {
-                bKinominoKusiyaki = 0;
+                bDango = 0;
             }
 
         }
         else if (key_.getKeyDown(KEY_INPUT_UP))
         {
-            bKinominoKusiyaki += 1;
-            if (bKinominoKusiyaki >= maxKinominoKusiyaki)
+            bDango += 1;
+            if (bDango >= maxDango)
             {
-                bKinominoKusiyaki = maxKinominoKusiyaki;
+                bDango = maxDango;
             }
         }
         else if (key_.getKeyDown(KEY_INPUT_RIGHT))
@@ -772,35 +769,35 @@ void shop::BSBuy(void)
 
             if (SelectNum == 2)
             {
-                numRu = -(mKK * (bKinominoKusiyaki));
-                if (sMoney >= -(numRu))
+                numRu = -(mD * (bDango));
+                if (wMoney >= -(numRu))
                 {
-                    maxKinominoKusiyaki -= bKinominoKusiyaki;
-                    sKinominoKusiyaki += (bKinominoKusiyaki);
+                    maxDango -= bDango;
+                    sDango += (bDango);
                     xx = 0;
-                    ChangeBS(SHOP_BS::BS_MAX);
+                    ChangeBS(WSHOP_BS::BS_MAX);
                     MoneyFlg = true;
                     SelectNum = 0;
-                    bKinominoKusiyaki = 0;
+                    bDango = 0;
                     PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
                 }
                 else
                 {
-                    sKinominoKusiyaki = sKinominoKusiyaki;
+                    sDango = sDango;
                     xx = 0;
-                    ChangeBS(SHOP_BS::BS_MAX);
+                    ChangeBS(WSHOP_BS::BS_MAX);
                     SelectNum = 0;
-                    bKinominoKusiyaki = 0;
+                    bDango = 0;
                     PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
                 }
             }
             else if (SelectNum == 1)
             {
-                sKinominoKusiyaki = sKinominoKusiyaki;
+                sDango = sDango;
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 SelectNum = 0;
-                bKinominoKusiyaki = 0;
+                bDango = 0;
                 PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
@@ -809,19 +806,19 @@ void shop::BSBuy(void)
     {
         if (key_.getKeyDown(KEY_INPUT_DOWN))
         {
-            bFruitDrink -= 1;
-            if (bFruitDrink <= 0)
+            bTea -= 1;
+            if (bTea <= 0)
             {
-                bFruitDrink = 0;
+                bTea = 0;
             }
 
         }
         else if (key_.getKeyDown(KEY_INPUT_UP))
         {
-            bFruitDrink += 1;
-            if (bFruitDrink >= maxFruitDrink)
+            bTea += 1;
+            if (bTea >= maxTea)
             {
-                bFruitDrink = maxFruitDrink;
+                bTea = maxTea;
             }
         }
         else if (key_.getKeyDown(KEY_INPUT_RIGHT))
@@ -847,35 +844,35 @@ void shop::BSBuy(void)
 
             if (SelectNum == 2)
             {
-                numRu = -(mFD * (bFruitDrink));
-                if (sMoney >= -(numRu))
+                numRu = -(mT * (bTea));
+                if (wMoney >= -(numRu))
                 {
-                    maxFruitDrink -= bFruitDrink;
-                    sFruitDrink += (bFruitDrink);
+                    maxTea -= bTea;
+                    sTea += (bTea);
                     xx = 0;
-                    ChangeBS(SHOP_BS::BS_MAX);
+                    ChangeBS(WSHOP_BS::BS_MAX);
                     MoneyFlg = true;
                     SelectNum = 0;
-                    bFruitDrink = 0;
+                    bTea = 0;
                     PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
                 }
                 else
                 {
-                    sFruitDrink = sFruitDrink;
+                    sTea = sTea;
                     xx = 0;
-                    ChangeBS(SHOP_BS::BS_MAX);
+                    ChangeBS(WSHOP_BS::BS_MAX);
                     SelectNum = 0;
-                    bFruitDrink = 0;
+                    bTea = 0;
                     PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
                 }
             }
             else if (SelectNum == 1)
             {
-                sFruitDrink = sFruitDrink;
+                sTea = sTea;
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 SelectNum = 0;
-                bFruitDrink = 0;
+                bTea = 0;
                 PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
@@ -883,7 +880,6 @@ void shop::BSBuy(void)
     if (yy == 4)
     {
        
-
         if (key_.getKeyDown(KEY_INPUT_DOWN))
         {
             bFishingRodS -= 1;
@@ -925,12 +921,12 @@ void shop::BSBuy(void)
             if (SelectNum == 2)
             {
                 numRu = -(mFRS * (bFishingRodS));
-                if (sMoney >= -(numRu))
+                if (wMoney >= -(numRu))
                 {
                     maxFishingRodS -= bFishingRodS;
                     sFishingRodS += (bFishingRodS);
                     xx = 0;
-                    ChangeBS(SHOP_BS::BS_MAX);
+                    ChangeBS(WSHOP_BS::BS_MAX);
                     MoneyFlg = true;
                     SelectNum = 0;
                     bFishingRodS = 0;
@@ -941,7 +937,7 @@ void shop::BSBuy(void)
                 {
                     sFishingRodS = sFishingRodS;
                     xx = 0;
-                    ChangeBS(SHOP_BS::BS_MAX);
+                    ChangeBS(WSHOP_BS::BS_MAX);
                     SelectNum = 0;
                     bFishingRodS = 0;
                     PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
@@ -951,7 +947,7 @@ void shop::BSBuy(void)
             {
                 sFishingRodS = sFishingRodS;
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bFishingRodS = 0;
                 PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
@@ -1001,12 +997,12 @@ void shop::BSBuy(void)
             if (SelectNum == 2)
             {
                 numRu = -(mRB * (bRagBag));
-                if (sMoney >= -(numRu))
+                if (wMoney >= -(numRu))
                 {
                     maxRagBag -= bRagBag;
                     sRagBag += (bRagBag);
                     xx = 0;
-                    ChangeBS(SHOP_BS::BS_MAX);
+                    ChangeBS(WSHOP_BS::BS_MAX);
                     MoneyFlg = true;
                     SelectNum = 0;
                     bRagBag = 0;
@@ -1016,7 +1012,7 @@ void shop::BSBuy(void)
                 {
                     sRagBag = sRagBag;
                     xx = 0;
-                    ChangeBS(SHOP_BS::BS_MAX);
+                    ChangeBS(WSHOP_BS::BS_MAX);
                     SelectNum = 0;
                     bRagBag = 0;
                     PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
@@ -1026,7 +1022,7 @@ void shop::BSBuy(void)
             {
                 sRagBag = sRagBag;
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bRagBag = 0;
                 PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
@@ -1076,12 +1072,12 @@ void shop::BSBuy(void)
             if (SelectNum == 2)
             {
                 numRu = -(mP * (bPickaxe));
-                if (sMoney >= -(numRu))
+                if (wMoney >= -(numRu))
                 {
                     maxPickaxe -= bPickaxe;
                     sPickaxe += (bPickaxe);
                     xx = 0;
-                    ChangeBS(SHOP_BS::BS_MAX);
+                    ChangeBS(WSHOP_BS::BS_MAX);
                     MoneyFlg = true;
                     SelectNum = 0;
                     bPickaxe = 0;
@@ -1091,7 +1087,7 @@ void shop::BSBuy(void)
                 {
                     sPickaxe = sPickaxe;
                     xx = 0;
-                    ChangeBS(SHOP_BS::BS_MAX);
+                    ChangeBS(WSHOP_BS::BS_MAX);
                     SelectNum = 0;
                     bPickaxe = 0;
                     PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
@@ -1102,36 +1098,36 @@ void shop::BSBuy(void)
             {
                 sPickaxe = sPickaxe;
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bPickaxe = 0;
                 PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
     }
- 
+
 }
 
-void shop::BSSell(void)
+void wshop::BSSell(void)
 {
-    
+
     if (yy == 1)
     {
         if (key_.getKeyDown(KEY_INPUT_DOWN))
         {
-            bApple -= 1;
-            if (bApple <= 0)
+            bRice -= 1;
+            if (bRice <= 0)
             {
-                bApple = 0;
+                bRice = 0;
             }
 
         }
         else if (key_.getKeyDown(KEY_INPUT_UP))
         {
-            bApple += 1;
-            if (bApple >= sApple)
+            bRice += 1;
+            if (bRice >= sRice)
             {
-                bApple = sApple;
+                bRice = sRice;
             }
         }
         else if (key_.getKeyDown(KEY_INPUT_RIGHT))
@@ -1156,26 +1152,26 @@ void shop::BSSell(void)
         {
             if (SelectNum == 2)
             {
-                sApple -= bApple;
+                sRice -= bRice;
                 /*sApple += (bApple);*/
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
-                numRu = (mA * (bApple));
+                ChangeBS(WSHOP_BS::BS_MAX);
+                numRu = (mRi * (bRice));
                 MoneyFlg = true;
                 SelectNum = 0;
-                bApple = 0;
+                bRice = 0;
                 PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
             }
             else if (SelectNum == 1)
             {
-                sApple = sApple;
+                sRice = sRice;
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 SelectNum = 0;
-                bApple = 0;
+                bRice = 0;
                 PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
-            
+
 
         }
 
@@ -1184,19 +1180,19 @@ void shop::BSSell(void)
     {
         if (key_.getKeyDown(KEY_INPUT_DOWN))
         {
-            bKinominoKusiyaki -= 1;
-            if (bKinominoKusiyaki <= 0)
+            bDango -= 1;
+            if (bDango <= 0)
             {
-                bKinominoKusiyaki = 0;
+                bDango = 0;
             }
 
         }
         else if (key_.getKeyDown(KEY_INPUT_UP))
         {
-            bKinominoKusiyaki += 1;
-            if (bKinominoKusiyaki >= sKinominoKusiyaki)
+            bDango += 1;
+            if (bDango >= sDango)
             {
-                bKinominoKusiyaki = sKinominoKusiyaki;
+                bDango = sDango;
             }
         }
         else if (key_.getKeyDown(KEY_INPUT_RIGHT))
@@ -1222,23 +1218,23 @@ void shop::BSSell(void)
 
             if (SelectNum == 2)
             {
-                sKinominoKusiyaki -= bKinominoKusiyaki;
-               /* sKinominoKusiyaki += (bKinominoKusiyaki);*/
+                sDango -= bDango;
+                /*sDango += (bDango);*/
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
-                numRu = (mKK * (bKinominoKusiyaki));
+                ChangeBS(WSHOP_BS::BS_MAX);
+                numRu = (mD * (bDango));
                 MoneyFlg = true;
                 SelectNum = 0;
-                bKinominoKusiyaki = 0;
+                bDango = 0;
                 PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
             }
             else if (SelectNum == 1)
             {
-                sKinominoKusiyaki = sKinominoKusiyaki;
+                sDango = sDango;
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 SelectNum = 0;
-                bKinominoKusiyaki = 0;
+                bDango = 0;
                 PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
@@ -1247,19 +1243,19 @@ void shop::BSSell(void)
     {
         if (key_.getKeyDown(KEY_INPUT_DOWN))
         {
-            bFruitDrink -= 1;
-            if (bFruitDrink <= 0)
+            bTea -= 1;
+            if (bTea <= 0)
             {
-                bFruitDrink = 0;
+                bTea = 0;
             }
 
         }
         else if (key_.getKeyDown(KEY_INPUT_UP))
         {
-            bFruitDrink += 1;
-            if (bFruitDrink >= sFruitDrink)
+            bTea += 1;
+            if (bTea >= sTea)
             {
-                bFruitDrink = sFruitDrink;
+                bTea = sTea;
             }
         }
         else if (key_.getKeyDown(KEY_INPUT_RIGHT))
@@ -1285,23 +1281,23 @@ void shop::BSSell(void)
 
             if (SelectNum == 2)
             {
-                sFruitDrink -= bFruitDrink;
-               /* sFruitDrink += (bFruitDrink);*/
+                sTea -= bTea;
+               /* sTea += (bTea);*/
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
-                numRu = (mFD * (bFruitDrink));
+                ChangeBS(WSHOP_BS::BS_MAX);
+                numRu = (mT * (bTea));
                 MoneyFlg = true;
                 SelectNum = 0;
-                bFruitDrink = 0;
+                bTea = 0;
                 PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
             }
             else if (SelectNum == 1)
             {
-                sFruitDrink = sFruitDrink;
+                sTea = sTea;
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 SelectNum = 0;
-                bFruitDrink = 0;
+                bTea = 0;
                 PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
         }
@@ -1351,7 +1347,7 @@ void shop::BSSell(void)
                 sFishingRodS -= bFishingRodS;
                 /*sFishingRodS += (bFishingRodS);*/
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 numRu = (mFRS * (bFishingRodS));
                 MoneyFlg = true;
                 SelectNum = 0;
@@ -1362,7 +1358,7 @@ void shop::BSSell(void)
             {
                 sFishingRodS = sFishingRodS;
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bFishingRodS = 0;
                 PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
@@ -1412,9 +1408,9 @@ void shop::BSSell(void)
             if (SelectNum == 2)
             {
                 sRagBag -= bRagBag;
-                /*sRagBag += (bRagBag);*/
+               /* sRagBag += (bRagBag);*/
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 numRu = (mRB * (bRagBag));
                 MoneyFlg = true;
                 SelectNum = 0;
@@ -1425,7 +1421,7 @@ void shop::BSSell(void)
             {
                 sRagBag = sRagBag;
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bRagBag = 0;
                 PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
@@ -1477,7 +1473,7 @@ void shop::BSSell(void)
                 sPickaxe -= bPickaxe;
                 /*sPickaxe += (bPickaxe);*/
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 numRu = (mP * (bPickaxe));
                 MoneyFlg = true;
                 SelectNum = 0;
@@ -1488,7 +1484,7 @@ void shop::BSSell(void)
             {
                 sPickaxe = sPickaxe;
                 xx = 0;
-                ChangeBS(SHOP_BS::BS_MAX);
+                ChangeBS(WSHOP_BS::BS_MAX);
                 SelectNum = 0;
                 bPickaxe = 0;
                 PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
@@ -1497,38 +1493,38 @@ void shop::BSSell(void)
     }
 }
 
-void shop::BS(void)
+void wshop::BS(void)
 {
     switch (mBS)
     {
-    case shop::SHOP_BS::BS_BUY:
+    case wshop::WSHOP_BS::BS_BUY:
         BSBuy();
         break;
-    case shop::SHOP_BS::BS_SELL:
+    case wshop::WSHOP_BS::BS_SELL:
         BSSell();
         break;
-    case shop::SHOP_BS::BS_MAX:
+    case wshop::WSHOP_BS::BS_MAX:
         break;
     default:
         break;
     }
 }
 
-void shop::ChangeState(SHOP_SELECT select)
+void wshop::ChangeState(WSHOP_SELECT select)
 {
     mSelect = select;
 
     switch (mSelect)
     {
-    case shop::SHOP_SELECT::SELECT:
+    case wshop::WSHOP_SELECT::SELECT:
         break;
-    case shop::SHOP_SELECT::BUY:
+    case wshop::WSHOP_SELECT::BUY:
         break;
-    case shop::SHOP_SELECT::SELL:
+    case wshop::WSHOP_SELECT::SELL:
         break;
-    case shop::SHOP_SELECT::CANSEL:
+    case wshop::WSHOP_SELECT::CANSEL:
         break;
-    case shop::SHOP_SELECT::MAX:
+    case wshop::WSHOP_SELECT::MAX:
         break;
     default:
         break;
@@ -1536,16 +1532,16 @@ void shop::ChangeState(SHOP_SELECT select)
 
 }
 
-void shop::ChangeBS(SHOP_BS bs)
+void wshop::ChangeBS(WSHOP_BS bs)
 {
     mBS = bs;
     switch (mBS)
     {
-    case shop::SHOP_BS::BS_BUY:
+    case wshop::WSHOP_BS::BS_BUY:
         break;
-    case shop::SHOP_BS::BS_SELL:
+    case wshop::WSHOP_BS::BS_SELL:
         break;
-    case shop::SHOP_BS::BS_MAX:
+    case wshop::WSHOP_BS::BS_MAX:
         break;
     default:
         break;
@@ -1553,47 +1549,47 @@ void shop::ChangeBS(SHOP_BS bs)
 
 }
 
-int shop::SsApple(void)
+int wshop::SsRice(void)
 {
-    return sApple;
+    return sRice;
 }
 
-int shop::SsKinominoKusiyaki(void)
+int wshop::SsDango(void)
 {
-    return sKinominoKusiyaki;
+    return sDango;
 }
 
-int shop::SsFruitDrink(void)
+int wshop::SsTea(void)
 {
-    return sFruitDrink;
+    return sTea;
 }
 
-int shop::SsFishingRodS(void)
+int wshop::SsFishingRodS(void)
 {
     return sFishingRodS;
 }
 
-int shop::SsRagBag(void)
+int wshop::SsRagBag(void)
 {
     return sRagBag;
 }
 
-int shop::SsPickaxe(void)
+int wshop::SsPickaxe(void)
 {
     return sPickaxe;
 }
 
-int shop::SsKinomi(void)
+int wshop::SsKinomi(void)
 {
     return sKinomi;
 }
 
-int shop::SsRantan(void)
+int wshop::SsRantan(void)
 {
     return sRantan;
 }
 
-int shop::SsHaori(void)
+int wshop::SsHaori(void)
 {
     return sHaori;
 }
