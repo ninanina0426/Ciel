@@ -5,6 +5,7 @@
 #include"../scene/Obj/Player.h"
 #include"../scene/Obj/Menu.h"
 #include"Obj/shop.h"
+#include"Obj/wshop.h"
 #include "../stage/stage.h"
 #include "../stage/transitionStage/FadeInStage.h"
 
@@ -62,6 +63,7 @@ private:
     Aitem *mAitem;
 
     shop mShop;
+    wshop mWshop;
 
 
     Npc* mNpc;

@@ -1,7 +1,6 @@
 #pragma once
 #include "../../common/Vector2.h"
 #include "../Input/Keyboard.h"
-class GameScene;
 
 class shop
 {
@@ -27,7 +26,7 @@ public:
 	shop();
 	~shop();
 
-	bool init(GameScene* parent);		//‰Šú‰»
+	bool init(void);		//‰Šú‰»
 	void Update(int num);		//XV
 	void Draw(void);		//•`‰æ
 	bool Release(void);		//ŠJ•ú
@@ -89,8 +88,6 @@ private:
 	SHOP_BS mBS;
 
 	Keyboard key_;
-
-	GameScene* mParent;
 
 	int num;
 

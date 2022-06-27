@@ -210,7 +210,8 @@ Vector2 StageMng::Update(Vector2 mPlayerset)
 
 	if (CheckHitKey(KEY_INPUT_W))
 	{
-		
+		stage_ = std::move(std::make_unique<WaMap>());
+		mMapID = MAP_ID::WA;
 	}
 	if (CheckHitKey(KEY_INPUT_A))
 	{

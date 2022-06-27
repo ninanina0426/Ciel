@@ -166,7 +166,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mMapOffset = lpMapMng.Update(PlayerPos);
 
-    if (mShop.SPose() == false)
+    if ((mShop.SPose() == false)&&(mWshop.SPose() == false))
     {
         mPlayer.Update(lpMapMng.GetChipId());
     }
@@ -177,11 +177,13 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mNpc->Update(PlayerPos, PlayerSize, mChat->Getflg());
 
-    mAitem->Update(PlayerPos, PlayerSize);
-    mChat->Update(mNpc->Getflg(), mNpc->Num(), mShop.CanselFlg(), mShop.SPose());
+    
+    mChat->Update(mNpc->Getflg(), mNpc->Num(), mShop.CanselFlg(), mShop.SPose(), mWshop.CanselFlg(), mWshop.SPose());
 
     mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum());
+    mWshop.SetAitem(mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum());
    
+    mAitem->Update(PlayerPos, PlayerSize);
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
@@ -190,15 +192,30 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
      {
          mMenu.Update();
      }
-     mShop.SsetAitem(mAitem->GetAitem());
+
+     bool AitemGet = mAitem->GetAitem();
+     mShop.SsetAitem(AitemGet);
+     mWshop.SsetAitem(AitemGet);
 
      mShop.Update(mChat->GetNum());
 
-     mMenu.SetMenu(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori());
+     mWshop.Update(mChat->GetNum());
+
+     //mMenu.SetMenu(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori());
+
+     //Waとsweetの両方で買えるアイテムがある場合に使う
+     mAitem->TotalAitem(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori(), mWshop.SsRice(), mWshop.SsDango(), mWshop.SsTea(), mWshop.SsFishingRodS(), mWshop.SsRagBag(), mWshop.SsPickaxe(), mWshop.SsKinomi(), mWshop.SsRantan(), mWshop.SsHaori());
 
      mShop.AMoney(mAitem->Money(mShop.SetMoney(),mShop.GetMoney()));
 
-     mShop.sHaveMoney(mAitem->HaveMoney());
+
+     mWshop.AMoney(mAitem->wMoney(mWshop.SetMoney(),mWshop.GetMoney()));
+
+     int HaveMoney = mAitem->HaveMoney();
+
+     mShop.sHaveMoney(HaveMoney);
+
+     mWshop.sHaveMoney(HaveMoney);
 
       //フェードイン
      if (lpMapMng.fadeinFlg_)
@@ -320,6 +337,8 @@ void GameScene::DrawOwnScn()
      }
 
      mShop.Draw();
+
+     mWshop.Draw();
     
      //フェードイン
      if (lpMapMng.fadeinFlg_)
@@ -339,7 +358,8 @@ bool GameScene::Init(void)
 
     mMenu.init(this);
 
-    mShop.init(this);
+    mShop.init();
+    mWshop.init();
 
     //時間系初期化
     evening_ = LoadGraph("./image/yukoku.png");

@@ -49,7 +49,7 @@ bool Aitem::init()
 	mAitem = 2;
 
 	//‚¨‹à
-	Ru = 0;
+	Ru = 500;
 
 
 	mNumKinomi = 0;
@@ -59,6 +59,9 @@ bool Aitem::init()
 	mFishingRodS = 0;
 	mRagBag = 0;
 	mPickaxe = 0;
+	mRice=0;
+	mDango=0;
+	mTea=0;
 	
 
 	mNum[0] ={0,0}; //posx
@@ -566,9 +569,47 @@ int Aitem::Money(int ru, bool flg)
 	return Ru;
 }
 
+int Aitem::wMoney(int ru, bool flg)
+{
+	int wRu = Ru;
+
+	if (flg == true)
+	{
+		Ru = wRu + ru;
+	}
+
+	return Ru;
+}
+
 int Aitem::HaveMoney()
 {
+	/*Ru = ssRu + wwRu;*/
+
 	return Ru;
+}
+
+void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh)
+{
+	int tApple=mApple;
+	int tKinominoKusiyaki=mKinominoKusiyaki;
+	int tFruitDrink=mFruitDrink;
+	int tFishingRodS=mFishingRodS;
+	int tRagBag=mRagBag;
+	int tPickaxe=mPickaxe;
+	int tHaoriN=mHaoriN;
+	int tRantanN=mRantanN;
+	int tNumKinomi=mNumKinomi;
+
+	mNumKinomi=k+sk- tNumKinomi;
+	/*mApple = a + sa - tApple;
+	mKinominoKusiyaki=kk+skk- tKinominoKusiyaki;
+	mFruitDrink=fd+sfd-tFruitDrink;*/
+	mFishingRodS=frs+sfrs- tFishingRodS;
+	mRagBag=rb+srb- tRagBag;
+	mPickaxe=p+sp- tPickaxe;
+	mHaoriN=h+sh- tHaoriN;
+	mRantanN=r+sr- tRantanN;
+
 }
 
 int Aitem::Num()
@@ -630,6 +671,21 @@ int Aitem::mHaoriNum(void)
 int Aitem::mRantanNum(void)
 {
 	return mRantanN;
+}
+
+int Aitem::RiceNum(void)
+{
+	return 0;
+}
+
+int Aitem::DangoNum(void)
+{
+	return 0;
+}
+
+int Aitem::TeaNum(void)
+{
+	return 0;
 }
 
 int Aitem::GetTam(void)

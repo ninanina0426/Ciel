@@ -47,6 +47,7 @@ private:
 	int mImage3[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 
 	int mImageC[25];		//
+	int mImageI[25];		//
 	int mImageChat[100];	//
 	//int mImage4[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	//int mImage5[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ

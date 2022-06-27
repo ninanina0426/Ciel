@@ -67,7 +67,11 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/char/‰Ô.png", 25, 1, 25, 32, 48, &mImageC[0]) == -1)
+	if (LoadDivGraph("image/char/‰Ô.png", 22, 1, 22, 32, 48, &mImageC[0]) == -1)
+	{
+		return false;
+	}
+	if (LoadDivGraph("image/char/‹à.png", 22, 1, 22, 32, 48, &mImageI[0]) == -1)
 	{
 		return false;
 	}
@@ -288,10 +292,10 @@ Vector2 Player::Update(int chipId)
 		PlaySoundMem(sHandle, DX_PLAYTYPE_BACK);
 	}
 
-	if (mAnmCnt / 10 == 24)
+	if (mAnmCnt / 10 == 22)
 	{
 		moveAnmCnt = false;
-		mAnmCnt = 260;
+		mAnmCnt = 250;
 	}
 	if (moveAnmCnt == false)
 	{
@@ -318,13 +322,24 @@ void Player::Draw(Vector2 offset)
 {
 	if (plID_ == PlayerID::iti)
 	{
-		if (i == 0)
+		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage1[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[1], true);
 		}
-		else if (i == 1)
+		if (mAnmCnt / 10 < 22)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage1[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImageI[mAnmCnt / 10], true);
+		}
+		else
+		{
+			if (i == 0)
+			{
+				DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage1[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+			}
+			else if (i == 1)
+			{
+				DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage1[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+			}
 		}
 	}
 	if (plID_ == PlayerID::Soy)
@@ -344,7 +359,7 @@ void Player::Draw(Vector2 offset)
 		{
 			DrawGraph(mPos.x_ - offset.x_-63 , mPos.y_ - offset.y_ -80, mImageChat[1], true);
 		}
-		if (mAnmCnt/10 < 25)
+		if (mAnmCnt/10 < 22)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImageC[mAnmCnt/10], true);
 		}

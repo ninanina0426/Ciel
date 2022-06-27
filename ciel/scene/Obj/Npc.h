@@ -38,6 +38,7 @@ private:
 	int mImage3[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	int mImage4[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	int mImage5[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage6[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	
 
 
@@ -78,6 +79,8 @@ public:
 	bool mSoNpc2;
 
 	bool mSmNpc1;
+
+	bool mWsNpc1;
 
 	bool mQSoNpc1;
 	bool mQSoNpc2;

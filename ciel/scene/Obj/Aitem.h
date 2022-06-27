@@ -21,7 +21,11 @@ public:
 
 	int Money(int ru,bool flg);
 
+	int wMoney(int ru, bool flg);
+
 	int HaveMoney();
+
+	void TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh);
 
 
 	bool mTama1;
@@ -66,6 +70,9 @@ public:
 	int PickaxeNum(void);
 	int mHaoriNum(void);
 	int mRantanNum(void);
+	int RiceNum(void);
+	int DangoNum(void);
+	int TeaNum(void);
 
 	int GetTam(void);
 
@@ -99,8 +106,13 @@ private:
 	int mHaoriN;
 	int mRantanN;
 	int mNumKinomi;
+	int mRice;
+	int mDango;
+	int mTea;
 
 	int Ru;
+	int ssRu;
+	int wwRu;
 
 };
 
