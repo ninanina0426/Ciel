@@ -2,7 +2,7 @@
 #include "SelectScene.h"
 #include "GameScene.h"
 #include "EventScene.h"
-
+#include "Transition/FadeInOut.h"
 
 SelectScene::SelectScene()
 {
@@ -14,7 +14,7 @@ SelectScene::~SelectScene()
     DeleteSoundMem(SHandle);
 }
 
-bool SelectScene::SlectChar(Player player, int count, PlayerID limID, PlayerID setID)
+bool SelectScene::SlectChar(Player player, KeyDir dir, int count, PlayerID limID, PlayerID setID)
 {
     //キャラ選択が終わっていたら抜ける
     if (player_.state_ != PL_ST::NON)
@@ -22,8 +22,18 @@ bool SelectScene::SlectChar(Player player, int count, PlayerID limID, PlayerID s
         return false;
     }
   
+    if (dir == KeyDir::RIGHT)
+    {
+        keydir_ = KEY_INPUT_RIGHT;
+    }
+    else
+    {
+        keydir_ = KEY_INPUT_LEFT;
+    }
+
+    
     //キャラクター選択
-    if (key_.getKeyDown(KEY_INPUT_LEFT))
+    if (key_.getKeyDown(keydir_))
     {
         if (player_.plID_ != limID)
         {
@@ -35,6 +45,7 @@ bool SelectScene::SlectChar(Player player, int count, PlayerID limID, PlayerID s
         }
         return true;
     }
+   
     return false;
 }
 
@@ -57,14 +68,15 @@ uniquBaseScn SelectScene::Update(uniquBaseScn own)
     //キャラ選択が終わったらシーン移送
     if (DicideChar(player_))
     {
-        return std::make_unique<EventScene>(std::make_unique<GameScene>(player_.plID_), player_.plID_, 5);
+        return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EventScene>(std::make_unique<GameScene>(player_.plID_), player_.plID_, 5));
     }
 
     //playerの選択
-    SlectChar(player_, 1, PlayerID::Soy, PlayerID::iti);
+    SlectChar(player_,KeyDir::LEFT, 1, PlayerID::Soy, PlayerID::iti);
+    SlectChar(player_,KeyDir::RIGHT, -1, PlayerID::iti, PlayerID::Soy);
 
     DrawOwnScn();
-
+    animcnt_++;
     return std::move(own);
 }
 
@@ -73,29 +85,50 @@ void SelectScene::DrawOwnScn()
     SetDrawScreen(sceneScrID_);
     ClsDrawScreen();
 
+    DrawExtendGraph(0, 0, 1080, 609, bg_, true);
+    DrawExtendGraph(0, 100, 800, 700, eff_b[(animcnt_ / 10) % 10], true);
+    DrawGraph(0, 100, eff_[(animcnt_/10)%15], true);
+    
+    DrawBox(650, 50, 1030, 350, 0xffffff, false);
+    DrawBox(0, 30, 200, 80, 0xffffff, false);
+
     if (player_.plID_ == PlayerID::iti)
     {
-        DrawGraph(0, 0, titi_, true);
+        DrawString(20, 50, "○○〇", 0xffffff, true);
+        DrawGraph(280, 20, titi_, true);
     }
     if (player_.plID_ == PlayerID::Calendula)
     {
-        DrawGraph(0, 0, carenImage_, true);
+        DrawString(20, 50, "カレンデュラ", 0xffffff, true);
+        DrawGraph(280, 30, carenImage_, true);
     }
     if (player_.plID_ == PlayerID::Soy)
     {
-        DrawGraph(0, 0, soyImage_, true);
+        DrawString(20, 50, "SOY", 0xffffff, true);
+        DrawGraph(300, 30, soyImage_, true);
     }
-   
-    DrawFormatString(0, 0, 0xffffff, "playerID:%d", player_.plID_);
+
+    DrawExtendGraph(0, 100, 800, 670, eff_f[(animcnt_ / 10) % 10], true);
+    DrawString(200, 300, "<", 0xffffff, true);
+    DrawString(600, 300, ">", 0xffffff, true);
+    DrawString(950, 580, "Enterで決定", 0xffffff, true);
+
 }
 
 bool SelectScene::Init(void)
 {
     player_.plID_ = PlayerID::iti;
 
+    keydir_ = 0;
+    animcnt_ = 0;
     soyImage_ = LoadGraph("./image/player/soy.png");
     carenImage_ = LoadGraph("./image/player/caren.png");
     titi_ = LoadGraph("./image/player/titi.png");
+    bg_ = LoadGraph("./image/player/hi.png");
+    LoadDivGraph("./image/player/eff.png", 16, 2, 8, 800, 600, eff_, true);
+    LoadDivGraph("./image/player/eff_f.png", 10, 5, 2, 400, 400, eff_f, true);
+    LoadDivGraph("./image/player/eff_b.png", 10, 5, 2, 400, 400, eff_b, true);
+
 
     SHandle = LoadSoundMem("image/music/select.ogg");
 

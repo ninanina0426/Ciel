@@ -97,7 +97,7 @@ void EventScene::Event(int num)
                 DrawBox(0, 0, 1080, 609, 0xffffff, true);
             }
         }
-        if (animcnt_ > 1300)
+        if (animcnt_ > 500)
         {
             flg_ = true;
         }

@@ -64,5 +64,9 @@ private:
 	QuestType type_;
 	MAP_ID mapID_;
 	int Item_;
+
+	int qe_id_;
+	int count_;
+	int alq_;
 };
 
