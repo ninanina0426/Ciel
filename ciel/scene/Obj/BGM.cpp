@@ -42,10 +42,13 @@ void BGM::Update(int num)
             SHandle = LoadSoundMem("image/music/WaShop.ogg");
             break;
         case MAP_ID::CAVE:
+            SHandle = LoadSoundMem("image/music/Cave.ogg");
             break;
         case MAP_ID::CAVESHOP:
+            SHandle = LoadSoundMem("image/music/Cave.ogg");
             break;
         case MAP_ID::DARK:
+            SHandle = LoadSoundMem("image/music/DarkTemple.ogg");
             break;
         case MAP_ID::FORESTIN:
             SHandle = LoadSoundMem("image/music/forestIn.ogg");

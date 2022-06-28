@@ -77,9 +77,15 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
+	if (LoadDivGraph("image/char/•s.png", 22, 1, 22, 32, 48, &mImageS[0]) == -1)
+	{
+		return false;
+	}
 
 	//‰ï˜b
 	mImageChat[1] = LoadGraph("image/talk/c1.png",true);
+	mImageChat[3] = LoadGraph("image/talk/i1.png",true);
+	mImageChat[2] = LoadGraph("image/talk/s1.png",true);
 
 
 	sHandle = LoadSoundMem("image/Sound/•ž.ogg");
@@ -123,7 +129,7 @@ Vector2 Player::Update(int chipId)
 		}
 	}
 
-	if ((mAnmCnt / 10 > 25)&& (moveAnmCnt==true))
+	if ((mAnmCnt / 10 > 22)&& (moveAnmCnt==true))
 	{
 		if (moveFlg == false)
 		{
@@ -331,7 +337,7 @@ void Player::Draw(Vector2 offset)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[1], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[3], true);
 		}
 		if (mAnmCnt / 10 < 22)
 		{
@@ -351,13 +357,24 @@ void Player::Draw(Vector2 offset)
 	}
 	if (plID_ == PlayerID::Soy)
 	{
-		if (i == 0)
+		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage2[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[2], true);
 		}
-		else if (i == 1)
+		if (mAnmCnt / 10 < 22)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage2[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImageS[mAnmCnt / 10], true);
+		}
+		else
+		{
+			if (i == 0)
+			{
+				DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage2[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+			}
+			else if (i == 1)
+			{
+				DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage2[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+			}
 		}
 	}
 	if (plID_ == PlayerID::Calendula)
