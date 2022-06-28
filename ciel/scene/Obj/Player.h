@@ -50,6 +50,8 @@ private:
 	int mImageI[25];		//
 	int mImageS[25];		//
 	int mImageChat[100];	//
+
+	int mImageF;
 	//int mImage4[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	//int mImage5[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	//int mImage6[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
@@ -78,7 +80,13 @@ private:
 
 	//Œø‰Ê‰¹
 	int sHandle;
-	
+
+	//ƒMƒ~ƒbƒN
+	Vector2 mgPos;
+	Vector2 mgSize;
+	bool gFlg;
+	MAP_ID mapID;
+
 public:
 	Player();
 	~Player();

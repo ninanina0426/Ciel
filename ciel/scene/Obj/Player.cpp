@@ -30,7 +30,7 @@ bool Player::init(PlayerID playerid)
 		state_ = PL_ST::NON;
 	}
 	mSizeOffset.x_ = 0;
-	mSizeOffset.y_= 0;
+	mSizeOffset.y_ = 0;
 	mMoveSpeed = 3;
 	mMoveDir = DIR_DOWN;
 	mSize.x_ = 32;
@@ -39,7 +39,7 @@ bool Player::init(PlayerID playerid)
 	mSizeOffset.y_ = mSize.y_ / 2;
 	flg = false;
 	moveFlg = false;
-	
+
 	Stamina_ = STAMINA;
 	Energy_ = ENERGY;
 	staminaFlg_ = false;
@@ -51,6 +51,13 @@ bool Player::init(PlayerID playerid)
 	i = 0;
 
 	num = 0;
+
+	//ギミック
+	mgPos.x_ = 580;
+	mgPos.y_ = 285;
+	mgSize.x_ = 96;
+	mgSize.y_ = 96;
+	gFlg = false;
 
 
 	//グラフィックの読み込み
@@ -85,6 +92,8 @@ bool Player::init(PlayerID playerid)
 	mImageChat[3] = LoadGraph("image/talk/i1.png",true);
 	mImageChat[2] = LoadGraph("image/talk/s1.png",true);
 
+	//ギミック
+	mImageF= LoadGraph("image/ギミック/船.png", true);
 
 	sHandle = LoadSoundMem("image/Sound/服.ogg");
 	
@@ -97,7 +106,7 @@ Vector2 Player::Update(int chipId)
 	DIR keyDir = DIR_MAX;		//キー入力の方向
 	Vector2 copyPos = mPos;
 
-	MAP_ID mapID = lpMapMng.GetMapId();
+	mapID = lpMapMng.GetMapId();
 
 	mChipId = chipId;
 
@@ -293,6 +302,34 @@ Vector2 Player::Update(int chipId)
 		}
 	}
 
+	if (mapID == MAP_ID::SWEETS)
+	{
+		if ((mPos.x_ < 580) && (mPos.x_ > 490) && (mPos.y_ > 285) && (mPos.y_ < 310))
+		{
+			if (key_.getKeyDown(KEY_INPUT_F))
+			{
+				gFlg = true;
+				mPos.x_ = 455;
+				mPos.y_ = 550;
+			}
+		}
+
+		if (gFlg == true)
+		{
+			mgPos.x_ = mPos.x_;
+			mgPos.y_ = 560;
+
+			if (mgPos.x_ < 403)
+			{
+				mgPos.x_ = 403;
+			}
+			else if (mgPos.x_ > 510)
+			{
+				mgPos.x_ = 510;
+			}
+		}
+	}
+	
 	if (mAnmCnt / 10 == 15)
 	{
 		PlaySoundMem(sHandle, DX_PLAYTYPE_BACK);
@@ -326,6 +363,20 @@ Vector2 Player::Update(int chipId)
 
 void Player::Draw(Vector2 offset)
 {
+	if (mapID == MAP_ID::SWEETS)
+	{
+		if (gFlg == true)
+		{
+			DrawGraph(mgPos.x_ - offset.x_ - 48, mgPos.y_ - offset.y_ - 48, mImageF, true);
+		}
+
+		if (gFlg == false)
+		{
+			DrawGraph(580 - offset.x_ - 79, 285 - offset.y_ - 48, mImageF, true);
+		}
+	}
+	
+
 	if (plID_ == PlayerID::iti)
 	{
 		if (moveAnmCnt == false)
@@ -393,9 +444,13 @@ void Player::Draw(Vector2 offset)
 		}
 		
 	}
+
+	
+	
 	
 
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
+	//DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mgPos.x_, mgPos.y_);
 	DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
 	DrawFormatString(0, 300, 0xff0000, "スタミナ%d", Stamina_);
 
