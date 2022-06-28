@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include "Player.h"
 #include"../../stage/StageMng.h"
+#include "Quest.h"
 
 
 
@@ -43,6 +44,7 @@ bool Player::init(PlayerID playerid)
 	Stamina_ = STAMINA;
 	Energy_ = ENERGY;
 	staminaFlg_ = false;
+	qflg_ = false;
 	staminacnt_ = 0;
 
 	mAnmCnt = 0;
@@ -302,12 +304,17 @@ Vector2 Player::Update(int chipId)
 		if (key_.getKeyDown(KEY_INPUT_F))
 		{
 			moveAnmCnt = true;
+			qflg_ = true;
 		}
 	}
 	
 	if (moveAnmCnt == true)
 	{
 		mAnmCnt++;
+	}
+	if (qflg_)
+	{
+		QuestIns.UpDate(qflg_, 1, copyPos, mSize, mapID);
 	}
 	
 

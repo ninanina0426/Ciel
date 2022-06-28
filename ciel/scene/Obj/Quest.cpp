@@ -135,14 +135,18 @@ void Quest::Draw()
 		DrawFormatString(800, 0, 0xff0000, "クエスト受注しました");
 		DrawFormatString(900, 50, 0xff0000, "□　%s", QTxt_.c_str());
 	}
-	if (count_ < 510)
+	if (count_ < 570)
 	{
 		if (count_ < 255)
 		{
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, count_);
 			DrawExtendGraph(150, 100, 930, 500, qe_id_, true);
 		}
-		else
+		else if (count_ < 315)
+		{
+			DrawExtendGraph(150, 100, 930, 500, qe_id_, true);
+		}
+		else 
 		{
 			alq_ += 3;
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 - alq_);
