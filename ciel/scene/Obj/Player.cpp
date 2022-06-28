@@ -82,6 +82,8 @@ bool Player::init(PlayerID playerid)
 
 	//‰ï˜b
 	mImageChat[1] = LoadGraph("image/talk/c1.png",true);
+	mImageChat[3] = LoadGraph("image/talk/i1.png",true);
+	mImageChat[2] = LoadGraph("image/talk/s1.png",true);
 
 
 	sHandle = LoadSoundMem("image/Sound/•ž.ogg");
@@ -328,7 +330,7 @@ void Player::Draw(Vector2 offset)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[1], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[3], true);
 		}
 		if (mAnmCnt / 10 < 22)
 		{
@@ -350,7 +352,7 @@ void Player::Draw(Vector2 offset)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[1], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[2], true);
 		}
 		if (mAnmCnt / 10 < 22)
 		{
