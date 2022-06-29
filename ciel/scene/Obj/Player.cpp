@@ -74,15 +74,15 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/char/花.png", 22, 1, 22, 32, 48, &mImageC[0]) == -1)
+	if (LoadDivGraph("image/char/花.png", 27, 1, 27, 32, 48, &mImageC[0]) == -1)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/char/金.png", 22, 1, 22, 32, 48, &mImageI[0]) == -1)
+	if (LoadDivGraph("image/char/金.png", 27, 1, 27, 32, 48, &mImageI[0]) == -1)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/char/不.png", 22, 1, 22, 32, 48, &mImageS[0]) == -1)
+	if (LoadDivGraph("image/char/不.png", 27, 1, 27, 32, 48, &mImageS[0]) == -1)
 	{
 		return false;
 	}
@@ -95,7 +95,11 @@ bool Player::init(PlayerID playerid)
 	//ギミック
 	mImageF= LoadGraph("image/ギミック/船.png", true);
 
+	//効果音
 	sHandle = LoadSoundMem("image/Sound/服.ogg");
+	tHandle = LoadSoundMem("image/Sound/釣り.ogg");
+	fHandle = LoadSoundMem("image/Sound/パパッ.ogg");
+	oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
 	
 	return true;
 
@@ -123,20 +127,23 @@ Vector2 Player::Update(int chipId)
 	{
 		if (key_.getKeyDown(KEY_INPUT_F))
 		{
+			//釣り
 			if (i == 0)
 			{
 				i = 1;
 				moveFlg = true;
+				PlaySoundMem(tHandle, DX_PLAYTYPE_BACK);
 			}
 			else if (i == 1)
 			{
 				i = 0;
 				moveFlg = false;
+				
 			}
 		}
 	}
 
-	if ((mAnmCnt / 10 > 22)&& (moveAnmCnt==true))
+	if ((mAnmCnt / 10 > 30)&& (moveAnmCnt==true))
 	{
 		if (moveFlg == false)
 		{
@@ -302,21 +309,24 @@ Vector2 Player::Update(int chipId)
 		}
 	}
 
+	//ライムに乗る
 	if (mapID == MAP_ID::SWEETS)
 	{
 		if ((mPos.x_ < 580) && (mPos.x_ > 490) && (mPos.y_ > 285) && (mPos.y_ < 310))
 		{
 			message_box();
-			/*if (key_.getKeyDown(KEY_INPUT_F))
-			{
-				gFlg = true;
-				mPos.x_ = 455;
-				mPos.y_ = 550;
-			}*/
 		}
-
 		if (gFlg == true)
 		{
+			if (key_.getKeyDown(KEY_INPUT_LEFT))
+			{
+				PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
+			}
+			if (key_.getKeyDown(KEY_INPUT_RIGHT))
+			{
+				PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
+			}
+			
 			mgPos.x_ = mPos.x_;
 			mgPos.y_ = 560;
 
@@ -330,16 +340,23 @@ Vector2 Player::Update(int chipId)
 			}
 		}
 	}
+
 	
-	if (mAnmCnt / 10 == 15)
+	//最初の倒れている時
+	if (mAnmCnt  == 150)
 	{
 		PlaySoundMem(sHandle, DX_PLAYTYPE_BACK);
 	}
 
-	if (mAnmCnt / 10 == 22)
+	if (mAnmCnt  == 250)
 	{
+		PlaySoundMem(fHandle, DX_PLAYTYPE_BACK);
+	}
+
+	if (mAnmCnt == 270)
+	{
+		mAnmCnt = 290;
 		moveAnmCnt = false;
-		mAnmCnt = 250;
 	}
 	if (moveAnmCnt == false)
 	{
@@ -364,6 +381,7 @@ Vector2 Player::Update(int chipId)
 
 void Player::Draw(Vector2 offset)
 {
+	//ライム
 	if (mapID == MAP_ID::SWEETS)
 	{
 		if (gFlg == true)
@@ -384,7 +402,7 @@ void Player::Draw(Vector2 offset)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[3], true);
 		}
-		if (mAnmCnt / 10 < 22)
+		if (mAnmCnt< 270)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImageI[mAnmCnt / 10], true);
 		}
@@ -406,7 +424,7 @@ void Player::Draw(Vector2 offset)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[2], true);
 		}
-		if (mAnmCnt / 10 < 22)
+		if (mAnmCnt / 10 < 27)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImageS[mAnmCnt / 10], true);
 		}
@@ -428,7 +446,7 @@ void Player::Draw(Vector2 offset)
 		{
 			DrawGraph(mPos.x_ - offset.x_-63 , mPos.y_ - offset.y_ -80, mImageChat[1], true);
 		}
-		if (mAnmCnt/10 < 22)
+		if (mAnmCnt/10 < 27)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImageC[mAnmCnt/10], true);
 		}
