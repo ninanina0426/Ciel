@@ -590,9 +590,9 @@ int Aitem::HaveMoney()
 
 void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh)
 {
-	int tApple=mApple;
+	/*int tApple=mApple;
 	int tKinominoKusiyaki=mKinominoKusiyaki;
-	int tFruitDrink=mFruitDrink;
+	int tFruitDrink=mFruitDrink;*/
 	int tFishingRodS=mFishingRodS;
 	int tRagBag=mRagBag;
 	int tPickaxe=mPickaxe;
@@ -601,9 +601,9 @@ void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int
 	int tNumKinomi=mNumKinomi;
 
 	mNumKinomi=k+sk- tNumKinomi;
-	/*mApple = a + sa - tApple;
-	mKinominoKusiyaki=kk+skk- tKinominoKusiyaki;
-	mFruitDrink=fd+sfd-tFruitDrink;*/
+	//mApple = a /*+ sa */- tApple;
+	//mKinominoKusiyaki=kk/*+skk*/- tKinominoKusiyaki;
+	//mFruitDrink=fd/*+sfd*/-tFruitDrink;
 	mFishingRodS=frs+sfrs- tFishingRodS;
 	mRagBag=rb+srb- tRagBag;
 	mPickaxe=p+sp- tPickaxe;

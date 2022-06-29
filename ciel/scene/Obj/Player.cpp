@@ -306,12 +306,13 @@ Vector2 Player::Update(int chipId)
 	{
 		if ((mPos.x_ < 580) && (mPos.x_ > 490) && (mPos.y_ > 285) && (mPos.y_ < 310))
 		{
-			if (key_.getKeyDown(KEY_INPUT_F))
+			message_box();
+			/*if (key_.getKeyDown(KEY_INPUT_F))
 			{
 				gFlg = true;
 				mPos.x_ = 455;
 				mPos.y_ = 550;
-			}
+			}*/
 		}
 
 		if (gFlg == true)
@@ -490,6 +491,22 @@ Vector2 Player::GetPos(void)
 	return mPos;
 }
 
+void Player::message_box() 
+{
+	int flag;
+	flag = MessageBox(
+		NULL,
+		TEXT("ˆÚ“®‚·‚éH(Œ³‚ÌêŠ‚É‚Í–ß‚ê‚Ü‚¹‚ñ)"),
+		TEXT("‘I‘ð"),
+		MB_YESNO | MB_ICONQUESTION);
+	if (flag == IDYES)
+	{
+		gFlg = true;
+		mPos.x_ = 455;
+		mPos.y_ = 550;
+	}
+	
+}
 
 
 

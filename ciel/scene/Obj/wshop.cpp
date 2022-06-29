@@ -1344,15 +1344,22 @@ void wshop::BSSell(void)
 
             if (SelectNum == 2)
             {
-                sFishingRodS -= bFishingRodS;
-                /*sFishingRodS += (bFishingRodS);*/
+                //sFishingRodS -= bFishingRodS;
+                ///*sFishingRodS += (bFishingRodS);*/
+                //xx = 0;
+                //ChangeBS(WSHOP_BS::BS_MAX);
+                //numRu = (mFRS * (bFishingRodS));
+                //MoneyFlg = true;
+                //SelectNum = 0;
+                //bFishingRodS = 0;
+                //PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                sFishingRodS = sFishingRodS;
                 xx = 0;
                 ChangeBS(WSHOP_BS::BS_MAX);
-                numRu = (mFRS * (bFishingRodS));
-                MoneyFlg = true;
                 SelectNum = 0;
                 bFishingRodS = 0;
-                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
+
             }
             else if (SelectNum == 1)
             {
@@ -1407,15 +1414,22 @@ void wshop::BSSell(void)
 
             if (SelectNum == 2)
             {
-                sRagBag -= bRagBag;
-               /* sRagBag += (bRagBag);*/
+               // sRagBag -= bRagBag;
+               ///* sRagBag += (bRagBag);*/
+               // xx = 0;
+               // ChangeBS(WSHOP_BS::BS_MAX);
+               // numRu = (mRB * (bRagBag));
+               // MoneyFlg = true;
+               // SelectNum = 0;
+               // bRagBag = 0;
+               // PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+
+                sRagBag = sRagBag;
                 xx = 0;
                 ChangeBS(WSHOP_BS::BS_MAX);
-                numRu = (mRB * (bRagBag));
-                MoneyFlg = true;
                 SelectNum = 0;
                 bRagBag = 0;
-                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
             else if (SelectNum == 1)
             {
@@ -1470,15 +1484,21 @@ void wshop::BSSell(void)
 
             if (SelectNum == 2)
             {
-                sPickaxe -= bPickaxe;
-                /*sPickaxe += (bPickaxe);*/
+                //sPickaxe -= bPickaxe;
+                ///*sPickaxe += (bPickaxe);*/
+                //xx = 0;
+                //ChangeBS(WSHOP_BS::BS_MAX);
+                //numRu = (mP * (bPickaxe));
+                //MoneyFlg = true;
+                //SelectNum = 0;
+                //bPickaxe = 0;
+                //PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                sPickaxe = sPickaxe;
                 xx = 0;
                 ChangeBS(WSHOP_BS::BS_MAX);
-                numRu = (mP * (bPickaxe));
-                MoneyFlg = true;
                 SelectNum = 0;
                 bPickaxe = 0;
-                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
             }
             else if (SelectNum == 1)
             {

@@ -87,6 +87,8 @@ private:
 	bool gFlg;
 	MAP_ID mapID;
 
+	void message_box();
+
 public:
 	Player();
 	~Player();
@@ -115,4 +117,5 @@ public:
 	PlayerID plID_;
 	
 };
+
 

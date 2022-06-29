@@ -177,13 +177,13 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mNpc->Update(PlayerPos, PlayerSize, mChat->Getflg());
 
-    
+    mAitem->Update(PlayerPos, PlayerSize);
     mChat->Update(mNpc->Getflg(), mNpc->Num(), mShop.CanselFlg(), mShop.SPose(), mWshop.CanselFlg(), mWshop.SPose());
 
     mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum());
     mWshop.SetAitem(mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum());
    
-    mAitem->Update(PlayerPos, PlayerSize);
+  
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
