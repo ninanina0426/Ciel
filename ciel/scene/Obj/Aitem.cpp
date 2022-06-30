@@ -62,6 +62,8 @@ bool Aitem::init()
 	mRice=0;
 	mDango=0;
 	mTea=0;
+
+	apple = 0;
 	
 
 	mNum[0] ={0,0}; //posx
@@ -311,7 +313,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					mApple += 1;
+					apple += 1;
 					mAitem -= 1;
 					mNum[2] = mNum[0];
 					i = 2;
@@ -329,7 +331,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					mApple += 1;
+					apple += 1;
 					mAitem -= 1;
 					mNum[3] = mNum[0];
 					i = 3;
@@ -536,7 +538,7 @@ void Aitem::Draw(Vector2 mMapoffset)
 	}
 
 
-	DrawFormatString(0,150, GetColor(255, 255, 255), "num=%d", mAitem);
+	DrawFormatString(0,150, GetColor(255, 255, 255), "num=%d", apple);
 	DrawFormatString(0, 170, GetColor(255, 255, 255), "‹Ê=%d", Ru);
 	
 
@@ -588,28 +590,35 @@ int Aitem::HaveMoney()
 	return Ru;
 }
 
-void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh)
+void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st)
 {
 	/*int tApple=mApple;
 	int tKinominoKusiyaki=mKinominoKusiyaki;
-	int tFruitDrink=mFruitDrink;*/
+	int tFruitDrink=mFruitDrink;
 	int tFishingRodS=mFishingRodS;
 	int tRagBag=mRagBag;
 	int tPickaxe=mPickaxe;
 	int tHaoriN=mHaoriN;
 	int tRantanN=mRantanN;
 	int tNumKinomi=mNumKinomi;
+	int tRice=mRice;
+	int tDango=mDango;
+	int tTea=mTea;*/
 
-	mNumKinomi=k+sk- tNumKinomi;
-	//mApple = a /*+ sa */- tApple;
-	//mKinominoKusiyaki=kk/*+skk*/- tKinominoKusiyaki;
-	//mFruitDrink=fd/*+sfd*/-tFruitDrink;
-	mFishingRodS=frs+sfrs- tFishingRodS;
-	mRagBag=rb+srb- tRagBag;
-	mPickaxe=p+sp- tPickaxe;
-	mHaoriN=h+sh- tHaoriN;
-	mRantanN=r+sr- tRantanN;
+	mNumKinomi=k+sk;
+	mApple = apple + a + sa;
+	mKinominoKusiyaki=kk+skk;
+	mFruitDrink=fd+sfd;
+	mFishingRodS=frs+sfrs;
+	mRagBag=rb+srb;
+	mPickaxe=p+sp;
+	mHaoriN=h+sh;
+	mRantanN=r+sr;
+	mRice = ri+sri;
+	mDango = d+sd;
+	mTea = t+st;
 
+	/*mApple = apple+a + sa;*/
 }
 
 int Aitem::Num()
@@ -674,17 +683,17 @@ int Aitem::mRantanNum(void)
 
 int Aitem::RiceNum(void)
 {
-	return 0;
+	return mRice;
 }
 
 int Aitem::DangoNum(void)
 {
-	return 0;
+	return mDango;
 }
 
 int Aitem::TeaNum(void)
 {
-	return 0;
+	return mTea;
 }
 
 int Aitem::GetTam(void)

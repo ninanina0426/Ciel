@@ -25,7 +25,7 @@ public:
 
 	int HaveMoney();
 
-	void TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh);
+	void TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h,int ri,int d,int t, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st);
 
 
 	bool mTama1;
@@ -77,6 +77,7 @@ public:
 	int GetTam(void);
 
 	int mAitem;
+	
 
 	bool GetAitem();
 
@@ -113,6 +114,8 @@ private:
 	int Ru;
 	int ssRu;
 	int wwRu;
+
+	int apple;
 
 };
 
