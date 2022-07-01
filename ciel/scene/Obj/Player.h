@@ -46,10 +46,12 @@ private:
 	int mImage2[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	int mImage3[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 
-	int mImageC[25];		//
-	int mImageI[25];		//
-	int mImageS[25];		//
+	int mImageC[27];		//
+	int mImageI[27];		//
+	int mImageS[27];		//
 	int mImageChat[100];	//
+
+	int mImageF;
 	//int mImage4[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	//int mImage5[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	//int mImage6[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
@@ -78,7 +80,18 @@ private:
 
 	//Œø‰Ê‰¹
 	int sHandle;
-	
+	int tHandle;
+	int fHandle;
+	int oHandle;
+
+	//ƒMƒ~ƒbƒN
+	Vector2 mgPos;
+	Vector2 mgSize;
+	bool gFlg;
+	MAP_ID mapID;
+
+	void message_box();
+
 public:
 	Player();
 	~Player();
@@ -109,4 +122,5 @@ public:
 	PlayerID plID_;
 	
 };
+
 

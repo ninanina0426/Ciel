@@ -34,7 +34,7 @@ public:
 	bool SPose(void);
 	bool CanselFlg(void);
 
-	int SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h);
+	int SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h,int ri,int d,int t);
 
 	int SetMoney();
 	bool GetMoney();
@@ -48,6 +48,9 @@ public:
 
 	void SsetAitem(bool flg);
 
+	int SsApple(void);
+	int SsKinominoKusiyaki(void);
+	int SsFruitDrink(void);
 	int SsRice(void);
 	int SsDango(void);
 	int SsTea(void);
@@ -102,6 +105,9 @@ private:
 	int SelectNum;
 
 	//éùÇ¡ÇƒÇ¢ÇÈ
+	int gApple;
+	int gKinominoKusiyaki;
+	int gFruitDrink;
 	int gRice;
 	int gDango;
 	int gTea;
@@ -113,6 +119,9 @@ private:
 	int gHaori;
 
 	//îÑîÉ
+	int bApple;
+	int bKinominoKusiyaki;
+	int bFruitDrink;
 	int bRice;
 	int bDango;
 	int bTea;
@@ -124,6 +133,10 @@ private:
 	int bHaori;
 
 	//ç›å…
+
+	int maxApple;
+	int maxKinominoKusiyaki;
+	int maxFruitDrink;
 	int maxRice;
 	int maxDango;
 	int maxTea;
@@ -135,6 +148,9 @@ private:
 	int maxHaori;
 
 	//ëççá
+	int sApple;
+	int sKinominoKusiyaki;
+	int sFruitDrink;
 	int sRice;
 	int sDango;
 	int sTea;
@@ -146,6 +162,9 @@ private:
 	int sHaori;
 
 	//â¡å∏éZ
+	int kApple;
+	int kKinominoKusiyaki;
+	int kFruitDrink;
 	int kRice;
 	int kDango;
 	int kTea;
@@ -157,6 +176,9 @@ private:
 	int kHaori;
 
 	//Ç®ã‡
+	int mA;
+	int mKK;
+	int mFD;
 	int mRi;
 	int mD;
 	int mT;
