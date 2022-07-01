@@ -43,6 +43,8 @@
     <ClCompile Include="scene\EventScene.cpp" />
     <ClCompile Include="scene\Obj\wshop.cpp" />
     <ClCompile Include="scene\Obj\UI.cpp" />
+    <ClCompile Include="stage\SnowCaveMap.cpp" />
+    <ClCompile Include="stage\SnowMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -134,5 +136,7 @@
     <ClInclude Include="scene\EventScene.h" />
     <ClInclude Include="scene\Obj\wshop.h" />
     <ClInclude Include="scene\Obj\UI.h" />
+    <ClInclude Include="stage\SnowMap.h" />
+    <ClInclude Include="stage\SnowCaveMap.h" />
   </ItemGroup>
 </Project>
