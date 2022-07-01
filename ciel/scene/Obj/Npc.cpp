@@ -22,6 +22,13 @@ bool Npc::init(void)
 	mSoNpc2 = false;
 	mSmNpc1 = false;
 	mWsNpc1 = false;
+	mFmNpc1 = false;
+	mFmNpc2 = false;
+	mFmNpc3 = false;
+	mFmNpc4 = false;
+	mFmNpc5 = false;
+	mFmNpc6 = false;
+
 
 	mQSoNpc1 = false;
 	mQSoNpc2 = false;
@@ -51,6 +58,9 @@ bool Npc::init(void)
 	case NpcType::FI_NPC:
 		break;
 	case NpcType::FM_NPC:
+		mMoveDir = DIR_UP;
+		mSize.x_ = 32;
+		mSize.y_ = 32;
 		break;
 	case NpcType::SM_NPC:
 		break;
@@ -59,8 +69,8 @@ bool Npc::init(void)
 		{
 		case NumType::NPC_1:
 			mMoveDir = DIR_UP;
-			mSize.x_ = 32;
-			mSize.y_ = 64;
+			mSize.x_ = 64;
+			mSize.y_ = 128;
 			break;
 		case NumType::NPC_2:
 			break;
@@ -194,35 +204,155 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 	case NpcType::FI_NPC:
 		break;
 	case NpcType::FM_NPC:
-		break;
-	case NpcType::SM_NPC:
-		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 830 + 32 / 2) &&
-			(mPos.y_ + 830 - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
-			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 830 + 32 / 2) &&
-			(mPos.x_ + 830 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 2145 +128 / 2) &&
+			(mPos.y_ + 2145 - 128 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 1535 + 64 / 2) &&
+			(mPos.x_ + 1535 - 64 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
 			mNumType = NumType::NPC_1;
-			if (mSmNpc1 == false)
+			if (mFmNpc1 == false)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					mSmNpc1 = true;
-					i = 20;
+					mFmNpc1 = true;
+					i = 30;
 				}
 			}
 			else
 			{
-				if (flg==false)
+				if (flg == false)
 				{
-					mSmNpc1 = false;
+					mFmNpc1 = false;
 					i = 0;
-					if (mQSmNpc1 == false)
-					{
-						mQSmNpc1 = true;
-					}
 				}
-				
+
 			}
+
+		}
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 1918 + 128 / 2) &&
+			(mPos.y_ + 1918 - 128 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 286 + 64 / 2) &&
+			(mPos.x_ + 286 - 64 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			mNumType = NumType::NPC_2;
+			if (mFmNpc2 == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mFmNpc2 = true;
+					i = 35;
+				}
+			}
+			else
+			{
+				if (flg == false)
+				{
+					mFmNpc2 = false;
+					i = 0;
+				}
+
+			}
+
+		}
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 800 + 128 / 2) &&
+			(mPos.y_ + 800 - 128 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 128 + 64 / 2) &&
+			(mPos.x_ + 128 - 64 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			mNumType = NumType::NPC_3;
+			if (mFmNpc3 == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mFmNpc3 = true;
+					i = 40;
+				}
+			}
+			else
+			{
+				if (flg == false)
+				{
+					mFmNpc3 = false;
+					i = 0;
+				}
+
+			}
+
+		}
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 769 + 128 / 2) &&
+			(mPos.y_ + 769 - 128 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 2879 + 64 / 2) &&
+			(mPos.x_ + 2879 - 64 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			mNumType = NumType::NPC_4;
+			if (mFmNpc4 == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mFmNpc4 = true;
+					i = 45;
+				}
+			}
+			else
+			{
+				if (flg == false)
+				{
+					mFmNpc4 = false;
+					i = 0;
+				}
+
+			}
+
+		}
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 100 + 128 / 2) &&
+			(mPos.y_ + 100 - 128 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 2400 + 64 / 2) &&
+			(mPos.x_ + 2400 - 64 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			mNumType = NumType::NPC_5;
+			if (mFmNpc5 == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mFmNpc5 = true;
+					i = 50;
+				}
+			}
+			else
+			{
+				if (flg == false)
+				{
+					mFmNpc5 = false;
+					i = 0;
+				}
+
+			}
+
+		}
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 129 + 128 / 2) &&
+			(mPos.y_ + 129 - 128 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 2591 + 64 / 2) &&
+			(mPos.x_ + 2591 - 64 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			mNumType = NumType::NPC_6;
+			if (mFmNpc6 == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mFmNpc6 = true;
+					i = 55;
+				}
+			}
+			else
+			{
+				if (flg == false)
+				{
+					mFmNpc6 = false;
+					i = 0;
+				}
+
+			}
+
 		}
 		break;
 	case NpcType::SO_NPC:
@@ -426,7 +556,29 @@ bool Npc::Getflg()
 		
 		break;
 	case NpcType::FM_NPC:
-		
+		switch (mNumType)
+		{
+		case NumType::NPC_1:
+			return mFmNpc1;
+			break;
+		case NumType::NPC_2:
+			return mFmNpc2;
+			break;
+		case NumType::NPC_3:
+			return mFmNpc3;
+			break;
+		case NumType::NPC_4:
+			return mFmNpc4;
+			break;
+		case NumType::NPC_5:
+			return mFmNpc5;
+			break;
+		case NumType::NPC_6:
+			return mFmNpc6;
+			break;
+		default:
+			break;
+		}
 		break;
 	case NpcType::SM_NPC:
 		switch (mNumType)

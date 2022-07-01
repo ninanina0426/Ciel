@@ -46,6 +46,7 @@ public:
 	MAP_ID GetMapIdOld(void);
 
 	int GetChipId(void);
+	int GetChipID(void);
 
 private:
 	StageMng();

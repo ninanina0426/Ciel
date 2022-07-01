@@ -938,6 +938,11 @@ int StageMng::GetChipId(void)
 	return mTchipId;
 }
 
+int StageMng::GetChipID(void)
+{
+	return chipID;
+}
+
 StageMng::StageMng()
 {
 	Init();

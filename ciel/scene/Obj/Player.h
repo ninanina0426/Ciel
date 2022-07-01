@@ -64,12 +64,14 @@ private:
 	
 	int i;
 	int num;
+	int move;
 
 	bool moveAnmCnt;
 
 	bool moveFlg;
 
 	int mChipId;
+	int mChiID;
 
 	Vector2 mDamyPos;
 
