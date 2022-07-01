@@ -21,7 +21,7 @@ public:
 	
 	bool Init();
 	void Draw();
-	Vector2 Update(Vector2 mPlayerset);
+	Vector2 Update(Vector2 mPlayerset,int ai);
 	bool Release(void);
 	int GetMapChipMng(Vector2 pos);
 	bool cheakMapChip(Vector2 pos);
@@ -70,6 +70,8 @@ private:
 
 	MAP_ID mNextMapID;
 	Vector2 mNextPos;
+	int aitem;
+	bool opendir_;
 
 	friend Stage;
 };

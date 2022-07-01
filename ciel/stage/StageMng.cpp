@@ -21,6 +21,7 @@ bool StageMng::Init()
 	fadeinFlg_ = false;
 	mMapID = MAP_ID::TEMPLE;
 	fl_ = false;
+	aitem = 0;
 	mOffset = mPlayer.GetPos()-Vector2{540,0};
 	
     return true;
@@ -45,9 +46,11 @@ void StageMng::Draw()
 
 
 
-Vector2 StageMng::Update(Vector2 mPlayerset)
+Vector2 StageMng::Update(Vector2 mPlayerset, int ai)
 {
 	mMapOldID = mMapID;
+
+	aitem = ai;
 
 	movePos = mPlayerset - mOffset; //playerのPos
 
@@ -312,20 +315,9 @@ bool StageMng::GetEvent(Vector2 pos)
 
 		}
 	}
-	//TEMPLEからTEMPLEINへ
-	if (lpMapMng.mMapID == MAP_ID::TEMPLE)
-	{
-		if (chipID == 470)
-		{
-			mMapChange = true;
-			mNextPos = { 1425,1545 };
-			mDir = DIR_UP;
-			mMapID = MAP_ID::TEMPLEIN;
-			mOffset = mNextPos - Vector2{ 540,300 };
-			stage_ = std::move(std::make_unique<TempleInMap>());
 
-		}
-	}
+	
+
 	//TEMPLEINからTEMPLEへ
 	if (lpMapMng.mMapID == MAP_ID::TEMPLEIN)
 	{
@@ -630,6 +622,49 @@ bool StageMng::GetMapChange(Vector2 pos)
 {
 	if (lpMapMng.mMapID == MAP_ID::TEMPLE)
 	{
+		//TEMPLEからTEMPLEINへ
+		if (lpMapMng.mMapID == MAP_ID::TEMPLE)
+		{
+			if (pos.y_ < 581 && aitem != 0)//chipID == 470
+			{
+				if (!opendir_)
+				{
+					if (key_.getKeyDown(KEY_INPUT_F))
+					{
+						opendir_ = true;
+					}
+				}
+				else
+				{
+					if (key_.getKeyDown(KEY_INPUT_F))
+					{
+						opendir_ = false;
+					}
+				}
+				if (opendir_)
+				{
+					SetDrawBlendMode(DX_BLENDMODE_ALPHA, 180);
+					DrawBox(0, 250, 1080, 400, 0x000000, true);
+					SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+					DrawString(300, 280, "汝　願ひかなふるなら　言ふにしたがいて　たま　たいまつる\n \n", 0xffffff);
+				}
+			}
+			else
+			{
+				opendir_ = false;
+			}
+			if (pos.y_<581&& aitem==0)//chipID == 470
+			{
+				mMapChange = true;
+				mNextPos = { 1425,1545 };
+				mDir = DIR_UP;
+				mMapID = MAP_ID::TEMPLEIN;
+				mOffset = mNextPos - Vector2{ 540,300 };
+				stage_ = std::move(std::make_unique<TempleInMap>());
+
+			}
+		}
+
 		//スイーツマップへ
 		if (pos.x_ >= 1380 && pos.x_ < 1450 &&
 			pos.y_ >= 730 && pos.y_ < 760)
