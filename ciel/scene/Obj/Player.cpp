@@ -377,6 +377,14 @@ Vector2 Player::Update(int chipId)
 	{
 		QuestIns.UpDate(qflg_, 1, copyPos, mSize, mapID);
 	}
+	if (QuestIns.CompFlg())
+	{
+		if (QuestIns.GetCont() > 570)
+		{
+			qflg_ = false;
+		}
+		
+	}
 	
 
 
@@ -480,6 +488,8 @@ void Player::Draw(Vector2 offset)
 	DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
 	DrawFormatString(0, 300, 0xff0000, "スタミナ%d", Stamina_);
 
+	
+
 }
 
 bool Player::Release(void)
@@ -514,6 +524,11 @@ Vector2 Player::GetSiz(void)
 Vector2 Player::GetPos(void)
 {
 	return mPos;
+}
+
+int Player::GetStamina(void)
+{
+	return Stamina_;
 }
 
 void Player::message_box() 

@@ -11,6 +11,7 @@
 
 
 
+
 GameScene::GameScene(PlayerID playerID)
 {
     Init();
@@ -230,7 +231,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
      }
     mBgm->Update(mMenu.OpBgm());
 
-
+    ui_.Upadate(mPlayer.GetStamina());
     return std::move(own);
 }
 
@@ -343,12 +344,13 @@ void GameScene::DrawOwnScn()
 
      mWshop.Draw();
     
+     ui_.Draw();
+
      //フェードイン
      if (lpMapMng.fadeinFlg_)
      {
          fadein_.DrawOwnScn();
      }
-    
 }
 
 bool GameScene::Init(void)

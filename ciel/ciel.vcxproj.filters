@@ -42,6 +42,7 @@
     <ClCompile Include="stage\transitionStage\FadeInStage.cpp" />
     <ClCompile Include="scene\EventScene.cpp" />
     <ClCompile Include="scene\Obj\wshop.cpp" />
+    <ClCompile Include="scene\Obj\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -132,5 +133,6 @@
     <ClInclude Include="stage\transitionStage\FadeInStage.h" />
     <ClInclude Include="scene\EventScene.h" />
     <ClInclude Include="scene\Obj\wshop.h" />
+    <ClInclude Include="scene\Obj\UI.h" />
   </ItemGroup>
 </Project>

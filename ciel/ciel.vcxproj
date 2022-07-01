@@ -157,6 +157,7 @@
     <ClCompile Include="scene\Obj\Npc.cpp" />
     <ClCompile Include="scene\Obj\Quest.cpp" />
     <ClCompile Include="scene\Obj\shop.cpp" />
+    <ClCompile Include="scene\Obj\UI.cpp" />
     <ClCompile Include="scene\Obj\wshop.cpp" />
     <ClCompile Include="stage\CaveMap.cpp" />
     <ClCompile Include="stage\CaveShop.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="scene\Obj\Npc.h" />
     <ClInclude Include="scene\Obj\Quest.h" />
     <ClInclude Include="scene\Obj\shop.h" />
+    <ClInclude Include="scene\Obj\UI.h" />
     <ClInclude Include="scene\Obj\wshop.h" />
     <ClInclude Include="stage\CaveMap.h" />
     <ClInclude Include="stage\CaveShop.h" />

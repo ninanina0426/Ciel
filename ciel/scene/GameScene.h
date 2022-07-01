@@ -8,6 +8,7 @@
 #include"Obj/wshop.h"
 #include "../stage/stage.h"
 #include "../stage/transitionStage/FadeInStage.h"
+#include "Obj/UI.h"
 
 class SceneMng;
 class Aitem;
@@ -102,6 +103,6 @@ private:
     int x;
     
 
-
+    UI ui_;
 };
 

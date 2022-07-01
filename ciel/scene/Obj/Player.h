@@ -110,6 +110,7 @@ public:
 	Vector2 GetSiz(void);
 	Vector2 GetPos(void);
 
+	int GetStamina(void);
 
 	int Stamina_;		//スタミナ管理
 	int Energy_;		//エネルギー管理

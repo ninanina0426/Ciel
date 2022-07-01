@@ -299,11 +299,45 @@ bool StageMng::GetEvent(Vector2 pos)
 			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<templeMap>());
 		}
+		if (chipID == 62)
+		{
+			mMapChange = true;
+			//マップを切り替えることになった
+			mNextPos = { 337,1650 };
+			mDir = DIR_DOWN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			mMapID = MAP_ID::FORESTIN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<ForestInMap>());
+		}
+		if (mTchipId == 843 && pos.y_ > 1969)
+		{
+			mMapChange = true;
+			mNextPos = { 1426,2773 };
+			mDir = DIR_UP;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			mMapID = MAP_ID::FORESTIN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<ForestInMap>());
+			//mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
+		}
+		if (mTchipId == 843 && pos.y_ < 1720)
+		{
+			mMapChange = true;
+			mNextPos = { 2484,1926 };
+			mDir = DIR_UP;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			mMapID = MAP_ID::FORESTIN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<ForestInMap>());
+			//mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
+		}
+		
 	}
 	//FORESTINからFORESTへ
 	if (lpMapMng.mMapID == MAP_ID::FORESTIN)
 	{
-		if (chipID == 337)
+		if (pos.y_>870&& mTchipId==337)
 		{
 			mMapChange = true;
 			mNextPos = { 1455,240 };
@@ -313,6 +347,50 @@ bool StageMng::GetEvent(Vector2 pos)
 			stage_ = std::move(std::make_unique<ForestMap>());
 
 
+		}
+		if (chipID ==2520)
+		{
+			mMapChange = true;
+			//マップを切り替えることになった
+			mNextPos = { 465,2010 };
+			mDir = DIR_DOWN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			mMapID = MAP_ID::FOREST;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<ForestMap>());
+		}
+		if (chipID == 2521)
+		{
+			mMapChange = true;
+			//マップを切り替えることになった
+			mNextPos = { 1584,1720 };
+			mDir = DIR_DOWN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			mMapID = MAP_ID::FOREST;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<ForestMap>());
+		}
+		if (chipID == 2521)
+		{
+			mMapChange = true;
+			//マップを切り替えることになった
+			mNextPos = { 1584,1720 };
+			mDir = DIR_DOWN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			mMapID = MAP_ID::FOREST;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<ForestMap>());
+		}
+		if (chipID == 137)
+		{
+			mMapChange = true;
+			//マップを切り替えることになった
+			mNextPos = { 119,1940 };
+			mDir = DIR_RIGHT;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			mMapID = MAP_ID::FOREST;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<ForestMap>());
 		}
 	}
 
@@ -646,7 +724,7 @@ bool StageMng::GetMapChange(Vector2 pos)
 					SetDrawBlendMode(DX_BLENDMODE_ALPHA, 180);
 					DrawBox(0, 250, 1080, 400, 0x000000, true);
 					SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-					DrawString(300, 280, "汝　願ひかなふるなら　言ふにしたがいて　たま　たいまつる\n \n", 0xffffff);
+					DrawString(300, 280, "汝　願ひかなふるなら　言ふにしたがいて　くすしきたま　たいまつる\n \n　　　　　　　　こなたかなたに　それ　散りぼふ\n　\n　　　　　　　　　　　汝　たま　刈りつめ　", 0xffffff);
 				}
 			}
 			else

@@ -46,6 +46,8 @@ public:
 	void UpDate(bool stateFlg, int q,Vector2 plPos, Vector2 plsize,MAP_ID mapid);
 	void Draw(void);
 
+	bool CompFlg(void);
+	int GetCont(void);
 private:
 	Quest();
 	~Quest();

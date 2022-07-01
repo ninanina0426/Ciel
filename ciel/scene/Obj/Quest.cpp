@@ -60,7 +60,11 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 	case MAP_ID::SWEETSOUT:
 		if (quest_ == QUEST::QUEST_2&&aitem_.GetmKinomi()==0)
 		{
-			CompFlg_ = true;
+			if (CheckHitKey(KEY_INPUT_F))
+			{
+				CompFlg_ = true;
+			}
+			
 		}
 		break;
 	case MAP_ID::SWEETSSCHOOL:
@@ -179,7 +183,7 @@ void Quest::Draw()
 			}
 			else
 			{
-				Calq_ += 3;
+				Calq_ += 5;
 				SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 - Calq_);
 				DrawExtendGraph(150, 100, 930, 500, qe_cm_, true);
 			}
@@ -189,6 +193,16 @@ void Quest::Draw()
 	}
 	
 
+}
+
+bool Quest::CompFlg(void)
+{
+	return CompFlg_;
+}
+
+int Quest::GetCont(void)
+{
+	return Ccount_;
 }
 
 bool Quest::Init(void)
