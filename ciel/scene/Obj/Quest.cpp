@@ -63,6 +63,7 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 			if (CheckHitKey(KEY_INPUT_F))
 			{
 				CompFlg_ = true;
+				getru_ = 55;
 			}
 			
 		}
@@ -203,6 +204,11 @@ bool Quest::CompFlg(void)
 int Quest::GetCont(void)
 {
 	return Ccount_;
+}
+
+int Quest::GetRu(void)
+{
+	return getru_;
 }
 
 bool Quest::Init(void)
