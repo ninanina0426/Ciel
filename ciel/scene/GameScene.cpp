@@ -164,7 +164,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     
     DrawOwnScn();//ŒÂ•Ê‚ÌDrawˆ—‚Èˆ×•K‚¸‘‚­
 
-    mMapOffset = lpMapMng.Update(PlayerPos);
+    mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam());
 
     if ((mShop.SPose() == false)&&(mWshop.SPose() == false))
     {
@@ -182,7 +182,9 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum());
     mWshop.SetAitem(mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum());
-   
+    
+    
+    
     mAitem->Update(PlayerPos, PlayerSize);
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/

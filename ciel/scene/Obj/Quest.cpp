@@ -48,7 +48,7 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 	case MAP_ID::FORESTIN:
 		break;
 	case MAP_ID::TEMPLE:
-		if (quest_==QUEST::QUEST_1&&plPos.y_ < 1000)
+		if (quest_ == QUEST::QUEST_1 && plPos.y_ < 1000 )
 		{
 			CompFlg_ = true;
 		}
@@ -81,7 +81,6 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 		quest_old = quest_;
 		//quest_ = QUEST::MAX;
 		state_ = QuestState::COMP;
-	
 	}
 	
 
@@ -94,7 +93,7 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 			break;
 		case QUEST::QUEST_1:
 			QFlg_ = true;
-			QTxt_ = "探索してみよう";
+			QTxt_ = "探索してみよう!\n 　・←↑→↓：移動\n 　・左shift：走る\n 　・F：アクション";
 			break;
 		case QUEST::QUEST_2:
 			QFlg_ = true;
@@ -121,6 +120,16 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 		count_ = 0;
 		alq_ = 0;
 	}
+	if (CompFlg_)
+	{
+		Ccount_ += 5;
+	}
+	else
+	{
+		Ccount_ = 0;
+		Calq_ = 0;
+	}
+
 
 	//クエストを受けるかどうか
 	//クエストの種類　メインは強制　サブは任意
@@ -134,27 +143,51 @@ void Quest::Draw()
 	{
 		DrawFormatString(800, 0, 0xff0000, "クエスト受注しました");
 		DrawFormatString(900, 50, 0xff0000, "□　%s", QTxt_.c_str());
+		if (count_ < 570)
+		{
+			if (count_ < 255)
+			{
+				SetDrawBlendMode(DX_BLENDMODE_ALPHA, count_);
+				DrawExtendGraph(150, 100, 930, 500, qe_id_, true);
+			}
+			else if (count_ < 315)
+			{
+				DrawExtendGraph(150, 100, 930, 500, qe_id_, true);
+			}
+			else
+			{
+				alq_ += 3;
+				SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 - alq_);
+				DrawExtendGraph(150, 100, 930, 500, qe_id_, true);
+			}
+
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		}
 	}
-	if (count_ < 570)
+	else
 	{
-		if (count_ < 255)
+		if (Ccount_ < 570)
 		{
-			SetDrawBlendMode(DX_BLENDMODE_ALPHA, count_);
-			DrawExtendGraph(150, 100, 930, 500, qe_id_, true);
+			if (Ccount_ < 255)
+			{
+				SetDrawBlendMode(DX_BLENDMODE_ALPHA, Ccount_);
+				DrawExtendGraph(150, 100, 930, 500, qe_cm_, true);
+			}
+			else if (Ccount_ < 315)
+			{
+				DrawExtendGraph(150, 100, 930, 500, qe_cm_, true);
+			}
+			else
+			{
+				Calq_ += 3;
+				SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 - Calq_);
+				DrawExtendGraph(150, 100, 930, 500, qe_cm_, true);
+			}
+
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		}
-		else if (count_ < 315)
-		{
-			DrawExtendGraph(150, 100, 930, 500, qe_id_, true);
-		}
-		else 
-		{
-			alq_ += 3;
-			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 - alq_);
-			DrawExtendGraph(150, 100, 930, 500, qe_id_, true);
-		}
-		
-		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
+	
 
 }
 
@@ -170,9 +203,17 @@ bool Quest::Init(void)
 	Item_ = 0;
 	count_ = 0;
 	alq_ = 0;
+	Ccount_=0;
+	Calq_=0;
 	aitem_.init();
 
+	keyf_[0] = false;
+	keyf_[1] = false;
+	keyf_[2] = false;
+
 	qe_id_ = LoadGraph("./image/move/qe.png");
+	qe_cm_ = LoadGraph("./image/move/qeCm.png");
+
 
 	return true;
 }

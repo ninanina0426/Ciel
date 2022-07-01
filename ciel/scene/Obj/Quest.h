@@ -65,8 +65,14 @@ private:
 	MAP_ID mapID_;
 	int Item_;
 
+	
+	bool keyf_[3];
+
 	int qe_id_;
+	int qe_cm_;
 	int count_;
 	int alq_;
+	int Ccount_;
+	int Calq_;
 };
 
