@@ -28,6 +28,14 @@ bool Chat::init(void)
 	mImage[3] = LoadGraph("image/talk/3.png");
 	mImage[4] = LoadGraph("image/talk/temple.png");
 	mImage[5] = LoadGraph("image/talk/temple.png");
+
+	mImage[8] = LoadGraph("image/talk/temple.png");
+	mImage[9] = LoadGraph("image/talk/temple.png");
+	mImage[10] = LoadGraph("image/talk/temple.png");
+	mImage[11] = LoadGraph("image/talk/temple.png");
+	mImage[12] = LoadGraph("image/talk/temple.png");
+	mImage[13] = LoadGraph("image/talk/temple.png");
+
 	mImage[15] = LoadGraph("image/talk/temple.png");
 	mImage[16] = LoadGraph("image/talk/temple.png");
 	mImage[17] = LoadGraph("image/talk/3.png");
@@ -169,6 +177,26 @@ bool Chat::Update(bool flg, int num,bool sflg,bool sPose, bool wflg, bool wPose)
 
 			}
 		}
+		case 8:
+		{
+
+			if (mNum == 100)
+			{
+				mNum = num - 1;
+			}
+			if (key_.getKeyDown(KEY_INPUT_F) && (mNum != 100))
+			{
+
+				mNum += 1;
+				if (mNum == 13)
+				{
+					mFlg = false;
+					mNum = 0;
+
+				}
+
+			}
+		}
 		break;
 		case 15:
 		{
@@ -184,7 +212,7 @@ bool Chat::Update(bool flg, int num,bool sflg,bool sPose, bool wflg, bool wPose)
 				if (mNum == 16)
 				{
 					mSNum = 15;
-					mNum = 30;
+					mNum = 29;
 				}
 
 				if (mNum == 18)
@@ -197,16 +225,16 @@ bool Chat::Update(bool flg, int num,bool sflg,bool sPose, bool wflg, bool wPose)
 
 			if (wPose == true)
 			{
-				if (mNum == 30)
+				if (mNum == 29)
 				{
-					mNum = 30;
-					mSNum = 30;
+					mNum = 29;
+					mSNum = 29;
 				}
 				if (wshopFlg == false)
 				{
 					if (mNum == 17)
 					{
-						mNum = 30;
+						mNum = 29;
 					}
 				}
 			}

@@ -397,7 +397,15 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
 					mSoNpc2 = true;
-					i = 4;
+					if (mQSoNpc2 == false)
+					{
+						i = 8;
+					}
+					else
+					{
+						i = 4;
+					}
+					
 				}
 			}
 			else
