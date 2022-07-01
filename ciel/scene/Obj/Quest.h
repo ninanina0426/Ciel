@@ -48,6 +48,7 @@ public:
 
 	bool CompFlg(void);
 	int GetCont(void);
+	int GetRu(void);
 private:
 	Quest();
 	~Quest();
@@ -67,6 +68,7 @@ private:
 	MAP_ID mapID_;
 	int Item_;
 
+	int getru_;
 	
 	bool keyf_[3];
 

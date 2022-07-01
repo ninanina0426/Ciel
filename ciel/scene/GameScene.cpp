@@ -8,6 +8,7 @@
 #include"../stage/Layer.h"
 #include "../stage/StageMng.h"
 #include "EventScene.h"
+#include "Obj/Quest.h"
 
 
 
@@ -220,6 +221,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
      mShop.sHaveMoney(HaveMoney);
 
      mWshop.sHaveMoney(HaveMoney);
+
+     auto r=QuestIns.GetRu();
 
       //フェードイン
      if (lpMapMng.fadeinFlg_)
