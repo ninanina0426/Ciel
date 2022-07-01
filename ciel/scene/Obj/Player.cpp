@@ -115,6 +115,7 @@ Vector2 Player::Update(int chipId)
 	mapID = lpMapMng.GetMapId();
 
 	mChipId = chipId;
+	mChiID = lpMapMng.GetChipID();
 
 	key_.Update();
 
@@ -328,20 +329,30 @@ Vector2 Player::Update(int chipId)
 			{
 				PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
 			}
-			
+
 			mgPos.x_ = mPos.x_;
 			mgPos.y_ = 560;
 
 			if (mgPos.x_ < 403)
 			{
 				mgPos.x_ = 403;
+
 			}
 			else if (mgPos.x_ > 510)
 			{
 				mgPos.x_ = 510;
+
 			}
 		}
+		
 	}
+	if (mChiID == 4220 || mChiID == 4221 || mChiID == 4320 || mChiID == 4321)
+	{
+		gFlg = false;
+		DeleteSoundMem(oHandle);
+		oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
+	}
+	
 
 	
 	//最初の倒れている時
@@ -477,7 +488,8 @@ void Player::Draw(Vector2 offset)
 
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mgPos.x_, mgPos.y_);
-	DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
+	//DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
+	DrawFormatString(0, 30, 0xff0000, "chipID:%d", mChiID);
 	DrawFormatString(0, 300, 0xff0000, "スタミナ%d", Stamina_);
 
 }
