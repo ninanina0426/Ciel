@@ -409,34 +409,18 @@ int wshop::SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r,
     if (gFishingRodS == 1)
     {
         maxFishingRodS = 0;
-        sFishingRodS = gFishingRodS;
+        
     }
-    /*if (sFishingRodS == 1)
-    {
-        maxFishingRodS = 0;
-        sFishingRodS = gFishingRodS;
-    }*/
     if (gRagBag == 1)
     {
         maxRagBag = 0;
-        sRagBag = gRagBag;
     }
-  /*  if (sRagBag == 1)
-    {
-        maxRagBag = 0;
-        sRagBag = gRagBag;
-    }*/
+ 
     if (gPickaxe == 1)
     {
-        maxPickaxe = 0;
-        sPickaxe = gPickaxe;
+        maxPickaxe = 0; 
     }
-    /*if (sRagBag == 1)
-    {
-        maxPickaxe = 0;
-        sPickaxe = gPickaxe;
-    }*/
-
+   
     return true;
 }
 
