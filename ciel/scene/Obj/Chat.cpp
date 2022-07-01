@@ -33,6 +33,38 @@ bool Chat::init(void)
 	mImage[17] = LoadGraph("image/talk/3.png");
 	mImage[18] = LoadGraph("image/talk/3.png");
 
+	mImage[30] = LoadGraph("image/talk/30.png");
+	mImage[31] = LoadGraph("image/talk/temple.png");
+	mImage[32] = LoadGraph("image/talk/temple.png");
+	mImage[33] = LoadGraph("image/talk/temple.png");
+	mImage[34] = LoadGraph("image/talk/temple.png");
+	mImage[35] = LoadGraph("image/talk/35.png");
+	mImage[36] = LoadGraph("image/talk/temple.png");
+	mImage[37] = LoadGraph("image/talk/temple.png");
+	mImage[38] = LoadGraph("image/talk/temple.png");
+	mImage[39] = LoadGraph("image/talk/temple.png");
+	mImage[40] = LoadGraph("image/talk/40.png");
+	mImage[41] = LoadGraph("image/talk/temple.png");
+	mImage[42] = LoadGraph("image/talk/temple.png");
+	mImage[43] = LoadGraph("image/talk/temple.png");
+	mImage[44] = LoadGraph("image/talk/temple.png");
+	mImage[45] = LoadGraph("image/talk/45.png");
+	mImage[46] = LoadGraph("image/talk/temple.png");
+	mImage[47] = LoadGraph("image/talk/temple.png");
+	mImage[48] = LoadGraph("image/talk/temple.png");
+	mImage[49] = LoadGraph("image/talk/temple.png");
+	mImage[50] = LoadGraph("image/talk/50.png");
+	mImage[51] = LoadGraph("image/talk/temple.png");
+	mImage[52] = LoadGraph("image/talk/temple.png");
+	mImage[53] = LoadGraph("image/talk/temple.png");
+	mImage[54] = LoadGraph("image/talk/temple.png");
+	mImage[55] = LoadGraph("image/talk/55.png");
+	mImage[56] = LoadGraph("image/talk/temple.png");
+	mImage[57] = LoadGraph("image/talk/temple.png");
+	mImage[58] = LoadGraph("image/talk/temple.png");
+	mImage[59] = LoadGraph("image/talk/temple.png");
+	mImage[60] = LoadGraph("image/talk/temple.png");
+
 	mNum = 100;
 
 	mFlg = false;
@@ -53,7 +85,10 @@ bool Chat::Update(bool flg, int num,bool sflg,bool sPose, bool wflg, bool wPose)
 
 	key_.Update();
 
-	
+	/*if (mNum == 100)
+	{
+		mNum = num - 1;
+	}*/
 
 	if ((mFlg == true))
 	{
@@ -119,7 +154,7 @@ bool Chat::Update(bool flg, int num,bool sflg,bool sPose, bool wflg, bool wPose)
 
 			if (mNum == 100)
 			{
-				mNum = num;
+				mNum = num - 1;
 			}
 			if (key_.getKeyDown(KEY_INPUT_F) && (mNum != 100))
 			{
@@ -189,6 +224,132 @@ bool Chat::Update(bool flg, int num,bool sflg,bool sPose, bool wflg, bool wPose)
 			
 		}
 		break;
+		case 30:
+		{
+
+			if (mNum == 100)
+			{
+				mNum = num - 1;
+			}
+			if (key_.getKeyDown(KEY_INPUT_F) && (mNum != 100))
+			{
+
+				mNum += 1;
+				if (mNum == 34)
+				{
+					mFlg = false;
+					mNum = 0;
+
+				}
+
+			}
+		}
+		break;
+		case 35:
+		{
+
+			if (mNum == 100)
+			{
+				mNum = num - 1;
+			}
+			if (key_.getKeyDown(KEY_INPUT_F) && (mNum != 100))
+			{
+
+				mNum += 1;
+				if (mNum == 39)
+				{
+					mFlg = false;
+					mNum = 0;
+
+				}
+
+			}
+		}
+		break;
+		case 40:
+		{
+
+			if (mNum == 100)
+			{
+				mNum = num - 1;
+			}
+			if (key_.getKeyDown(KEY_INPUT_F) && (mNum != 100))
+			{
+
+				mNum += 1;
+				if (mNum == 44)
+				{
+					mFlg = false;
+					mNum = 0;
+
+				}
+
+			}
+		}
+		break;
+		case 45:
+		{
+
+			if (mNum == 100)
+			{
+				mNum = num - 1;
+			}
+			if (key_.getKeyDown(KEY_INPUT_F) && (mNum != 100))
+			{
+
+				mNum += 1;
+				if (mNum == 49)
+				{
+					mFlg = false;
+					mNum = 0;
+
+				}
+
+			}
+		}
+		break;
+		case 50:
+		{
+
+			if (mNum == 100)
+			{
+				mNum = num - 1;
+			}
+			if (key_.getKeyDown(KEY_INPUT_F) && (mNum != 100))
+			{
+
+				mNum += 1;
+				if (mNum == 54)
+				{
+					mFlg = false;
+					mNum = 0;
+
+				}
+
+			}
+		}
+		break;
+		case 55:
+		{
+
+			if (mNum == 100)
+			{
+				mNum = num - 1;
+			}
+			if (key_.getKeyDown(KEY_INPUT_F) && (mNum != 100))
+			{
+
+				mNum += 1;
+				if (mNum == 59)
+				{
+					mFlg = false;
+					mNum = 0;
+
+				}
+
+			}
+		}
+		break;
 		default:
 			break;
 		}
@@ -223,9 +384,40 @@ void Chat::Draw(Vector2 offset)
 		DrawGraph(mPos.x_ - offset.x_ + 1750, mPos.y_ - offset.y_ + 1650, mImage[mNum], true);
 		break;
 	}
+	case 30:
+	{
+		DrawGraph(mPos.x_ - offset.x_ + 1535-32, mPos.y_ - offset.y_ + 2145-128, mImage[mNum], true);
+		break;
+	}
+	case 35:
+	{
+		DrawGraph(mPos.x_ - offset.x_ + 286 - 32, mPos.y_ - offset.y_ + 1918 - 128, mImage[mNum], true);
+		break;
+	}
+	case 40:
+	{
+		DrawGraph(mPos.x_ - offset.x_ + 128 - 32, mPos.y_ - offset.y_ + 800 - 128, mImage[mNum], true);
+		break;
+	}
+	case 45:
+	{
+		DrawGraph(mPos.x_ - offset.x_ + 2879 - 32, mPos.y_ - offset.y_ + 769 - 128, mImage[mNum], true);
+		break;
+	}
+	case 50:
+	{
+		DrawGraph(mPos.x_ - offset.x_ + 2400 - 32, mPos.y_ - offset.y_ + 100 - 128, mImage[mNum], true);
+		break;
+	}
+	case 55:
+	{
+		DrawGraph(mPos.x_ - offset.x_ + 2591 - 32, mPos.y_ - offset.y_ + 129 - 128, mImage[mNum], true);
+		break;
+	}
 	default:
 		break;
 	}
+
 
 	DrawFormatString(0, 70, GetColor(0,0,255), "Chat:%d", mNum);
 

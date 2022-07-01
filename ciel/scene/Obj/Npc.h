@@ -25,7 +25,8 @@ enum class NumType
 	NPC_2,
 	NPC_3,
 	NPC_4,
-	NPC_5
+	NPC_5,
+	NPC_6
 };
 
 
@@ -77,6 +78,13 @@ public:
 
 	bool mSoNpc1;
 	bool mSoNpc2;
+
+	bool mFmNpc1;
+	bool mFmNpc2;
+	bool mFmNpc3;
+	bool mFmNpc4;
+	bool mFmNpc5;
+	bool mFmNpc6;
 
 	bool mSmNpc1;
 
