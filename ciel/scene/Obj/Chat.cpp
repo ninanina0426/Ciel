@@ -407,6 +407,11 @@ void Chat::Draw(Vector2 offset)
 		DrawGraph(mPos.x_ - offset.x_ + 750, mPos.y_ - offset.y_ + 1100, mImage[mNum], true);
 		break;
 	}
+	case 8:
+	{
+		DrawGraph(mPos.x_ - offset.x_ + 1305, mPos.y_ - offset.y_ + 555, mImage[mNum], true);
+		break;
+	}
 	case 15:
 	{
 		DrawGraph(mPos.x_ - offset.x_ + 1750, mPos.y_ - offset.y_ + 1650, mImage[mNum], true);

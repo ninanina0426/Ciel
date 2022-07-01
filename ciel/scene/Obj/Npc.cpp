@@ -367,8 +367,23 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					mSoNpc1 = true;
-					i = 1;
+					if (mSoNpc1 == false)
+					{
+						if (key_.getKeyDown(KEY_INPUT_F))
+						{
+							mSoNpc1 = true;
+							if (mQSoNpc1 == false)
+							{
+								i = 8;
+							}
+							else
+							{
+								i = 1;
+							}
+
+						}
+					}
+					
 				}
 			}
 			else
@@ -397,15 +412,7 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
 					mSoNpc2 = true;
-					if (mQSoNpc2 == false)
-					{
-						i = 8;
-					}
-					else
-					{
-						i = 4;
-					}
-					
+					i = 4;
 				}
 			}
 			else
