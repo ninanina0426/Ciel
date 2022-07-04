@@ -64,7 +64,9 @@ bool Aitem::init()
 	mTea=0;
 
 	apple = 0;
+	rantan = 0;
 	
+	Flg = true;
 
 	mNum[0] ={0,0}; //posx
 
@@ -330,7 +332,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					apple += 1;
+					rantan += 1;
 					mAitem -= 1;
 					mNum[2] = mNum[0];
 					i = 2;
@@ -608,10 +610,33 @@ int Aitem::wMoney(int ru, bool flg)
 	return Ru;
 }
 
+int Aitem::qMoney(int ru, bool flg)
+{
+	int qRu = Ru;
+
+	if (Flg == true)
+	{
+		if (flg == true)
+		{
+			Ru = qRu + ru;
+			Flg = false;
+		}
+	}
+	if (Flg == false)
+	{
+		if (flg == false)
+		{
+			Flg = true;
+		}
+	}
+	
+	return Ru;
+}
+
+
+
 int Aitem::HaveMoney()
 {
-	/*Ru = ssRu + wwRu;*/
-
 	return Ru;
 }
 
@@ -638,7 +663,7 @@ void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int
 	mRagBag=rb+srb;
 	mPickaxe=p+sp;
 	mHaoriN=h+sh;
-	mRantanN=r+sr;
+	mRantanN=r+sr+rantan;
 	mRice = ri+sri;
 	mDango = d+sd;
 	mTea = t+st;

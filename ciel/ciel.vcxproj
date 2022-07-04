@@ -154,6 +154,7 @@
     <ClCompile Include="scene\EventScene.cpp" />
     <ClCompile Include="scene\Obj\BGM.cpp" />
     <ClCompile Include="scene\Obj\Chat.cpp" />
+    <ClCompile Include="scene\Obj\Masuku.cpp" />
     <ClCompile Include="scene\Obj\Npc.cpp" />
     <ClCompile Include="scene\Obj\Quest.cpp" />
     <ClCompile Include="scene\Obj\shop.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="scene\EventScene.h" />
     <ClInclude Include="scene\Obj\BGM.h" />
     <ClInclude Include="scene\Obj\Chat.h" />
+    <ClInclude Include="scene\Obj\Masuku.h" />
     <ClInclude Include="scene\Obj\Npc.h" />
     <ClInclude Include="scene\Obj\Quest.h" />
     <ClInclude Include="scene\Obj\shop.h" />
