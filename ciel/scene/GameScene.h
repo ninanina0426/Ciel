@@ -9,13 +9,13 @@
 #include "../stage/stage.h"
 #include "../stage/transitionStage/FadeInStage.h"
 #include "Obj/UI.h"
-
 class SceneMng;
 class Aitem;
 class BGM;
 class Npc;
 class Chat;
 class Layer;
+class Masuku;
 
 class GameScene : public BaseScene
 {
@@ -104,5 +104,7 @@ private:
     
 
     UI ui_;
+
+    Masuku* mMasuku;
 };
 

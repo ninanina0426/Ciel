@@ -418,7 +418,7 @@ bool CaveMap::CheckMapChip(Vector2 pos)
 		case 41:
 		case 42:
 		case 43:
-		case 72:
+		
 
 
 			switch (layer3)
@@ -438,6 +438,10 @@ bool CaveMap::CheckMapChip(Vector2 pos)
 			default:
 				break;
 			}
+			break;
+
+		case 72:
+			flg = false;
 			break;
 		default:
 			break;

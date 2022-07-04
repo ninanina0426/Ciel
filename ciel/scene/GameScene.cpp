@@ -9,8 +9,7 @@
 #include "../stage/StageMng.h"
 #include "EventScene.h"
 #include "Obj/Quest.h"
-
-
+#include"Obj/Masuku.h"
 
 
 GameScene::GameScene(PlayerID playerID)
@@ -26,7 +25,6 @@ GameScene::~GameScene()
 
 
 //アイテムのフラグ ---------------------------
-
 bool GameScene::IsTama1(void)
 {
     return mAitem->mTama1;
@@ -216,13 +214,18 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
      mWshop.AMoney(mAitem->wMoney(mWshop.SetMoney(),mWshop.GetMoney()));
 
+     auto r = QuestIns.GetRu();
+     auto q = QuestIns.CompFlg();
+
+     mAitem->qMoney(r, q);
+
      int HaveMoney = mAitem->HaveMoney();
 
      mShop.sHaveMoney(HaveMoney);
 
      mWshop.sHaveMoney(HaveMoney);
 
-     auto r=QuestIns.GetRu();
+     
 
       //フェードイン
      if (lpMapMng.fadeinFlg_)
@@ -235,6 +238,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     mBgm->Update(mMenu.OpBgm());
 
     ui_.Upadate(mPlayer.GetStamina());
+
+    mMasuku->Update(PlayerPos);
     return std::move(own);
 }
 
@@ -347,7 +352,11 @@ void GameScene::DrawOwnScn()
 
      mWshop.Draw();
     
+     mMasuku->Draw(mMapOffset,mAitem->mRantanNum());
+
      ui_.Draw();
+
+     
 
      //フェードイン
      if (lpMapMng.fadeinFlg_)
@@ -387,6 +396,8 @@ bool GameScene::Init(void)
     mChat = new Chat();
 
     mLayer = new Layer();
+
+    mMasuku = new Masuku();
 
    	return true;
 

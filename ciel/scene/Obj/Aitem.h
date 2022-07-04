@@ -23,6 +23,8 @@ public:
 
 	int wMoney(int ru, bool flg);
 
+	int qMoney(int ru,bool flg);
+
 	int HaveMoney();
 
 	void TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h,int ri,int d,int t, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st);
@@ -116,6 +118,8 @@ private:
 	int wwRu;
 
 	int apple;
+
+	bool Flg;
 
 };
 

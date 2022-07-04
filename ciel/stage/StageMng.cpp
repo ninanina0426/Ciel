@@ -232,7 +232,7 @@ Vector2 StageMng::Update(Vector2 mPlayerset, int ai)
 	if (CheckHitKey(KEY_INPUT_D))
 	{
 		stage_ = std::move(std::make_unique<SnowCaveMap>());
-		mMapID = MAP_ID::SNOWCAVE;
+		mMapID = MAP_ID::CAVE;
 	}
 	stage_->Update(mOffset);
 

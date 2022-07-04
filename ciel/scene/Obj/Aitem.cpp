@@ -65,6 +65,7 @@ bool Aitem::init()
 
 	apple = 0;
 	
+	Flg = true;
 
 	mNum[0] ={0,0}; //posx
 
@@ -583,10 +584,33 @@ int Aitem::wMoney(int ru, bool flg)
 	return Ru;
 }
 
+int Aitem::qMoney(int ru, bool flg)
+{
+	int qRu = Ru;
+
+	if (Flg == true)
+	{
+		if (flg == true)
+		{
+			Ru = qRu + ru;
+			Flg = false;
+		}
+	}
+	if (Flg == false)
+	{
+		if (flg == false)
+		{
+			Flg = true;
+		}
+	}
+	
+	return Ru;
+}
+
+
+
 int Aitem::HaveMoney()
 {
-	/*Ru = ssRu + wwRu;*/
-
 	return Ru;
 }
 
