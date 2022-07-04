@@ -133,13 +133,13 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     //àÍì˙ÇÃó¨ÇÍ
     int min = 60;    //àÍï™ä‘ÇÃÉtÉåÅ[ÉÄêî
     int Day = min * 5;      //àÍì˙ÇÃïbêî
-
     //yuugata
     if (delta % Day == 120)
     {
         AMflg_ = false;
         PMflg_ = true;
         count_ = 0;
+        skycnt_ = 0;
     }
     //yoru
     if (!AMflg_ && PMflg_ && delta % Day == 180)
@@ -147,6 +147,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         Nightflg_ = true;
         PMflg_ = false;
         count_ = 0;
+        skycnt_ = 0;
     }
     if (delta % Day == 0)
     {
@@ -154,6 +155,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         PMflg_ = false;
         Nightflg_ = false;
         count_ = 0;
+        skycnt_ = 0;
     }
     if (count_ <= 60)
     {
@@ -253,7 +255,7 @@ void GameScene::DrawOwnScn()
     auto elTime = nowTime_ - oldTime_;
     auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
     int delta = static_cast<int>(msec / 1000000.0); //ïbÇ…ïœä∑  
-    delta = delta * 20;
+   // delta = delta * 20;
     switch (mapID)
     {
     case MAP_ID::FOREST:
@@ -300,28 +302,29 @@ void GameScene::DrawOwnScn()
     default:
         break;
     }
+
     if (skyflg_&& AMflg_)
     {
+        DrawGraph(0, 0, you_, true);
         SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_);
-        DrawBox(0, 0, 1080, 609, 0x4169e1, true);
+        DrawGraph(0, 0, asa_, true);
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     }
     if (skyflg_ && PMflg_)
     {
-        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_-255);
-        DrawBox(0, 0, 1080, 609, 0xff6347, true);
+        DrawGraph(0, 0, asa_, true);
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_);
+        DrawGraph(0, 0, yuu_, true);
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     }
     if (skyflg_ && Nightflg_)
     {
-        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_-255);
-        DrawBox(0, 0, 1080, 609, 0x191970, true);
+        DrawGraph(0, 0, yuu_, true);
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_);
+        DrawGraph(0, 0, you_, true);
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     }
-    if (skyflg_)
-    {
-        DrawGraph(0,0 -delta, bgid_, true);
-    }
+    
     
 
     //É}ÉbÉv
@@ -388,7 +391,10 @@ bool GameScene::Init(void)
     //éûä‘ånèâä˙âª
     evening_ = LoadGraph("./image/yukoku.png");
     night_ = LoadGraph("./image/yoru.png");
-    bgid_= LoadGraph("./image/move/bgsky.png");
+    asa_ = LoadGraph("./image/move/í©.png");
+    yuu_ = LoadGraph("./image/move/ó[.png");
+    you_ = LoadGraph("./image/move/ñÈ.png");
+
     nowTime_ = std::chrono::system_clock::now();
     oldTime_ = nowTime_;
     AMflg_ = true;
