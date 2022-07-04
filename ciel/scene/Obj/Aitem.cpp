@@ -88,6 +88,9 @@ bool Aitem::init()
 	mNum[12] = { 560,160 };
 	mNum[13] = { 2300,120 };
 
+	//ランタン
+	mNum[14] = { 1420,2144 };
+
 	i = 0;
 
 	mShop = new shop();
@@ -115,6 +118,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 	switch (mapID)
 	{
 	case MAP_ID::FOREST:
+		
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[9].y_ + 32 / 2) &&
 			(mPos.y_ + mNum[9].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[9].x_ + 32 / 2) &&
@@ -274,6 +278,18 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 		}
 		break;
 	case MAP_ID::FORESTIN:
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[14].y_ + 32 / 2) &&
+			(mPos.y_ + mNum[14].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[14].x_ + 32 / 2) &&
+			(mPos.x_ + mNum[14].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if (key_.getKeyDown(KEY_INPUT_F))
+			{
+				rantan += 1;
+				mNum[14] = mNum[0];
+				mRantan = true;
+			}
+		}
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[4].y_ + 32 / 2) &&
 			(mPos.y_ + mNum[4].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[4].x_  +32/ 2) &&
@@ -332,7 +348,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					rantan += 1;
+					apple += 1;
 					mAitem -= 1;
 					mNum[2] = mNum[0];
 					i = 2;
@@ -413,6 +429,7 @@ void Aitem::Draw(Vector2 mMapoffset)
 	{
 
 	case MAP_ID::FOREST:
+		
 		//木の実１
 		if (mKinomi != 0)
 		{
@@ -496,6 +513,14 @@ void Aitem::Draw(Vector2 mMapoffset)
 		}
 		break;
 	case MAP_ID::FORESTIN:
+		if (rantan == 0)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ + mNum[14].x_ - mMapoffset.x_, mPos.y_ + mNum[14].y_ - mMapoffset.y_, mImage[1][mAnimCnt], true);
+			}
+		}
 		//キーアイテム
 		if (mTama != 0)
 		{
