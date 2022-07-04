@@ -118,6 +118,7 @@ private:
 	int wwRu;
 
 	int apple;
+	int rantan;
 
 	bool Flg;
 

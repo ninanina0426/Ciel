@@ -64,6 +64,7 @@ bool Aitem::init()
 	mTea=0;
 
 	apple = 0;
+	rantan = 0;
 	
 	Flg = true;
 
@@ -314,7 +315,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					apple += 1;
+					rantan += 1;
 					mAitem -= 1;
 					mNum[2] = mNum[0];
 					i = 2;
@@ -637,7 +638,7 @@ void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int
 	mRagBag=rb+srb;
 	mPickaxe=p+sp;
 	mHaoriN=h+sh;
-	mRantanN=r+sr;
+	mRantanN=r+sr+rantan;
 	mRice = ri+sri;
 	mDango = d+sd;
 	mTea = t+st;

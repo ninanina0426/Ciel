@@ -25,6 +25,7 @@ bool StageMng::Init()
 	mMapID = MAP_ID::TEMPLE;
 	fl_ = false;
 	aitem = 0;
+	mflg = false;
 	mOffset = mPlayer.GetPos()-Vector2{540,0};
 	
     return true;
@@ -49,11 +50,13 @@ void StageMng::Draw()
 
 
 
-Vector2 StageMng::Update(Vector2 mPlayerset, int ai)
+Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg)
 {
 	mMapOldID = mMapID;
 
 	aitem = ai;
+
+	mflg = flg;
 
 	movePos = mPlayerset - mOffset; //playerÇÃPos
 
@@ -444,6 +447,7 @@ bool StageMng::GetEvent(Vector2 pos)
 	}	
 	if (lpMapMng.mMapID == MAP_ID::CAVE)
 	{
+		
 		//CAVEÇ©ÇÁCAVESHOPÇ÷
 		if (chipID == 103)
 		{
@@ -455,7 +459,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			stage_ = std::move(std::make_unique<CaveShop>());
 
 		}
-
+		
 		//CAVEÇ©ÇÁDARKTEMPLEÇ÷
 		if (chipID == 105)
 		{
@@ -888,6 +892,17 @@ bool StageMng::GetMapChange(Vector2 pos)
 	}
 	if (lpMapMng.mMapID == MAP_ID::CAVE)
 	{
+		//ÉâÉìÉ^ÉìÇ™ñ≥Ç≠ÇƒêiÇﬂÇ»Ç¢
+		if (mflg == true)
+		{
+			mMapChange = true;
+			mNextPos = { 1645,715 };
+			mDir = DIR_DOWN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			mMapID = MAP_ID::TEMPLE;
+			stage_ = std::move(std::make_unique<templeMap>());
+		}
+
 		if (pos.y_ > 3160 )
 		{
 			if (key_.getKeyDown(KEY_INPUT_F))

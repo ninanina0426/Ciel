@@ -164,7 +164,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     
     DrawOwnScn();//ŒÂ•Ê‚ÌDrawˆ—‚Èˆ×•K‚¸‘‚­
 
-    mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam());
+    mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(),mMasuku->Flg());
 
     if ((mShop.SPose() == false)&&(mWshop.SPose() == false))
     {
@@ -239,7 +239,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     ui_.Upadate(mPlayer.GetStamina());
 
-    mMasuku->Update(PlayerPos);
+    mMasuku->Update(PlayerPos, mAitem->mRantanNum());
     return std::move(own);
 }
 
@@ -352,7 +352,7 @@ void GameScene::DrawOwnScn()
 
      mWshop.Draw();
     
-     mMasuku->Draw(mMapOffset,mAitem->mRantanNum());
+     mMasuku->Draw(mMapOffset);
 
      ui_.Draw();
 
