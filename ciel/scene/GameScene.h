@@ -89,6 +89,7 @@ private:
     int count_;
     int night_;
     int evening_;
+    int bgid_;
     std::chrono::system_clock::time_point nowTime_;
     std::chrono::system_clock::time_point oldTime_;
 

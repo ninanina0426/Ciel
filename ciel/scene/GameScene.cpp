@@ -234,7 +234,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
      }
     mBgm->Update(mMenu.OpBgm());
 
-    ui_.Upadate(mPlayer.GetStamina());
+    ui_.Upadate(mPlayer.GetStamina(),mPlayer.GetPos());
+
     return std::move(own);
 }
 
@@ -243,6 +244,11 @@ void GameScene::DrawOwnScn()
     SetDrawScreen(sceneScrID_);
     ClsDrawScreen();
     auto mapID = lpMapMng.GetMapId();
+
+    auto elTime = nowTime_ - oldTime_;
+    auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
+    int delta = static_cast<int>(msec / 1000000.0); //秒に変換  
+    delta = delta * 20;
     switch (mapID)
     {
     case MAP_ID::FOREST:
@@ -307,6 +313,10 @@ void GameScene::DrawOwnScn()
         DrawBox(0, 0, 1080, 609, 0x191970, true);
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     }
+    if (skyflg_)
+    {
+        DrawGraph(0,0 -delta, bgid_, true);
+    }
     
 
     //マップ
@@ -324,12 +334,9 @@ void GameScene::DrawOwnScn()
      //時間帯
      TimeManeger();
 
-     //デバッグ用
-     auto elTime = nowTime_ - oldTime_;
-     auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
-     int delta = static_cast<int>(msec / 1000000.0); //秒に変換  
+    
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
-
+    
     
     
 
@@ -372,6 +379,7 @@ bool GameScene::Init(void)
     //時間系初期化
     evening_ = LoadGraph("./image/yukoku.png");
     night_ = LoadGraph("./image/yoru.png");
+    bgid_= LoadGraph("./image/move/bgsky.png");
     nowTime_ = std::chrono::system_clock::now();
     oldTime_ = nowTime_;
     AMflg_ = true;

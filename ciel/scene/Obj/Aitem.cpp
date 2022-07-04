@@ -77,7 +77,7 @@ bool Aitem::init()
 	mNum[5] = { 553,565 };
 	mNum[6] = { 1585,1070 };
 	mNum[7] = { 465,500 };
-	mNum[8] = {};
+	mNum[8] = {1457,653};
 
 	//–Ø‚ÌŽÀ
 	mNum[9] = { 2536,1635 };
@@ -298,6 +298,23 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 		}
 		break;
 	case MAP_ID::TEMPLE:
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[8].y_ + 32 / 2) &&
+			(mPos.y_ + mNum[8].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[8].x_ + 32 / 2) &&
+			(mPos.x_ + mNum[8].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if ((mTama != 0) && (mTama <= 5))
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mTama -= 1;
+					mNum[8] = mNum[0];
+					mTama1 = true;
+
+				}
+
+			}
+		}
 		
 		break;
 	case MAP_ID::TEMPLEIN:
@@ -491,6 +508,14 @@ void Aitem::Draw(Vector2 mMapoffset)
 
 		break;
 	case MAP_ID::TEMPLEIN:
+		if (mTama != 0)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ + mNum[13].x_ - mMapoffset.x_, mPos.y_ + mNum[8].y_ - mMapoffset.y_, mImage[1][mAnimCnt], true);
+			}
+		}
 
 		break;
 	case MAP_ID::SWEETS:

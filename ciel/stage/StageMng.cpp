@@ -340,7 +340,7 @@ bool StageMng::GetEvent(Vector2 pos)
 	//FORESTINからFORESTへ
 	if (lpMapMng.mMapID == MAP_ID::FORESTIN)
 	{
-		if (pos.y_>870&& mTchipId==337)
+		if (pos.y_>870&&pos.y_<895&& mTchipId==337)
 		{
 			mMapChange = true;
 			mNextPos = { 1455,240 };
@@ -348,8 +348,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			mMapID = MAP_ID::FOREST;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<ForestMap>());
-
-
 		}
 		if (chipID ==2520)
 		{
@@ -373,17 +371,17 @@ bool StageMng::GetEvent(Vector2 pos)
 			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<ForestMap>());
 		}
-		if (chipID == 2521)
-		{
-			mMapChange = true;
-			//マップを切り替えることになった
-			mNextPos = { 1584,1720 };
-			mDir = DIR_DOWN;
-			mOffset = mNextPos - Vector2{ 540,300 };
-			mMapID = MAP_ID::FOREST;
-			mOffset = mNextPos - Vector2{ 540,300 };
-			stage_ = std::move(std::make_unique<ForestMap>());
-		}
+		//if (chipID == 2521)
+		//{
+		//	mMapChange = true;
+		//	//マップを切り替えることになった
+		//	mNextPos = { 1584,1720 };
+		//	mDir = DIR_DOWN;
+		//	mOffset = mNextPos - Vector2{ 540,300 };
+		//	mMapID = MAP_ID::FOREST;
+		//	mOffset = mNextPos - Vector2{ 540,300 };
+		//	stage_ = std::move(std::make_unique<ForestMap>());
+		//}
 		if (chipID == 137)
 		{
 			mMapChange = true;
@@ -696,6 +694,33 @@ bool StageMng::GetEvent(Vector2 pos)
 		}
 	}
 
+
+	if (lpMapMng.mMapID == MAP_ID::SNOW)
+	{
+
+		if ((chipID == 859))
+		{
+			mMapChange = true;
+			mNextPos = { 1984,1857 };
+			mDir = DIR_UP;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<SnowCaveMap>());
+			mMapID = MAP_ID::SNOWCAVE;
+		}
+	}
+	if (lpMapMng.mMapID == MAP_ID::SNOWCAVE)
+	{
+
+		if ((chipID == 22))
+		{
+			mMapChange = true;
+			mNextPos = { 1984,1857 };
+			mDir = DIR_UP;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<SnowMap>());
+			mMapID = MAP_ID::SNOW;
+		}
+	}
 	return mMapChange;
 }
 
@@ -728,6 +753,8 @@ bool StageMng::GetMapChange(Vector2 pos)
 					DrawBox(0, 250, 1080, 400, 0x000000, true);
 					SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 					DrawString(300, 280, "汝　願ひかなふるなら　言ふにしたがいて　くすしきたま　たいまつる\n \n　　　　　　　　こなたかなたに　それ　散りぼふ\n　\n　　　　　　　　　　　汝　たま　刈りつめ　", 0xffffff);
+				
+					
 				}
 			}
 			else
@@ -850,11 +877,11 @@ bool StageMng::GetMapChange(Vector2 pos)
 				if (fadein_.GetCnt() > 255)
 				{
 					mMapChange = true;
-					mNextPos = { 1600, 3050 };
-					mDir = DIR_UP;
-					mMapID = MAP_ID::CAVE;
+					mNextPos = { 400, 2990 };
+					mDir = DIR_RIGHT;
+					mMapID = MAP_ID::SNOW;
 					mOffset = mNextPos - Vector2{ 540,300 };
-					stage_ = std::move(std::make_unique<CaveMap>());
+					stage_ = std::move(std::make_unique<SnowMap>());
 				}
 			}
 		}
