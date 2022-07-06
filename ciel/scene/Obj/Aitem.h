@@ -78,6 +78,10 @@ public:
 
 	int GetTam(void);
 
+	int SetAitem(void);
+
+	int sAitem;
+
 	int mAitem;
 	
 
