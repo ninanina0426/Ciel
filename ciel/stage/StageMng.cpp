@@ -749,6 +749,7 @@ bool StageMng::GetMapChange(Vector2 pos)
 					if (key_.getKeyDown(KEY_INPUT_F))
 					{
 						opendir_ = false;
+						qeopd_ = true;
 					}
 				}
 				if (opendir_)

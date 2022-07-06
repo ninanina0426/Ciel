@@ -337,7 +337,13 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 
 			}
 		}
-		
+		if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}
 		break;
 	case MAP_ID::TEMPLEIN:
 		

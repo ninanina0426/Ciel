@@ -48,6 +48,9 @@ public:
 	int GetChipId(void);
 	int GetChipID(void);
 
+
+
+	bool qeopd_ = false;
 private:
 	StageMng();
 	~StageMng();

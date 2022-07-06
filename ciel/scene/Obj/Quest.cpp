@@ -48,7 +48,7 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 	case MAP_ID::FORESTIN:
 		break;
 	case MAP_ID::TEMPLE:
-		if (quest_ == QUEST::QUEST_1 && plPos.y_ < 1000 )
+		if (quest_ == QUEST::QUEST_1 &&lpMapMng.qeopd_)
 		{
 			CompFlg_ = true;
 		}
