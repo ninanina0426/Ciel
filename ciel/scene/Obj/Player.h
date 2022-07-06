@@ -94,6 +94,8 @@ private:
 
 	void message_box();
 
+	DIR keyDir;
+
 public:
 	Player();
 	~Player();

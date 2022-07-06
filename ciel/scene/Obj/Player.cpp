@@ -64,7 +64,7 @@ bool Player::init(PlayerID playerid)
 
 	//グラフィックの読み込み
 
-	if (LoadDivGraph("image/char/106.png", 32, 4, 8, 32, 48, &mImage1[0]) == -1)
+	if (LoadDivGraph("image/char/106.png", 32, 4, 8, 48, 48, &mImage1[0]) == -1)
 	{
 		return false;
 	}
@@ -109,7 +109,7 @@ bool Player::init(PlayerID playerid)
 
 Vector2 Player::Update(int chipId)
 {
-	DIR keyDir = DIR_MAX;		//キー入力の方向
+	keyDir = DIR_MAX;		//キー入力の方向
 	Vector2 copyPos = mPos;
 
 	mapID = lpMapMng.GetMapId();
@@ -119,18 +119,11 @@ Vector2 Player::Update(int chipId)
 
 	key_.Update();
 
-	
-	//デバッグ用
-	/*if (key_.getKeyDownHold(KEY_INPUT_Q))
-	{
-		mPos = { 0,0 };
-	}*/
-
-	if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
+	//釣り
+	if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299) || mChipId == 896)
 	{
 		if (key_.getKeyDown(KEY_INPUT_F))
 		{
-			//釣り
 			if (i == 0)
 			{
 				i = 1;
@@ -346,6 +339,7 @@ Vector2 Player::Update(int chipId)
 		}
 		
 	}
+	//ライム
 	if (mChiID == 4220 || mChiID == 4221 || mChiID == 4320 || mChiID == 4321)
 	{
 		gFlg = false;
@@ -407,6 +401,7 @@ Vector2 Player::Update(int chipId)
 
 void Player::Draw(Vector2 offset)
 {
+	
 	//ライム
 	if (mapID == MAP_ID::SWEETS)
 	{
@@ -436,13 +431,24 @@ void Player::Draw(Vector2 offset)
 		{
 			if (i == 0)
 			{
-				DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage1[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+				if (keyDir == DIR_MAX)
+				{
+					DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[mMoveDir * DIR_MAX], true);
+				}
+				else if (keyDir != DIR_MAX)
+				{
+					DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+				}
+				
 			}
 			else if (i == 1)
 			{
-				DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage1[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 			}
+			
 		}
+		
+		
 	}
 	if (plID_ == PlayerID::Soy)
 	{
@@ -450,7 +456,7 @@ void Player::Draw(Vector2 offset)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[2], true);
 		}
-		if (mAnmCnt / 10 < 27)
+		if (mAnmCnt< 270)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImageS[mAnmCnt / 10], true);
 		}
@@ -458,7 +464,14 @@ void Player::Draw(Vector2 offset)
 		{
 			if (i == 0)
 			{
-				DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage2[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+				if (keyDir == DIR_MAX)
+				{
+					DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage2[mMoveDir * DIR_MAX], true);
+				}
+				else if (keyDir != DIR_MAX)
+				{
+					DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage2[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+				}
 			}
 			else if (i == 1)
 			{
@@ -472,7 +485,7 @@ void Player::Draw(Vector2 offset)
 		{
 			DrawGraph(mPos.x_ - offset.x_-63 , mPos.y_ - offset.y_ -80, mImageChat[1], true);
 		}
-		if (mAnmCnt/10 < 27)
+		if (mAnmCnt< 270)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImageC[mAnmCnt/10], true);
 		}
@@ -480,7 +493,14 @@ void Player::Draw(Vector2 offset)
 		{
 			if (i == 0)
 			{
-				DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage3[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+				if (keyDir == DIR_MAX)
+				{
+					DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage3[mMoveDir * DIR_MAX], true);
+				}
+				else if (keyDir != DIR_MAX)
+				{
+					DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage3[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+				}
 			}
 			else if (i == 1)
 			{
