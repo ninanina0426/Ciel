@@ -21,13 +21,21 @@ void UI::Upadate(int sta,Vector2 pos,Vector2 size)
 	{
 		telop_ = true;
 
-		if (aitem_.mTama1 || aitem_.mTama2 || aitem_.mTama3 || aitem_.mTama4 || aitem_.mTama5)
+		if (aitem_.SetAitem()==2)
 		{
 			aitemname_ = "•sŽv‹c‚È‹Ê";
 		}
-		if (aitem_.mKinomi1 || aitem_.mKinomi2 || aitem_.mKinomi3 || aitem_.mKinomi4 || aitem_.mKinomi2)
+		if (aitem_.SetAitem()==1)
 		{
 			aitemname_ = "‚«‚Ì‚Ý";
+		}
+		if (aitem_.SetAitem() == 3)
+		{
+			aitemname_ = "ƒŠƒ“ƒS";
+		}
+		if (aitem_.SetAitem() == 4)
+		{
+			aitemname_ = "ƒ‰ƒ“ƒ^ƒ“";
 		}
 	}
 	
@@ -42,15 +50,15 @@ void UI::Upadate(int sta,Vector2 pos,Vector2 size)
 		count_++;
 		if (updown_ < 151)
 		{
-			updown_ += 2;
+			updown_ += 5;
 		}
 		
 	}
 	if (count_ > 120)
 	{
 		telop_ = false;
-		updown_ -= 2;
-		if (updown_ == 0)
+		updown_ -= 3;
+		if (updown_ < 0)
 		{
 			updown_ = 0;
 			count_ = 0;

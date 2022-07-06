@@ -125,6 +125,6 @@ private:
 	int rantan;
 
 	bool Flg;
-
+	
 };
 
