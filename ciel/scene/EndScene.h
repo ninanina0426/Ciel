@@ -1,10 +1,14 @@
 #pragma once
 #include "BaseScene.h"
+#include <string>
+#include "Obj/Player.h"
+#include "Input/Keyboard.h"
+
 class EndScene :
     public BaseScene
 {
 public:
-    EndScene();
+    EndScene(std::string end, PlayerID plID);
     ~EndScene();
 private:
     uniquBaseScn Update(uniquBaseScn own) override;     //タイトルシーンUpdata
@@ -12,5 +16,11 @@ private:
     bool Init(void) override;                           // タイトルシーン初期化
     SceneID GetSceneID(void) override { return SceneID::END; };   //sceneIDをタイトルに設定
 
+    std::string endType_;
+    PlayerID playerID_;
+    Keyboard key_;
+
+    //グラフィック関係
+    int e3_;
 };
 

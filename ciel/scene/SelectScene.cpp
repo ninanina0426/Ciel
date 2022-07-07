@@ -2,6 +2,7 @@
 #include "SelectScene.h"
 #include "GameScene.h"
 #include "EventScene.h"
+#include "EndScene.h"
 #include "Transition/FadeInOut.h"
 
 SelectScene::SelectScene()
@@ -68,11 +69,42 @@ uniquBaseScn SelectScene::Update(uniquBaseScn own)
     //キャラ選択が終わったらシーン移送
     if (DicideChar(player_))
     {
+        if (player_.plID_ == PlayerID::Max)
+        {
+           auto s= MessageBox(NULL, TEXT("本当にやめるのですか？"),TEXT(""), MB_YESNO| MB_ICONQUESTION);
+           if (s == IDYES)
+           {
+               auto d = MessageBox(NULL, TEXT("ホントニ？　イイノ？"), TEXT(""), MB_YESNO| MB_ICONEXCLAMATION);
+               if (d == IDYES)
+               {
+                   auto f = MessageBox(NULL, TEXT("ホ　ホン　ト　二二　い　い？　イ　ノ？　？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
+                   if (f == IDYES)
+                   {
+                       return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_3", player_.plID_));
+                   }
+                   else if (f == IDNO)
+                   {
+                       player_.state_ = PL_ST::NON;
+                       return std::move(own);
+                   }
+               }
+               else if (d == IDNO)
+               {
+                   player_.state_ = PL_ST::NON;
+                   return std::move(own);
+               }
+           }
+           else if (s == IDNO)
+           {
+               player_.state_ = PL_ST::NON;
+               return std::move(own);
+           }
+        }
         return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EventScene>(std::make_unique<GameScene>(player_.plID_), player_.plID_, 5));
     }
 
     //playerの選択
-    SlectChar(player_,KeyDir::LEFT, 1, PlayerID::Soy, PlayerID::iti);
+    SlectChar(player_,KeyDir::LEFT, 1, PlayerID::Max, PlayerID::iti);
     SlectChar(player_,KeyDir::RIGHT, -1, PlayerID::iti, PlayerID::Soy);
 
     DrawOwnScn();
@@ -86,11 +118,15 @@ void SelectScene::DrawOwnScn()
     ClsDrawScreen();
 
     DrawExtendGraph(0, 0, 1080, 609, bg_, true);
-    DrawExtendGraph(0, 100, 800, 700, eff_b[(animcnt_ / 10) % 10], true);
-    DrawGraph(0, 100, eff_[(animcnt_/10)%15], true);
+    if (player_.plID_ != PlayerID::Max)
+    {
+        DrawExtendGraph(0, 100, 800, 700, eff_b[(animcnt_ / 10) % 10], true);
+        DrawGraph(0, 100, eff_[(animcnt_ / 10) % 15], true);
+        DrawBox(650, 50, 1030, 350, 0xffffff, false);
+        DrawBox(0, 30, 200, 80, 0xffffff, false);
+    }
     
-    DrawBox(650, 50, 1030, 350, 0xffffff, false);
-    DrawBox(0, 30, 200, 80, 0xffffff, false);
+   
 
     if (player_.plID_ == PlayerID::iti)
     {
@@ -108,7 +144,15 @@ void SelectScene::DrawOwnScn()
         DrawGraph(300, 30, soyImage_, true);
     }
 
-    DrawExtendGraph(0, 100, 800, 670, eff_f[(animcnt_ / 10) % 10], true);
+    if (player_.plID_ != PlayerID::Max)
+    {
+        DrawExtendGraph(0, 100, 800, 670, eff_f[(animcnt_ / 10) % 10], true);
+    }
+    else
+    {
+        DrawString(300, 250, "冒険しない", 0xffffff);
+    }
+   
     DrawString(200, 300, "<", 0xffffff, true);
     DrawString(600, 300, ">", 0xffffff, true);
     DrawString(950, 580, "Enterで決定", 0xffffff, true);
