@@ -239,7 +239,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     }
     mBgm->Update(mMenu.OpBgm());
 
-    ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetPos());
+    ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetPos(),mPlayer.GetSiz());
 
     mMasuku->Update(PlayerPos, mAitem->mRantanNum());
 

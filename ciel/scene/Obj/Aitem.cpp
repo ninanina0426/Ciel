@@ -67,7 +67,7 @@ bool Aitem::init()
 	apple = 0;
 	rantan = 0;
 
-
+	
 	
 	Flg = true;
 

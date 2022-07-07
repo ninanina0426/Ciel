@@ -94,7 +94,7 @@ void SelectScene::DrawOwnScn()
 
     if (player_.plID_ == PlayerID::iti)
     {
-        DrawString(20, 50, "››Z", 0xffffff, true);
+        DrawString(20, 50, "ƒWƒƒƒbƒN", 0xffffff, true);
         DrawGraph(280, 20, titi_, true);
     }
     if (player_.plID_ == PlayerID::Calendula)

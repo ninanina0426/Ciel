@@ -16,8 +16,6 @@
 #include "SnowCaveMap.h"
 
 
-
-
 bool StageMng::Init()
 {
 	stage_ = std::make_unique<templeMap>();
@@ -234,8 +232,10 @@ Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg)
 	}
 	if (CheckHitKey(KEY_INPUT_D))
 	{
-		stage_ = std::move(std::make_unique<SnowCaveMap>());
-		mMapID = MAP_ID::CAVE;
+
+		stage_ = std::move(std::make_unique<SnowMap>());
+		mMapID = MAP_ID::SNOW;
+
 	}
 	stage_->Update(mOffset);
 
@@ -374,17 +374,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<ForestMap>());
 		}
-		//if (chipID == 2521)
-		//{
-		//	mMapChange = true;
-		//	//É}ÉbÉvÇêÿÇËë÷Ç¶ÇÈÇ±Ç∆Ç…Ç»Ç¡ÇΩ
-		//	mNextPos = { 1584,1720 };
-		//	mDir = DIR_DOWN;
-		//	mOffset = mNextPos - Vector2{ 540,300 };
-		//	mMapID = MAP_ID::FOREST;
-		//	mOffset = mNextPos - Vector2{ 540,300 };
-		//	stage_ = std::move(std::make_unique<ForestMap>());
-		//}
+		
 		if (chipID == 137)
 		{
 			mMapChange = true;
@@ -699,32 +689,57 @@ bool StageMng::GetEvent(Vector2 pos)
 	}
 
 
+	//ê·Ç©ÇÁê·ÇÃì¥åAÇ÷
 	if (lpMapMng.mMapID == MAP_ID::SNOW)
 	{
 
-		if ((chipID == 859))
+		if (chipID == 859 && 2400 < pos.x_)
 		{
 			mMapChange = true;
-			mNextPos = { 1984,1857 };
+			mNextPos = { 1985,1830 };
+			mDir = DIR_UP;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<SnowCaveMap>());
+			mMapID = MAP_ID::SNOWCAVE;
+
+		}
+		else if (chipID == 859)
+		{
+			mMapChange = true;
+			mNextPos =  { 1150, 1900 };
 			mDir = DIR_UP;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<SnowCaveMap>());
 			mMapID = MAP_ID::SNOWCAVE;
 		}
+
 	}
+
+	//ê·ÇÃì¥åAÇ©ÇÁê·Ç÷
 	if (lpMapMng.mMapID == MAP_ID::SNOWCAVE)
 	{
-
-		if ((chipID == 22))
+		if (chipID == 22 && 1900 < pos.x_)
 		{
 			mMapChange = true;
-			mNextPos = { 1984,1857 };
-			mDir = DIR_UP;
+			mNextPos = { 2450,2740 };
+			mDir = DIR_DOWN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<SnowMap>());
+			mMapID = MAP_ID::SNOW;
+
+		}
+		else if (chipID == 22)
+		{
+			mMapChange = true;
+			mNextPos = { 800, 2600 };
+			mDir = DIR_DOWN;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<SnowMap>());
 			mMapID = MAP_ID::SNOW;
 		}
+
 	}
+	
 	return mMapChange;
 }
 
@@ -749,6 +764,7 @@ bool StageMng::GetMapChange(Vector2 pos)
 					if (key_.getKeyDown(KEY_INPUT_F))
 					{
 						opendir_ = false;
+						qeopd_ = true;
 					}
 				}
 				if (opendir_)
