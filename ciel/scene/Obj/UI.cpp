@@ -23,7 +23,7 @@ void UI::Upadate(int sta,Vector2 pos,Vector2 size)
 
 		if (aitem_.SetAitem()==2)
 		{
-			aitemname_ = "•sv‹c‚È‹Ê";
+			aitemname_ = "Œõ‚é‹Ê";
 		}
 		if (aitem_.SetAitem()==1)
 		{
@@ -82,10 +82,10 @@ void UI::Draw(void)
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	if (telop_&& updown_>150)
 	{
-		DrawFormatString(10, 529, 0xffffff, "%s‚ğE‚Á‚½I", aitemname_.c_str());
+		DrawFormatString(5, 529, 0xffffff, "%s‚ğE‚Á‚½I", aitemname_.c_str());
 	}
 	
-
+	DrawString(0, 200, "W:‰Ùq\nA:X\nS:_“a\nD:á\nE:˜a\nR:“´ŒA",0x000000,true);
 }
 
 void UI::Init()
