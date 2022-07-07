@@ -287,10 +287,10 @@ bool SnowCaveMap::CheckMapChip(Vector2 pos)
 
 int SnowCaveMap::GetMapChip(Vector2 pos)
 {
-	return obj[pos.y_ / 32][pos.x_ / 32];
+	return ground[pos.y_ / 32][pos.x_ / 32];
 }
 
 int SnowCaveMap::GetTMapChip(Vector2 pos)
 {
-	return ground[pos.y_ / 32][pos.x_ / 32];
+	return  obj[pos.y_ / 32][pos.x_ / 32];
 }

@@ -16,8 +16,6 @@
 #include "SnowCaveMap.h"
 
 
-
-
 bool StageMng::Init()
 {
 	stage_ = std::make_unique<templeMap>();
@@ -231,8 +229,8 @@ Vector2 StageMng::Update(Vector2 mPlayerset, int ai)
 	}
 	if (CheckHitKey(KEY_INPUT_D))
 	{
-		stage_ = std::move(std::make_unique<SnowCaveMap>());
-		mMapID = MAP_ID::SNOWCAVE;
+		stage_ = std::move(std::make_unique<SnowMap>());
+		mMapID = MAP_ID::SNOW;
 	}
 	stage_->Update(mOffset);
 
@@ -693,6 +691,56 @@ bool StageMng::GetEvent(Vector2 pos)
 			stage_ = std::move(std::make_unique<SweetsMap>());
 			mMapID = MAP_ID::SWEETS;
 
+		}
+	}
+
+	//ê·Ç©ÇÁê·ÇÃì¥åAÇ÷
+	if (lpMapMng.mMapID == MAP_ID::SNOW)
+	{
+
+		if (chipID == 859 && 2400 < pos.x_)
+		{
+			mMapChange = true;
+			mNextPos = { 1985,1830 };
+			mDir = DIR_UP;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<SnowCaveMap>());
+			mMapID = MAP_ID::SNOWCAVE;
+
+		}
+		else if (chipID == 859)
+		{
+			mMapChange = true;
+			mNextPos =  { 1150, 1900 };
+			mDir = DIR_UP;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<SnowCaveMap>());
+			mMapID = MAP_ID::SNOWCAVE;
+		}
+
+	}
+
+	//ê·Ç©ÇÁê·ÇÃì¥åAÇ÷
+	if (lpMapMng.mMapID == MAP_ID::SNOWCAVE)
+	{
+		if (chipID == 22 && 1900 < pos.x_)
+		{
+			mMapChange = true;
+			mNextPos = { 2450,2740 };
+			mDir = DIR_DOWN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<SnowMap>());
+			mMapID = MAP_ID::SNOW;
+
+		}
+		else if (chipID == 22)
+		{
+			mMapChange = true;
+			mNextPos = { 800, 2600 };
+			mDir = DIR_DOWN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<SnowMap>());
+			mMapID = MAP_ID::SNOW;
 		}
 	}
 
