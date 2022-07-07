@@ -16,10 +16,10 @@ void BGM::Update(int num)
     
     x = num;
 
-    move = 255 * x;
+    move = 255 * x/100;
 
     // âπó ÇÃê›íË
-    ChangeVolumeSoundMem(100, SHandle);
+    ChangeVolumeSoundMem(move, SHandle);
 
     MAP_ID coppymapID = lpMapMng.GetMapIdOld();
     MAP_ID mapID = lpMapMng.GetMapId();
@@ -113,5 +113,8 @@ bool BGM::Init(void)
    // SHandle[12] = LoadSoundMem("bgm/retroparty.mp3");
    // SHandle[13] = LoadSoundMem("bgm/retroparty.mp3");*/
     SHandle = LoadSoundMem("image/music/titel.ogg");
+
+    x = 100;
+
     return true;
 }

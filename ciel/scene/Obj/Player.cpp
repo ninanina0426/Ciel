@@ -416,10 +416,7 @@ Vector2 Player::Update(int chipId)
 		
 	}
 	
-
-
 	return mPos;
-
 
 }
 
@@ -450,7 +447,7 @@ void Player::Draw(Vector2 offset)
 		}
 		if (mAnmCnt< 270)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImageI[mAnmCnt / 10], true);
+			DrawGraph(mPos.x_ - offset.x_ - 16, mPos.y_ - offset.y_ - 24, mImageI[mAnmCnt / 10], true);
 		}
 		else
 		{
