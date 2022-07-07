@@ -48,7 +48,6 @@ bool Aitem::init()
 	
 	sAitem = 2;
 
-
 	mAitem = 0;
 	//‚¨‹à
 	Ru = 500;
@@ -617,7 +616,7 @@ void Aitem::Draw(Vector2 mMapoffset)
 
 
 	DrawFormatString(0,150, GetColor(255, 255, 255), "num=%d", apple);
-	DrawFormatString(0, 170, GetColor(255, 255, 255), "‹Ê=%d", Ru);
+	DrawFormatString(0, 170, GetColor(255, 255, 255), "‹Ê=%d", mTama);
 	
 
 }

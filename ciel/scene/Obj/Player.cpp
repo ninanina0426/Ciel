@@ -34,12 +34,13 @@ bool Player::init(PlayerID playerid)
 	mSizeOffset.y_ = 0;
 	mMoveSpeed = 3;
 	mMoveDir = DIR_DOWN;
-	mSize.x_ = 32;
-	mSize.y_ = 32;
+	mSize.x_ = 48;
+	mSize.y_ = 48;
 	mSizeOffset.x_ = mSize.x_ / 2;
 	mSizeOffset.y_ = mSize.y_ / 2;
 	flg = false;
 	moveFlg = false;
+	mFlg = false;
 
 	Stamina_ = STAMINA;
 	Energy_ = ENERGY;
@@ -64,7 +65,7 @@ bool Player::init(PlayerID playerid)
 
 	//グラフィックの読み込み
 
-	if (LoadDivGraph("image/char/106.png", 32, 4, 8, 48, 48, &mImage1[0]) == -1)
+	if (LoadDivGraph("image/char/110.png", 48, 4, 12, 48, 48, &mImage1[0]) == -1)
 	{
 		return false;
 	}
@@ -120,7 +121,7 @@ Vector2 Player::Update(int chipId)
 	key_.Update();
 
 	//釣り
-	if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299) || mChipId == 896)
+	if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299) )
 	{
 		if (key_.getKeyDown(KEY_INPUT_F))
 		{
@@ -138,16 +139,37 @@ Vector2 Player::Update(int chipId)
 			}
 		}
 	}
-
-	if ((mAnmCnt / 10 > 30)&& (moveAnmCnt==true))
+	//浅瀬
+	if ((mChipId == 896))
 	{
-		if (moveFlg == false)
+		if (key_.getKeyDown(KEY_INPUT_F))
+		{
+			if (i == 0)
+			{
+				i = 2;
+				mFlg = true;
+				PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
+			}
+			else if (i == 2)
+			{
+				i = 0;
+				mFlg = false;
+				DeleteSoundMem(oHandle);
+				oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
+			}
+		}
+	}
+
+	if ((mAnmCnt / 10 > 30) && (moveAnmCnt == true))
+	{
+		if ((moveFlg == false) && (mFlg == false))
 		{
 			//プレイヤーの操作
 			if (key_.getKeyDownHold(KEY_INPUT_DOWN))
 			{
 				keyDir = DIR_DOWN;
 				num = 6;
+
 			}
 			if (key_.getKeyDownHold(KEY_INPUT_UP))
 			{
@@ -164,6 +186,7 @@ Vector2 Player::Update(int chipId)
 				keyDir = DIR_RIGHT;
 				num = 5;
 			}
+			
 
 			//走る
 			if (key_.getKeyDownHold(KEY_INPUT_LSHIFT) && Stamina_ != 0 && keyDir != DIR::DIR_MAX)
@@ -196,14 +219,15 @@ Vector2 Player::Update(int chipId)
 					mMoveSpeed = 3;
 				}
 			}
-
+		
 			if (keyDir != DIR_MAX)
 			{
 				mMoveDir = keyDir;
 
 				//プレイヤーのコピー
-				if (keyDir == DIR_UP)
+				if (mMoveDir == DIR_UP)
 				{
+					
 					copyPos.y_ -= mMoveSpeed;
 					if (copyPos.y_ < 0)
 					{
@@ -211,10 +235,11 @@ Vector2 Player::Update(int chipId)
 					}
 
 				}
-				if (keyDir == DIR_DOWN)
+				if (mMoveDir == DIR_DOWN)
 				{
 					copyPos.y_ += mMoveSpeed;
 
+				
 					if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
 					{
 						if (copyPos.y_ > 1600)
@@ -230,10 +255,9 @@ Vector2 Player::Update(int chipId)
 						}
 					}
 				}
-				if (keyDir == DIR_RIGHT)
+				if (mMoveDir == DIR_RIGHT)
 				{
 					copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
-
 
 					if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
 					{
@@ -253,15 +277,14 @@ Vector2 Player::Update(int chipId)
 					}
 				}
 
-				if (keyDir == DIR_LEFT)
+				if (mMoveDir == DIR_LEFT)
 				{
 					copyPos.x_ -= mMoveSpeed;
+
 					if (copyPos.x_ < 0)
 					{
 						copyPos.x_ = 0;
 					}
-
-
 
 				}
 
@@ -303,6 +326,8 @@ Vector2 Player::Update(int chipId)
 
 
 		}
+
+		
 	}
 
 	//ライムに乗る
@@ -445,6 +470,10 @@ void Player::Draw(Vector2 offset)
 			{
 				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 			}
+			else if (i == 2)
+			{
+				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[(4+num) * DIR_MAX + ((mAnmCnt / 10) % 4)], true);
+			}
 			
 		}
 		
@@ -510,17 +539,11 @@ void Player::Draw(Vector2 offset)
 		
 	}
 
-	
-	
-	
-
 	DrawFormatString(0, 0, GetColor(0,0,255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mgPos.x_, mgPos.y_);
 	//DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
 	/*DrawFormatString(0, 30, 0xff0000, "chipID:%d", mChiID);*/
 	//DrawFormatString(0, 300, 0xff0000, "スタミナ%d", Stamina_);
-
-	
 
 }
 
