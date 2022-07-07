@@ -42,9 +42,9 @@ private:
 	/*GameScene* mParent;*/
 	/*GameScene* mParent;*/
 
-	int mImage1[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
-	int mImage2[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
-	int mImage3[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage1[48];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage2[48];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage3[48];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 
 	int mImageC[27];		//
 	int mImageI[27];		//
@@ -68,7 +68,10 @@ private:
 
 	bool moveAnmCnt;
 
+	//’Ş‚è
 	bool moveFlg;
+	//ó£
+	bool mFlg;
 
 	int mChipId;
 	int mChiID;
