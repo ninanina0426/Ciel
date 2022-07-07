@@ -498,7 +498,9 @@ bool SnowMap::CheckMapChip(Vector2 pos)
 			case 927:
 			case 703:
 			case 748:
+			case 859:
 
+				
 			flg = false;
 			break;
 			default:

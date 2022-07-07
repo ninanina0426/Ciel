@@ -46,8 +46,10 @@ bool Aitem::init()
 	mTama = 5;
 	mKinomi = 5;
 	
-	mAitem = 2;
+	sAitem = 2;
 
+
+	mAitem = 0;
 	//お金
 	Ru = 500;
 
@@ -64,7 +66,11 @@ bool Aitem::init()
 	mTea=0;
 
 	apple = 0;
+	rantan = 0;
+
 	
+	
+	Flg = true;
 
 	mNum[0] ={0,0}; //posx
 
@@ -77,7 +83,7 @@ bool Aitem::init()
 	mNum[5] = { 553,565 };
 	mNum[6] = { 1585,1070 };
 	mNum[7] = { 465,500 };
-	mNum[8] = {};
+	mNum[8] = {1457,653};
 
 	//木の実
 	mNum[9] = { 2536,1635 };
@@ -85,6 +91,9 @@ bool Aitem::init()
 	mNum[11] = { 155,930 };
 	mNum[12] = { 560,160 };
 	mNum[13] = { 2300,120 };
+
+	//ランタン
+	mNum[14] = { 1420,2144 };
 
 	i = 0;
 
@@ -108,11 +117,10 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 
 	key_.Update();
 
-	
-
 	switch (mapID)
 	{
 	case MAP_ID::FOREST:
+		
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[9].y_ + 32 / 2) &&
 			(mPos.y_ + mNum[9].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[9].x_ + 32 / 2) &&
@@ -126,7 +134,8 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mNum[9] = mNum[0];
 					mKinomi1 = true;
 					mNumKinomi += 1;
-
+					mGet = true;
+					mAitem = 1;
 				}
 
 			}
@@ -144,6 +153,8 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mNum[10] = mNum[0];
 					mKinomi2 = true;
 					mNumKinomi += 1;
+					mGet = true;
+					mAitem = 1;
 				}
 
 			}
@@ -161,6 +172,8 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mNum[11] = mNum[0];
 					mKinomi3 = true;
 					mNumKinomi += 1;
+					mGet = true;
+					mAitem = 1;
 				}
 
 			}
@@ -179,6 +192,8 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mNum[12] = mNum[0];
 					mKinomi4 = true;
 					mNumKinomi += 1;
+					mGet = true;
+					mAitem = 1;
 				}
 
 			}
@@ -196,17 +211,19 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mNum[13] = mNum[0];
 					mKinomi5 = true;
 					mNumKinomi += 1;
+					mGet = true;
+					mAitem = 1;
 				}
 
 			}
 		}
-		/*if (key_.getKeyDown(KEY_INPUT_F))
+		if (key_.getKeyDown(KEY_INPUT_F))
 		{
 		}
 		else
 		{
 			mGet = false;
-		}*/
+		}
 		break;
 	case MAP_ID::WA:
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[7].y_ + 32 / 2) &&
@@ -221,19 +238,20 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mTama -= 1;
 					mNum[7] = mNum[0];
 					mTama4 = true;
-
+					mGet = true;
+					mAitem = 2;
 				}
 
 			}
 		}
 
-		/*if (key_.getKeyDown(KEY_INPUT_F))
+		if (key_.getKeyDown(KEY_INPUT_F))
 		{
 		}
 		else
 		{
 			mGet = false;
-		}*/
+		}
 		break;
 	case MAP_ID::WASHOP:
 		
@@ -257,7 +275,8 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mTama -= 1;
 					mNum[6] = mNum[0];
 					mTama3 = true;
-
+					mGet = true;
+					mAitem = 2;
 				}
 
 			}
@@ -272,6 +291,20 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 		}
 		break;
 	case MAP_ID::FORESTIN:
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[14].y_ + 32 / 2) &&
+			(mPos.y_ + mNum[14].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[14].x_ + 32 / 2) &&
+			(mPos.x_ + mNum[14].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if (key_.getKeyDown(KEY_INPUT_F))
+			{
+				rantan += 1;
+				mNum[14] = mNum[0];
+				mRantan = true;
+				mGet = true;
+				mAitem = 4;
+			}
+		}
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[4].y_ + 32 / 2) &&
 			(mPos.y_ + mNum[4].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[4].x_  +32/ 2) &&
@@ -284,7 +317,8 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mTama -= 1;
 					mNum[4] = mNum[0];
 					mTama1 = true;
-					
+					mGet = true;
+					mAitem = 2;
 				}
 
 			}
@@ -298,7 +332,31 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 		}
 		break;
 	case MAP_ID::TEMPLE:
-		
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[8].y_ + 32 / 2) &&
+			(mPos.y_ + mNum[8].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[8].x_ + 32 / 2) &&
+			(mPos.x_ + mNum[8].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if ((mTama != 0) && (mTama <= 5))
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mTama -= 1;
+					mNum[8] = mNum[0];
+					mTama1 = true;
+					mGet = true;
+					mAitem = 2;
+				}
+
+			}
+		}
+		if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}
 		break;
 	case MAP_ID::TEMPLEIN:
 		
@@ -309,15 +367,16 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[2].x_  +32/ 2) &&
 			(mPos.x_ + mNum[2].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mAitem != 0) && (mAitem <= 2))
+			if ((sAitem != 0) && (sAitem <= 2))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
 					apple += 1;
-					mAitem -= 1;
+					sAitem -= 1;
 					mNum[2] = mNum[0];
 					i = 2;
 					mGet = true;
+					mAitem = 3;
 				}
 			}
 		}
@@ -327,15 +386,16 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[3].x_ + 32 / 2) &&
 			(mPos.x_ + mNum[3].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mAitem != 0) && (mAitem <= 2))
+			if ((sAitem != 0) && (sAitem <= 2))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
 					apple += 1;
-					mAitem -= 1;
+					sAitem -= 1;
 					mNum[3] = mNum[0];
 					i = 3;
 					mGet = true;
+					mAitem = 3;
 				}
 			}
 		}
@@ -352,6 +412,8 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mTama -= 1;
 					mNum[5] = mNum[0];
 					mTama2 = true;
+					mGet = true;
+					mAitem = 2;
 				}
 
 			}
@@ -380,7 +442,6 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 		break;
 	}
 
-
 	ItemAnimcount++;
 
 	return mPos;
@@ -394,6 +455,7 @@ void Aitem::Draw(Vector2 mMapoffset)
 	{
 
 	case MAP_ID::FOREST:
+		
 		//木の実１
 		if (mKinomi != 0)
 		{
@@ -477,6 +539,14 @@ void Aitem::Draw(Vector2 mMapoffset)
 		}
 		break;
 	case MAP_ID::FORESTIN:
+		if (rantan == 0)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ + mNum[14].x_ - mMapoffset.x_, mPos.y_ + mNum[14].y_ - mMapoffset.y_, mImage[1][mAnimCnt], true);
+			}
+		}
 		//キーアイテム
 		if (mTama != 0)
 		{
@@ -491,6 +561,14 @@ void Aitem::Draw(Vector2 mMapoffset)
 
 		break;
 	case MAP_ID::TEMPLEIN:
+		if (mTama != 0)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ + mNum[13].x_ - mMapoffset.x_, mPos.y_ + mNum[8].y_ - mMapoffset.y_, mImage[1][mAnimCnt], true);
+			}
+		}
 
 		break;
 	case MAP_ID::SWEETS:
@@ -583,27 +661,38 @@ int Aitem::wMoney(int ru, bool flg)
 	return Ru;
 }
 
+int Aitem::qMoney(int ru, bool flg)
+{
+	int qRu = Ru;
+
+	if (Flg == true)
+	{
+		if (flg == true)
+		{
+			Ru = qRu + ru;
+			Flg = false;
+		}
+	}
+	if (Flg == false)
+	{
+		if (flg == false)
+		{
+			Flg = true;
+		}
+	}
+	
+	return Ru;
+}
+
+
+
 int Aitem::HaveMoney()
 {
-	/*Ru = ssRu + wwRu;*/
-
 	return Ru;
 }
 
 void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st)
 {
-	/*int tApple=mApple;
-	int tKinominoKusiyaki=mKinominoKusiyaki;
-	int tFruitDrink=mFruitDrink;
-	int tFishingRodS=mFishingRodS;
-	int tRagBag=mRagBag;
-	int tPickaxe=mPickaxe;
-	int tHaoriN=mHaoriN;
-	int tRantanN=mRantanN;
-	int tNumKinomi=mNumKinomi;
-	int tRice=mRice;
-	int tDango=mDango;
-	int tTea=mTea;*/
 
 	mNumKinomi=k+sk;
 	mApple = apple + a + sa;
@@ -613,12 +702,11 @@ void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int
 	mRagBag=rb+srb;
 	mPickaxe=p+sp;
 	mHaoriN=h+sh;
-	mRantanN=r+sr;
+	mRantanN=r+sr+rantan;
 	mRice = ri+sri;
 	mDango = d+sd;
 	mTea = t+st;
 
-	/*mApple = apple+a + sa;*/
 }
 
 int Aitem::Num()
@@ -699,6 +787,11 @@ int Aitem::TeaNum(void)
 int Aitem::GetTam(void)
 {
 	return mTama;
+}
+
+int Aitem::SetAitem(void)
+{
+	return mAitem;
 }
 
 bool Aitem::GetAitem()

@@ -17,6 +17,8 @@ bool FadeInOut::UpdataTransition(void)
 	DrawOwnScn();
 	count_ += 5;
 
+
+
 	return (count_ > 510);
 }
 

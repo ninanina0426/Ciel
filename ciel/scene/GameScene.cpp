@@ -9,8 +9,7 @@
 #include "../stage/StageMng.h"
 #include "EventScene.h"
 #include "Obj/Quest.h"
-
-
+#include"Obj/Masuku.h"
 
 
 GameScene::GameScene(PlayerID playerID)
@@ -26,7 +25,6 @@ GameScene::~GameScene()
 
 
 //アイテムのフラグ ---------------------------
-
 bool GameScene::IsTama1(void)
 {
     return mAitem->mTama1;
@@ -99,12 +97,12 @@ bool GameScene::mEnd()
 
 uniquBaseScn GameScene::Update(uniquBaseScn own)
 {
-   /* if (CheckHitKey(KEY_INPUT_SPACE))
-    {
-        return std::make_unique<GameScene>(std::move(own));
-    }*/
+    /* if (CheckHitKey(KEY_INPUT_SPACE))
+     {
+         return std::make_unique<GameScene>(std::move(own));
+     }*/
 
-    //ポーズ機能
+     //ポーズ機能
     key_.Update();
     if (mPose == false)
     {
@@ -118,12 +116,12 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         if (key_.getKeyDown(KEY_INPUT_ESCAPE))
         {
             mPose = false;
-           /* mMenu.init(this);*/
+            /* mMenu.init(this);*/
         }
     }
     if (key_.getKeyDown(KEY_INPUT_G))
     {
-        return std::make_unique<EventScene>(std::move(own),mPlayer.plID_, mAitem->GetTam());
+        return std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam());
     }
 
     //時間
@@ -135,13 +133,13 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     //一日の流れ
     int min = 60;    //一分間のフレーム数
     int Day = min * 5;      //一日の秒数
-
     //yuugata
     if (delta % Day == 120)
     {
         AMflg_ = false;
         PMflg_ = true;
         count_ = 0;
+        skycnt_ = 0;
     }
     //yoru
     if (!AMflg_ && PMflg_ && delta % Day == 180)
@@ -149,6 +147,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         Nightflg_ = true;
         PMflg_ = false;
         count_ = 0;
+        skycnt_ = 0;
     }
     if (delta % Day == 0)
     {
@@ -156,6 +155,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         PMflg_ = false;
         Nightflg_ = false;
         count_ = 0;
+        skycnt_ = 0;
     }
     if (count_ <= 60)
     {
@@ -163,12 +163,12 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     }
 
     skycnt_++;
-    
+
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
-    mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam());
+    mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg());
 
-    if ((mShop.SPose() == false)&&(mWshop.SPose() == false))
+    if ((mShop.SPose() == false) && (mWshop.SPose() == false))
     {
         mPlayer.Update(lpMapMng.GetChipId());
     }
@@ -190,51 +190,59 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum());
     mWshop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum());
-   
+
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
      /*mMenu.Update();*/
-     if (mPose == true)
-     {
-         mMenu.Update();
-     }
+    if (mPose == true)
+    {
+        mMenu.Update();
+    }
 
-     bool AitemGet = mAitem->GetAitem();
-     mShop.SsetAitem(AitemGet);
-     mWshop.SsetAitem(AitemGet);
+    bool AitemGet = mAitem->GetAitem();
+    mShop.SsetAitem(AitemGet);
+    mWshop.SsetAitem(AitemGet);
 
-     mShop.Update(mChat->GetNum());
+    mShop.Update(mChat->GetNum());
 
-     mWshop.Update(mChat->GetNum());
+    mWshop.Update(mChat->GetNum());
 
-     //mMenu.SetMenu(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori());
-
-    
-     mShop.AMoney(mAitem->Money(mShop.SetMoney(),mShop.GetMoney()));
+    //mMenu.SetMenu(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori());
 
 
-     mWshop.AMoney(mAitem->wMoney(mWshop.SetMoney(),mWshop.GetMoney()));
+    mShop.AMoney(mAitem->Money(mShop.SetMoney(), mShop.GetMoney()));
 
-     int HaveMoney = mAitem->HaveMoney();
 
-     mShop.sHaveMoney(HaveMoney);
+    mWshop.AMoney(mAitem->wMoney(mWshop.SetMoney(), mWshop.GetMoney()));
 
-     mWshop.sHaveMoney(HaveMoney);
+    auto r = QuestIns.GetRu();
+    auto q = QuestIns.CompFlg();
 
-     auto r=QuestIns.GetRu();
+    mAitem->qMoney(r, q);
 
-      //フェードイン
-     if (lpMapMng.fadeinFlg_)
-     {
-         if (fadein_.UpdataTrangetion())
-         {
-             lpMapMng.fadeinFlg_ = false;
-         }
-     }
+    int HaveMoney = mAitem->HaveMoney();
+
+    mShop.sHaveMoney(HaveMoney);
+
+    mWshop.sHaveMoney(HaveMoney);
+
+
+
+    //フェードイン
+    if (lpMapMng.fadeinFlg_)
+    {
+        if (fadein_.UpdataTrangetion())
+        {
+            lpMapMng.fadeinFlg_ = false;
+        }
+    }
     mBgm->Update(mMenu.OpBgm());
 
-    ui_.Upadate(mPlayer.GetStamina());
+    ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetPos(),mPlayer.GetSiz());
+
+    mMasuku->Update(PlayerPos, mAitem->mRantanNum());
+
     return std::move(own);
 }
 
@@ -243,6 +251,11 @@ void GameScene::DrawOwnScn()
     SetDrawScreen(sceneScrID_);
     ClsDrawScreen();
     auto mapID = lpMapMng.GetMapId();
+
+    auto elTime = nowTime_ - oldTime_;
+    auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
+    int delta = static_cast<int>(msec / 1000000.0); //秒に変換  
+   // delta = delta * 20;
     switch (mapID)
     {
     case MAP_ID::FOREST:
@@ -289,24 +302,29 @@ void GameScene::DrawOwnScn()
     default:
         break;
     }
+
     if (skyflg_&& AMflg_)
     {
+        DrawGraph(0, 0, you_, true);
         SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_);
-        DrawBox(0, 0, 1080, 609, 0x4169e1, true);
+        DrawGraph(0, 0, asa_, true);
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     }
     if (skyflg_ && PMflg_)
     {
-        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_-255);
-        DrawBox(0, 0, 1080, 609, 0xff6347, true);
+        DrawGraph(0, 0, asa_, true);
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_);
+        DrawGraph(0, 0, yuu_, true);
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     }
     if (skyflg_ && Nightflg_)
     {
-        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_-255);
-        DrawBox(0, 0, 1080, 609, 0x191970, true);
+        DrawGraph(0, 0, yuu_, true);
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, skycnt_);
+        DrawGraph(0, 0, you_, true);
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     }
+    
     
 
     //マップ
@@ -324,12 +342,9 @@ void GameScene::DrawOwnScn()
      //時間帯
      TimeManeger();
 
-     //デバッグ用
-     auto elTime = nowTime_ - oldTime_;
-     auto msec = std::chrono::duration_cast<std::chrono::microseconds>(elTime).count();
-     int delta = static_cast<int>(msec / 1000000.0); //秒に変換  
+    
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
-
+    
     
     
 
@@ -347,7 +362,11 @@ void GameScene::DrawOwnScn()
 
      mWshop.Draw();
     
+     mMasuku->Draw(mMapOffset);
+
      ui_.Draw();
+
+     
 
      //フェードイン
      if (lpMapMng.fadeinFlg_)
@@ -372,6 +391,10 @@ bool GameScene::Init(void)
     //時間系初期化
     evening_ = LoadGraph("./image/yukoku.png");
     night_ = LoadGraph("./image/yoru.png");
+    asa_ = LoadGraph("./image/move/朝.png");
+    yuu_ = LoadGraph("./image/move/夕.png");
+    you_ = LoadGraph("./image/move/夜.png");
+
     nowTime_ = std::chrono::system_clock::now();
     oldTime_ = nowTime_;
     AMflg_ = true;
@@ -387,6 +410,8 @@ bool GameScene::Init(void)
     mChat = new Chat();
 
     mLayer = new Layer();
+
+    mMasuku = new Masuku();
 
    	return true;
 

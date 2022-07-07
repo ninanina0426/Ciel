@@ -9,13 +9,13 @@
 #include "../stage/stage.h"
 #include "../stage/transitionStage/FadeInStage.h"
 #include "Obj/UI.h"
-
 class SceneMng;
 class Aitem;
 class BGM;
 class Npc;
 class Chat;
 class Layer;
+class Masuku;
 
 class GameScene : public BaseScene
 {
@@ -89,6 +89,9 @@ private:
     int count_;
     int night_;
     int evening_;
+    int asa_;
+    int yuu_;
+    int you_;
     std::chrono::system_clock::time_point nowTime_;
     std::chrono::system_clock::time_point oldTime_;
 
@@ -104,5 +107,7 @@ private:
     
 
     UI ui_;
+
+    Masuku* mMasuku;
 };
 

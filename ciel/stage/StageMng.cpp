@@ -23,6 +23,7 @@ bool StageMng::Init()
 	mMapID = MAP_ID::TEMPLE;
 	fl_ = false;
 	aitem = 0;
+	mflg = false;
 	mOffset = mPlayer.GetPos()-Vector2{540,0};
 	
     return true;
@@ -47,11 +48,13 @@ void StageMng::Draw()
 
 
 
-Vector2 StageMng::Update(Vector2 mPlayerset, int ai)
+Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg)
 {
 	mMapOldID = mMapID;
 
 	aitem = ai;
+
+	mflg = flg;
 
 	movePos = mPlayerset - mOffset; //playerのPos
 
@@ -229,8 +232,10 @@ Vector2 StageMng::Update(Vector2 mPlayerset, int ai)
 	}
 	if (CheckHitKey(KEY_INPUT_D))
 	{
+
 		stage_ = std::move(std::make_unique<SnowMap>());
 		mMapID = MAP_ID::SNOW;
+
 	}
 	stage_->Update(mOffset);
 
@@ -338,7 +343,7 @@ bool StageMng::GetEvent(Vector2 pos)
 	//FORESTINからFORESTへ
 	if (lpMapMng.mMapID == MAP_ID::FORESTIN)
 	{
-		if (pos.y_>870&& mTchipId==337)
+		if (pos.y_>870&&pos.y_<895&& mTchipId==337)
 		{
 			mMapChange = true;
 			mNextPos = { 1455,240 };
@@ -346,8 +351,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			mMapID = MAP_ID::FOREST;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<ForestMap>());
-
-
 		}
 		if (chipID ==2520)
 		{
@@ -371,17 +374,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<ForestMap>());
 		}
-		if (chipID == 2521)
-		{
-			mMapChange = true;
-			//マップを切り替えることになった
-			mNextPos = { 1584,1720 };
-			mDir = DIR_DOWN;
-			mOffset = mNextPos - Vector2{ 540,300 };
-			mMapID = MAP_ID::FOREST;
-			mOffset = mNextPos - Vector2{ 540,300 };
-			stage_ = std::move(std::make_unique<ForestMap>());
-		}
+		
 		if (chipID == 137)
 		{
 			mMapChange = true;
@@ -442,6 +435,7 @@ bool StageMng::GetEvent(Vector2 pos)
 	}	
 	if (lpMapMng.mMapID == MAP_ID::CAVE)
 	{
+		
 		//CAVEからCAVESHOPへ
 		if (chipID == 103)
 		{
@@ -453,7 +447,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			stage_ = std::move(std::make_unique<CaveShop>());
 
 		}
-
+		
 		//CAVEからDARKTEMPLEへ
 		if (chipID == 105)
 		{
@@ -694,6 +688,7 @@ bool StageMng::GetEvent(Vector2 pos)
 		}
 	}
 
+
 	//雪から雪の洞窟へ
 	if (lpMapMng.mMapID == MAP_ID::SNOW)
 	{
@@ -720,7 +715,7 @@ bool StageMng::GetEvent(Vector2 pos)
 
 	}
 
-	//雪から雪の洞窟へ
+	//雪の洞窟から雪へ
 	if (lpMapMng.mMapID == MAP_ID::SNOWCAVE)
 	{
 		if (chipID == 22 && 1900 < pos.x_)
@@ -742,8 +737,9 @@ bool StageMng::GetEvent(Vector2 pos)
 			stage_ = std::move(std::make_unique<SnowMap>());
 			mMapID = MAP_ID::SNOW;
 		}
-	}
 
+	}
+	
 	return mMapChange;
 }
 
@@ -768,6 +764,7 @@ bool StageMng::GetMapChange(Vector2 pos)
 					if (key_.getKeyDown(KEY_INPUT_F))
 					{
 						opendir_ = false;
+						qeopd_ = true;
 					}
 				}
 				if (opendir_)
@@ -776,6 +773,8 @@ bool StageMng::GetMapChange(Vector2 pos)
 					DrawBox(0, 250, 1080, 400, 0x000000, true);
 					SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 					DrawString(300, 280, "汝　願ひかなふるなら　言ふにしたがいて　くすしきたま　たいまつる\n \n　　　　　　　　こなたかなたに　それ　散りぼふ\n　\n　　　　　　　　　　　汝　たま　刈りつめ　", 0xffffff);
+				
+					
 				}
 			}
 			else
@@ -898,11 +897,11 @@ bool StageMng::GetMapChange(Vector2 pos)
 				if (fadein_.GetCnt() > 255)
 				{
 					mMapChange = true;
-					mNextPos = { 1600, 3050 };
-					mDir = DIR_UP;
-					mMapID = MAP_ID::CAVE;
+					mNextPos = { 400, 2990 };
+					mDir = DIR_RIGHT;
+					mMapID = MAP_ID::SNOW;
 					mOffset = mNextPos - Vector2{ 540,300 };
-					stage_ = std::move(std::make_unique<CaveMap>());
+					stage_ = std::move(std::make_unique<SnowMap>());
 				}
 			}
 		}
@@ -936,6 +935,17 @@ bool StageMng::GetMapChange(Vector2 pos)
 	}
 	if (lpMapMng.mMapID == MAP_ID::CAVE)
 	{
+		//ランタンが無くて進めない
+		if (mflg == true)
+		{
+			mMapChange = true;
+			mNextPos = { 1645,715 };
+			mDir = DIR_DOWN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			mMapID = MAP_ID::TEMPLE;
+			stage_ = std::move(std::make_unique<templeMap>());
+		}
+
 		if (pos.y_ > 3160 )
 		{
 			if (key_.getKeyDown(KEY_INPUT_F))

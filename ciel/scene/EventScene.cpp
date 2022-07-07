@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include "EventScene.h"
+#include "Transition/FadeInOut.h"
 
 EventScene::EventScene(uniquBaseScn gameScene, PlayerID playerID, int aitem)
 {
@@ -22,7 +23,7 @@ uniquBaseScn EventScene::Update(uniquBaseScn own)
     //フラグがtrueになったらゲームシーンに返す
     if (flg_)
     {
-        return std::move(gameScene_);
+        return std::make_unique<FadeInOut>(std::move(own), std::move(gameScene_));
     }
     DrawOwnScn();
     //動画が終わったら
