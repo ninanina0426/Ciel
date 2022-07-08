@@ -48,6 +48,7 @@ private:
 	int mImage3[48];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 
 	int mImageTI[24];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImageTS[24];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 
 	int mImageC[27];		//
 	int mImageI[27];		//
