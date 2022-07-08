@@ -46,6 +46,8 @@ private:
 	int mImage2[48];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	int mImage3[48];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 
+	int mImageTI[24];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+
 	int mImageC[27];		//
 	int mImageI[27];		//
 	int mImageS[27];		//
@@ -66,12 +68,17 @@ private:
 	int num;
 	int move;
 
+	int tCnt;
+	int ttCnt;
+
 	bool moveAnmCnt;
 
 	//’Ş‚è
 	bool moveFlg;
 	//ó£
 	bool mFlg;
+	//‚Â‚é‚Í‚µ
+	bool tFlg;
 
 	int mChipId;
 	int mChiID;
@@ -88,6 +95,7 @@ private:
 	int tHandle;
 	int fHandle;
 	int oHandle;
+	int ttHandle;
 
 	//ƒMƒ~ƒbƒN
 	Vector2 mgPos;

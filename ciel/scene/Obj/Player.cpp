@@ -41,6 +41,7 @@ bool Player::init(PlayerID playerid)
 	flg = false;
 	moveFlg = false;
 	mFlg = false;
+	tFlg = false;
 
 	Stamina_ = STAMINA;
 	Energy_ = ENERGY;
@@ -50,6 +51,9 @@ bool Player::init(PlayerID playerid)
 
 	mAnmCnt = 0;
 	moveAnmCnt = true;
+
+	tCnt = 0;
+	ttCnt = 60;
 
 	i = 0;
 
@@ -89,6 +93,11 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
+	if (LoadDivGraph("image/char/10.png", 24, 6, 4, 48, 48, &mImageTI[0]) == -1)
+	{
+		return false;
+	}
+
 
 	//会話
 	mImageChat[1] = LoadGraph("image/talk/c1.png",true);
@@ -103,6 +112,7 @@ bool Player::init(PlayerID playerid)
 	tHandle = LoadSoundMem("image/Sound/釣り.ogg");
 	fHandle = LoadSoundMem("image/Sound/パパッ.ogg");
 	oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
+	ttHandle = LoadSoundMem("image/Sound/つるはし1.ogg");
 	
 	return true;
 
@@ -159,10 +169,38 @@ Vector2 Player::Update(int chipId)
 			}
 		}
 	}
+	//つるはし
+	if (key_.getKeyDown(KEY_INPUT_B))
+	{
+		if (i == 0)
+		{
+			i = 3;
+			tFlg = true;
+			tCnt = 60;
+			ttCnt = 0;
+		}
+	}
+	if (tFlg == true)
+	{
+		tCnt--;
+		if (tCnt == 10)
+		{
+			PlaySoundMem(ttHandle, DX_PLAYTYPE_BACK);
+		}
+		if (tCnt < 1)
+		{
+			i = 0;
+			tFlg = false;
+			tCnt = 60;
+			ttCnt = 0;
+		}
+
+	}
+	
 
 	if ((mAnmCnt / 10 > 30) && (moveAnmCnt == true))
 	{
-		if ((moveFlg == false) && (mFlg == false))
+		if ((moveFlg == false) && (mFlg == false) && (tFlg == false))
 		{
 			//プレイヤーの操作
 			if (key_.getKeyDownHold(KEY_INPUT_DOWN))
@@ -326,7 +364,7 @@ Vector2 Player::Update(int chipId)
 
 
 		}
-
+		
 		
 	}
 
@@ -415,6 +453,19 @@ Vector2 Player::Update(int chipId)
 		}
 		
 	}
+
+	
+	
+
+	ttCnt++;
+	/*if (ttCnt==0)
+	{*/
+		
+		/*if (ttCnt >= 60)
+		{
+			ttCnt = 60;
+		}*/
+	/*}*/
 	
 	return mPos;
 
@@ -470,6 +521,10 @@ void Player::Draw(Vector2 offset)
 			else if (i == 2)
 			{
 				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[(4+num) * DIR_MAX + ((mAnmCnt / 10) % 4)], true);
+			}
+			else if (i == 3)
+			{
+				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImageTI[mMoveDir * 6 + ((ttCnt / 10)/* % 6*/)], true);
 			}
 			
 		}
@@ -530,7 +585,7 @@ void Player::Draw(Vector2 offset)
 			}
 			else if (i == 1)
 			{
-				DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage3[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
+				DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage3[num * DIR_MAX + (ttCnt % 6)], true);
 			}
 		}
 		
