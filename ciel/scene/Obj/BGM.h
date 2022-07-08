@@ -32,7 +32,7 @@ public:
 
 	int SHandle;
 	/*int SHandle[15];*/
-	void Update(int num);
+	void Update(int num,bool evfl);
 	void Move(void);
 	bool Init(void);
 private:

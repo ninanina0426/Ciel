@@ -133,6 +133,7 @@ public:
 	int staminacnt_;
 
 	bool qflg_;
+	
 
 	PL_ST state_;
 	PlayerID plID_;

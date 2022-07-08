@@ -8,6 +8,12 @@ TransitionScene::TransitionScene(uniquBaseScn beforScene, uniquBaseScn nextScene
 	nextScene_ = std::move(nextScene);
 }
 
+TransitionScene::TransitionScene(shareBaseScn beforScene, uniquBaseScn nextScene)
+{
+	beforScene_S = std::move(beforScene);
+	nextScene_ = std::move(nextScene);
+}
+
 TransitionScene::~TransitionScene()
 {
 }

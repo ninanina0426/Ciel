@@ -5,11 +5,21 @@ FadeInOut::FadeInOut(uniquBaseScn beforScene, uniquBaseScn nextScene)
 	:TransitionScene(std::move(beforScene), std::move(nextScene))
 {
 	count_ = 0;
+	flg_ = false;
+	DrawOwnScn();
+}
+
+FadeInOut::FadeInOut(shareBaseScn beforScene, uniquBaseScn nextScene)
+	:TransitionScene(std::move(beforScene), std::move(nextScene))
+{
+	count_ = 0;
+	flg_ = true;
 	DrawOwnScn();
 }
 
 FadeInOut::~FadeInOut()
 {
+	
 }
 
 bool FadeInOut::UpdataTransition(void)
@@ -26,16 +36,33 @@ void FadeInOut::DrawOwnScn(void)
 {
 	SetDrawScreen(sceneScrID_);
 	ClsDrawScreen();
-	if (count_<256)
+	if (flg_)
 	{
-		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 - count_);
-		beforScene_->Draw();
+		if (count_ < 256)
+		{
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 - count_);
+			beforScene_S->Draw();
+		}
+		else
+		{
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, count_ - 255);
+			nextScene_->Draw();
+		}
 	}
 	else
 	{
-		SetDrawBlendMode(DX_BLENDMODE_ALPHA, count_-255);
-		nextScene_->Draw();
+		if (count_ < 256)
+		{
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 - count_);
+			beforScene_->Draw();
+		}
+		else
+		{
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, count_ - 255);
+			nextScene_->Draw();
+		}
 	}
+	
 
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }

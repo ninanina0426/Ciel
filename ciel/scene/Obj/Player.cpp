@@ -103,6 +103,7 @@ bool Player::init(PlayerID playerid)
 	mImageChat[1] = LoadGraph("image/talk/c1.png",true);
 	mImageChat[3] = LoadGraph("image/talk/i1.png",true);
 	mImageChat[2] = LoadGraph("image/talk/s1.png",true);
+	
 
 	//ギミック
 	mImageF= LoadGraph("image/ギミック/船.png", true);

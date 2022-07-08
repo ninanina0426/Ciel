@@ -45,5 +45,12 @@ private:
 	int animcnt_;
 	//ムービー系
 	int move1_;
+	int rany_;
+	int kemuri_[4][3];
+
+	//サウンド
+	bool shFlg_;
+	int rany;
+	int li_;
 };
 

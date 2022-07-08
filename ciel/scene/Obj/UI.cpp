@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include "UI.h"
+#include "../../stage/StageMng.h"
 
 UI::UI()
 {
@@ -10,10 +11,11 @@ UI::~UI()
 {
 }
 
-void UI::Upadate(int sta,Vector2 pos,Vector2 size)
+void UI::Upadate(int sta,Vector2 pos,Vector2 size, Vector2 offset)
 {
 	stamina = sta;
 	plPos_ = pos;
+	off_ = offset;
 
 	aitem_.Update(plPos_, size);
 
@@ -84,14 +86,17 @@ void UI::Draw(void)
 	{
 		DrawFormatString(5, 529, 0xffffff, "%sÇèEÇ¡ÇΩÅI", aitemname_.c_str());
 	}
-	
+	if (eveflg_ == true)
+	{
+		DrawGraph(plPos_.x_ - off_.x_ - 63, plPos_.y_ - off_.y_ - 80, mImageChat_, true);
+	}
 	DrawString(0, 200, "W:âŸéq\nA:êX\nS:ê_ìa\nD:ê·\nE:òa\nR:ì¥åA",0x000000,true);
 }
 
 void UI::Init()
 {
 	boxid = LoadGraph("./image/ui/aitembox.png");
-
+	mImageChat_=  LoadGraph("image/talk/s1.png", true);
 	aitemname_ = "ÉäÉìÉS";
 	updown_ = 0;
 	count_ = 0;

@@ -32,6 +32,7 @@ bool Aitem::init()
 	mTama3 = false;
 	mTama4 = false;
 	mTama5 = false;
+	mTama6 = false;
 
 	mKinomi1 = false;
 	mKinomi2 = false;
@@ -230,7 +231,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[7].x_ + 32 / 2) &&
 			(mPos.x_ + mNum[7].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mTama != 0) && (mTama <= 5))
+			if ((mTama != 0) && (mTama <= 6))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
@@ -267,7 +268,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[6].x_ + 32 / 2) &&
 			(mPos.x_ + mNum[6].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mTama != 0) && (mTama <= 5))
+			if ((mTama != 0) && (mTama <= 6))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
@@ -309,7 +310,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[4].x_  +32/ 2) &&
 			(mPos.x_ + mNum[4].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mTama != 0) && (mTama <= 5))
+			if ((mTama != 0) && (mTama <= 6))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
@@ -336,13 +337,13 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[8].x_ + 32 / 2) &&
 			(mPos.x_ + mNum[8].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mTama != 0) && (mTama <= 5))
+			if ((mTama != 0) && (mTama <= 6))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
 					mTama -= 1;
 					mNum[8] = mNum[0];
-					mTama1 = true;
+					mTama6 = true;
 					mGet = true;
 					mAitem = 2;
 				}
@@ -404,7 +405,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[5].x_ + 32 / 2) &&
 			(mPos.x_ + mNum[5].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mTama != 0) && (mTama <= 5))
+			if ((mTama != 0) && (mTama <= 6))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
