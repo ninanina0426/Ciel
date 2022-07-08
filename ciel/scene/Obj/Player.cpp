@@ -454,19 +454,8 @@ Vector2 Player::Update(int chipId)
 		
 	}
 
-	
-	
-
 	ttCnt++;
-	/*if (ttCnt==0)
-	{*/
-		
-		/*if (ttCnt >= 60)
-		{
-			ttCnt = 60;
-		}*/
-	/*}*/
-	
+
 	return mPos;
 
 }
