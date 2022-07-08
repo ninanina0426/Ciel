@@ -99,6 +99,10 @@ private:
     std::chrono::system_clock::time_point nowTime_;
     std::chrono::system_clock::time_point oldTime_;
 
+    void ColdState(void);
+    int detTime_;
+    int ice_;
+
     Chat* mChat;
 
     Keyboard key_;

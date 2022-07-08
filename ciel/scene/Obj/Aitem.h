@@ -43,7 +43,7 @@ public:
 	bool mKinomi4;
 	bool mKinomi5;
 
-	
+	bool Takara;
 
 	
 	bool mHaori;
@@ -117,6 +117,7 @@ private:
 	int mRice;
 	int mDango;
 	int mTea;
+	int mtakara;
 
 	int Ru;
 	int ssRu;

@@ -2,7 +2,7 @@
 #include "Player.h"
 #include"../../stage/StageMng.h"
 #include "Quest.h"
-
+#include "UI.h"
 
 
 
@@ -66,6 +66,7 @@ bool Player::init(PlayerID playerid)
 	mgSize.y_ = 96;
 	gFlg = false;
 
+	
 
 	//グラフィックの読み込み
 
@@ -119,7 +120,7 @@ bool Player::init(PlayerID playerid)
 
 }
 
-Vector2 Player::Update(int chipId)
+Vector2 Player::Update(int chipId,bool fl)
 {
 	keyDir = DIR_MAX;		//キー入力の方向
 	Vector2 copyPos = mPos;
@@ -129,336 +130,350 @@ Vector2 Player::Update(int chipId)
 	mChipId = chipId;
 	mChiID = lpMapMng.GetChipID();
 
-	key_.Update();
-
-	//釣り
-	if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299) )
-	{
-		if (key_.getKeyDown(KEY_INPUT_F))
-		{
-			if (i == 0)
-			{
-				i = 1;
-				moveFlg = true;
-				PlaySoundMem(tHandle, DX_PLAYTYPE_BACK);
-			}
-			else if (i == 1)
-			{
-				i = 0;
-				moveFlg = false;
-				
-			}
-		}
-	}
-	//浅瀬
-	if ((mChipId == 896))
-	{
-		if (key_.getKeyDown(KEY_INPUT_F))
-		{
-			if (i == 0)
-			{
-				i = 2;
-				mFlg = true;
-				PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
-			}
-			else if (i == 2)
-			{
-				i = 0;
-				mFlg = false;
-				DeleteSoundMem(oHandle);
-				oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
-			}
-		}
-	}
-	//つるはし
-	if (key_.getKeyDown(KEY_INPUT_B))
-	{
-		if (i == 0)
-		{
-			i = 3;
-			tFlg = true;
-			tCnt = 60;
-			ttCnt = 0;
-		}
-	}
-	if (tFlg == true)
-	{
-		tCnt--;
-		if (tCnt == 10)
-		{
-			PlaySoundMem(ttHandle, DX_PLAYTYPE_BACK);
-		}
-		if (tCnt < 1)
-		{
-			i = 0;
-			tFlg = false;
-			tCnt = 60;
-			ttCnt = 0;
-		}
-
-	}
 	
 
-	if ((mAnmCnt / 10 > 30) && (moveAnmCnt == true))
+	key_.Update();
+
+	if (!fl)
 	{
-		if ((moveFlg == false) && (mFlg == false) && (tFlg == false))
+
+		//釣り
+		if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
 		{
-			//プレイヤーの操作
-			if (key_.getKeyDownHold(KEY_INPUT_DOWN))
+			if (key_.getKeyDown(KEY_INPUT_F))
 			{
-				keyDir = DIR_DOWN;
-				num = 6;
+				if (i == 0)
+				{
+					i = 1;
+					moveFlg = true;
+					PlaySoundMem(tHandle, DX_PLAYTYPE_BACK);
+				}
+				else if (i == 1)
+				{
+					i = 0;
+					moveFlg = false;
 
+				}
 			}
-			if (key_.getKeyDownHold(KEY_INPUT_UP))
+		}
+		//浅瀬
+		if ((mChipId == 896))
+		{
+			if (key_.getKeyDown(KEY_INPUT_F))
 			{
-				keyDir = DIR_UP;
-				num = 4;
+				if (i == 0)
+				{
+					i = 2;
+					mFlg = true;
+					PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
+				}
+				else if (i == 2)
+				{
+					i = 0;
+					mFlg = false;
+					DeleteSoundMem(oHandle);
+					oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
+				}
 			}
-			if (key_.getKeyDownHold(KEY_INPUT_LEFT))
+		}
+		//つるはし
+		if (key_.getKeyDown(KEY_INPUT_B))
+		{
+			if (i == 0)
 			{
-				keyDir = DIR_LEFT;
-				num = 7;
+				i = 3;
+				tFlg = true;
+				tCnt = 60;
+				ttCnt = 0;
 			}
-			if (key_.getKeyDownHold(KEY_INPUT_RIGHT))
+		}
+		if (tFlg == true)
+		{
+			tCnt--;
+			if (tCnt == 10)
 			{
-				keyDir = DIR_RIGHT;
-				num = 5;
+				PlaySoundMem(ttHandle, DX_PLAYTYPE_BACK);
 			}
-			
+			if (tCnt < 1)
+			{
+				i = 0;
+				tFlg = false;
+				tCnt = 60;
+				ttCnt = 0;
+			}
 
-			//走る
-			if (key_.getKeyDownHold(KEY_INPUT_LSHIFT) && Stamina_ != 0 && keyDir != DIR::DIR_MAX)
+		}
+
+
+		if ((mAnmCnt / 10 > 30) && (moveAnmCnt == true))
+		{
+			if ((moveFlg == false) && (mFlg == false) && (tFlg == false))
 			{
-				Stamina_--;
-				mMoveSpeed = 5;
-			}
-			else
-			{
-				if (Stamina_ == 0)
+				//プレイヤーの操作
+				if (key_.getKeyDownHold(KEY_INPUT_DOWN))
 				{
-					staminaFlg_ = true;
+					keyDir = DIR_DOWN;
+					num = 6;
+
 				}
-				if (staminaFlg_)
+				if (key_.getKeyDownHold(KEY_INPUT_UP))
 				{
-					mMoveSpeed = 2;
-					staminacnt_++;
+					keyDir = DIR_UP;
+					num = 4;
 				}
-				if (staminacnt_ > 120)
+				if (key_.getKeyDownHold(KEY_INPUT_LEFT))
 				{
-					staminacnt_ = 0;
-					staminaFlg_ = false;
+					keyDir = DIR_LEFT;
+					num = 7;
 				}
-				if (!staminaFlg_)
+				if (key_.getKeyDownHold(KEY_INPUT_RIGHT))
 				{
-					if (Stamina_ != STAMINA)
+					keyDir = DIR_RIGHT;
+					num = 5;
+				}
+
+
+				//走る
+				if (key_.getKeyDownHold(KEY_INPUT_LSHIFT) && Stamina_ != 0 && keyDir != DIR::DIR_MAX)
+				{
+					Stamina_--;
+					mMoveSpeed = 5;
+				}
+				else
+				{
+					if (Stamina_ == 0)
 					{
-						Stamina_++;
+						staminaFlg_ = true;
 					}
-					mMoveSpeed = 3;
-				}
-			}
-		
-			if (keyDir != DIR_MAX)
-			{
-				mMoveDir = keyDir;
-
-				//プレイヤーのコピー
-				if (mMoveDir == DIR_UP)
-				{
-					
-					copyPos.y_ -= mMoveSpeed;
-					if (copyPos.y_ < 0)
+					if (staminaFlg_)
 					{
-						copyPos.y_ = 0;
+						mMoveSpeed = 2;
+						staminacnt_++;
 					}
-
-				}
-				if (mMoveDir == DIR_DOWN)
-				{
-					copyPos.y_ += mMoveSpeed;
-
-				
-					if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
+					if (staminacnt_ > 120)
 					{
-						if (copyPos.y_ > 1600)
+						staminacnt_ = 0;
+						staminaFlg_ = false;
+					}
+					if (!staminaFlg_)
+					{
+						if (Stamina_ != STAMINA)
 						{
-							copyPos.y_ = 1600;
+							Stamina_++;
+						}
+						mMoveSpeed = 3;
+					}
+				}
+
+				if (keyDir != DIR_MAX)
+				{
+					mMoveDir = keyDir;
+
+					//プレイヤーのコピー
+					if (mMoveDir == DIR_UP)
+					{
+
+						copyPos.y_ -= mMoveSpeed;
+						if (copyPos.y_ < 0)
+						{
+							copyPos.y_ = 0;
+						}
+
+					}
+					if (mMoveDir == DIR_DOWN)
+					{
+						copyPos.y_ += mMoveSpeed;
+
+
+						if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
+						{
+							if (copyPos.y_ > 1600)
+							{
+								copyPos.y_ = 1600;
+							}
+						}
+						else
+						{
+							if (copyPos.y_ > 3200)
+							{
+								copyPos.y_ = 3200;
+							}
 						}
 					}
-					else
+					if (mMoveDir == DIR_RIGHT)
 					{
-						if (copyPos.y_ > 3200)
-						{
-							copyPos.y_ = 3200;
-						}
-					}
-				}
-				if (mMoveDir == DIR_RIGHT)
-				{
-					copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
+						copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
 
-					if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
-					{
-						if (copyPos.x_ > 1600)
+						if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
 						{
-							copyPos.x_ = 1600;
-						}
-
-					}
-					else
-					{
-						if (copyPos.x_ > 3200)
-						{
-							copyPos.x_ = 3200;
+							if (copyPos.x_ > 1600)
+							{
+								copyPos.x_ = 1600;
+							}
 
 						}
+						else
+						{
+							if (copyPos.x_ > 3200)
+							{
+								copyPos.x_ = 3200;
+
+							}
+						}
 					}
-				}
 
-				if (mMoveDir == DIR_LEFT)
-				{
-					copyPos.x_ -= mMoveSpeed;
-
-					if (copyPos.x_ < 0)
+					if (mMoveDir == DIR_LEFT)
 					{
-						copyPos.x_ = 0;
+						copyPos.x_ -= mMoveSpeed;
+
+						if (copyPos.x_ < 0)
+						{
+							copyPos.x_ = 0;
+						}
+
 					}
 
+
+					//移動チップに当たっている時
+					if (lpMapMng.GetEvent(copyPos) == true)
+					{
+						//切り替え先のSetposをもらう
+						copyPos = lpMapMng.GetPos();
+						mMoveDir = lpMapMng.GetDir();
+						lpMapMng.mMapChange = false;
+
+					}
+					else if (lpMapMng.GetEvent(copyPos) == false)
+					{
+						lpMapMng.GetEvent(copyPos);
+					}
+
+
+
+					//当たり判定
+					if (lpMapMng.cheakMapChip(copyPos))
+					{
+						mPos = copyPos;
+					}
+
+					/*mDamyPos = copyPos;*/
+
 				}
-
-
-				//移動チップに当たっている時
-				if (lpMapMng.GetEvent(copyPos) == true)
+				if (lpMapMng.GetMapChange(copyPos) == true)
 				{
 					//切り替え先のSetposをもらう
 					copyPos = lpMapMng.GetPos();
 					mMoveDir = lpMapMng.GetDir();
 					lpMapMng.mMapChange = false;
 
-				}
-				else if (lpMapMng.GetEvent(copyPos) == false)
-				{
-					lpMapMng.GetEvent(copyPos);
-				}
-
-
-
-				//当たり判定
-				if (lpMapMng.cheakMapChip(copyPos))
-				{
 					mPos = copyPos;
 				}
 
-				/*mDamyPos = copyPos;*/
 
-			}
-			if (lpMapMng.GetMapChange(copyPos) == true)
-			{
-				//切り替え先のSetposをもらう
-				copyPos = lpMapMng.GetPos();
-				mMoveDir = lpMapMng.GetDir();
-				lpMapMng.mMapChange = false;
-
-				mPos = copyPos;
 			}
 
 
 		}
-		
-		
-	}
 
-	//ライムに乗る
-	if (mapID == MAP_ID::SWEETS)
-	{
-		if ((mPos.x_ < 580) && (mPos.x_ > 490) && (mPos.y_ > 285) && (mPos.y_ < 310))
+		//ライムに乗る
+		if (mapID == MAP_ID::SWEETS)
 		{
-			message_box();
+			if ((mPos.x_ < 580) && (mPos.x_ > 490) && (mPos.y_ > 285) && (mPos.y_ < 310))
+			{
+				message_box();
+			}
+			if (gFlg == true)
+			{
+				if (key_.getKeyDown(KEY_INPUT_LEFT))
+				{
+					PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
+				}
+				if (key_.getKeyDown(KEY_INPUT_RIGHT))
+				{
+					PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
+				}
+
+				mgPos.x_ = mPos.x_;
+				mgPos.y_ = 560;
+
+				if (mgPos.x_ < 403)
+				{
+					mgPos.x_ = 403;
+
+				}
+				else if (mgPos.x_ > 510)
+				{
+					mgPos.x_ = 510;
+
+				}
+			}
+
 		}
-		if (gFlg == true)
+		//ライム
+		if (mChiID == 4220 || mChiID == 4221 || mChiID == 4320 || mChiID == 4321)
 		{
-			if (key_.getKeyDown(KEY_INPUT_LEFT))
-			{
-				PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
-			}
-			if (key_.getKeyDown(KEY_INPUT_RIGHT))
-			{
-				PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
-			}
-
-			mgPos.x_ = mPos.x_;
-			mgPos.y_ = 560;
-
-			if (mgPos.x_ < 403)
-			{
-				mgPos.x_ = 403;
-
-			}
-			else if (mgPos.x_ > 510)
-			{
-				mgPos.x_ = 510;
-
-			}
+			gFlg = false;
+			DeleteSoundMem(oHandle);
+			oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
 		}
-		
-	}
-	//ライム
-	if (mChiID == 4220 || mChiID == 4221 || mChiID == 4320 || mChiID == 4321)
-	{
-		gFlg = false;
-		DeleteSoundMem(oHandle);
-		oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
-	}
-	
 
-	
-	//最初の倒れている時
-	if (mAnmCnt  == 150)
-	{
-		PlaySoundMem(sHandle, DX_PLAYTYPE_BACK);
-	}
 
-	if (mAnmCnt  == 270)
-	{
-		PlaySoundMem(fHandle, DX_PLAYTYPE_BACK);
-	}
 
-	if (mAnmCnt == 270)
-	{
-		mAnmCnt = 290;
-		moveAnmCnt = false;
-	}
-	if (moveAnmCnt == false)
-	{
-		if (key_.getKeyDown(KEY_INPUT_F))
+		//最初の倒れている時
+		if (mAnmCnt == 150)
 		{
-			moveAnmCnt = true;
-			qflg_ = true;
+			PlaySoundMem(sHandle, DX_PLAYTYPE_BACK);
 		}
-	}
-	
-	if (moveAnmCnt == true)
-	{
-		mAnmCnt++;
-	}
-	if (qflg_)
-	{
-		QuestIns.UpDate(qflg_, 1, copyPos, mSize, mapID);
-	}
-	if (QuestIns.CompFlg())
-	{
-		if (QuestIns.GetCont() > 570)
+
+		if (mAnmCnt == 270)
 		{
-			qflg_ = false;
+			PlaySoundMem(fHandle, DX_PLAYTYPE_BACK);
 		}
-		
+
+		if (mAnmCnt == 270)
+		{
+			mAnmCnt = 290;
+			moveAnmCnt = false;
+		}
+		if (moveAnmCnt == false)
+		{
+			if (key_.getKeyDown(KEY_INPUT_F))
+			{
+				moveAnmCnt = true;
+				qflg_ = true;
+			}
+		}
+
+		if (moveAnmCnt == true)
+		{
+			mAnmCnt++;
+		}
+		if (qflg_)
+		{
+			QuestIns.UpDate(qflg_, 1, copyPos, mSize, mapID);
+		}
+		if (QuestIns.CompFlg())
+		{
+			if (QuestIns.GetCont() > 570)
+			{
+				qflg_ = false;
+			}
+
+		}
+		ttCnt++;
+	}
+	else
+	{
+	StopSoundMem(sHandle);
+	StopSoundMem(tHandle);
+	StopSoundMem(fHandle);
+	StopSoundMem(oHandle);
+	StopSoundMem(ttHandle);
 	}
 
+ 
 	
 	
-
-	ttCnt++;
 	/*if (ttCnt==0)
 	{*/
 		

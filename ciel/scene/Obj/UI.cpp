@@ -39,6 +39,10 @@ void UI::Upadate(int sta,Vector2 pos,Vector2 size, Vector2 offset)
 		{
 			aitemname_ = "ƒ‰ƒ“ƒ^ƒ“";
 		}
+		if (aitem_.SetAitem() == 5)
+		{
+			aitemname_ = "  ”é•ó";
+		}
 	}
 	
 	/*if (CheckHitKey(KEY_INPUT_F))
