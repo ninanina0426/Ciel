@@ -35,6 +35,7 @@ public:
 	bool mTama3;
 	bool mTama4;
 	bool mTama5;
+	bool mTama6;
 
 	bool mKinomi1;
 	bool mKinomi2;

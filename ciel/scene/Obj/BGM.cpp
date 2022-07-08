@@ -11,7 +11,7 @@ BGM::~BGM()
 {
 }
 
-void BGM::Update(int num)
+void BGM::Update(int num, bool evfl)
 {
     
     x = num;
@@ -26,6 +26,11 @@ void BGM::Update(int num)
     if (CheckSoundMem(SHandle) == 0)
     {
         Move();
+    }
+    if (evfl)
+    {
+        StopSoundMem(SHandle);
+       
     }
     if (coppymapID != mapID)
     {

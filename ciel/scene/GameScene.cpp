@@ -10,7 +10,7 @@
 #include "EventScene.h"
 #include "Obj/Quest.h"
 #include"Obj/Masuku.h"
-
+#include "Transition/FadeInOut.h"
 
 GameScene::GameScene(PlayerID playerID)
 {
@@ -48,6 +48,11 @@ bool GameScene::IsTama4(void)
 bool GameScene::IsTama5(void)
 {
     return mAitem->mTama5;
+}
+
+bool GameScene::IsTama6(void)
+{
+    return  mAitem->mTama6;
 }
 
 bool GameScene::IsKinomi1(void)
@@ -119,11 +124,81 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
             /* mMenu.init(this);*/
         }
     }
+
+
+   
     if (key_.getKeyDown(KEY_INPUT_G))
     {
         return std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam());
     }
 
+    if (IsTama1() && !movefl[0])
+    {
+        ui_.eveflg_ = true;
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+            ui_.eveflg_ = false;
+            game = std::make_shared <GameScene>(mPlayer.plID_);
+            movefl[0] = true;
+            return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
+        }
+
+    }
+    if (IsTama2() && !movefl[1])
+    {
+        ui_.eveflg_ = true;
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+            ui_.eveflg_ = false;
+            game = std::make_shared <GameScene>(mPlayer.plID_);
+            movefl[1] = true;
+            return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
+        }
+    }
+    if (IsTama3() && !movefl[2])
+    {
+        ui_.eveflg_ = true;
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+            ui_.eveflg_ = false;
+            game = std::make_shared <GameScene>(mPlayer.plID_);
+            movefl[2] = true;
+            return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
+        }
+    }
+    if (IsTama4() && !movefl[3])
+    {
+        ui_.eveflg_ = true;
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+            ui_.eveflg_ = false;
+            game = std::make_shared <GameScene>(mPlayer.plID_);
+            movefl[3] = true;
+            return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
+        }
+    }
+    if (IsTama5() && !movefl[4])
+    {
+        ui_.eveflg_ = true;
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+            ui_.eveflg_ = false;
+            game = std::make_shared <GameScene>(mPlayer.plID_);
+            movefl[4] = true;
+            return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
+        }
+    }
+    if (IsTama6() && !movefl[5])
+    {
+        ui_.eveflg_ = true;
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+            ui_.eveflg_ = false;
+            game = std::make_shared <GameScene>(mPlayer.plID_);
+            movefl[5] = true;
+            return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
+        }
+    }
     //ŽžŠÔ
     nowTime_ = std::chrono::system_clock::now();		//Œ»Ý‚ÌŽžŠÔ‚ðŽæ“¾
     auto elTime = nowTime_ - oldTime_;                  //ŽžŠÔ‚Ì·‚ð‚Æ‚é
@@ -166,10 +241,11 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     DrawOwnScn();//ŒÂ•Ê‚ÌDrawˆ—‚Èˆ×•K‚¸‘‚­
 
-    mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg());
+    
 
-    if ((mShop.SPose() == false) && (mWshop.SPose() == false))
+    if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&ui_.eveflg_==false)
     {
+        mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg());
         mPlayer.Update(lpMapMng.GetChipId());
     }
 
@@ -237,11 +313,15 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
             lpMapMng.fadeinFlg_ = false;
         }
     }
-    mBgm->Update(mMenu.OpBgm());
-
-    ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetPos(),mPlayer.GetSiz());
-
+    
     mMasuku->Update(PlayerPos, mAitem->mRantanNum());
+
+    ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetPos(), mPlayer.GetSiz(), mMapOffset);
+
+     mBgm->Update(mMenu.OpBgm(),ui_.eveflg_);
+    
+
+    
 
     return std::move(own);
 }
@@ -402,6 +482,11 @@ bool GameScene::Init(void)
     Nightflg_ = false;
     count_ = 0;
     skycnt_ = 255;
+
+    for (int i = 0; i < 6; i++)
+    {
+        movefl[i] = false;
+    }
 
     mBgm = new BGM();
 
