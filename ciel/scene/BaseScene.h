@@ -5,6 +5,7 @@
 class BaseScene;
 
 using uniquBaseScn = std::unique_ptr<BaseScene>;			//シーンのポインター
+using shareBaseScn = std::shared_ptr<BaseScene>;
 
 //シーンID
 enum class SceneID

@@ -13,6 +13,7 @@ class TransitionScene :
 public:
 	TransitionScene(){};
 	TransitionScene(uniquBaseScn beforScene, uniquBaseScn nextScene);
+	TransitionScene(shareBaseScn beforScene, uniquBaseScn nextScene);
 	~TransitionScene();
 private:
 	virtual bool UpdataTransition(void) = 0;
@@ -25,5 +26,9 @@ private:
 protected:
 	uniquBaseScn beforScene_;
 	uniquBaseScn nextScene_;
+
+	shareBaseScn beforScene_S;
+	
+
 };
 

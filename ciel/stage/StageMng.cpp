@@ -214,28 +214,8 @@ Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg)
 
 	}
 	
-	
 
-	if (CheckHitKey(KEY_INPUT_W))
-	{
-		stage_ = std::move(std::make_unique<SweetsMap>());
-		mMapID = MAP_ID::SWEETS;
-	}
-	if (CheckHitKey(KEY_INPUT_A))
-	{
-		stage_ = std::move(std::make_unique<ForestMap>());
-		mMapID = MAP_ID::FOREST;
-	}
-	if (CheckHitKey(KEY_INPUT_S))
-	{
-		stage_ = std::move(std::make_unique<templeMap>());
-		mMapID = MAP_ID::TEMPLE;
-	}
-	if (CheckHitKey(KEY_INPUT_D))
-	{
-		stage_ = std::move(std::make_unique<SnowMap>());
-		mMapID = MAP_ID::SNOW;
-	}
+
 	stage_->Update(mOffset);
 
 	//フェードイン
@@ -782,6 +762,64 @@ bool StageMng::GetEvent(Vector2 pos)
 
 bool StageMng::GetMapChange(Vector2 pos)
 {
+	//デバッグ用--------------------------------------------------------------------
+	if (CheckHitKey(KEY_INPUT_W))
+	{
+		mMapChange = true;
+		mNextPos = { 820,1520 };
+		mDir = DIR_UP;
+		mMapID = MAP_ID::SWEETS;
+		mOffset = mNextPos - Vector2{ 540,0 };
+		stage_ = std::move(std::make_unique<SweetsMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_A))
+	{
+		mMapChange = true;
+		mNextPos = { 1630, 2590 };
+		mDir = DIR_UP;
+		mMapID = MAP_ID::FOREST;
+		mOffset = mNextPos - Vector2{ 540,300 };
+		stage_ = std::move(std::make_unique<ForestMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_S))
+	{
+		mMapChange = true;
+		mNextPos = { 1645,715 };
+		mDir = DIR_DOWN;
+		mOffset = mNextPos - Vector2{ 540,300 };
+		mMapID = MAP_ID::TEMPLE;
+		stage_ = std::move(std::make_unique<templeMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_D))
+	{
+		mMapChange = true;
+		mNextPos = { 400, 2990 };
+		mDir = DIR_RIGHT;
+		mMapID = MAP_ID::SNOW;
+		mOffset = mNextPos - Vector2{ 540,300 };
+		stage_ = std::move(std::make_unique<SnowMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_E))
+	{
+		mMapChange = true;
+		mNextPos = { 25, 2400 };
+		mDir = DIR_RIGHT;
+		mMapID = MAP_ID::WA;
+		mOffset = mNextPos - Vector2{ 540,300 };
+		stage_ = std::move(std::make_unique<WaMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_R))
+	{
+		mMapChange = true;
+		mNextPos = { 1600, 3050 };
+		mDir = DIR_UP;
+		mMapID = MAP_ID::CAVE;
+		mOffset = mNextPos - Vector2{ 540,300 };
+		stage_ = std::move(std::make_unique<CaveMap>());
+	}
+	//---------------------------------------------------------------------------
+
+
 	if (lpMapMng.mMapID == MAP_ID::TEMPLE)
 	{
 		//TEMPLEからTEMPLEINへ

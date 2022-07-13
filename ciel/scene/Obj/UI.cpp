@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include "UI.h"
+#include "../../stage/StageMng.h"
 
 UI::UI()
 {
@@ -10,10 +11,11 @@ UI::~UI()
 {
 }
 
-void UI::Upadate(int sta,Vector2 pos,Vector2 size)
+void UI::Upadate(int sta,Vector2 pos,Vector2 size, Vector2 offset)
 {
 	stamina = sta;
 	plPos_ = pos;
+	off_ = offset;
 
 	aitem_.Update(plPos_, size);
 
@@ -23,7 +25,7 @@ void UI::Upadate(int sta,Vector2 pos,Vector2 size)
 
 		if (aitem_.SetAitem()==2)
 		{
-			aitemname_ = "•sv‹c‚È‹Ê";
+			aitemname_ = "Œõ‚é‹Ê";
 		}
 		if (aitem_.SetAitem()==1)
 		{
@@ -36,6 +38,10 @@ void UI::Upadate(int sta,Vector2 pos,Vector2 size)
 		if (aitem_.SetAitem() == 4)
 		{
 			aitemname_ = "ƒ‰ƒ“ƒ^ƒ“";
+		}
+		if (aitem_.SetAitem() == 5)
+		{
+			aitemname_ = "  ”é•ó";
 		}
 	}
 	
@@ -82,16 +88,19 @@ void UI::Draw(void)
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	if (telop_&& updown_>150)
 	{
-		DrawFormatString(10, 529, 0xffffff, "%s‚ğE‚Á‚½I", aitemname_.c_str());
+		DrawFormatString(5, 529, 0xffffff, "%s‚ğE‚Á‚½I", aitemname_.c_str());
 	}
-	
-
+	if (eveflg_ == true)
+	{
+		DrawGraph(plPos_.x_ - off_.x_ - 63, plPos_.y_ - off_.y_ - 80, mImageChat_, true);
+	}
+	DrawString(0, 200, "W:‰Ùq\nA:X\nS:_“a\nD:á\nE:˜a\nR:“´ŒA",0x000000,true);
 }
 
 void UI::Init()
 {
 	boxid = LoadGraph("./image/ui/aitembox.png");
-
+	mImageChat_=  LoadGraph("image/talk/s1.png", true);
 	aitemname_ = "ƒŠƒ“ƒS";
 	updown_ = 0;
 	count_ = 0;

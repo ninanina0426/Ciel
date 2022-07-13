@@ -10,7 +10,8 @@
 #include "EventScene.h"
 #include "Obj/Quest.h"
 #include"Obj/Masuku.h"
-
+#include "Transition/FadeInOut.h"
+#include "EndScene.h"
 
 GameScene::GameScene(PlayerID playerID)
 {
@@ -21,6 +22,12 @@ GameScene::GameScene(PlayerID playerID)
 
 GameScene::~GameScene()
 {
+    game.reset();
+    delete mBgm;
+    delete mNpc;
+    delete mChat;
+    delete mLayer;
+    delete mMasuku;
 }
 
 
@@ -48,6 +55,11 @@ bool GameScene::IsTama4(void)
 bool GameScene::IsTama5(void)
 {
     return mAitem->mTama5;
+}
+
+bool GameScene::IsTama6(void)
+{
+    return  mAitem->mTama6;
 }
 
 bool GameScene::IsKinomi1(void)
@@ -89,7 +101,7 @@ bool GameScene::IsRantan(void)
 
 bool GameScene::mEnd()
 {
-    return false;
+    return mAitem->Takara;
 }
 
 //----------------------------------
@@ -119,11 +131,93 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
             /* mMenu.init(this);*/
         }
     }
+
+
+   
     if (key_.getKeyDown(KEY_INPUT_G))
     {
         return std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam());
     }
 
+    if (IsTama1() && !movefl[0])
+    {
+        ui_.eveflg_ = true;
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+            ui_.eveflg_ = false;
+            game = std::make_shared <GameScene>(mPlayer.plID_);
+            movefl[0] = true;
+            return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
+        }
+
+    }
+    if (IsTama2() && !movefl[1])
+    {
+        ui_.eveflg_ = true;
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+            ui_.eveflg_ = false;
+            game = std::make_shared <GameScene>(mPlayer.plID_);
+            movefl[1] = true;
+            return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
+        }
+    }
+    if (IsTama3() && !movefl[2])
+    {
+        ui_.eveflg_ = true;
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+            ui_.eveflg_ = false;
+            game = std::make_shared <GameScene>(mPlayer.plID_);
+            movefl[2] = true;
+            return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
+        }
+    }
+    if (IsTama4() && !movefl[3])
+    {
+        ui_.eveflg_ = true;
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+            ui_.eveflg_ = false;
+            game = std::make_shared <GameScene>(mPlayer.plID_);
+            movefl[3] = true;
+            return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
+        }
+    }
+    if (IsTama5() && !movefl[4])
+    {
+        ui_.eveflg_ = true;
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+            ui_.eveflg_ = false;
+            game = std::make_shared <GameScene>(mPlayer.plID_);
+            movefl[4] = true;
+            return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
+        }
+    }
+    if (IsTama6() && !movefl[5])
+    {
+        ui_.eveflg_ = true;
+        if (key_.getKeyDown(KEY_INPUT_F))
+        {
+            ui_.eveflg_ = false;
+            game = std::make_shared <GameScene>(mPlayer.plID_);
+            movefl[5] = true;
+            return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
+        }
+    }
+
+    //凍死エンド
+    if (detTime_ >700)
+    {
+        return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_1", mPlayer.plID_));
+
+    }
+    //trueエンド
+    if (mAitem->Takara==1)
+    {
+        return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_2", mPlayer.plID_));
+    }
     //時間
     nowTime_ = std::chrono::system_clock::now();		//現在の時間を取得
     auto elTime = nowTime_ - oldTime_;                  //時間の差をとる
@@ -163,15 +257,17 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     }
 
     skycnt_++;
+    
 
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
-    mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg());
+    
 
-    if ((mShop.SPose() == false) && (mWshop.SPose() == false))
+    if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&ui_.eveflg_==false)
     {
-        mPlayer.Update(lpMapMng.GetChipId());
+        mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg()); 
     }
+    mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_);
 
     PlayerPos = mPlayer.GetPos();
 
@@ -237,11 +333,20 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
             lpMapMng.fadeinFlg_ = false;
         }
     }
-    mBgm->Update(mMenu.OpBgm());
-
-    ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetPos(),mPlayer.GetSiz());
+    
+    if (!IsHaori())
+    {
+        ColdState();
+    }
 
     mMasuku->Update(PlayerPos, mAitem->mRantanNum());
+
+    ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetPos(), mPlayer.GetSiz(), mMapOffset);
+
+    mBgm->Update(mMenu.OpBgm(),ui_.eveflg_);
+    
+
+    
 
     return std::move(own);
 }
@@ -394,6 +499,8 @@ bool GameScene::Init(void)
     asa_ = LoadGraph("./image/move/朝.png");
     yuu_ = LoadGraph("./image/move/夕.png");
     you_ = LoadGraph("./image/move/夜.png");
+    ice_ = LoadGraph("./image/ui/ice.png");
+
 
     nowTime_ = std::chrono::system_clock::now();
     oldTime_ = nowTime_;
@@ -402,6 +509,12 @@ bool GameScene::Init(void)
     Nightflg_ = false;
     count_ = 0;
     skycnt_ = 255;
+    detTime_ = 0;
+
+    for (int i = 0; i < 6; i++)
+    {
+        movefl[i] = false;
+    }
 
     mBgm = new BGM();
 
@@ -484,6 +597,31 @@ void GameScene::TimeManeger(void)
         SetDrawBlendMode(DX_BLENDMODE_ALPHA, count_+1);
         DrawGraph(0, 0, night_, true);
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+    }
+}
+
+void GameScene::ColdState(void)
+{
+    auto map = lpMapMng.GetMapId();
+    if (map == MAP_ID::SNOW || map == MAP_ID::SNOWCAVE)
+    {
+        detTime_++;
+
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
+        DrawExtendGraph(0, 0, 1080, 609, ice_, true);
+        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+        if (detTime_ > 200)
+        {
+            SetDrawBlendMode(DX_BLENDMODE_ALPHA, (detTime_/2)-50);
+            DrawBox(0, 0, 1080, 609, 0x000000, true);
+            SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+            if (detTime_ > 600)
+            {
+                DrawString(500, 300, "さむい・・・・", 0xffffff, true);
+            }
+        }
+        
     }
 }
 

@@ -31,6 +31,7 @@ public:
     bool IsTama3(void);
     bool IsTama4(void);
     bool IsTama5(void);
+    bool IsTama6(void);
 
     bool IsKinomi1(void);
     bool IsKinomi2(void);
@@ -48,11 +49,14 @@ public:
     int SHandle;
 
     bool mPose;
+    bool movefl[6];
 private:
     uniquBaseScn Update(uniquBaseScn own) override;     //タイトルシーンUpdata
     void DrawOwnScn() override;                         //タイトルシーンDraw
     bool Init(void) override;                           // タイトルシーン初期化
     SceneID GetSceneID(void) override { return SceneID::GAME; };   //sceneIDをタイトルに設定
+
+    shareBaseScn game;
 
     Vector2 PlayerPos;
     Vector2 PlayerSize;
@@ -95,6 +99,10 @@ private:
     std::chrono::system_clock::time_point nowTime_;
     std::chrono::system_clock::time_point oldTime_;
 
+    void ColdState(void);
+    int detTime_;
+    int ice_;
+
     Chat* mChat;
 
     Keyboard key_;
@@ -109,5 +117,7 @@ private:
     UI ui_;
 
     Masuku* mMasuku;
+
+   
 };
 

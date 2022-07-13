@@ -32,6 +32,7 @@ bool Aitem::init()
 	mTama3 = false;
 	mTama4 = false;
 	mTama5 = false;
+	mTama6 = false;
 
 	mKinomi1 = false;
 	mKinomi2 = false;
@@ -43,11 +44,14 @@ bool Aitem::init()
 
 	mRantan = false;
 
+	Takara = false;
+
 	mTama = 5;
 	mKinomi = 5;
 	
-	sAitem = 2;
+	mtakara = 0;
 
+	sAitem = 2;
 
 	mAitem = 0;
 	//‚¨‹à
@@ -94,6 +98,9 @@ bool Aitem::init()
 
 	//ƒ‰ƒ“ƒ^ƒ“
 	mNum[14] = { 1420,2144 };
+
+	//•ó
+	mNum[15] = {1425,1026};
 
 	i = 0;
 
@@ -231,7 +238,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[7].x_ + 32 / 2) &&
 			(mPos.x_ + mNum[7].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mTama != 0) && (mTama <= 5))
+			if ((mTama != 0) && (mTama <= 6))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
@@ -268,7 +275,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[6].x_ + 32 / 2) &&
 			(mPos.x_ + mNum[6].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mTama != 0) && (mTama <= 5))
+			if ((mTama != 0) && (mTama <= 6))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
@@ -310,7 +317,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[4].x_  +32/ 2) &&
 			(mPos.x_ + mNum[4].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mTama != 0) && (mTama <= 5))
+			if ((mTama != 0) && (mTama <= 6))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
@@ -337,13 +344,13 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[8].x_ + 32 / 2) &&
 			(mPos.x_ + mNum[8].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mTama != 0) && (mTama <= 5))
+			if ((mTama != 0) && (mTama <= 6))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
 					mTama -= 1;
 					mNum[8] = mNum[0];
-					mTama1 = true;
+					mTama6 = true;
 					mGet = true;
 					mAitem = 2;
 				}
@@ -359,7 +366,31 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 		}
 		break;
 	case MAP_ID::TEMPLEIN:
-		
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[15].y_ + 32 / 2) &&
+			(mPos.y_ + mNum[15].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[15].x_ + 32 / 2) &&
+			(mPos.x_ + mNum[15].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if (mtakara == 0)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mtakara = 1;
+					mNum[15] = mNum[0];
+					Takara = true;
+					mGet = true;
+					mAitem = 5;
+				}
+
+			}
+		}
+		if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}
 		break;
 	case MAP_ID::SWEETS:
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[2].y_ + 32 / 2) &&
@@ -405,7 +436,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[5].x_ + 32 / 2) &&
 			(mPos.x_ + mNum[5].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((mTama != 0) && (mTama <= 5))
+			if ((mTama != 0) && (mTama <= 6))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
@@ -561,12 +592,12 @@ void Aitem::Draw(Vector2 mMapoffset)
 
 		break;
 	case MAP_ID::TEMPLEIN:
-		if (mTama != 0)
+		if (Takara == 0)
 		{
 			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
 			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
 			{
-				DrawGraph(mPos.x_ + mNum[13].x_ - mMapoffset.x_, mPos.y_ + mNum[8].y_ - mMapoffset.y_, mImage[1][mAnimCnt], true);
+				DrawGraph(mPos.x_ + mNum[15].x_ - mMapoffset.x_-20, mPos.y_ + mNum[15].y_ - mMapoffset.y_-70, mImage[1][mAnimCnt], true);
 			}
 		}
 
@@ -617,7 +648,7 @@ void Aitem::Draw(Vector2 mMapoffset)
 
 
 	DrawFormatString(0,150, GetColor(255, 255, 255), "num=%d", apple);
-	DrawFormatString(0, 170, GetColor(255, 255, 255), "‹Ê=%d", Ru);
+	DrawFormatString(0, 170, GetColor(255, 255, 255), "‹Ê=%d", mTama);
 	
 
 }

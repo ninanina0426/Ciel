@@ -35,6 +35,7 @@ public:
 	bool mTama3;
 	bool mTama4;
 	bool mTama5;
+	bool mTama6;
 
 	bool mKinomi1;
 	bool mKinomi2;
@@ -42,7 +43,7 @@ public:
 	bool mKinomi4;
 	bool mKinomi5;
 
-	
+	bool Takara;
 
 	
 	bool mHaori;
@@ -116,6 +117,7 @@ private:
 	int mRice;
 	int mDango;
 	int mTea;
+	int mtakara;
 
 	int Ru;
 	int ssRu;

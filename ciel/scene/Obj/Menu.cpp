@@ -15,7 +15,7 @@ bool Menu::init(GameScene* parent)
 {
 	mParent = parent;
 
-	b = 0;
+	b = 50;
 	
 	
 	mImage[0][0] = LoadGraph("image/menyu/menu10.png");
@@ -766,7 +766,7 @@ void Menu::Hint(void)
 
 int Menu::Opution(void)
 {
-	/*if (xxxx >= 0)
+	if (xxxx >= 0)
 	{
 		if (key_.getKeyDown(KEY_INPUT_RIGHT))
 		{
@@ -785,11 +785,11 @@ int Menu::Opution(void)
 			}
 		}
 
-	}*/
+	}
 
 	
 
-	if (key_.getKeyDownHold(KEY_INPUT_DOWN))
+	if (key_.getKeyDownHold(KEY_INPUT_RIGHT))
 	{
 		b += 1;
 		if (b > 100)
@@ -797,7 +797,7 @@ int Menu::Opution(void)
 			x = 100;
 		}
 	}
-	if (key_.getKeyDownHold(KEY_INPUT_UP))
+	if (key_.getKeyDownHold(KEY_INPUT_LEFT))
 	{
 		b -= 1;
 		if (b < 0)

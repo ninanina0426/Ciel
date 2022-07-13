@@ -3,6 +3,7 @@
 #include"../Input/Keyboard.h"
 #include"../../stage/Stage.h"
 
+class UI;
 
 enum DIR		//Œü‚«ŠÇ——p
 {
@@ -42,9 +43,12 @@ private:
 	/*GameScene* mParent;*/
 	/*GameScene* mParent;*/
 
-	int mImage1[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
-	int mImage2[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
-	int mImage3[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage1[48];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage2[48];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage3[48];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+
+	int mImageTI[24];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImageTS[24];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 
 	int mImageC[27];		//
 	int mImageI[27];		//
@@ -66,9 +70,17 @@ private:
 	int num;
 	int move;
 
+	int tCnt;
+	int ttCnt;
+
 	bool moveAnmCnt;
 
+	//’Ş‚è
 	bool moveFlg;
+	//ó£
+	bool mFlg;
+	//‚Â‚é‚Í‚µ
+	bool tFlg;
 
 	int mChipId;
 	int mChiID;
@@ -85,6 +97,7 @@ private:
 	int tHandle;
 	int fHandle;
 	int oHandle;
+	int ttHandle;
 
 	//ƒMƒ~ƒbƒN
 	Vector2 mgPos;
@@ -96,6 +109,8 @@ private:
 
 	DIR keyDir;
 
+
+	
 public:
 	Player();
 	~Player();
@@ -105,7 +120,7 @@ public:
 	bool flg;
 
 	bool init(PlayerID playerid);		//‰Šú‰»
-	Vector2 Update(int chipid);		//XV
+	Vector2 Update(int chipid,bool fl);		//XV
 	void Draw(Vector2 offset);		//•`‰æ
 	bool Release(void);		//ŠJ•ú
 	DIR GetDIR(void);
@@ -122,6 +137,7 @@ public:
 	int staminacnt_;
 
 	bool qflg_;
+	
 
 	PL_ST state_;
 	PlayerID plID_;
