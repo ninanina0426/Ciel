@@ -14,6 +14,7 @@
 #include "ForestInMap.h"
 #include "SnowMap.h"
 #include "SnowCaveMap.h"
+#include "SnowShopMap.h"
 
 
 bool StageMng::Init()
@@ -232,10 +233,8 @@ Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg)
 	}
 	if (CheckHitKey(KEY_INPUT_D))
 	{
-
 		stage_ = std::move(std::make_unique<SnowMap>());
 		mMapID = MAP_ID::SNOW;
-
 	}
 	stage_->Update(mOffset);
 
@@ -689,7 +688,7 @@ bool StageMng::GetEvent(Vector2 pos)
 	}
 
 
-	//雪から雪の洞窟へ
+	//雪～
 	if (lpMapMng.mMapID == MAP_ID::SNOW)
 	{
 
@@ -711,6 +710,28 @@ bool StageMng::GetEvent(Vector2 pos)
 			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<SnowCaveMap>());
 			mMapID = MAP_ID::SNOWCAVE;
+		}
+
+		//雪から雪ショップへ
+		if (mTchipId == 411 && 600 < pos.x_ && 700 > pos.x_)
+		{
+			mMapChange = true;
+			mNextPos = { 1450,1580 };
+			mDir = DIR_UP;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<SnowShopMap>());
+			mMapID = MAP_ID::SNOWSHOP;
+
+		}
+		if (mTchipId == 412 && 600 < pos.x_ && 700 > pos.x_)
+		{
+			mMapChange = true;
+			mNextPos = { 1450,1580 };
+			mDir = DIR_UP;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<SnowShopMap>());
+			mMapID = MAP_ID::SNOWSHOP;
+
 		}
 
 	}
@@ -738,6 +759,22 @@ bool StageMng::GetEvent(Vector2 pos)
 			mMapID = MAP_ID::SNOW;
 		}
 
+	}
+
+	//雪ショップから雪へ
+	if (lpMapMng.mMapID == MAP_ID::SNOWSHOP)
+	{
+
+		if (chipID == 1740 && 1400 < pos.x_ && 1470 > pos.x_)
+		{
+			mMapChange = true;
+			mNextPos = { 670,890 };
+			mDir = DIR_DOWN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			stage_ = std::move(std::make_unique<SnowMap>());
+			mMapID = MAP_ID::SNOW;
+
+		}
 	}
 	
 	return mMapChange;

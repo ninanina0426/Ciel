@@ -182,6 +182,7 @@
     <ClCompile Include="stage\Layer.cpp" />
     <ClCompile Include="stage\SnowCaveMap.cpp" />
     <ClCompile Include="stage\SnowMap.cpp" />
+    <ClCompile Include="stage\SnowShopMap.cpp" />
     <ClCompile Include="stage\StageMng.cpp" />
     <ClCompile Include="stage\Stage.cpp" />
     <ClCompile Include="stage\transitionStage\FadeInStage.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="stage\Layer.h" />
     <ClInclude Include="stage\SnowCaveMap.h" />
     <ClInclude Include="stage\SnowMap.h" />
+    <ClInclude Include="stage\SnowShopMap.h" />
     <ClInclude Include="stage\StageMng.h" />
     <ClInclude Include="stage\Stage.h" />
     <ClInclude Include="stage\transitionStage\FadeInStage.h" />

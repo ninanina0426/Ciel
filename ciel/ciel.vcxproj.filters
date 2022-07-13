@@ -46,6 +46,7 @@
     <ClCompile Include="stage\SnowCaveMap.cpp" />
     <ClCompile Include="stage\SnowMap.cpp" />
     <ClCompile Include="scene\Obj\Masuku.cpp" />
+    <ClCompile Include="stage\SnowShopMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -140,5 +141,6 @@
     <ClInclude Include="stage\SnowMap.h" />
     <ClInclude Include="stage\SnowCaveMap.h" />
     <ClInclude Include="scene\Obj\Masuku.h" />
+    <ClInclude Include="stage\SnowShopMap.h" />
   </ItemGroup>
 </Project>
