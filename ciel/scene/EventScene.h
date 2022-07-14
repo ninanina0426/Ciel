@@ -38,6 +38,8 @@ private:
 	uniquBaseScn gameScene_;
 	bool flg_;		//イベントが終わった
 
+	int mImageJ[27];
+
 	//グラフィック系
 	int airplan_[4][3];
 	int sea_;
