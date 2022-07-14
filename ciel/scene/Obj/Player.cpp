@@ -78,7 +78,7 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/char/112.png", 32, 4, 8, 32, 48, &mImage3[0]) == -1)
+	if (LoadDivGraph("image/char/112.png", 48, 4, 12, 48, 48, &mImage3[0]) == -1)
 	{
 		return false;
 	}
@@ -586,7 +586,7 @@ void Player::Draw(Vector2 offset)
 		}
 		if (mAnmCnt< 270)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImageC[mAnmCnt/10], true);
+			DrawGraph(mPos.x_ - offset.x_ - 16, mPos.y_ - offset.y_ - 24, mImageC[mAnmCnt/10], true);
 		}
 		else
 		{
@@ -607,7 +607,7 @@ void Player::Draw(Vector2 offset)
 			}
 			else if (i == 2)
 			{
-				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage2[(4 + num) * DIR_MAX + ((mAnmCnt / 10) % 4)], true);
+				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage3[(4 + num) * DIR_MAX + ((mAnmCnt / 10) % 4)], true);
 			}
 			else if (i == 3)
 			{
