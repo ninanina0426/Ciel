@@ -104,7 +104,6 @@ void Love::Draw(Vector2 offset)
     {
         DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + mNum[1].x_, mPos.y_ - offset.y_ - mSizeOffset.y_ + mNum[1].y_, mImage[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
     }
-   
 }
 
 bool Love::Release(void)
