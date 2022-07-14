@@ -122,7 +122,7 @@ public:
 
 	bool init(PlayerID playerid);		//初期化
 
-	Vector2 Update(int chipid,bool fl, int lhit);		//更新
+	Vector2 Update(int chipid,bool fl, bool lhit);		//更新
 
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放

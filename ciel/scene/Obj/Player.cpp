@@ -127,7 +127,7 @@ bool Player::init(PlayerID playerid)
 
 }
 
-Vector2 Player::Update(int chipId,bool fl, int lhit)
+Vector2 Player::Update(int chipId,bool fl, bool lhit)
 {
 	keyDir = DIR_MAX;		//ÉLÅ[ì¸óÕÇÃï˚å¸
 	Vector2 copyPos = mPos;
@@ -136,6 +136,8 @@ Vector2 Player::Update(int chipId,bool fl, int lhit)
 
 	mChipId = chipId;
 	mChiID = lpMapMng.GetChipID();
+
+	bool mloveNpc = lhit;
 
 	key_.Update();
 
@@ -359,6 +361,43 @@ Vector2 Player::Update(int chipId,bool fl, int lhit)
 					if (lpMapMng.cheakMapChip(copyPos))
 					{
 						mPos = copyPos;
+					}
+
+					if (mloveNpc == true)
+					{
+						if (mMoveDir == DIR_UP)
+						{
+							if ((mPos.y_ < 750) && (mPos.y_ > 745))
+							{
+								mPos.y_ = 750;
+								mPos.x_ = copyPos.x_;
+							}
+						}
+						if (mMoveDir == DIR_DOWN)
+						{
+							if ((mPos.y_ < 691) && (mPos.y_ > 684))
+							{
+								mPos.y_ = 684;
+								mPos.x_ = copyPos.x_;
+							}
+						}
+						if (mMoveDir == DIR_LEFT)
+						{
+							if ((mPos.x_ < 1670) && (mPos.x_ > 1665))
+							{
+								mPos.x_ = 1670;
+								mPos.y_ = copyPos.y_;
+							}
+						}
+						if (mMoveDir == DIR_RIGHT)
+						{
+							if ((mPos.x_ > 1615) && (mPos.x_ < 1620))
+							{
+								mPos.x_ = 1615;
+								mPos.y_ = copyPos.y_;
+							}
+						}
+						
 					}
 
 					/*mDamyPos = copyPos;*/
