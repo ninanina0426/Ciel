@@ -27,8 +27,19 @@ bool Love::init()
     mMoveDir = DIR_UP;
     mAnmCnt = 0;
 
+    FR = 0;
+
     moveFlg = false;
     hitflg = false;
+
+    //プレゼント
+    lApple=0;
+    lKinominoKusiyaki=0;
+    lFruitDrink=0;
+    lRice=0;
+    lDango=0;
+    lTea=0;
+    lFish=0;
 
     mNum[0] = { 0,0 };
     mNum[1] = { 1645,715 };
@@ -56,6 +67,37 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
         if (key_.getKeyDown(KEY_INPUT_F))
         {
             moveFlg = true;
+
+            if (HaveNum == 1)
+            {
+                lApple -= 1;
+                FR += 10;
+            }
+            else if (HaveNum == 2)
+            {
+                lRice -= 1;
+                FR += 10;
+            }
+            else if (HaveNum == 3)
+            {
+                lKinominoKusiyaki -= 1;
+                FR += 15;
+            }
+            else if (HaveNum == 4)
+            {
+                lDango -= 1;
+                FR += 15;
+            }
+            else if (HaveNum == 5)
+            {
+                lFruitDrink -= 1;
+                FR += 20;
+            }
+            else if (HaveNum == 6)
+            {
+                lTea -= 1;
+                FR += 10;
+            }
         }
 
         hitflg = true;
@@ -93,7 +135,6 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
         }
     }
   
-
     mAnmCnt++;
     return Vector2();
 }
@@ -104,6 +145,8 @@ void Love::Draw(Vector2 offset)
     {
         DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + mNum[1].x_, mPos.y_ - offset.y_ - mSizeOffset.y_ + mNum[1].y_, mImage[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
     }
+
+    DrawFormatString(0, 300, 0xff0000, "好感度%d", FR);
 }
 
 bool Love::Release(void)
@@ -123,4 +166,9 @@ Vector2 Love::GetPos(void)
 bool Love::Hit()
 {
     return hitflg;
+}
+
+bool Love::MoveFR()
+{
+    return moveFlg;
 }

@@ -42,8 +42,18 @@ private:
 	bool hitflg;
 
 	//‰ï˜b
-	
 
+	//Š
+	int lApple;
+	int lKinominoKusiyaki;
+	int lFruitDrink;
+	int lRice;
+	int lDango;
+	int lTea;
+	int lFish;
+	
+	//DŠ´“x
+	int FR;
 
 public:
 	Love();
@@ -57,6 +67,7 @@ public:
 	Vector2 GetPos(void);
 
 	bool Hit();
+	bool MoveFR();
 
 };
 
