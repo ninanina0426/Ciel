@@ -68,6 +68,9 @@ bool Aitem::init()
 	mRice=0;
 	mDango=0;
 	mTea=0;
+	mTamaN = 0;
+	mKey = 0;
+	mFish = 0;
 
 	apple = 0;
 	rantan = 0;
@@ -247,6 +250,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mTama4 = true;
 					mGet = true;
 					mAitem = 2;
+					mTamaN += 1;
 				}
 
 			}
@@ -284,6 +288,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mTama3 = true;
 					mGet = true;
 					mAitem = 2;
+					mTamaN += 1;
 				}
 
 			}
@@ -326,6 +331,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mTama1 = true;
 					mGet = true;
 					mAitem = 2;
+					mTamaN += 1;
 				}
 
 			}
@@ -353,6 +359,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mTama6 = true;
 					mGet = true;
 					mAitem = 2;
+					mTamaN += 1;
 				}
 
 			}
@@ -408,6 +415,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					i = 2;
 					mGet = true;
 					mAitem = 3;
+
 				}
 			}
 		}
@@ -445,6 +453,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mTama2 = true;
 					mGet = true;
 					mAitem = 2;
+					mTamaN += 1;
 				}
 
 			}
@@ -722,21 +731,21 @@ int Aitem::HaveMoney()
 	return Ru;
 }
 
-void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st)
+void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt)
 {
 
-	mNumKinomi=k+sk;
-	mApple = apple + a + sa;
-	mKinominoKusiyaki=kk+skk;
-	mFruitDrink=fd+sfd;
-	mFishingRodS=frs+sfrs;
-	mRagBag=rb+srb;
-	mPickaxe=p+sp;
-	mHaoriN=h+sh;
-	mRantanN=r+sr+rantan;
-	mRice = ri+sri;
-	mDango = d+sd;
-	mTea = t+st;
+	mNumKinomi=k+sk-mk;
+	mApple = apple + a + sa-ma;
+	mKinominoKusiyaki=kk+skk-mkk;
+	mFruitDrink=fd+sfd-mfd;
+	mFishingRodS=frs+sfrs-mfrs;
+	mRagBag=rb+srb-mrb;
+	mPickaxe=p+sp-mp;
+	mHaoriN=h+sh-mh;
+	mRantanN=r+sr+rantan-mr;
+	mRice = ri+sri-mri;
+	mDango = d+sd-md;
+	mTea = t+st-mt;
 
 }
 
@@ -813,6 +822,21 @@ int Aitem::DangoNum(void)
 int Aitem::TeaNum(void)
 {
 	return mTea;
+}
+
+int Aitem::TamNum(void)
+{
+	return mTamaN;
+}
+
+int Aitem::KeyNum(void)
+{
+	return mKey;
+}
+
+int Aitem::FishNum(void)
+{
+	return mFish;
 }
 
 int Aitem::GetTam(void)

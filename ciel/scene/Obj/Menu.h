@@ -22,7 +22,6 @@ public:
 	enum class AITEM_SELECT
 	{
 		AITEM_ID,
-		AITEM_NOMAL,
 		AITEM_HEAL,
 		AITEM_IMPORTANT,
 		AITEM_MAX
@@ -39,7 +38,6 @@ public:
 	void Menus(void);
 	void Aitems(void);
 	void Select(void);
-	void Nomal(void);
 	void Heal(void);
 	void Important(void);
 
@@ -49,7 +47,6 @@ public:
 
 	int OpBgm(void);
 
-	
 	int y;
 	int x;
 	int yy;
@@ -103,6 +100,8 @@ private:
 	int ssHaoriN;
 	int ssRantanN;
 	int ssNumKinomi;
+	int ssKey;
+	int ssTama;
 
 	int b;
 

@@ -26,6 +26,7 @@ bool StageMng::Init()
 	aitem = 0;
 	mflg = false;
 	mOffset = mPlayer.GetPos()-Vector2{540,0};
+	/*mOffset = {0,0};*/
 	
     return true;
 }

@@ -21,8 +21,8 @@ bool Player::init(PlayerID playerid)
 	mPos.x_ = 1590;
 	mPos.y_ = 2915;
 
-	/*mPos.x_ = 785;
-	mPos.y_ = 1400;*/
+	/*mPos.x_ = 0;
+	mPos.y_ = 0;*/
 
 	//player‚Ìí•ÊŠÖŒW
 	if (plID_ != PlayerID::Max)
@@ -123,7 +123,7 @@ bool Player::init(PlayerID playerid)
 
 }
 
-Vector2 Player::Update(int chipId,bool fl)
+Vector2 Player::Update(int chipId,bool fl, int lhit)
 {
 	keyDir = DIR_MAX;		//ƒL[“ü—Í‚Ì•ûŒü
 	Vector2 copyPos = mPos;
@@ -133,7 +133,10 @@ Vector2 Player::Update(int chipId,bool fl)
 	mChipId = chipId;
 	mChiID = lpMapMng.GetChipID();
 
-	
+	key_.Update();
+
+
+
 
 	key_.Update();
 
@@ -652,6 +655,11 @@ Vector2 Player::GetPos(void)
 int Player::GetStamina(void)
 {
 	return Stamina_;
+}
+
+PlayerID Player::GetType(void)
+{
+	return plID_;
 }
 
 void Player::message_box() 

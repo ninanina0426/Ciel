@@ -15,6 +15,7 @@ bool Menu::init(GameScene* parent)
 {
 	mParent = parent;
 
+	//‹È‚Ì‰Šú‰¹—Ê
 	b = 50;
 	
 	
@@ -229,10 +230,10 @@ void Menu::Draw(void)
 		DrawBox(mBoxA[xx][0].x_, mBoxA[xx][0].y_, mBoxA[xx + 1][0].x_, 180, GetColor(0, 0, 200), true);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		break;
-	case Menu::AITEM_SELECT::AITEM_NOMAL:
-		SetDrawBlendMode(DX_BLENDMODE_MULA, 150);
-		DrawBox(mBoxAs[xxx][yyy].x_, mBoxAs[xxx][yyy].y_, mBoxAs[xxx + 1][yyy].x_, mBoxAs[xxx][yyy+1].y_, GetColor(0, 0, 200), true);
-		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+	//case Menu::AITEM_SELECT::AITEM_NOMAL:
+	//	SetDrawBlendMode(DX_BLENDMODE_MULA, 150);
+	//	DrawBox(mBoxAs[xxx][yyy].x_, mBoxAs[xxx][yyy].y_, mBoxAs[xxx + 1][yyy].x_, mBoxAs[xxx][yyy+1].y_, GetColor(0, 0, 200), true);
+	//	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		break;
 	case Menu::AITEM_SELECT::AITEM_HEAL:
 		SetDrawBlendMode(DX_BLENDMODE_MULA, 150);
@@ -345,9 +346,9 @@ void Menu::Draw(void)
 	case Menu::AITEM_SELECT::AITEM_ID:
 		
 		break;
-	case Menu::AITEM_SELECT::AITEM_NOMAL:
-		
-		break;
+	//case Menu::AITEM_SELECT::AITEM_NOMAL:
+	//	
+	//	break;
 	case Menu::AITEM_SELECT::AITEM_HEAL:
 		if (xx == 2)
 		{
@@ -531,9 +532,9 @@ void Menu::Aitems(void)
 	case Menu::AITEM_SELECT::AITEM_ID:
 		Select();
 		break;
-	case Menu::AITEM_SELECT::AITEM_NOMAL:
-		Nomal();
-		break;
+	//case Menu::AITEM_SELECT::AITEM_NOMAL:
+	//	Nomal();
+	//	break;
 	case Menu::AITEM_SELECT::AITEM_HEAL:
 		Heal();
 		break;
@@ -574,8 +575,8 @@ void Menu::Select(void)
 	{
 		if (xx == 1)
 		{
-			ChangeAitem(AITEM_SELECT::AITEM_NOMAL);
-			yyy = 1;
+			/*ChangeAitem(AITEM_SELECT::AITEM_NOMAL);
+			yyy = 1;*/
 
 		}
 		if (xx == 2)
@@ -598,37 +599,37 @@ void Menu::Select(void)
 
 }
 
-void Menu::Nomal(void)
-{
-	if (xxx >= 0)
-	{
-		if (yyy >= 0)
-		{
-			if (key_.getKeyDown(KEY_INPUT_DOWN))
-			{
-				yyy += 1;
-				if (yyy > 2)
-				{
-					yyy = 1;
-				}
-			}
-			else if (key_.getKeyDown(KEY_INPUT_UP) && yyy >= 0)
-			{
-				yyy -= 1;
-				if (yyy <= 0)
-				{
-					yyy = 2;
-				}
-			}
-		}
-	}
-	if (key_.getKeyDown(KEY_INPUT_Q))
-	{
-		ChangeAitem(AITEM_SELECT::AITEM_ID);
-		xxx = 0;
-		yyy = 0;
-	}
-}
+//void Menu::Nomal(void)
+//{
+//	if (xxx >= 0)
+//	{
+//		if (yyy >= 0)
+//		{
+//			if (key_.getKeyDown(KEY_INPUT_DOWN))
+//			{
+//				yyy += 1;
+//				if (yyy > 2)
+//				{
+//					yyy = 1;
+//				}
+//			}
+//			else if (key_.getKeyDown(KEY_INPUT_UP) && yyy >= 0)
+//			{
+//				yyy -= 1;
+//				if (yyy <= 0)
+//				{
+//					yyy = 2;
+//				}
+//			}
+//		}
+//	}
+//	if (key_.getKeyDown(KEY_INPUT_Q))
+//	{
+//		ChangeAitem(AITEM_SELECT::AITEM_ID);
+//		xxx = 0;
+//		yyy = 0;
+//	}
+//}
 
 void Menu::Heal(void)
 {
