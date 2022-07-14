@@ -245,7 +245,7 @@ void Menus::Draw(PlayerID type, int ru)
 	case Menus::MENUS_SELECT::MENU_ID:
 		switch (mType)
 		{
-		case PlayerID::iti:
+		case PlayerID::Jack:
 			DrawGraph(0, 0, mImage[0], true);
 			break;
 		case PlayerID::Calendula:
