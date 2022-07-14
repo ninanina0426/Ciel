@@ -25,7 +25,7 @@ enum class PL_ST
 //ƒLƒƒƒ‰Ží—Þ
 enum class PlayerID
 {
-	iti,
+	Jack,
 	Calendula,
 	Soy,
 	Max

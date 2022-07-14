@@ -498,7 +498,7 @@ void Player::Draw(Vector2 offset)
 	}
 	
 
-	if (plID_ == PlayerID::iti)
+	if (plID_ == PlayerID::Jack)
 	{
 		if (moveAnmCnt == false)
 		{

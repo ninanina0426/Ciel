@@ -47,7 +47,7 @@ void EventScene::DrawOwnScn()
     auto plID = player_.plID_;
     switch (plID)
     {
-    case PlayerID::iti:
+    case PlayerID::Jack:
         break;
     case PlayerID::Calendula:
         break;

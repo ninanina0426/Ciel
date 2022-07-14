@@ -104,8 +104,8 @@ uniquBaseScn SelectScene::Update(uniquBaseScn own)
     }
 
     //playerの選択
-    SlectChar(player_,KeyDir::LEFT, 1, PlayerID::Max, PlayerID::iti);
-    SlectChar(player_,KeyDir::RIGHT, -1, PlayerID::iti, PlayerID::Soy);
+    SlectChar(player_,KeyDir::LEFT, 1, PlayerID::Max, PlayerID::Jack);
+    SlectChar(player_,KeyDir::RIGHT, -1, PlayerID::Jack, PlayerID::Soy);
 
     DrawOwnScn();
     animcnt_++;
@@ -128,7 +128,7 @@ void SelectScene::DrawOwnScn()
     
    
 
-    if (player_.plID_ == PlayerID::iti)
+    if (player_.plID_ == PlayerID::Jack)
     {
         DrawString(20, 50, "ジャック", 0xffffff, true);
         DrawGraph(280, 20, titi_, true);
@@ -161,7 +161,7 @@ void SelectScene::DrawOwnScn()
 
 bool SelectScene::Init(void)
 {
-    player_.plID_ = PlayerID::iti;
+    player_.plID_ = PlayerID::Jack;
 
     keydir_ = 0;
     animcnt_ = 0;

@@ -36,7 +36,7 @@ void EndScene::DrawOwnScn()
 	}
 	switch (playerID_)
 	{
-	case PlayerID::iti:
+	case PlayerID::Jack:
 		if (endType_ == "end_2")
 		{
 
