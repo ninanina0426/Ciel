@@ -499,7 +499,9 @@ bool SnowMap::CheckMapChip(Vector2 pos)
 			case 703:
 			case 748:
 			case 859:
-
+			case 93:
+			case 750:
+			case 48:
 				
 			flg = false;
 			break;
@@ -566,5 +568,5 @@ int SnowMap::GetMapChip(Vector2 pos)
 
 int SnowMap::GetTMapChip(Vector2 pos)
 {
-	return 0;
+	return OBU3[pos.y_ / 32][pos.x_ / 32];;
 }

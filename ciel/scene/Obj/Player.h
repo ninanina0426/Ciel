@@ -3,6 +3,7 @@
 #include"../Input/Keyboard.h"
 #include"../../stage/Stage.h"
 
+class UI;
 
 enum DIR		//向き管理用
 {
@@ -108,6 +109,8 @@ private:
 
 	DIR keyDir;
 
+
+	
 public:
 	Player();
 	~Player();
@@ -117,7 +120,9 @@ public:
 	bool flg;
 
 	bool init(PlayerID playerid);		//初期化
-	Vector2 Update(int chipid,int lhit);		//更新
+
+	Vector2 Update(int chipid,bool fl, int lhit);		//更新
+
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
 	DIR GetDIR(void);

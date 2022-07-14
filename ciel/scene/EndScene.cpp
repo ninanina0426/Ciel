@@ -31,7 +31,8 @@ void EndScene::DrawOwnScn()
     ClsDrawScreen();
 	if (endType_ == "end_1")
 	{
-		DrawFormatString(600, 600, 0xffffff, "END_1 #慣れない土地には敵わない");
+		DrawGraph(0, 0, e1_, false);
+		DrawFormatString(750, 590, 0xffffff, "END_1 #慣れない土地には敵わない");
 	}
 	switch (playerID_)
 	{
@@ -39,21 +40,21 @@ void EndScene::DrawOwnScn()
 		if (endType_ == "end_2")
 		{
 
-			DrawFormatString(490, 600, 0xffffff, "END_2 #一攫千金逆転人生");
+			DrawFormatString(800, 590, 0xffffff, "END_2 #一攫千金逆転人生");
 		}
 		break;
 	case PlayerID::Calendula:
 		if (endType_ == "end_2")
 		{
 
-			DrawFormatString(490, 600, 0xffffff, "END_2 #圧倒的な美しさ");
+			DrawFormatString(800, 590, 0xffffff, "END_2 #圧倒的な美しさ");
 		}
 		break;
 	case PlayerID::Soy:
 		if (endType_ == "end_2")
 		{
 
-			DrawFormatString(490, 600, 0xffffff, "END_2 #人間にナレタ！");
+			DrawFormatString(800, 590, 0xffffff, "END_2 #人間にナレタ！");
 		}
 		break;
 	case PlayerID::Max:
@@ -76,6 +77,7 @@ void EndScene::DrawOwnScn()
 
 bool EndScene::Init(void)
 {
+	e1_ = LoadGraph("./image/move/氷.jpg");
 	e3_ = LoadGraph("./image/ui/noizu.jpg");
 
     return true;

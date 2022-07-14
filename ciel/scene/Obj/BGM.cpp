@@ -9,6 +9,7 @@ BGM::BGM()
 
 BGM::~BGM()
 {
+    DeleteSoundMem(SHandle);
 }
 
 void BGM::Update(int num, bool evfl)
