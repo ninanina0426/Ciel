@@ -78,7 +78,7 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/char/108.png", 32, 4, 8, 32, 48, &mImage3[0]) == -1)
+	if (LoadDivGraph("image/char/112.png", 32, 4, 8, 32, 48, &mImage3[0]) == -1)
 	{
 		return false;
 	}
@@ -99,6 +99,10 @@ bool Player::init(PlayerID playerid)
 		return false;
 	}
 	if (LoadDivGraph("image/char/11.png", 24, 6, 4, 48, 48, &mImageTS[0]) == -1)
+	{
+		return false;
+	}
+	if (LoadDivGraph("image/char/12.png", 24, 6, 4, 48, 48, &mImageTC[0]) == -1)
 	{
 		return false;
 	}
@@ -132,11 +136,6 @@ Vector2 Player::Update(int chipId,bool fl, int lhit)
 
 	mChipId = chipId;
 	mChiID = lpMapMng.GetChipID();
-
-	key_.Update();
-
-
-
 
 	key_.Update();
 
@@ -605,6 +604,14 @@ void Player::Draw(Vector2 offset)
 			else if (i == 1)
 			{
 				DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage3[num * DIR_MAX + (ttCnt % 6)], true);
+			}
+			else if (i == 2)
+			{
+				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage2[(4 + num) * DIR_MAX + ((mAnmCnt / 10) % 4)], true);
+			}
+			else if (i == 3)
+			{
+				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImageTC[mMoveDir * 6 + ((ttCnt / 10))], true);
 			}
 		}
 		

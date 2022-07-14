@@ -267,9 +267,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&ui_.eveflg_==false)
     {
         mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg());
-        mPlayer.Update(lpMapMng.GetChipId(),mLove->Hit());
+        mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_,mLove->Hit());
     }
-    mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_);
 
     PlayerPos = mPlayer.GetPos();
 
