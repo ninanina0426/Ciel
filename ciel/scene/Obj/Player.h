@@ -117,7 +117,7 @@ public:
 	bool flg;
 
 	bool init(PlayerID playerid);		//初期化
-	Vector2 Update(int chipid);		//更新
+	Vector2 Update(int chipid,int lhit);		//更新
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
 	DIR GetDIR(void);
@@ -138,6 +138,8 @@ public:
 
 	PL_ST state_;
 	PlayerID plID_;
+
+	PlayerID GetType(void);
 	
 };
 

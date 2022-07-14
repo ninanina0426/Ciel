@@ -27,7 +27,7 @@ public:
 
 	int HaveMoney();
 
-	void TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h,int ri,int d,int t, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st);
+	void TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h,int ri,int d,int t, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt);
 
 
 	bool mTama1;
@@ -76,6 +76,9 @@ public:
 	int RiceNum(void);
 	int DangoNum(void);
 	int TeaNum(void);
+	int TamNum(void);
+	int KeyNum(void);
+	int FishNum(void);
 
 	int GetTam(void);
 
@@ -85,7 +88,6 @@ public:
 
 	int mAitem;
 	
-
 	bool GetAitem();
 
 private:
@@ -117,6 +119,9 @@ private:
 	int mRice;
 	int mDango;
 	int mTea;
+	int mTamaN;
+	int mKey;
+	int mFish;
 
 	int Ru;
 	int ssRu;

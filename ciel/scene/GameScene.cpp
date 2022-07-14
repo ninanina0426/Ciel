@@ -10,6 +10,7 @@
 #include "EventScene.h"
 #include "Obj/Quest.h"
 #include"Obj/Masuku.h"
+#include"Obj/Love.h"
 #include "Transition/FadeInOut.h"
 
 GameScene::GameScene(PlayerID playerID)
@@ -241,12 +242,12 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
-    
+   
 
     if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&ui_.eveflg_==false)
     {
         mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg());
-        mPlayer.Update(lpMapMng.GetChipId());
+        mPlayer.Update(lpMapMng.GetChipId(),mLove->Hit());
     }
 
     PlayerPos = mPlayer.GetPos();
@@ -255,13 +256,16 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mNpc->Update(PlayerPos, PlayerSize, mChat->Getflg());
 
+    mLove->Update(PlayerPos, PlayerSize,mPlayer.GetDIR(),mMenus.NumHave());
+
     mAitem->Update(PlayerPos, PlayerSize);
     mChat->Update(mNpc->Getflg(), mNpc->Num(), mShop.CanselFlg(), mShop.SPose(), mWshop.CanselFlg(), mWshop.SPose());
 
 
     //Waとsweetの両方で買えるアイテムがある場合に使う
     mAitem->TotalAitem(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori(), mShop.SsRice(), mShop.SsDango(), mShop.SsTea(),
-        mWshop.SsApple(), mWshop.SsKinominoKusiyaki(), mWshop.SsFruitDrink(), mWshop.SsFishingRodS(), mWshop.SsRagBag(), mWshop.SsPickaxe(), mWshop.SsKinomi(), mWshop.SsRantan(), mWshop.SsHaori(), mWshop.SsRice(), mWshop.SsDango(), mWshop.SsTea());
+        mWshop.SsApple(), mWshop.SsKinominoKusiyaki(), mWshop.SsFruitDrink(), mWshop.SsFishingRodS(), mWshop.SsRagBag(), mWshop.SsPickaxe(), mWshop.SsKinomi(), mWshop.SsRantan(), mWshop.SsHaori(), mWshop.SsRice(), mWshop.SsDango(), mWshop.SsTea(),
+        mMenus.AppleE(),mMenus.KinominoKusiyakiE(), mMenus.FruitDrinkE(), mMenus.FishingRodSE(), mMenus.RagBagE(), mMenus.PickaxeE(), mMenus.KnomiE(), mMenus.mRantanE(), mMenus.mHaoriE(), mMenus.RiceE(), mMenus.DangoE(), mMenus.TeaE());
 
 
     mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum());
@@ -270,11 +274,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
-     /*mMenu.Update();*/
-    if (mPose == true)
-    {
-        mMenu.Update();
-    }
+   
 
     bool AitemGet = mAitem->GetAitem();
     mShop.SsetAitem(AitemGet);
@@ -284,8 +284,13 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mWshop.Update(mChat->GetNum());
 
-    //mMenu.SetMenu(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori());
+    mMenus.SetMenu(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->TeaNum(), mAitem->KeyNum(), mAitem->FishNum());
 
+    if (mPose == true)
+    {
+        mMenus.Update();
+    }
+    
 
     mShop.AMoney(mAitem->Money(mShop.SetMoney(), mShop.GetMoney()));
 
@@ -318,11 +323,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetPos(), mPlayer.GetSiz(), mMapOffset);
 
-     mBgm->Update(mMenu.OpBgm(),ui_.eveflg_);
+     mBgm->Update(mMenus.OpBgm(),ui_.eveflg_);
     
-
-    
-
     return std::move(own);
 }
 
@@ -414,10 +416,7 @@ void GameScene::DrawOwnScn()
 
     mAitem->Draw(mMapOffset);
 
-    //プレイヤー
-	 mPlayer.Draw(mMapOffset);
-
-     mLayer->Draw(mMapOffset);
+    mLove->Draw(mMapOffset);
 
      //時間帯
      TimeManeger();
@@ -426,21 +425,29 @@ void GameScene::DrawOwnScn()
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     
     
-    
+     //プレイヤー
+     mPlayer.Draw(mMapOffset);
+
+
 
      mChat->Draw(mMapOffset);
 
-     
-
-
      if (mPose == true)
      {
-         mMenu.Draw();
+         mMenus.Draw(mPlayer.GetType(),mAitem->HaveMoney());
      }
+
+    
+     ////プレイヤー
+     //mPlayer.Draw(mMapOffset);
+
+     mLayer->Draw(mMapOffset);
 
      mShop.Draw();
 
      mWshop.Draw();
+
+
     
      mMasuku->Draw(mMapOffset);
 
@@ -463,7 +470,7 @@ bool GameScene::Init(void)
 
     mAitem = new Aitem();
 
-    mMenu.init(this);
+    mMenus.init();
 
     mShop.init();
     mWshop.init();
@@ -497,6 +504,8 @@ bool GameScene::Init(void)
     mLayer = new Layer();
 
     mMasuku = new Masuku();
+
+    mLove = new Love();
 
    	return true;
 

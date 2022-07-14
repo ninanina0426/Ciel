@@ -21,8 +21,8 @@ bool Player::init(PlayerID playerid)
 	mPos.x_ = 1590;
 	mPos.y_ = 2915;
 
-	/*mPos.x_ = 785;
-	mPos.y_ = 1400;*/
+	/*mPos.x_ = 0;
+	mPos.y_ = 0;*/
 
 	//player‚Ìí•ÊŠÖŒW
 	if (plID_ != PlayerID::Max)
@@ -122,7 +122,7 @@ bool Player::init(PlayerID playerid)
 
 }
 
-Vector2 Player::Update(int chipId)
+Vector2 Player::Update(int chipId, int lhit)
 {
 	keyDir = DIR_MAX;		//ƒL[“ü—Í‚Ì•ûŒü
 	Vector2 copyPos = mPos;
@@ -154,25 +154,29 @@ Vector2 Player::Update(int chipId)
 		}
 	}
 	//ó£
-	if ((mChipId == 896))
+	if (mapID == MAP_ID::FORESTIN)
 	{
-		if (key_.getKeyDown(KEY_INPUT_F))
+		if ((mChipId == 896))
 		{
-			if (i == 0)
+			if (key_.getKeyDown(KEY_INPUT_F))
 			{
-				i = 2;
-				mFlg = true;
-				PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
-			}
-			else if (i == 2)
-			{
-				i = 0;
-				mFlg = false;
-				DeleteSoundMem(oHandle);
-				oHandle = LoadSoundMem("image/Sound/…‚ÉZ‚©‚è‚È‚ª‚ç•à‚­.ogg");
+				if (i == 0)
+				{
+					i = 2;
+					mFlg = true;
+					PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
+				}
+				else if (i == 2)
+				{
+					i = 0;
+					mFlg = false;
+					DeleteSoundMem(oHandle);
+					oHandle = LoadSoundMem("image/Sound/…‚ÉZ‚©‚è‚È‚ª‚ç•à‚­.ogg");
+				}
 			}
 		}
 	}
+	
 	//‚Â‚é‚Í‚µ
 	if (key_.getKeyDown(KEY_INPUT_B))
 	{
@@ -637,6 +641,11 @@ Vector2 Player::GetPos(void)
 int Player::GetStamina(void)
 {
 	return Stamina_;
+}
+
+PlayerID Player::GetType(void)
+{
+	return plID_;
 }
 
 void Player::message_box() 

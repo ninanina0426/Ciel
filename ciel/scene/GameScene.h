@@ -3,7 +3,7 @@
 #include "BaseScene.h"
 #include"../scene/Input/Keyboard.h"
 #include"../scene/Obj/Player.h"
-#include"../scene/Obj/Menu.h"
+#include"../scene/Obj/Menus.h"
 #include"Obj/shop.h"
 #include"Obj/wshop.h"
 #include "../stage/stage.h"
@@ -16,6 +16,7 @@ class Npc;
 class Chat;
 class Layer;
 class Masuku;
+class Love;
 
 class GameScene : public BaseScene
 {
@@ -63,7 +64,7 @@ private:
     //player
     Player mPlayer;
 
-    Menu mMenu;
+    Menus mMenus;
 
     Aitem *mAitem;
 
@@ -106,6 +107,8 @@ private:
     BGM*mBgm;
 
     Layer* mLayer;
+
+    Love* mLove;
 
     int x;
     
