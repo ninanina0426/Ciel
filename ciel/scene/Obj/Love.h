@@ -11,6 +11,10 @@ private:
 	int mImage[48];		//画像の格納領域
 	int mImageChat[100];	//
 
+	int chat;
+
+	int numC;
+
 	int mImageF;
 	
 	DIR mMoveDir;		//キャラクターの向き
@@ -78,6 +82,8 @@ public:
 	int Dango();
 	int Tea();
 	int Fish();
+
+	void LoveEV();
 
 };
 

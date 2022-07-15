@@ -454,7 +454,7 @@ void GameScene::DrawOwnScn()
 
 
 
-     mChat->Draw(mMapOffset);
+     mLayer->Draw(mMapOffset);
 
      if (mPose == true)
      {
@@ -465,7 +465,9 @@ void GameScene::DrawOwnScn()
      ////ƒvƒŒƒCƒ„[
      //mPlayer.Draw(mMapOffset);
 
-     mLayer->Draw(mMapOffset);
+    
+
+     mChat->Draw(mMapOffset);
 
      mShop.Draw();
 
@@ -474,6 +476,8 @@ void GameScene::DrawOwnScn()
 
     
      mMasuku->Draw(mMapOffset);
+
+
 
      ui_.Draw();
 

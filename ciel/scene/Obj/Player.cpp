@@ -543,7 +543,7 @@ void Player::Draw(Vector2 offset)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[3], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80-50, mImageChat[3], true);
 		}
 		if (mAnmCnt< 270)
 		{
@@ -584,7 +584,7 @@ void Player::Draw(Vector2 offset)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[2], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80 - 50, mImageChat[2], true);
 		}
 		if (mAnmCnt< 270)
 		{
@@ -621,7 +621,7 @@ void Player::Draw(Vector2 offset)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_-63 , mPos.y_ - offset.y_ -80, mImageChat[1], true);
+			DrawGraph(mPos.x_ - offset.x_-63 , mPos.y_ - offset.y_ -80 - 50, mImageChat[1], true);
 		}
 		if (mAnmCnt< 270)
 		{
