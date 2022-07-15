@@ -242,7 +242,7 @@ bool Chat::Update(bool flg, int num,bool sflg,bool sPose, bool wflg, bool wPose)
 			{
 				if (wshopFlg == true)
 				{
-					if (mNum == 20)
+					if (mNum == 29)
 					{
 						mNum = 17;
 					}

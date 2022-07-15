@@ -55,6 +55,7 @@ private:
 	//çDä¥ìx
 	int FR;
 
+	int HaveNum;
 public:
 	Love();
 	~Love();
@@ -68,6 +69,15 @@ public:
 
 	bool Hit();
 	bool MoveFR();
+	int NumH();
+
+	int Apple();
+	int KinominoKusiyaki();
+	int FruitDrink();
+	int Rice();
+	int Dango();
+	int Tea();
+	int Fish();
 
 };
 

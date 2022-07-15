@@ -57,7 +57,7 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
 
     chiID = lpMapMng.GetChipID();
 
-    int HaveNum = num;
+    HaveNum = num;
 
     if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[1].y_ + 32 / 2) &&
         (mPos.y_ + mNum[1].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
@@ -72,31 +72,37 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
             {
                 lApple -= 1;
                 FR += 10;
+                HaveNum = 20;
             }
             else if (HaveNum == 2)
             {
                 lRice -= 1;
                 FR += 10;
+                HaveNum = 20;
             }
             else if (HaveNum == 3)
             {
                 lKinominoKusiyaki -= 1;
                 FR += 15;
+                HaveNum = 20;
             }
             else if (HaveNum == 4)
             {
                 lDango -= 1;
                 FR += 15;
+                HaveNum = 20;
             }
             else if (HaveNum == 5)
             {
                 lFruitDrink -= 1;
                 FR += 20;
+                HaveNum = 20;
             }
             else if (HaveNum == 6)
             {
                 lTea -= 1;
                 FR += 10;
+                HaveNum = 20;
             }
         }
 
@@ -105,6 +111,11 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
     else
     {
         hitflg = false;
+    }
+
+    if (HaveNum == 20)
+    {
+        HaveNum = 100;
     }
 
     if (key_.getKeyDown(KEY_INPUT_F))
@@ -171,4 +182,44 @@ bool Love::Hit()
 bool Love::MoveFR()
 {
     return moveFlg;
+}
+
+int Love::NumH()
+{
+    return HaveNum;
+}
+
+int Love::Apple()
+{
+    return lApple;
+}
+
+int Love::KinominoKusiyaki()
+{
+    return lKinominoKusiyaki;
+}
+
+int Love::FruitDrink()
+{
+    return lFruitDrink;
+}
+
+int Love::Rice()
+{
+    return lRice;
+}
+
+int Love::Dango()
+{
+    return lDango;
+}
+
+int Love::Tea()
+{
+    return lTea;
+}
+
+int Love::Fish()
+{
+    return lFish;
 }

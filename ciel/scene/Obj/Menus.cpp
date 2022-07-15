@@ -19,6 +19,8 @@ bool Menus::init(void)
 	//曲の初期音量
 	b = 50;
 
+	have = 0;
+
 	//何も選択していないとき
 	mImage[0]= LoadGraph("image/menyu/J.png");
 	mImage[1]= LoadGraph("image/menyu/S.png");
@@ -189,7 +191,7 @@ bool Menus::init(void)
 	mBoxO[2] = {84,351};
 	mBoxO[3] = {84,351};
 	
-	FontSize = CreateFontToHandle(NULL, 50, 5);
+	FontSize = CreateFontToHandle(NULL, 48, 5);
 
 	cHandle = LoadSoundMem("image/Sound/キャンセル5.ogg");
 	kHandle = LoadSoundMem("image/Sound/決定ボタンを押す42.ogg");
@@ -203,32 +205,41 @@ bool Menus::init(void)
 	return true;
 }
 
-void Menus::Update(void)
+void Menus::Update(int num, bool flg)
 {
 	key_.Update();
-	
-	switch (mSelect)
+
+	if (num == 100)
 	{
-	case Menus::MENUS_SELECT::MENU_ID:
-		Menu();
-		break;
-	case Menus::MENUS_SELECT::MENU_AITEM:
-		Aitems();
-		break;
-	case Menus::MENUS_SELECT::MENU_HINT:
-		Hint();
-		break;
-	case Menus::MENUS_SELECT::MENU_OPTION:
-		Opution();
-		break;
-	case Menus::MENUS_SELECT::MENU_END:
-		End();
-		break;
-	case Menus::MENUS_SELECT::MENU_MAX:
-		break;
-	default:
-		break;
+		haveNum = 0;
 	}
+	
+	if (flg == true)
+	{
+		switch (mSelect)
+		{
+		case Menus::MENUS_SELECT::MENU_ID:
+			Menu();
+			break;
+		case Menus::MENUS_SELECT::MENU_AITEM:
+			Aitems();
+			break;
+		case Menus::MENUS_SELECT::MENU_HINT:
+			Hint();
+			break;
+		case Menus::MENUS_SELECT::MENU_OPTION:
+			Opution();
+			break;
+		case Menus::MENUS_SELECT::MENU_END:
+			End();
+			break;
+		case Menus::MENUS_SELECT::MENU_MAX:
+			break;
+		default:
+			break;
+		}
+	}
+	
 
 }
 
@@ -289,6 +300,30 @@ void Menus::Draw(PlayerID type, int ru)
 		if (SHflg == true)
 		{
 			DrawGraph(0, 0, mImageAH[1], true);
+			if (yyyy == 1)
+			{
+				DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssApple);
+			}
+			if (yyyy == 2)
+			{
+				DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssRice);
+			}
+			if (yyyy == 3)
+			{
+				DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssKinominoKusiyaki);
+			}
+			if (yyyy == 4)
+			{
+				DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssDango);
+			}
+			if (yyyy == 5)
+			{
+				DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssFruitDrink);
+			}
+			if (yyyy == 6)
+			{
+				DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssTea);
+			}
 		}
 		else
 		{
@@ -299,6 +334,45 @@ void Menus::Draw(PlayerID type, int ru)
 		if (SIflg == true)
 		{
 			DrawGraph(0, 0, mImageAI[1], true);
+			if (xxx == 0)
+			{
+				if (yyy == 1)
+				{
+					DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssRagBag);
+				}
+				if (yyy == 2)
+				{
+					DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssFishingRodS);
+				}
+				if (yyy == 3)
+				{
+					DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssPickaxe);
+				}
+				if (yyy == 4)
+				{
+					DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssRantanN);
+				}
+				if (yyy == 5)
+				{
+					DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssHaoriN);
+				}
+			}
+			if (xxx == 1)
+			{
+				if (yyy == 1)
+				{
+					DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssTama);
+				}
+				if (yyy == 2)
+				{
+					DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssKey);
+				}
+				if (yyy == 3)
+				{
+					DrawFormatStringToHandle(470, 190, GetColor(255, 255, 255), FontSize, "所持:%d", ssNumKinomi);
+				}
+			}
+			
 		}
 		else
 		{
@@ -624,28 +698,12 @@ void Menus::Heal(void)
 						if (ssApple > 0)
 						{
 							haveNum = 1;
-							sApple = true;
-							sKinominoKusiyaki = false;
-							sFruitDrink = false;
-							sRice = false;
-							sDango = false;
-							sTea = false;
-							sFishingRodS = false;
-							sRagBag = false;
-							sPickaxe = false;
-							sHaoriN = false;
-							sRantanN = false;
-							sNumKinomi = false;
-							sKey = false;
-							sTama = false;
-							sfish = false;
 							SHflg = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
 						else
 						{
 							haveNum = 0;
-							sApple = false;
 							SHflg = false;
 							PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
 						}
@@ -671,32 +729,17 @@ void Menus::Heal(void)
 						ai = 0;
 						haveNum = 0;
 						SHflg = false;
-						sApple = false;
 						PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 					}
 				}
 				else if (yyyy == 2)
 				{
+					
 					if (ai == 1)
 					{
 						if (ssRice > 0)
 						{
 							haveNum = 2;
-							sRice = true;
-							sApple = false;
-							sKinominoKusiyaki = false;
-							sFruitDrink = false;
-							sDango = false;
-							sTea = false;
-							sFishingRodS = false;
-							sRagBag = false;
-							sPickaxe = false;
-							sHaoriN = false;
-							sRantanN = false;
-							sNumKinomi = false;
-							sKey = false;
-							sTama = false;
-							sfish = false;
 							SHflg = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
@@ -729,32 +772,17 @@ void Menus::Heal(void)
 						ai = 0;
 						haveNum = 0;
 						SHflg = false;
-						sRice = false;
 						PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 					}
 				}
 				else if (yyyy == 3)
 				{
+					
 					if (ai == 1)
 					{
 						if (ssKinominoKusiyaki > 0)
 						{
 							haveNum = 3;
-							sKinominoKusiyaki = true;
-							sApple = false;
-							sFruitDrink = false;
-							sRice = false;
-							sDango = false;
-							sTea = false;
-							sFishingRodS = false;
-							sRagBag = false;
-							sPickaxe = false;
-							sHaoriN = false;
-							sRantanN = false;
-							sNumKinomi = false;
-							sKey = false;
-							sTama = false;
-							sfish = false;
 							SHflg = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
@@ -787,32 +815,17 @@ void Menus::Heal(void)
 						ai = 0;
 						haveNum = 0;
 						SHflg = false;
-						sKinominoKusiyaki = false;
 						PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 					}
 				}
 				else if (yyyy == 4)
 				{
+					
 					if (ai == 1)
 					{
 						if (ssDango > 0)
 						{
 							haveNum = 4;
-							sDango = true;
-							sApple = false;
-							sKinominoKusiyaki = false;
-							sFruitDrink = false;
-							sRice = false;
-							sTea = false;
-							sFishingRodS = false;
-							sRagBag = false;
-							sPickaxe = false;
-							sHaoriN = false;
-							sRantanN = false;
-							sNumKinomi = false;
-							sKey = false;
-							sTama = false;
-							sfish = false;
 							SHflg = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
@@ -844,32 +857,17 @@ void Menus::Heal(void)
 						ai = 0;
 						haveNum = 0;
 						SHflg = false;
-						sDango = false;
 						PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 					}
 				}
 				else if (yyyy == 5)
 				{
+					
 					if (ai == 1)
 					{
 						if (ssFruitDrink > 0)
 						{
 							haveNum = 5;
-							sFruitDrink = true;
-							sApple = false;
-							sKinominoKusiyaki = false;;
-							sRice = false;
-							sDango = false;
-							sTea = false;
-							sFishingRodS = false;
-							sRagBag = false;
-							sPickaxe = false;
-							sHaoriN = false;
-							sRantanN = false;
-							sNumKinomi = false;
-							sKey = false;
-							sTama = false;
-							sfish = false;
 							SHflg = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
@@ -901,32 +899,17 @@ void Menus::Heal(void)
 						haveNum = 0;
 						ai = 0;
 						SHflg = false;
-						sFruitDrink = false;
 						PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 					}
 				}
 				else if (yyyy == 6)
 				{
+				
 					if (ai == 1)
 					{
 						if (ssTea > 0)
 						{
 							haveNum = 6;
-							sTea = true;
-							sApple = false;
-							sKinominoKusiyaki = false;
-							sFruitDrink = false;
-							sRice = false;
-							sDango = false;
-							sFishingRodS = false;
-							sRagBag = false;
-							sPickaxe = false;
-							sHaoriN = false;
-							sRantanN = false;
-							sNumKinomi = false;
-							sKey = false;
-							sTama = false;
-							sfish = false;
 							SHflg = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
@@ -958,7 +941,6 @@ void Menus::Heal(void)
 						haveNum = 0;
 						ai = 0;
 						SHflg = false;
-						sTea = false;
 						PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 					}
 				}
@@ -1079,26 +1061,13 @@ void Menus::Important(void)
 				{
 					if (yyy == 1)
 					{
+						
 						if (ah == 1)
 						{
 							if (ssRagBag > 0)
 							{
 								haveNum = 7;
-								sRagBag = true;
-								sApple = false;
-								sKinominoKusiyaki = false;
-								sFruitDrink = false;
-								sRice = false;
-								sDango = false;
-								sTea = false;
-								sFishingRodS = false;
-								sPickaxe = false;
-								sHaoriN = false;
-								sRantanN = false;
-								sNumKinomi = false;
-								sKey = false;
-								sTama = false;
-								sfish = false;
+								
 								SIflg = false;
 								PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 							}
@@ -1116,32 +1085,18 @@ void Menus::Important(void)
 							haveNum = 0;
 							ah = 0;
 							SIflg = false;
-							sRagBag = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
 					}
 					else if (yyy == 2)
 					{
+						
 						if (ah == 1)
 						{
 							if (ssFishingRodS > 0)
 							{
 								haveNum = 8;
-								sFishingRodS = true;
-								sApple = false;
-								sKinominoKusiyaki = false;
-								sFruitDrink = false;
-								sRice = false;
-								sDango = false;
-								sTea = false;
-								sRagBag = false;
-								sPickaxe = false;
-								sHaoriN = false;
-								sRantanN = false;
-								sNumKinomi = false;
-								sKey = false;
-								sTama = false;
-								sfish = false;
+								
 								SIflg = false;
 								PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 							}
@@ -1159,32 +1114,18 @@ void Menus::Important(void)
 							ah = 0;
 							haveNum = 0;
 							SIflg = false;
-							sFishingRodS = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
 					}
 					else if (yyy == 3)
 					{
+						
 						if (ah == 1)
 						{
 							if (ssPickaxe > 0)
 							{
 								haveNum = 9;
-								sPickaxe = true;
-								sApple = false;
-								sKinominoKusiyaki = false;
-								sFruitDrink = false;
-								sRice = false;
-								sDango = false;
-								sTea = false;
-								sFishingRodS = false;
-								sRagBag = false;
-								sHaoriN = false;
-								sRantanN = false;
-								sNumKinomi = false;
-								sKey = false;
-								sTama = false;
-								sfish = false;
+								
 								SIflg = false;
 								PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 							}
@@ -1192,7 +1133,6 @@ void Menus::Important(void)
 							{
 								haveNum = 0;
 								SIflg = false;
-								sPickaxe = false;
 								PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
 							}
 
@@ -1202,32 +1142,18 @@ void Menus::Important(void)
 							haveNum = 0;
 							ah = 0;
 							SIflg = false;
-							sPickaxe = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
 					}
 					else if (yyy == 4)
 					{
+						
 						if (ah == 1)
 						{
 							if (ssRantanN > 0)
 							{
 								haveNum = 10;
-								sRantanN = true;
-								sApple = false;
-								sKinominoKusiyaki = false;
-								sFruitDrink = false;
-								sRice = false;
-								sDango = false;
-								sTea = false;
-								sFishingRodS = false;
-								sRagBag = false;
-								sPickaxe = false;
-								sHaoriN = false;
-								sNumKinomi = false;
-								sKey = false;
-								sTama = false;
-								sfish = false;
+								
 								SIflg = false;
 								PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 							}
@@ -1235,7 +1161,6 @@ void Menus::Important(void)
 							{
 								haveNum = 0;
 								SIflg = false;
-								sRantanN = false;
 								PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
 							}
 
@@ -1245,32 +1170,18 @@ void Menus::Important(void)
 							haveNum = 0;
 							ah = 0;
 							SIflg = false;
-							sRantanN = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
 					}
 					else if (yyy == 5)
 					{
+					
 						if (ah == 1)
 						{
 							if (ssHaoriN > 0)
 							{
 								haveNum = 11;
-								sHaoriN = true;
-								sApple = false;
-								sKinominoKusiyaki = false;
-								sFruitDrink = false;
-								sRice = false;
-								sDango = false;
-								sTea = false;
-								sFishingRodS = false;
-								sRagBag = false;
-								sPickaxe = false;
-								sRantanN = false;
-								sNumKinomi = false;
-								sKey = false;
-								sTama = false;
-								sfish = false;
+								
 								SIflg = false;
 								PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 							}
@@ -1288,7 +1199,6 @@ void Menus::Important(void)
 							haveNum = 0;
 							ah = 0;
 							SIflg = false;
-							sHaoriN = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
 					}
@@ -1297,26 +1207,13 @@ void Menus::Important(void)
 				{
 					if (yyy == 1)
 					{
+						
 						if (ah == 1)
 						{
 							if (ssTama > 0)
 							{
 								haveNum = 12;
-								sTama = true;
-								sApple = false;
-								sKinominoKusiyaki = false;
-								sFruitDrink = false;
-								sRice = false;
-								sDango = false;
-								sTea = false;
-								sFishingRodS = false;
-								sRagBag = false;
-								sPickaxe = false;
-								sHaoriN = false;
-								sRantanN = false;
-								sNumKinomi = false;
-								sKey = false;
-								sfish = false;
+								
 								SIflg = false;
 								PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 							}
@@ -1334,32 +1231,18 @@ void Menus::Important(void)
 							haveNum = 0;
 							ah = 0;
 							SIflg = false;
-							sTama = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
 					}
 					else if (yyy == 2)
 					{
+						
 						if (ah == 1)
 						{
 							if (ssKey > 0)
 							{
 								haveNum = 13;
-								sKey = true;
-								sApple = false;
-								sKinominoKusiyaki = false;
-								sFruitDrink = false;
-								sRice = false;
-								sDango = false;
-								sTea = false;
-								sFishingRodS = false;
-								sRagBag = false;
-								sPickaxe = false;
-								sHaoriN = false;
-								sRantanN = false;
-								sNumKinomi = false;
-								sTama = false;
-								sfish = false;
+								
 								SIflg = false;
 								PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 							}
@@ -1367,7 +1250,6 @@ void Menus::Important(void)
 							{
 								haveNum = 0;
 								SIflg = false;
-								sKey = false;
 								PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
 							}
 
@@ -1377,32 +1259,18 @@ void Menus::Important(void)
 							haveNum = 0;
 							ah = 0;
 							SIflg = false;
-							sKey = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
 					}
 					else if (yyy == 3)
 					{
+						
 						if (ah == 1)
 						{
 							if (ssNumKinomi > 0)
 							{
 								haveNum = 14;
-								sNumKinomi = true;
-								sApple = false;
-								sKinominoKusiyaki = false;
-								sFruitDrink = false;
-								sRice = false;
-								sDango = false;
-								sTea = false;
-								sFishingRodS = false;
-								sRagBag = false;
-								sPickaxe = false;
-								sHaoriN = false;
-								sRantanN = false;
-								sKey = false;
-								sTama = false;
-								sfish = false;
+								
 								SIflg = false;
 								PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 							}
@@ -1410,7 +1278,6 @@ void Menus::Important(void)
 							{
 								haveNum = 0;
 								SIflg = false;
-								sNumKinomi = false;
 								PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
 							}
 
@@ -1420,7 +1287,6 @@ void Menus::Important(void)
 							haveNum = 0;
 							ah = 0;
 							SIflg = false;
-							sNumKinomi = false;
 							PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 						}
 					}

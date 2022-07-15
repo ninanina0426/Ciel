@@ -31,7 +31,7 @@ public:
 	~Menus();
 
 	bool init(void);		//初期化
-	void Update(void);		//更新
+	void Update(int num,bool flg);		//更新
 	void Draw(PlayerID type,int ru);		//描画
 	bool Release(void);		//開放
 
@@ -173,6 +173,8 @@ private:
 	bool sfish;
 
 	int b;
+
+	int have;
 
 	//効果音
 	int kHandle;
