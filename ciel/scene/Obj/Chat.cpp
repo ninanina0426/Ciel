@@ -242,7 +242,7 @@ bool Chat::Update(bool flg, int num,bool sflg,bool sPose, bool wflg, bool wPose)
 			{
 				if (wshopFlg == true)
 				{
-					if (mNum == 20)
+					if (mNum == 29)
 					{
 						mNum = 17;
 					}
@@ -399,52 +399,52 @@ void Chat::Draw(Vector2 offset)
 	{
 	case 1:
 	{
-		DrawGraph(mPos.x_ - offset.x_ + 1305, mPos.y_ - offset.y_ + 555, mImage[mNum], true);
+		DrawGraph(mPos.x_ - offset.x_ + 1305, mPos.y_ - offset.y_ + 555 - 50, mImage[mNum], true);
 		break;
 	}
 	case 4:
 	{
-		DrawGraph(mPos.x_ - offset.x_ + 750, mPos.y_ - offset.y_ + 1100, mImage[mNum], true);
+		DrawGraph(mPos.x_ - offset.x_ + 750, mPos.y_ - offset.y_ + 1100 - 50, mImage[mNum], true);
 		break;
 	}
 	case 8:
 	{
-		DrawGraph(mPos.x_ - offset.x_ + 1305, mPos.y_ - offset.y_ + 555, mImage[mNum], true);
+		DrawGraph(mPos.x_ - offset.x_ + 1305, mPos.y_ - offset.y_ + 555 - 50, mImage[mNum], true);
 		break;
 	}
 	case 15:
 	{
-		DrawGraph(mPos.x_ - offset.x_ + 1750, mPos.y_ - offset.y_ + 1650, mImage[mNum], true);
+		DrawGraph(mPos.x_ - offset.x_ + 1750, mPos.y_ - offset.y_ + 1650 - 50, mImage[mNum], true);
 		break;
 	}
 	case 30:
 	{
-		DrawGraph(mPos.x_ - offset.x_ + 1535-32, mPos.y_ - offset.y_ + 2145-128, mImage[mNum], true);
+		DrawGraph(mPos.x_ - offset.x_ + 1535-32, mPos.y_ - offset.y_ + 2145-128 - 50, mImage[mNum], true);
 		break;
 	}
 	case 35:
 	{
-		DrawGraph(mPos.x_ - offset.x_ + 286 - 32, mPos.y_ - offset.y_ + 1918 - 128, mImage[mNum], true);
+		DrawGraph(mPos.x_ - offset.x_ + 286 - 32, mPos.y_ - offset.y_ + 1918 - 128 - 50, mImage[mNum], true);
 		break;
 	}
 	case 40:
 	{
-		DrawGraph(mPos.x_ - offset.x_ + 128 - 32, mPos.y_ - offset.y_ + 800 - 128, mImage[mNum], true);
+		DrawGraph(mPos.x_ - offset.x_ + 128 - 32, mPos.y_ - offset.y_ + 800 - 128 - 50, mImage[mNum], true);
 		break;
 	}
 	case 45:
 	{
-		DrawGraph(mPos.x_ - offset.x_ + 2879 - 32, mPos.y_ - offset.y_ + 769 - 128, mImage[mNum], true);
+		DrawGraph(mPos.x_ - offset.x_ + 2879 - 32, mPos.y_ - offset.y_ + 769 - 128 - 50, mImage[mNum], true);
 		break;
 	}
 	case 50:
 	{
-		DrawGraph(mPos.x_ - offset.x_ + 2400 - 32, mPos.y_ - offset.y_ + 100 - 128, mImage[mNum], true);
+		DrawGraph(mPos.x_ - offset.x_ + 2400 - 32, mPos.y_ - offset.y_ + 100 - 128 - 50, mImage[mNum], true);
 		break;
 	}
 	case 55:
 	{
-		DrawGraph(mPos.x_ - offset.x_ + 2591 - 32, mPos.y_ - offset.y_ + 129 - 128, mImage[mNum], true);
+		DrawGraph(mPos.x_ - offset.x_ + 2591 - 32, mPos.y_ - offset.y_ + 129 - 128 - 50, mImage[mNum], true);
 		break;
 	}
 	default:

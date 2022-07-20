@@ -731,21 +731,21 @@ int Aitem::HaveMoney()
 	return Ru;
 }
 
-void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt)
+void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt, int la, int lkk, int lfd, int lri, int ld, int lt)
 {
 
-	mNumKinomi=k+sk-mk;
-	mApple = apple + a + sa-ma;
-	mKinominoKusiyaki=kk+skk-mkk;
-	mFruitDrink=fd+sfd-mfd;
+	mNumKinomi=k+sk+mk;
+	mApple = apple + a + sa-ma+la;
+	mKinominoKusiyaki=kk+skk-mkk+lkk;
+	mFruitDrink=fd+sfd-mfd+lfd;
 	mFishingRodS=frs+sfrs-mfrs;
 	mRagBag=rb+srb-mrb;
 	mPickaxe=p+sp-mp;
 	mHaoriN=h+sh-mh;
 	mRantanN=r+sr+rantan-mr;
-	mRice = ri+sri-mri;
-	mDango = d+sd-md;
-	mTea = t+st-mt;
+	mRice = ri+sri-mri+lri;
+	mDango = d+sd-md+ld;
+	mTea = t+st-mt+lt;
 
 }
 

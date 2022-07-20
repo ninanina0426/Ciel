@@ -27,7 +27,7 @@ public:
 
 	int HaveMoney();
 
-	void TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h,int ri,int d,int t, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt);
+	void TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h,int ri,int d,int t, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt, int la, int lkk, int lfd, int lri, int ld, int lt);
 
 
 	bool mTama1;

@@ -11,6 +11,10 @@ private:
 	int mImage[48];		//画像の格納領域
 	int mImageChat[100];	//
 
+	int chat;
+
+	int numC;
+
 	int mImageF;
 	
 	DIR mMoveDir;		//キャラクターの向き
@@ -42,9 +46,20 @@ private:
 	bool hitflg;
 
 	//会話
+
+	//所持
+	int lApple;
+	int lKinominoKusiyaki;
+	int lFruitDrink;
+	int lRice;
+	int lDango;
+	int lTea;
+	int lFish;
 	
+	//好感度
+	int FR;
 
-
+	int HaveNum;
 public:
 	Love();
 	~Love();
@@ -57,6 +72,18 @@ public:
 	Vector2 GetPos(void);
 
 	bool Hit();
+	bool MoveFR();
+	int NumH();
+
+	int Apple();
+	int KinominoKusiyaki();
+	int FruitDrink();
+	int Rice();
+	int Dango();
+	int Tea();
+	int Fish();
+
+	void LoveEV();
 
 };
 

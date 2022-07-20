@@ -78,7 +78,7 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
-	if (LoadDivGraph("image/char/112.png", 32, 4, 8, 32, 48, &mImage3[0]) == -1)
+	if (LoadDivGraph("image/char/112.png", 48, 4, 12, 48, 48, &mImage3[0]) == -1)
 	{
 		return false;
 	}
@@ -127,7 +127,7 @@ bool Player::init(PlayerID playerid)
 
 }
 
-Vector2 Player::Update(int chipId,bool fl, int lhit)
+Vector2 Player::Update(int chipId,bool fl, bool lhit)
 {
 	keyDir = DIR_MAX;		//ÉLÅ[ì¸óÕÇÃï˚å¸
 	Vector2 copyPos = mPos;
@@ -136,6 +136,8 @@ Vector2 Player::Update(int chipId,bool fl, int lhit)
 
 	mChipId = chipId;
 	mChiID = lpMapMng.GetChipID();
+
+	bool mloveNpc = lhit;
 
 	key_.Update();
 
@@ -361,6 +363,43 @@ Vector2 Player::Update(int chipId,bool fl, int lhit)
 						mPos = copyPos;
 					}
 
+					if (mloveNpc == true)
+					{
+						if (mMoveDir == DIR_UP)
+						{
+							if ((mPos.y_ < 750) && (mPos.y_ > 745))
+							{
+								mPos.y_ = 750;
+								mPos.x_ = copyPos.x_;
+							}
+						}
+						if (mMoveDir == DIR_DOWN)
+						{
+							if ((mPos.y_ < 691) && (mPos.y_ > 684))
+							{
+								mPos.y_ = 684;
+								mPos.x_ = copyPos.x_;
+							}
+						}
+						if (mMoveDir == DIR_LEFT)
+						{
+							if ((mPos.x_ < 1670) && (mPos.x_ > 1665))
+							{
+								mPos.x_ = 1670;
+								mPos.y_ = copyPos.y_;
+							}
+						}
+						if (mMoveDir == DIR_RIGHT)
+						{
+							if ((mPos.x_ > 1615) && (mPos.x_ < 1620))
+							{
+								mPos.x_ = 1615;
+								mPos.y_ = copyPos.y_;
+							}
+						}
+						
+					}
+
 					/*mDamyPos = copyPos;*/
 
 				}
@@ -504,7 +543,7 @@ void Player::Draw(Vector2 offset)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[3], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80-50, mImageChat[3], true);
 		}
 		if (mAnmCnt< 270)
 		{
@@ -545,7 +584,7 @@ void Player::Draw(Vector2 offset)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80, mImageChat[2], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80 - 50, mImageChat[2], true);
 		}
 		if (mAnmCnt< 270)
 		{
@@ -582,11 +621,11 @@ void Player::Draw(Vector2 offset)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_-63 , mPos.y_ - offset.y_ -80, mImageChat[1], true);
+			DrawGraph(mPos.x_ - offset.x_-63 , mPos.y_ - offset.y_ -80 - 50, mImageChat[1], true);
 		}
 		if (mAnmCnt< 270)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImageC[mAnmCnt/10], true);
+			DrawGraph(mPos.x_ - offset.x_ - 16, mPos.y_ - offset.y_ - 24, mImageC[mAnmCnt/10], true);
 		}
 		else
 		{
@@ -607,7 +646,7 @@ void Player::Draw(Vector2 offset)
 			}
 			else if (i == 2)
 			{
-				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage2[(4 + num) * DIR_MAX + ((mAnmCnt / 10) % 4)], true);
+				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage3[(4 + num) * DIR_MAX + ((mAnmCnt / 10) % 4)], true);
 			}
 			else if (i == 3)
 			{

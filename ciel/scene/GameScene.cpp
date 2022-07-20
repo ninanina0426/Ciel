@@ -264,17 +264,16 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
    
 
-    if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&ui_.eveflg_==false)
+    if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&(ui_.eveflg_==false)&&(mPose==false))
     {
         mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg());
+        mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_, mLove->Hit());
 
-       // mPlayer.Update(lpMapMng.GetChipId(),mLove->Hit());
     }
-   // mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_);
+
 
         mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_,mLove->Hit());
-    
-
+   
 
     PlayerPos = mPlayer.GetPos();
 
@@ -291,7 +290,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     //Waとsweetの両方で買えるアイテムがある場合に使う
     mAitem->TotalAitem(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori(), mShop.SsRice(), mShop.SsDango(), mShop.SsTea(),
         mWshop.SsApple(), mWshop.SsKinominoKusiyaki(), mWshop.SsFruitDrink(), mWshop.SsFishingRodS(), mWshop.SsRagBag(), mWshop.SsPickaxe(), mWshop.SsKinomi(), mWshop.SsRantan(), mWshop.SsHaori(), mWshop.SsRice(), mWshop.SsDango(), mWshop.SsTea(),
-        mMenus.AppleE(),mMenus.KinominoKusiyakiE(), mMenus.FruitDrinkE(), mMenus.FishingRodSE(), mMenus.RagBagE(), mMenus.PickaxeE(), mMenus.KnomiE(), mMenus.mRantanE(), mMenus.mHaoriE(), mMenus.RiceE(), mMenus.DangoE(), mMenus.TeaE());
+        mMenus.AppleE(), mMenus.KinominoKusiyakiE(), mMenus.FruitDrinkE(), mMenus.FishingRodSE(), mMenus.RagBagE(), mMenus.PickaxeE(), mMenus.KnomiE(), mMenus.mRantanE(), mMenus.mHaoriE(), mMenus.RiceE(), mMenus.DangoE(), mMenus.TeaE(),
+        mLove->Apple(),mLove->KinominoKusiyaki(),mLove->FruitDrink(),mLove->Rice(),mLove->Dango(),mLove->Tea());
 
 
     mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum());
@@ -311,12 +311,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     mWshop.Update(mChat->GetNum());
 
     mMenus.SetMenu(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->TeaNum(), mAitem->KeyNum(), mAitem->FishNum());
-
-    if (mPose == true)
-    {
-        mMenus.Update();
-    }
-    
+   
+    mMenus.Update(mLove->NumH(),mPose);
 
     mShop.AMoney(mAitem->Money(mShop.SetMoney(), mShop.GetMoney()));
 
@@ -462,7 +458,7 @@ void GameScene::DrawOwnScn()
 
 
 
-     mChat->Draw(mMapOffset);
+     mLayer->Draw(mMapOffset);
 
      if (mPose == true)
      {
@@ -473,7 +469,9 @@ void GameScene::DrawOwnScn()
      ////プレイヤー
      //mPlayer.Draw(mMapOffset);
 
-     mLayer->Draw(mMapOffset);
+    
+
+     mChat->Draw(mMapOffset);
 
      mShop.Draw();
 
@@ -482,6 +480,8 @@ void GameScene::DrawOwnScn()
 
     
      mMasuku->Draw(mMapOffset);
+
+
 
      ui_.Draw();
 
