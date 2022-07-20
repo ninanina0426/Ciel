@@ -273,7 +273,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
    // mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_);
 
         mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_,mLove->Hit());
-    }
+    
 
 
     PlayerPos = mPlayer.GetPos();

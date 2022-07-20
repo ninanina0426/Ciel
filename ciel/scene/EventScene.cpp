@@ -48,6 +48,8 @@ void EventScene::DrawOwnScn()
     switch (plID)
     {
     case PlayerID::Jack:
+        DrawExtendGraph(0, 0, 1080, 600, house_, true);
+       
         break;
     case PlayerID::Calendula:
         break;
@@ -67,6 +69,7 @@ bool EventScene::Init(void)
 {
     flg_ = false;
     shFlg_ = false;
+   
     //aitem_ = new Aitem;
     sea_ = LoadGraph("./image/move/umi.png");
     rany_= LoadGraph("./image/move/rany.png");
@@ -76,6 +79,8 @@ bool EventScene::Init(void)
 
     LoadDivGraph("./image/move/air.png", 12, 3, 4, AirplneSize, AirplneSize, *airplan_, true);
     LoadDivGraph("./image/move/煙.png", 12, 3, 4, 352, 256, *kemuri_, true);
+
+    house_ = LoadGraph("image/1108s.png");
     //move1_ = LoadGraph("./image/move/video.avi");
     PlayMovieToGraph(move1_);
     return true;
@@ -133,6 +138,7 @@ void EventScene::Event(int num)
         
         break;
     case EventType::STORY_1:
+        DrawOwnScn();
         DrawString(400, 300, "エピソード1", 0xffffff, true);
         break;
     case EventType::STORY_2:
