@@ -5,7 +5,6 @@
 #include "UI.h"
 
 
-
 Player::Player()
 {
 	init(PlayerID::Max);
@@ -159,8 +158,24 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 				{
 					i = 0;
 					moveFlg = false;
-
+					switch (plID_)
+					{
+					case PlayerID::Jack:
+						Energy(10);
+						break;
+					case PlayerID::Calendula:
+						Energy(10);
+						break;
+					case PlayerID::Soy:
+						Energy(5);
+						break;
+					case PlayerID::Max:
+						break;
+					default:
+						break;
+					}
 				}
+				
 			}
 		}
 		//êÛê£
@@ -180,7 +195,24 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 					mFlg = false;
 					DeleteSoundMem(oHandle);
 					oHandle = LoadSoundMem("image/Sound/êÖÇ…êZÇ©ÇËÇ»Ç™ÇÁï‡Ç≠.ogg");
+					switch (plID_)
+					{
+					case PlayerID::Jack:
+						Energy(15);
+						break;
+					case PlayerID::Calendula:
+						Energy(5);
+						break;
+					case PlayerID::Soy:
+						Energy(10);
+						break;
+					case PlayerID::Max:
+						break;
+					default:
+						break;
+					}
 				}
+				
 			}
 		}
 		//Ç¬ÇÈÇÕÇµ
@@ -192,6 +224,23 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 				tFlg = true;
 				tCnt = 60;
 				ttCnt = 0;
+				switch (plID_)
+				{
+				case PlayerID::Jack:
+					Energy(5);
+					break;
+				case PlayerID::Calendula:
+					Energy(20);
+					break;
+				case PlayerID::Soy:
+					Energy(10);
+					break;
+				case PlayerID::Max:
+					break;
+				default:
+					break;
+				}
+				
 			}
 		}
 		if (tFlg == true)
@@ -703,6 +752,11 @@ int Player::GetStamina(void)
 	return Stamina_;
 }
 
+int Player::GetSEnergy(void)
+{
+	return Energy_;
+}
+
 PlayerID Player::GetType(void)
 {
 	return plID_;
@@ -725,5 +779,9 @@ void Player::message_box()
 	
 }
 
+void Player::Energy(int num)
+{
+	Energy_ = Energy_ - num;
+}
 
 

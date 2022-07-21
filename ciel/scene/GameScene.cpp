@@ -29,6 +29,7 @@ GameScene::~GameScene()
     delete mChat;
     delete mLayer;
     delete mMasuku;
+    delete mLove;
 }
 
 
@@ -219,6 +220,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     {
         return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_2", mPlayer.plID_));
     }
+
     //時間
     nowTime_ = std::chrono::system_clock::now();		//現在の時間を取得
     auto elTime = nowTime_ - oldTime_;                  //時間の差をとる
@@ -256,7 +258,6 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     {
         count_++;
     }
-
     skycnt_++;
     
 
@@ -270,10 +271,6 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_, mLove->Hit());
 
     }
-
-
-        mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_,mLove->Hit());
-   
 
     PlayerPos = mPlayer.GetPos();
 
@@ -348,9 +345,9 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mMasuku->Update(PlayerPos, mAitem->mRantanNum());
 
-    ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetPos(), mPlayer.GetSiz(), mMapOffset);
+    ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetSEnergy(), mPlayer.GetPos(), mPlayer.GetSiz(), mMapOffset);
 
-     mBgm->Update(mMenus.OpBgm(),ui_.eveflg_);
+    mBgm->Update(mMenus.OpBgm(),ui_.eveflg_);
 
     
     return std::move(own);
@@ -446,8 +443,7 @@ void GameScene::DrawOwnScn()
 
     mLove->Draw(mMapOffset);
 
-     //時間帯
-     TimeManeger();
+     
 
     
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
@@ -456,20 +452,17 @@ void GameScene::DrawOwnScn()
      //プレイヤー
      mPlayer.Draw(mMapOffset);
 
-
-
      mLayer->Draw(mMapOffset);
+     
+     //時間帯
+     TimeManeger();
 
      if (mPose == true)
      {
          mMenus.Draw(mPlayer.GetType(),mAitem->HaveMoney());
      }
 
-    
-     ////プレイヤー
-     //mPlayer.Draw(mMapOffset);
-
-    
+     
 
      mChat->Draw(mMapOffset);
 
@@ -477,15 +470,11 @@ void GameScene::DrawOwnScn()
 
      mWshop.Draw();
 
-
+    
     
      mMasuku->Draw(mMapOffset);
 
-
-
      ui_.Draw();
-
-     
 
      //フェードイン
      if (lpMapMng.fadeinFlg_)

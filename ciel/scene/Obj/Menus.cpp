@@ -439,6 +439,8 @@ void Menus::Draw(PlayerID type, int ru)
 	}
 
 	DrawFormatStringToHandle(850, 515, GetColor(150,255,255), FontSize, "%d", Ru);
+	DrawString(0, 590, "F:決定　Q:キャンセル", 0xffffff, true);
+	DrawString(1000, 590, "ESC:戻る", 0xffffff, true);
 	//boxの表示
 	switch (mSelect)
 	{
@@ -510,6 +512,8 @@ void Menus::Draw(PlayerID type, int ru)
 		break;
 	}
 
+
+	
 }
 
 	
