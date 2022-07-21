@@ -117,7 +117,7 @@ public:
 	~Player();
 
 	int mPosBottom;	//キャラクターの足元のY座標
-
+	
 	bool flg;
 
 	bool init(PlayerID playerid);		//初期化

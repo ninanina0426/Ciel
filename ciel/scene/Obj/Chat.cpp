@@ -73,6 +73,7 @@ bool Chat::init(void)
 	mImage[59] = LoadGraph("image/talk/temple.png");
 	mImage[60] = LoadGraph("image/talk/temple.png");
 
+
 	mNum = 100;
 
 	mFlg = false;

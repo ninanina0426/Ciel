@@ -259,10 +259,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     skycnt_++;
     
-
     DrawOwnScn();//ŒÂ•Ê‚ÌDrawˆ—‚Èˆ×•K‚¸‘‚­
-
-   
 
     if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&(ui_.eveflg_==false)&&(mPose==false))
     {
@@ -271,10 +268,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     }
 
-
-        mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_,mLove->Hit());
    
-
     PlayerPos = mPlayer.GetPos();
 
     PlayerSize = mPlayer.GetSiz();
