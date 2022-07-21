@@ -34,7 +34,7 @@ public:
 	bool SPose(void);
 	bool CanselFlg(void);
 
-	int SetAitem(int a, int kk, int fd, int frs, int rb, int p,int k,int r,int h, int ri, int d, int t);
+	int SetAitem(int a, int kk, int fd, int frs, int rb, int p,int k,int r,int h, int ri, int d, int t,int f,int sr,int sb);
 
 	int SetMoney();
 	bool GetMoney();
@@ -60,6 +60,9 @@ public:
 	int SsRice(void);
 	int SsDango(void);
 	int SsTea(void);
+	int SsFish(void);
+	int SsStoneR(void);
+	int SsStoneB(void);
 
 private:
 	
@@ -78,6 +81,9 @@ private:
 	int mImageBsB;
 	int mImageBsS;
 	int mImageBuy;
+	int mImageBuy2;
+
+	int mNumS;
 	
 	Vector2 mBoxSe[10];
 	Vector2 mBoxA[10][10];
@@ -117,6 +123,9 @@ private:
 	int gRice;
 	int gDango;
 	int gTea;
+	int gFish;
+	int gStoneR;
+	int gStoneB;
 
 	//îÑîÉ
 	int bApple;
@@ -131,6 +140,9 @@ private:
 	int bRice;
 	int bDango;
 	int bTea;
+	int bFish;
+	int bStoneR;
+	int bStoneB;
 
 	//ç›å…
 	int maxApple;
@@ -159,6 +171,9 @@ private:
 	int sRice;
 	int sDango;
 	int sTea;
+	int sFish;
+	int sStoneR;
+	int sStoneB;
 
 	//â¡å∏éZ
 	int kApple;
@@ -173,6 +188,9 @@ private:
 	int kRice;
 	int kDango;
 	int kTea;
+	int kFish;
+	int kStoneR;
+	int kStoneB;
 
 	//Ç®ã‡
 	int mA;
@@ -187,6 +205,9 @@ private:
 	int mRi;
 	int mD;
 	int mT;
+	int mF;
+	int mSR;
+	int mSB;
 
 	bool moveFlg;
 
