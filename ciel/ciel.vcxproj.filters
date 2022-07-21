@@ -48,7 +48,7 @@
     <ClCompile Include="scene\Obj\Love.cpp" />
     <ClCompile Include="scene\Obj\Menus.cpp" />
     <ClCompile Include="stage\SnowShopMap.cpp" />
-
+    <ClCompile Include="scene\Obj\Gimmick.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -145,6 +145,6 @@
     <ClInclude Include="scene\Obj\Love.h" />
     <ClInclude Include="scene\Obj\Menus.h" />
     <ClInclude Include="stage\SnowShopMap.h" />
-
+    <ClInclude Include="scene\Obj\Gimmick.h" />
   </ItemGroup>
 </Project>

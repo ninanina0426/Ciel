@@ -2,6 +2,7 @@
 #include "../../common/Vector2.h"
 #include"../Input/Keyboard.h"
 #include"../../stage/Stage.h"
+#include "Gimmick.h"
 
 class UI;
 
@@ -105,13 +106,14 @@ private:
 	Vector2 mgSize;
 	bool gFlg;
 	MAP_ID mapID;
-
+	Gimmick gimick;
 	void message_box();
+	
 
 	DIR keyDir;
 
-	void Energy(int num);
-	
+	int fish;
+	int jewel;
 public:
 	Player();
 	~Player();
@@ -134,6 +136,10 @@ public:
 
 	int GetStamina(void);
 	int GetSEnergy(void);
+	int aitemNum_;
+	bool aitemFlag_;
+
+	void Energy(int num);
 
 	int Stamina_;		//スタミナ管理
 	int Energy_;		//エネルギー管理
@@ -148,6 +154,8 @@ public:
 
 	PlayerID GetType(void);
 	
+	int GetFish(void);
+	int GetJewel(void);
 };
 
 
