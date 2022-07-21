@@ -29,6 +29,7 @@ GameScene::~GameScene()
     delete mChat;
     delete mLayer;
     delete mMasuku;
+    delete mLove;
 }
 
 
@@ -219,6 +220,12 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     {
         return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_2", mPlayer.plID_));
     }
+    //loveエンド
+    if (mLove->eFlg==true)
+    {
+        return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_4", mPlayer.plID_));
+    }
+
     //時間
     nowTime_ = std::chrono::system_clock::now();		//現在の時間を取得
     auto elTime = nowTime_ - oldTime_;                  //時間の差をとる
@@ -256,7 +263,6 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     {
         count_++;
     }
-
     skycnt_++;
     
     DrawOwnScn();//個別のDraw処理な為必ず書く
@@ -268,7 +274,6 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     }
 
-   
     PlayerPos = mPlayer.GetPos();
 
     PlayerSize = mPlayer.GetSiz();
@@ -282,14 +287,14 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
 
     //Waとsweetの両方で買えるアイテムがある場合に使う
-    mAitem->TotalAitem(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori(), mShop.SsRice(), mShop.SsDango(), mShop.SsTea(),
-        mWshop.SsApple(), mWshop.SsKinominoKusiyaki(), mWshop.SsFruitDrink(), mWshop.SsFishingRodS(), mWshop.SsRagBag(), mWshop.SsPickaxe(), mWshop.SsKinomi(), mWshop.SsRantan(), mWshop.SsHaori(), mWshop.SsRice(), mWshop.SsDango(), mWshop.SsTea(),
-        mMenus.AppleE(), mMenus.KinominoKusiyakiE(), mMenus.FruitDrinkE(), mMenus.FishingRodSE(), mMenus.RagBagE(), mMenus.PickaxeE(), mMenus.KnomiE(), mMenus.mRantanE(), mMenus.mHaoriE(), mMenus.RiceE(), mMenus.DangoE(), mMenus.TeaE(),
+    mAitem->TotalAitem(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori(), mShop.SsRice(), mShop.SsDango(), mShop.SsTea(),mShop.SsFish(), mShop.SsStoneR(),mShop.SsStoneB(),
+        mWshop.SsApple(), mWshop.SsKinominoKusiyaki(), mWshop.SsFruitDrink(), mWshop.SsFishingRodS(), mWshop.SsRagBag(), mWshop.SsPickaxe(), mWshop.SsKinomi(), mWshop.SsRantan(), mWshop.SsHaori(), mWshop.SsRice(), mWshop.SsDango(), mWshop.SsTea(), mWshop.SsFish(), mWshop.SsStoneR(), mWshop.SsStoneB(),
+        mMenus.AppleE(), mMenus.KinominoKusiyakiE(), mMenus.FruitDrinkE(), mMenus.FishingRodSE(), mMenus.RagBagE(), mMenus.PickaxeE(), mMenus.KnomiE(), mMenus.mRantanE(), mMenus.mHaoriE(), mMenus.RiceE(), mMenus.DangoE(), mMenus.TeaE(),mMenus.FishE(),mMenus.StoneRE(),mMenus.StoneBE(),
         mLove->Apple(),mLove->KinominoKusiyaki(),mLove->FruitDrink(),mLove->Rice(),mLove->Dango(),mLove->Tea());
 
 
-    mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum());
-    mWshop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum());
+    mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(),mAitem->FishNum(),mAitem->StoneRNum(),mAitem->StoneBNum());
+    mWshop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
 
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
@@ -342,9 +347,9 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mMasuku->Update(PlayerPos, mAitem->mRantanNum());
 
-    ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetPos(), mPlayer.GetSiz(), mMapOffset);
+    ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetSEnergy(), mPlayer.GetPos(), mPlayer.GetSiz(), mMapOffset);
 
-     mBgm->Update(mMenus.OpBgm(),ui_.eveflg_);
+    mBgm->Update(mMenus.OpBgm(),ui_.eveflg_);
 
     
     return std::move(own);
@@ -440,8 +445,7 @@ void GameScene::DrawOwnScn()
 
     mLove->Draw(mMapOffset);
 
-     //時間帯
-     TimeManeger();
+     
 
     
      //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
@@ -450,20 +454,17 @@ void GameScene::DrawOwnScn()
      //プレイヤー
      mPlayer.Draw(mMapOffset);
 
-
-
      mLayer->Draw(mMapOffset);
+     
+     //時間帯
+     TimeManeger();
 
      if (mPose == true)
      {
          mMenus.Draw(mPlayer.GetType(),mAitem->HaveMoney());
      }
 
-    
-     ////プレイヤー
-     //mPlayer.Draw(mMapOffset);
-
-    
+     
 
      mChat->Draw(mMapOffset);
 
@@ -471,15 +472,11 @@ void GameScene::DrawOwnScn()
 
      mWshop.Draw();
 
-
+    
     
      mMasuku->Draw(mMapOffset);
 
-
-
      ui_.Draw();
-
-     
 
      //フェードイン
      if (lpMapMng.fadeinFlg_)

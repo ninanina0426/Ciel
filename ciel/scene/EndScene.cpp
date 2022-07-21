@@ -1,12 +1,14 @@
 #include <DxLib.h>
 #include "EndScene.h"
 #include "TitleScene.h"
+#include "../stage/StageMng.h"
 #include "Transition/FadeInOut.h"
 
 EndScene::EndScene(std::string end, PlayerID plID)
 {
     endType_ = end;
 	playerID_ = plID;
+	lpMapMng.Init();
     Init();
 }
 

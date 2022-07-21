@@ -83,6 +83,8 @@ public:
 	int TamE(void);
 	int KeyE(void);
 	int FishE(void);
+	int StoneRE(void);
+	int StoneBE(void);
 
 	int NumHave(void);
 
@@ -139,6 +141,8 @@ private:
 	int ssKey;
 	int ssTama;
 	int ssfish;
+	int ssStoneR;
+	int ssStoneB;
 
 	int eApple;
 	int eKinominoKusiyaki;
@@ -155,6 +159,8 @@ private:
 	int eKey;
 	int eTama;
 	int efish;
+	int eStoneR;
+	int eStoneB;
 
 	bool sApple;
 	bool sKinominoKusiyaki;

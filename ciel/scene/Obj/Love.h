@@ -60,6 +60,9 @@ private:
 	int FR;
 
 	int HaveNum;
+
+	void message_box();
+	
 public:
 	Love();
 	~Love();
@@ -83,7 +86,7 @@ public:
 	int Tea();
 	int Fish();
 
-	void LoveEV();
+	bool eFlg;
 
 };
 

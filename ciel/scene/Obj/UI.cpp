@@ -11,11 +11,12 @@ UI::~UI()
 {
 }
 
-void UI::Upadate(int sta,Vector2 pos,Vector2 size, Vector2 offset)
+void UI::Upadate(int sta,int ene,Vector2 pos,Vector2 size, Vector2 offset)
 {
 	stamina = sta;
 	plPos_ = pos;
 	off_ = offset;
+	energy = ene;
 
 	aitem_.Update(plPos_, size);
 
@@ -77,6 +78,7 @@ void UI::Upadate(int sta,Vector2 pos,Vector2 size, Vector2 offset)
 void UI::Draw(void)
 {
 	DrawBox(0, 20, stamina, 40, 0xffff00, true);
+	DrawBox(0, 0, energy*4, 20, 0x00ff00, true);
 	
 	if (plPos_.x_ > 1440 && plPos_.x_ < 1470 && plPos_.y_ < 660)
 	{

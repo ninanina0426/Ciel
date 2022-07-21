@@ -110,7 +110,7 @@ private:
 
 	DIR keyDir;
 
-
+	void Energy(int num);
 	
 public:
 	Player();
@@ -133,6 +133,7 @@ public:
 	Vector2 GetPos(void);
 
 	int GetStamina(void);
+	int GetSEnergy(void);
 
 	int Stamina_;		//スタミナ管理
 	int Energy_;		//エネルギー管理

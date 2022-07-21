@@ -2,6 +2,8 @@
 #include"../../stage/StageMng.h"
 #include "Love.h"
 
+
+
 Love::Love()
 {
     init();
@@ -30,7 +32,20 @@ bool Love::init()
     mImageChat[7] = LoadGraph("image/talk/2.png");
     mImageChat[8] = LoadGraph("image/talk/3.png");
     mImageChat[9] = LoadGraph("image/talk/temple.png");
-    mImageChat[10] = LoadGraph("image/talk/c1.png");
+
+    mImageChat[30] = LoadGraph("image/talk/l1.png");
+    mImageChat[29] = LoadGraph("image/talk/l2.png");
+    mImageChat[28] = LoadGraph("image/talk/l3.png");
+    mImageChat[27] = LoadGraph("image/talk/c1.png");
+    mImageChat[26] = LoadGraph("image/talk/c1.png");
+    mImageChat[25] = LoadGraph("image/talk/c1.png");
+    mImageChat[24] = LoadGraph("image/talk/c1.png");
+    mImageChat[23] = LoadGraph("image/talk/c1.png");
+    mImageChat[22] = LoadGraph("image/talk/c1.png");
+    mImageChat[20] = LoadGraph("image/talk/l4.png");
+    mImageChat[19] = LoadGraph("image/talk/l5.png");
+    mImageChat[18] = LoadGraph("image/talk/l5.png");
+    mImageChat[17] = LoadGraph("image/talk/l5.png");
 
     mPos = { 0,0 };
     mSize = { 32,48 };
@@ -42,6 +57,8 @@ bool Love::init()
     FR = 0;
 
     numC = 0;
+
+    eFlg = false;
 
     moveFlg = false;
     hitflg = false;
@@ -84,45 +101,55 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
         {
             if (key_.getKeyDown(KEY_INPUT_F))
             {
-                chat = GetRand(10);
                 moveFlg = true;
                 numC = 1;
+
+                if (HaveNum == 0)
+                {
+                    chat = GetRand(10);
+                }
 
                 if (HaveNum == 1)
                 {
                     lApple -= 1;
                     FR += 10;
                     HaveNum = 20;
+                    chat = 17;
                 }
                 else if (HaveNum == 2)
                 {
                     lRice -= 1;
                     FR += 10;
                     HaveNum = 20;
+                    chat = 17;
                 }
                 else if (HaveNum == 3)
                 {
                     lKinominoKusiyaki -= 1;
                     FR += 15;
                     HaveNum = 20;
+                    chat = 17;
                 }
                 else if (HaveNum == 4)
                 {
                     lDango -= 1;
                     FR += 15;
                     HaveNum = 20;
+                    chat = 17;
                 }
                 else if (HaveNum == 5)
                 {
                     lFruitDrink -= 1;
                     FR += 20;
                     HaveNum = 20;
+                    chat = 17;
                 }
                 else if (HaveNum == 6)
                 {
                     lTea -= 1;
                     FR += 10;
                     HaveNum = 20;
+                    chat = 17;
                 }
                 else if (HaveNum == 0)
                 {
@@ -132,13 +159,23 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
 
             hitflg = true;
         }
-        else if (numC == 1)
+        else if (numC == 27)
+        {
+            message_box();
+        }
+        else if (numC == 18)
+        {
+            eFlg = true;
+        }
+        else if (numC != 0)
         {
             if (key_.getKeyDown(KEY_INPUT_F))
             {
                 numC -= 1;
+                chat -= 1;
             }
         }
+       
     }
     else
     {
@@ -182,8 +219,11 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
     //好感度max
     if (FR == 200)
     {
-        LoveEV();
+        numC = 30;
+        FR = 205;
+        chat = 30;
     }
+
 
     mAnmCnt++;
     return Vector2();
@@ -193,7 +233,7 @@ void Love::Draw(Vector2 offset)
 {
     if (mapID == MAP_ID::TEMPLE)
     {
-        if (numC==1)
+        if (numC!=0)
         {
             DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + mNum[1].x_-50, mPos.y_ - offset.y_ - mSizeOffset.y_ + mNum[1].y_-100, mImageChat[chat], true);
         }
@@ -267,8 +307,19 @@ int Love::Fish()
     return lFish;
 }
 
-void Love::LoveEV()
+void Love::message_box()
 {
-
-
+    int flag;
+    flag = MessageBox(
+        NULL,
+        TEXT("受け入れますか？（endに移行します）"),
+        TEXT("選択"),
+        MB_YESNO | MB_ICONQUESTION);
+    if (flag == IDYES)
+    {
+        numC = 20;
+        chat = 20;
+    }
 }
+
+

@@ -8,7 +8,7 @@ public:
 	UI();
 	~UI();
 
-	void Upadate(int sta,Vector2 pos,Vector2 size,Vector2 offset);
+	void Upadate(int sta,int ene,Vector2 pos,Vector2 size,Vector2 offset);
 	void Draw(void);
 
 	bool eveflg_;
@@ -18,6 +18,7 @@ private:
 	Aitem aitem_;
 
 	int stamina;
+	int energy;
 	Vector2 plPos_;
 	Vector2 off_;
 
