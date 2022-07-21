@@ -219,6 +219,12 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     {
         return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_2", mPlayer.plID_));
     }
+    //loveƒGƒ“ƒh
+    if (mLove->eFlg==true)
+    {
+        return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_4", mPlayer.plID_));
+    }
+
     //ŠÔ
     nowTime_ = std::chrono::system_clock::now();		//Œ»İ‚ÌŠÔ‚ğæ“¾
     auto elTime = nowTime_ - oldTime_;                  //ŠÔ‚Ì·‚ğ‚Æ‚é
