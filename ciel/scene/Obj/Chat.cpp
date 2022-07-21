@@ -23,16 +23,16 @@ bool Chat::init(void)
 	mPos.x_ = 0;
 	mPos.y_ = 0;
 
-	mImage[1] = LoadGraph("image/talk/10.png");
+	mImage[1] = LoadGraph("image/talk/m10.png");
 	mImage[2] = LoadGraph("image/talk/2.png");
-	mImage[3] = LoadGraph("image/talk/3.png");
-	mImage[4] = LoadGraph("image/talk/temple.png");
-	mImage[5] = LoadGraph("image/talk/temple.png");
+	mImage[3] = LoadGraph("image/talk/m11.png");
+	mImage[4] = LoadGraph("image/talk/m11.png");
+	mImage[5] = LoadGraph("image/talk/m11.png");
 
 	mImage[8] = LoadGraph("image/talk/m1.png");
 	mImage[9] = LoadGraph("image/talk/m2.png");
 	mImage[10] = LoadGraph("image/talk/m3.png");
-	mImage[11] = LoadGraph("image/talk/m4.png");
+	mImage[11] = LoadGraph("image/talk/m4.png"); 
 	mImage[12] = LoadGraph("image/talk/m5.png");
 	mImage[13] = LoadGraph("image/talk/temple.png");
 

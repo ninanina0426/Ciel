@@ -44,7 +44,8 @@ bool Love::init()
     mImageChat[22] = LoadGraph("image/talk/c1.png");
     mImageChat[20] = LoadGraph("image/talk/l4.png");
     mImageChat[19] = LoadGraph("image/talk/l5.png");
-    mImageChat[18] = LoadGraph("image/talk/s1.png");
+    mImageChat[18] = LoadGraph("image/talk/l5.png");
+    mImageChat[17] = LoadGraph("image/talk/l5.png");
 
     mPos = { 0,0 };
     mSize = { 32,48 };
@@ -100,9 +101,13 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
         {
             if (key_.getKeyDown(KEY_INPUT_F))
             {
-                chat = GetRand(10);
                 moveFlg = true;
                 numC = 1;
+
+                if (HaveNum == 0)
+                {
+                    chat = GetRand(10);
+                }
 
                 if (HaveNum == 1)
                 {
