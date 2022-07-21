@@ -29,11 +29,11 @@ bool Chat::init(void)
 	mImage[4] = LoadGraph("image/talk/temple.png");
 	mImage[5] = LoadGraph("image/talk/temple.png");
 
-	mImage[8] = LoadGraph("image/talk/temple.png");
-	mImage[9] = LoadGraph("image/talk/temple.png");
-	mImage[10] = LoadGraph("image/talk/temple.png");
-	mImage[11] = LoadGraph("image/talk/temple.png");
-	mImage[12] = LoadGraph("image/talk/temple.png");
+	mImage[8] = LoadGraph("image/talk/m1.png");
+	mImage[9] = LoadGraph("image/talk/m2.png");
+	mImage[10] = LoadGraph("image/talk/m3.png");
+	mImage[11] = LoadGraph("image/talk/m4.png");
+	mImage[12] = LoadGraph("image/talk/m5.png");
 	mImage[13] = LoadGraph("image/talk/temple.png");
 
 	mImage[15] = LoadGraph("image/talk/temple.png");
@@ -177,6 +177,7 @@ bool Chat::Update(bool flg, int num,bool sflg,bool sPose, bool wflg, bool wPose)
 
 			}
 		}
+		break;
 		case 8:
 		{
 

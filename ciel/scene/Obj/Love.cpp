@@ -33,17 +33,17 @@ bool Love::init()
     mImageChat[8] = LoadGraph("image/talk/3.png");
     mImageChat[9] = LoadGraph("image/talk/temple.png");
 
-    mImageChat[30] = LoadGraph("image/talk/c1.png");
-    mImageChat[29] = LoadGraph("image/talk/c1.png");
-    mImageChat[28] = LoadGraph("image/talk/c1.png");
+    mImageChat[30] = LoadGraph("image/talk/l1.png");
+    mImageChat[29] = LoadGraph("image/talk/l2.png");
+    mImageChat[28] = LoadGraph("image/talk/l3.png");
     mImageChat[27] = LoadGraph("image/talk/c1.png");
     mImageChat[26] = LoadGraph("image/talk/c1.png");
     mImageChat[25] = LoadGraph("image/talk/c1.png");
     mImageChat[24] = LoadGraph("image/talk/c1.png");
     mImageChat[23] = LoadGraph("image/talk/c1.png");
     mImageChat[22] = LoadGraph("image/talk/c1.png");
-    mImageChat[20] = LoadGraph("image/talk/s1.png");
-    mImageChat[19] = LoadGraph("image/talk/s1.png");
+    mImageChat[20] = LoadGraph("image/talk/l4.png");
+    mImageChat[19] = LoadGraph("image/talk/l5.png");
     mImageChat[18] = LoadGraph("image/talk/s1.png");
 
     mPos = { 0,0 };
@@ -109,36 +109,42 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
                     lApple -= 1;
                     FR += 10;
                     HaveNum = 20;
+                    chat = 17;
                 }
                 else if (HaveNum == 2)
                 {
                     lRice -= 1;
                     FR += 10;
                     HaveNum = 20;
+                    chat = 17;
                 }
                 else if (HaveNum == 3)
                 {
                     lKinominoKusiyaki -= 1;
                     FR += 15;
                     HaveNum = 20;
+                    chat = 17;
                 }
                 else if (HaveNum == 4)
                 {
                     lDango -= 1;
                     FR += 15;
                     HaveNum = 20;
+                    chat = 17;
                 }
                 else if (HaveNum == 5)
                 {
                     lFruitDrink -= 1;
                     FR += 20;
                     HaveNum = 20;
+                    chat = 17;
                 }
                 else if (HaveNum == 6)
                 {
                     lTea -= 1;
                     FR += 10;
                     HaveNum = 20;
+                    chat = 17;
                 }
                 else if (HaveNum == 0)
                 {
