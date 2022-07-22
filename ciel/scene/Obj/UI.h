@@ -31,6 +31,7 @@ private:
 	int count_;
 	int updown_;
 
+	int action_;
 	int boxid;
 	int mImageChat_;
 };

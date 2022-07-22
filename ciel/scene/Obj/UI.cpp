@@ -106,10 +106,15 @@ void UI::Draw(void)
 	auto mapid = lpMapMng.GetMapId();
 	if (mapid == MAP_ID::TEMPLE)
 	{
-		if (plPos_.x_ > 1440 && plPos_.x_ < 1470 && plPos_.y_ < 660)
+		if (!aitem_.mTama6)
 		{
-			DrawString(476, 360, " ! ", 0xff0000, true);
+			if (plPos_.x_ > 1440 && plPos_.x_ < 1470 && plPos_.y_ < 660)
+			{
+				DrawGraph(480, 320, action_, true);
+				//DrawString(476, 360, " ! ", 0xff0000, true);
+			}
 		}
+		
 	}
 	
 
@@ -134,6 +139,7 @@ void UI::Init()
 {
 	boxid = LoadGraph("./image/ui/aitembox.png");
 	mImageChat_=  LoadGraph("image/talk/s1.png", true);
+	action_ = LoadGraph("image/ui/action.png", true);
 	aitemname_ = "ƒŠƒ“ƒS";
 	updown_ = 0;
 	count_ = 0;

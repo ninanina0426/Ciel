@@ -104,6 +104,9 @@ private:
     int detTime_;
     int ice_;
 
+    void DeadState(void);
+    int ded_;
+
     Chat* mChat;
 
     Keyboard key_;

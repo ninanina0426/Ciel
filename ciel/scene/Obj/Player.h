@@ -93,6 +93,7 @@ private:
 	Vector2 mSize;		//キャラクター画像のサイズ
 	int mMoveSpeed;		//キャラクター移動スピード
 	int mAnmCnt;
+	Vector2 offset_;
 
 	//効果音
 	int sHandle;
@@ -135,6 +136,7 @@ public:
 	void SetPos(Vector2 pos);
 	Vector2 GetSiz(void);
 	Vector2 GetPos(void);
+	Vector2 GetOffset(void);
 
 	int GetStamina(void);
 	int GetSEnergy(void);
