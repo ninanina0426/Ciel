@@ -650,58 +650,60 @@ void wshop::Buy(void)
 void wshop::Sell(void)
 {
     Canflg = false;
-    if (mNumS == 0)
+    if ((yy >= 0) && (xx == 0))
     {
-        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        if (mNumS == 0)
         {
-            yy += 1;
-            if (yy > 6)
+            if (key_.getKeyDown(KEY_INPUT_DOWN))
             {
-                yy = 1;
-                mNumS = 1;
+                yy += 1;
+                if (yy > 6)
+                {
+                    yy = 1;
+                    mNumS = 1;
+                }
+            }
+            else if (key_.getKeyDown(KEY_INPUT_UP) && yy >= 0)
+            {
+                yy -= 1;
+                if (yy <= 0)
+                {
+                    yy = 1;
+                }
             }
         }
-        else if (key_.getKeyDown(KEY_INPUT_UP) && yy >= 0)
+        else if (mNumS == 1)
         {
-            yy -= 1;
-            if (yy <= 0)
+            if (key_.getKeyDown(KEY_INPUT_DOWN))
             {
-                yy = 1;
-            }
-        }
-    }
-    else if (mNumS == 1)
-    {
-        if (key_.getKeyDown(KEY_INPUT_DOWN))
-        {
-            yy += 1;
-            if (yy > 3)
-            {
-                yy = 3;
+                yy += 1;
+                if (yy > 3)
+                {
+                    yy = 3;
 
+                }
             }
-        }
-        else if (key_.getKeyDown(KEY_INPUT_UP) && yy >= 0)
-        {
-            yy -= 1;
-            if (yy <= 0)
+            else if (key_.getKeyDown(KEY_INPUT_UP) && yy >= 0)
             {
-                yy = 6;
-                mNumS = 0;
+                yy -= 1;
+                if (yy <= 0)
+                {
+                    yy = 6;
+                    mNumS = 0;
+                }
             }
         }
-    }
-    if (key_.getKeyDown(KEY_INPUT_F)/* || key_.getKeyDown(KEY_INPUT_RETURN)*/)
-    {
-        ChangeBS(WSHOP_BS::BS_SELL);
-        xx = 1;
-    }
-    if (key_.getKeyDown(KEY_INPUT_Q))
-    {
-        ChangeState(WSHOP_SELECT::SELECT);
+        if (key_.getKeyDown(KEY_INPUT_F)/* || key_.getKeyDown(KEY_INPUT_RETURN)*/)
+        {
+            ChangeBS(WSHOP_BS::BS_SELL);
+            xx = 1;
+        }
+        if (key_.getKeyDown(KEY_INPUT_Q))
+        {
+            ChangeState(WSHOP_SELECT::SELECT);
 
+        }
     }
-
     if (key_.getKeyDown(KEY_INPUT_F))
     {
     }
