@@ -33,12 +33,12 @@ public:
 
 
 
-	bool mTama1;
-	bool mTama2;
-	bool mTama3;
-	bool mTama4;
-	bool mTama5;
-	bool mTama6;
+	bool mTama1;		//X
+	bool mTama2;		//‰Ùq
+	bool mTama3;		//“´ŒA
+	bool mTama4;		//˜a
+	bool mTama5;		//á
+	bool mTama6;		//_“a
 
 	bool mKinomi1;
 	bool mKinomi2;

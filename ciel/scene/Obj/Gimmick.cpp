@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include "Gimmick.h"
+#include "Player.h"
 
 Gimmick::Gimmick()
 {
@@ -10,8 +11,11 @@ Gimmick::~Gimmick()
 {
 }
 
-void Gimmick::Update()
+void Gimmick::Update(Player player)
 {
+	plPos = player.GetPos();
+	Offset = player.GetOffset();
+
 	time=GetRand(100);
 	rock = GetRand(8);
 	if (fisingFlg_)
@@ -25,7 +29,7 @@ void Gimmick::Draw()
 {
 	if (fisingFlg_)
 	{
-		DrawBox(0, 0, 200, 200, 0xff0000, true);
+		DrawGraph (plPos.x_ - Offset.x_-20, plPos.y_ - Offset.y_-55, id, true);
 	}
 }
 
@@ -85,6 +89,7 @@ bool Gimmick::Ford()
 
 void Gimmick::Init()
 {
+	id = LoadGraph("image/ui/action.png", true);
 	fisingFlg_ = false;
 	count = 30;
 }

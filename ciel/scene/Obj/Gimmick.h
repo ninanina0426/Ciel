@@ -1,12 +1,16 @@
 #pragma once
-//#include "Aitem.h"
+#include "../../common/Vector2.h"
+
+
+class Player;
+
 class Gimmick
 {
 public:
 	Gimmick();
 	~Gimmick();
 
-	void Update();
+	void Update(Player player);
 	void Draw();
 	bool Fishing();
 	bool Pick();
@@ -18,8 +22,12 @@ private:
 	void Init();
 	//Aitem aitem;
 
+	Vector2 Offset;
+	Vector2 plPos;
+
 	int rock;
 
+	int id;
 	int count;
 	int time;
 };

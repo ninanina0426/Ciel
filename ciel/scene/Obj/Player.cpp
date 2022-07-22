@@ -142,7 +142,7 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg)
 
 	key_.Update();
 
-	gimick.Update();
+	gimick.Update(*this);
 
 	if (gflg == false)
 	{
@@ -276,7 +276,9 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg)
 						(mChipId == 317) || (mChipId == 306) ||
 						(mChipId == 308) || (mChipId == 297) ||
 						(mChipId == 298) || (mChipId == 299) ||
-						(mChipId == 307)))
+						(mChipId == 307)||(mChipId==155)||
+						(mChipId==146)||(mChipId==101)||
+						(mChipId==28)))
 					{
 						if (key_.getKeyDown(KEY_INPUT_F))
 						{
@@ -653,7 +655,7 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg)
 
 void Player::Draw(Vector2 offset)
 {
-
+	offset_ = offset;
 	//ƒ‰ƒCƒ€
 	if (mapID == MAP_ID::SWEETS)
 	{
@@ -827,6 +829,11 @@ Vector2 Player::GetSiz(void)
 Vector2 Player::GetPos(void)
 {
 	return mPos;
+}
+
+Vector2 Player::GetOffset(void)
+{
+	return offset_;
 }
 
 int Player::GetStamina(void)

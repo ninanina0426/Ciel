@@ -218,7 +218,12 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     {
         return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_4", mPlayer.plID_));
     }
-
+    //餓死エンド
+    if (ded_>700)
+    {
+        return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_5", mPlayer.plID_));
+    }
+    
     //時間
     nowTime_ = std::chrono::system_clock::now();		//現在の時間を取得
     auto elTime = nowTime_ - oldTime_;                  //時間の差をとる
@@ -334,11 +339,24 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         }
     }
     
+    
     if (!IsHaori())
     {
         ColdState();
     }
 
+    if (!mPose)
+    {
+        if (mPlayer.GetSEnergy() <= 0)
+        {
+            DeadState();
+        }
+        else
+        {
+            ded_ = 0;
+        }
+    }
+    
     mMasuku->Update(PlayerPos, mAitem->mRantanNum(),mMenus.NumHave());
 
     ui_.Upadate(mPlayer, mMapOffset);
@@ -625,6 +643,21 @@ void GameScene::ColdState(void)
             }
         }
         
+    }
+}
+
+void GameScene::DeadState(void)
+{
+    ded_++;
+    if (ded_ > 200)
+    {
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, (ded_ / 2) - 50);
+        DrawBox(0, 0, 1080, 609, 0x000000, true);
+        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+        if (ded_ > 600)
+        {
+            DrawString(400, 300, "お腹・・・空いた・・・もうダメ・・・・・・", 0xffffff, true);
+        }
     }
 }
 
