@@ -233,6 +233,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     //一日の流れ
     int min = 60;    //一分間のフレーム数
     int Day = min * 5;      //一日の秒数
+    cnt_++;
     //yuugata
     if (delta % Day == 120)
     {
@@ -262,6 +263,34 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         count_++;
     }
     skycnt_++;
+    //一日の消費カロリー
+    switch (mPlayer.plID_)
+    {
+    case PlayerID::Jack:
+        if (cnt_ %600==0)
+        {
+            //20heru
+            mPlayer.Energy_ -= 1;
+        }
+        break;
+    case PlayerID::Calendula:
+        if (cnt_ % 2400 == 0)
+        {
+            //5
+            mPlayer.Energy(1);
+        }
+        break;
+    case PlayerID::Soy:
+        if (cnt_ % 1200 == 0)
+        {
+            //10
+            mPlayer.Energy(1);
+        }
+            break;
+    default:
+        break;
+    }
+    
     
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
@@ -529,6 +558,7 @@ bool GameScene::Init(void)
     count_ = 0;
     skycnt_ = 255;
     detTime_ = 0;
+    cnt_ = 0;
 
     for (int i = 0; i < 6; i++)
     {

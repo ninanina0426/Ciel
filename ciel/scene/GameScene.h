@@ -99,6 +99,7 @@ private:
     int you_;
     std::chrono::system_clock::time_point nowTime_;
     std::chrono::system_clock::time_point oldTime_;
+    int cnt_;
 
     void ColdState(void);
     int detTime_;

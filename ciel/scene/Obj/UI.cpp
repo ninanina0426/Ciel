@@ -114,6 +114,10 @@ void UI::Draw(void)
 				//DrawString(476, 360, " ! ", 0xff0000, true);
 			}
 		}
+		if (plPos_.y_ < 580)
+		{
+			DrawGraph(plPos_.x_- off_.x_-20, plPos_.y_- off_.y_-55, action_, true);
+		}
 		
 	}
 	

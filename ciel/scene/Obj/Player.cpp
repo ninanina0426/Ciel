@@ -44,6 +44,7 @@ bool Player::init(PlayerID playerid)
 
 	Stamina_ = STAMINA;
 	Energy_ = ENERGY;
+	
 	staminaFlg_ = false;
 	qflg_ = false;
 	staminacnt_ = 0;
@@ -648,6 +649,38 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg)
 			StopSoundMem(ttHandle);
 		}
 	}
+
+	if (Energy_ < 0)
+	{
+		Energy_ = 0;
+	}
+	switch (plID_)
+	{
+	case PlayerID::Jack:
+		if (Energy_ >= 150)
+		{
+			Energy_ = 150;
+		}
+		break;
+	case PlayerID::Calendula:
+		if (Energy_ >= 100)
+		{
+			Energy_ = 100;
+		}
+		break;
+	case PlayerID::Soy:
+		if (Energy_ >= 130)
+		{
+			Energy_ = 130;
+		}
+		break;
+	case PlayerID::Max:
+		break;
+	default:
+		break;
+	}
+
+
 	Energy(-En);
 	return mPos;
 
