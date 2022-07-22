@@ -339,7 +339,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         ColdState();
     }
 
-    mMasuku->Update(PlayerPos, mAitem->mRantanNum());
+    mMasuku->Update(PlayerPos, mAitem->mRantanNum(),mMenus.NumHave());
 
     ui_.Upadate(mPlayer, mMapOffset);
    

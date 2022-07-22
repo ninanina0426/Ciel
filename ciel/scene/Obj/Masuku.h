@@ -16,6 +16,8 @@ private:
 
 	int Rantan;
 
+	bool Rantan0;
+
 	Vector2 mPos;
 	Vector2 mSize;
 
@@ -26,7 +28,7 @@ public:
 	~Masuku();
 
 	bool init(void);		//初期化
-	void Update(Vector2 playerPos, int r);		//更新
+	void Update(Vector2 playerPos, int r, int ra);		//更新
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
 
