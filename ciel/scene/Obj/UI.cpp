@@ -11,15 +11,15 @@ UI::~UI()
 {
 }
 
-void UI::Upadate(int sta,int ene,Vector2 pos,Vector2 size, Vector2 offset)
+void UI::Upadate(Player player, Vector2 offset)
 {
-	stamina = sta;
-	plPos_ = pos;
+	stamina = player.Stamina_;
+	plPos_ = player.GetPos();
 	off_ = offset;
-	energy = ene;
+	energy = player.Energy_;
 
-	aitem_.Update(plPos_, size);
-
+	aitem_.Update(plPos_, player.GetSiz());
+	
 	if (aitem_.GetAitem())
 	{
 		telop_ = true;
@@ -44,12 +44,23 @@ void UI::Upadate(int sta,int ene,Vector2 pos,Vector2 size, Vector2 offset)
 		{
 			aitemname_ = "  ”é•ó";
 		}
+
+	}
+	if (player.aitemFlag_)
+	{
+		if (player.aitemNum_ == 1)
+		{
+			telop_ = true;
+			aitemname_ = "‚³‚©‚È";
+		}
+		if (player.aitemNum_ == 2)
+		{
+			telop_ = true;
+			aitemname_ = "•óÎ";
+		}
 	}
 	
-	/*if (CheckHitKey(KEY_INPUT_F))
-	{
-		telop_ = true;
-	}*/
+
 
 	//ƒAƒCƒeƒ€Žæ“¾‚Ì•\Ž¦
 	if (telop_)
@@ -75,16 +86,24 @@ void UI::Upadate(int sta,int ene,Vector2 pos,Vector2 size, Vector2 offset)
 
 }
 
+
+
 void UI::Draw(void)
 {
 	DrawBox(0, 20, stamina, 40, 0xffff00, true);
 	DrawBox(0, 0, energy*4, 20, 0x00ff00, true);
 	
-	if (plPos_.x_ > 1440 && plPos_.x_ < 1470 && plPos_.y_ < 660)
+	auto mapid = lpMapMng.GetMapId();
+	if (mapid == MAP_ID::TEMPLE)
 	{
-		
-		DrawString(476, 360, " ! ", 0xff0000,  true);
+		if (plPos_.x_ > 1440 && plPos_.x_ < 1470 && plPos_.y_ < 660)
+		{
+			DrawString(476, 360, " ! ", 0xff0000, true);
+		}
 	}
+	
+
+
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, updown_);
 	DrawGraph(0, 609 - updown_, boxid, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
@@ -98,6 +117,8 @@ void UI::Draw(void)
 	}
 	DrawString(0, 200, "W:‰ÙŽq\nA:X\nS:_“a\nD:á\nE:˜a\nR:“´ŒA",0x000000,true);
 }
+
+
 
 void UI::Init()
 {

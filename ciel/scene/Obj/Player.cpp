@@ -64,8 +64,8 @@ bool Player::init(PlayerID playerid)
 	mgSize.x_ = 96;
 	mgSize.y_ = 96;
 	gFlg = false;
-
-	
+	aitemNum_ = 0;
+	aitemFlag_ = false;
 
 	//グラフィックの読み込み
 
@@ -140,22 +140,37 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 
 	key_.Update();
 
+	gimick.Update();
 	if (!fl)
 	{
 
 		//釣り
 		if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
 		{
+			bool flg_;
+			if (i == 1)
+			{
+				flg_ = gimick.Ford();
+			}
 			if (key_.getKeyDown(KEY_INPUT_F))
 			{
+				
 				if (i == 0)
 				{
 					i = 1;
 					moveFlg = true;
 					PlaySoundMem(tHandle, DX_PLAYTYPE_BACK);
 				}
-				else if (i == 1)
+				else if (i == 1||flag_)
 				{
+					if (flg)
+					{
+						aitemFlag_ = true;
+
+						fish++;
+						aitemNum_ = 1;
+
+					}
 					i = 0;
 					moveFlg = false;
 					switch (plID_)
@@ -174,6 +189,7 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 					default:
 						break;
 					}
+					gimick.fisingFlg_ = false;
 				}
 				
 			}
@@ -181,6 +197,11 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 		//浅瀬
 		if ((mChipId == 896))
 		{
+			bool flg;
+			if (i == 2)
+			{
+				flg=gimick.Ford();
+			}
 			if (key_.getKeyDown(KEY_INPUT_F))
 			{
 				if (i == 0)
@@ -189,8 +210,24 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 					mFlg = true;
 					PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
 				}
-				else if (i == 2)
+				else if (i == 2|| flg)
 				{
+					if (flg)
+					{
+						aitemFlag_ = true;
+						auto a = GetRand(50);
+						if (a > 1)
+						{
+							fish++;
+							aitemNum_ = 1;
+						}
+						if (a == 1)
+						{
+							jewel++;
+							aitemNum_ = 2;
+						}
+					}
+
 					i = 0;
 					mFlg = false;
 					DeleteSoundMem(oHandle);
@@ -211,9 +248,15 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 					default:
 						break;
 					}
+					gimick.fisingFlg_ = false;
 				}
 				
 			}
+			else
+			{
+				aitemFlag_ = false;
+			}
+			
 		}
 		//つるはし
 		if (key_.getKeyDown(KEY_INPUT_B))
@@ -242,6 +285,7 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 				}
 				
 			}
+			gimick.Pick();
 		}
 		if (tFlg == true)
 		{
@@ -706,6 +750,7 @@ void Player::Draw(Vector2 offset)
 		
 	}
 
+	
 	DrawFormatString(0, 0, GetColor(0,0,255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mgPos.x_, mgPos.y_);
 	//DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
@@ -761,6 +806,16 @@ int Player::GetSEnergy(void)
 PlayerID Player::GetType(void)
 {
 	return plID_;
+}
+
+int Player::GetFish(void)
+{
+	return fish;
+}
+
+int Player::GetJewel(void)
+{
+	return jewel;
 }
 
 void Player::message_box() 

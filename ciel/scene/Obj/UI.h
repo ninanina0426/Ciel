@@ -8,14 +8,17 @@ public:
 	UI();
 	~UI();
 
-	void Upadate(int sta,int ene,Vector2 pos,Vector2 size,Vector2 offset);
+	void Upadate(Player player,Vector2 offset);
+	void Update1();
 	void Draw(void);
 
 	bool eveflg_;
+
 private:
 	void Init();
 
 	Aitem aitem_;
+	
 
 	int stamina;
 	int energy;

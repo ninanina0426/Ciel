@@ -129,6 +129,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 
 	key_.Update();
 
+
 	switch (mapID)
 	{
 	case MAP_ID::FOREST:
@@ -733,7 +734,8 @@ int Aitem::HaveMoney()
 	return Ru;
 }
 
-void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int f, int ssr, int sb, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int sf, int sssr, int ssb, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt, int mf, int msr, int msb ,int la, int lkk, int lfd, int lri, int ld, int lt)
+
+void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int f, int ssr, int sb, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int sf, int sssr, int ssb, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt, int mf, int msr, int msb ,int la, int lkk, int lfd, int lri, int ld, int lt, int je, int fis)
 {
 
 	mNumKinomi=k+sk+mk;
@@ -748,9 +750,10 @@ void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int
 	mRice = ri+sri-mri+lri;
 	mDango = d+sd-md+ld;
 	mTea = t+st-mt+lt;
-	mFish = f+sf-mf;
-	mStoneR = ssr+sssr-msr;
-	mStoneB = sb+ssb-msb;
+	mFish = f + sf+fis - mf;
+	mStoneR = ssr + sssr - msr;
+	mStoneB = sb + ssb - msb;
+	jewel = je;
 
 }
 
