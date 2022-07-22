@@ -892,4 +892,9 @@ int Player::EnergyNum()
 	return Energy_;
 }
 
+int Player::StaminaNum()
+{
+	return Stamina_;
+}
+
 

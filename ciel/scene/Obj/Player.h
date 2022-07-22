@@ -144,6 +144,8 @@ public:
 	void Energy(int num);
 	int EnergyNum();
 
+	int StaminaNum();
+
 	int Stamina_;		//スタミナ管理
 	int Energy_;		//エネルギー管理
 	bool staminaFlg_;	//スタミナのフラグ

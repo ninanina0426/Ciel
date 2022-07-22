@@ -32,7 +32,7 @@ public:
 
 	bool init(void);		//‰Šú‰»
 	void Update(int num,bool flg);		//XV
-	void Draw(PlayerID type,int ru,int En);		//•`‰æ
+	void Draw(PlayerID type,int ru,int En,int St);		//•`‰æ
 	bool Release(void);		//ŠJ•ú
 
 	void Menu(void);
@@ -91,7 +91,7 @@ public:
 	int En();
 
 
-	void SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t,int tam,int key,int fish);
+	void SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t,int tam,int key,int fish, int je, int bul);
 
 private:
 

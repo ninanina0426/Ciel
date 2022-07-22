@@ -258,7 +258,7 @@ void Menus::Update(int num, bool flg)
 
 }
 
-void Menus::Draw(PlayerID type, int ru, int En)
+void Menus::Draw(PlayerID type, int ru, int En, int St)
 {
 	PlayerID mType = type;
 
@@ -268,6 +268,8 @@ void Menus::Draw(PlayerID type, int ru, int En)
 
 	int E = En;
 
+	int S = St;
+
 	switch (mSelect)
 	{
 	case Menus::MENUS_SELECT::MENU_ID:
@@ -275,13 +277,18 @@ void Menus::Draw(PlayerID type, int ru, int En)
 		{
 		case PlayerID::Jack:
 			DrawGraph(0, 0, mImage[0], true);
-			DrawFormatStringToHandle(850, 400, GetColor(150, 255, 255), FontSize, "%d", E);
+			DrawFormatStringToHandle(850, 370, GetColor(255, 255, 255), FontSize, "%d", E);
+			DrawFormatStringToHandle(850, 410, GetColor(255, 255, 255), FontSize, "%d", S);
 			break;
 		case PlayerID::Calendula:
 			DrawGraph(0, 0, mImage[2], true);
+			DrawFormatStringToHandle(850, 370, GetColor(255, 255, 255), FontSize, "%d", E);
+			DrawFormatStringToHandle(850, 410, GetColor(255, 255, 255), FontSize, "%d", S);
 			break;
 		case PlayerID::Soy:
 			DrawGraph(0, 0, mImage[1], true);
+			DrawFormatStringToHandle(850, 370, GetColor(255, 255, 255), FontSize, "%d", E);
+			DrawFormatStringToHandle(850, 410, GetColor(255, 255, 255), FontSize, "%d", S);
 			break;
 		case PlayerID::Max:
 			break;
@@ -1564,7 +1571,7 @@ int Menus::OpBgm(void)
 	return b;
 }
 
-void Menus::SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int tam, int key, int fish)
+void Menus::SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int tam, int key, int fish,int je,int bul)
 {
 	ssApple=a;
 	ssKinominoKusiyaki=kk;
@@ -1581,6 +1588,8 @@ void Menus::SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r,
 	ssKey=key;
 	ssTama=tam;
 	ssfish=fish;
+	ssStoneR=je;
+	ssStoneB=bul;
 
 }
 

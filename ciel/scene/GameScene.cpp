@@ -303,7 +303,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mWshop.Update(mChat->GetNum());
 
-    mMenus.SetMenu(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->TeaNum(), mAitem->KeyNum(), mAitem->FishNum());
+    mMenus.SetMenu(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->TeaNum(), mAitem->KeyNum(), mAitem->FishNum(),mAitem->StoneRNum(),mAitem->StoneBNum());
    
     mMenus.Update(mLove->NumH(),mPose);
 
@@ -457,7 +457,7 @@ void GameScene::DrawOwnScn()
 
      if (mPose == true)
      {
-         mMenus.Draw(mPlayer.GetType(),mAitem->HaveMoney(),mPlayer.EnergyNum());
+         mMenus.Draw(mPlayer.GetType(),mAitem->HaveMoney(),mPlayer.EnergyNum(),mPlayer.StaminaNum());
      }
 
      
