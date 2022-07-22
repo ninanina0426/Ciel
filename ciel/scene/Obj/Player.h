@@ -126,7 +126,7 @@ public:
 
 	bool init(PlayerID playerid);		//初期化
 
-	Vector2 Update(int chipid,bool fl, bool lhit);		//更新
+	Vector2 Update(int chipid,bool fl, bool lhit,int e,bool gflg);		//更新
 
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
@@ -142,6 +142,7 @@ public:
 	bool aitemFlag_;
 
 	void Energy(int num);
+	int EnergyNum();
 
 	int Stamina_;		//スタミナ管理
 	int Energy_;		//エネルギー管理

@@ -33,11 +33,11 @@ bool Masuku::init(void)
     return true;
 }
 
-void Masuku::Update(Vector2 playerPos, int r)
+void Masuku::Update(Vector2 playerPos, int r,int ra)
 {
     mPos = playerPos;
 
-    Rantan = r;
+    Rantan = ra;
 
     key_.Update();
 
@@ -69,7 +69,7 @@ void Masuku::Update(Vector2 playerPos, int r)
         mAnmMum++;
     }
 
-    if (Rantan == 1)
+    if (Rantan == 10)
     {
         mFlg = false;
     }
@@ -83,7 +83,7 @@ void Masuku::Draw(Vector2 offset)
 
     if (mapID == MAP_ID::CAVE)
     {
-        if (Rantan == 1)
+        if (Rantan == 10)
         {
             DrawGraph(mPos.x_ - offset.x_ - mSize.x_, mPos.y_ - offset.y_ - mSize.y_, mImage, true);
         }

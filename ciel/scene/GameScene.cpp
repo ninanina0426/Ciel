@@ -260,10 +260,10 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     
     DrawOwnScn();//ŒÂ•Ê‚ÌDrawˆ—‚Èˆ×•K‚¸‘‚­
 
-    if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&(ui_.eveflg_==false)&&(mPose==false))
+    if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&(ui_.eveflg_==false))
     {
         mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg());
-        mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_, mLove->Hit());
+        mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_, mLove->Hit(),mMenus.En(),mPose);
 
     }
 
@@ -339,7 +339,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         ColdState();
     }
 
-    mMasuku->Update(PlayerPos, mAitem->mRantanNum());
+    mMasuku->Update(PlayerPos, mAitem->mRantanNum(),mMenus.NumHave());
 
     ui_.Upadate(mPlayer, mMapOffset);
    
@@ -457,7 +457,7 @@ void GameScene::DrawOwnScn()
 
      if (mPose == true)
      {
-         mMenus.Draw(mPlayer.GetType(),mAitem->HaveMoney());
+         mMenus.Draw(mPlayer.GetType(),mAitem->HaveMoney(),mPlayer.EnergyNum());
      }
 
      

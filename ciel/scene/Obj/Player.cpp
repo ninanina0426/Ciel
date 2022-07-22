@@ -126,12 +126,14 @@ bool Player::init(PlayerID playerid)
 
 }
 
-Vector2 Player::Update(int chipId, bool fl, bool lhit)
+Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg)
 {
 	keyDir = DIR_MAX;		//ÉLÅ[ì¸óÕÇÃï˚å¸
 	Vector2 copyPos = mPos;
 
 	mapID = lpMapMng.GetMapId();
+
+	int En = e;
 
 	mChipId = chipId;
 	mChiID = lpMapMng.GetChipID();
@@ -142,172 +144,111 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit)
 
 	gimick.Update();
 
-	if (!fl)
+	if (gflg == false)
 	{
-		if (Energy_ > 0)
+
+		if (!fl)
 		{
-			//íﬁÇË
-			if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
+			if (Energy_ > 0)
 			{
-				bool flg_;
-				if (i == 1)
+				//íﬁÇË
+				if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
 				{
-					flg_ = gimick.Fishing();
-				}
-				if (key_.getKeyDown(KEY_INPUT_F))
-				{
-					if (i == 0)
+					bool flg_;
+					if (i == 1)
 					{
-						i = 1;
-						moveFlg = true;
-						PlaySoundMem(tHandle, DX_PLAYTYPE_BACK);
+						flg_ = gimick.Fishing();
 					}
-					else if (i == 1 || flg_)
-					{
-					if (flg_)
-					{
-						aitemFlag_ = true;
-
-						fish++;
-						aitemNum_ = 1;
-
-					}
-					i = 0;
-					moveFlg = false;
-					switch (plID_)
-					{
-					case PlayerID::Jack:
-						Energy(10);
-						break;
-					case PlayerID::Calendula:
-						Energy(10);
-						break;
-					case PlayerID::Soy:
-						Energy(5);
-						break;
-					case PlayerID::Max:
-						break;
-					default:
-						break;
-					}
-					gimick.fisingFlg_ = false;
-					}
-
-				}
-				else
-				{
-					aitemFlag_ = false;
-				}
-			}
-			//êÛê£
-			if ((mChipId == 896))
-			{
-				bool flg;
-				if (i == 2)
-				{
-					flg = gimick.Ford();
-				}
-				if (key_.getKeyDown(KEY_INPUT_F))
-				{
-					if (i == 0)
-					{
-						i = 2;
-						mFlg = true;
-						PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
-					}
-					else if (i == 2 || flg)
-					{
-						if (flg)
-						{
-							aitemFlag_ = true;
-							auto a = GetRand(50);
-							if (a > 1)
-							{
-								fish++;
-								aitemNum_ = 1;
-							}
-							if (a == 1)
-							{
-								Red++;
-								aitemNum_ = 2;
-							}
-						}
-						i = 0;
-						mFlg = false;
-						DeleteSoundMem(oHandle);
-						oHandle = LoadSoundMem("image/Sound/êÖÇ…êZÇ©ÇËÇ»Ç™ÇÁï‡Ç≠.ogg");
-						switch (plID_)
-						{
-						case PlayerID::Jack:
-							Energy(15);
-							break;
-						case PlayerID::Calendula:
-							Energy(5);
-							break;
-						case PlayerID::Soy:
-							Energy(10);
-							break;
-						case PlayerID::Max:
-							break;
-						default:
-							break;
-						}
-						gimick.fisingFlg_ = false;
-					}
-
-				}
-				else
-				{
-					aitemFlag_ = false;
-				}
-
-			}
-			//Ç¬ÇÈÇÕÇµ
-
-			if (mapID == MAP_ID::CAVE || mapID == MAP_ID::SNOWCAVE)
-			{
-				if (!((mChipId == 315) || (mChipId == 316) ||
-					(mChipId == 317) || (mChipId == 306) ||
-					(mChipId == 308) || (mChipId == 297) ||
-					(mChipId == 298) || (mChipId == 299)||
-					(mChipId==307)))
-				{
 					if (key_.getKeyDown(KEY_INPUT_F))
 					{
 						if (i == 0)
 						{
-							if (gimick.Pick())
+							i = 1;
+							moveFlg = true;
+							PlaySoundMem(tHandle, DX_PLAYTYPE_BACK);
+						}
+						else if (i == 1 || flg_)
+						{
+							if (flg)
 							{
 								aitemFlag_ = true;
-								auto a = GetRand(5);
-								if (a == 0)
+
+								fish++;
+								aitemNum_ = 1;
+
+							}
+							i = 0;
+							moveFlg = false;
+							switch (plID_)
+							{
+							case PlayerID::Jack:
+								Energy(10);
+								break;
+							case PlayerID::Calendula:
+								Energy(10);
+								break;
+							case PlayerID::Soy:
+								Energy(5);
+								break;
+							case PlayerID::Max:
+								break;
+							default:
+								break;
+							}
+							gimick.fisingFlg_ = false;
+						}
+
+					}
+					else
+					{
+						aitemFlag_ = false;
+					}
+
+				}
+				//êÛê£
+				if ((mChipId == 896))
+				{
+					bool flg;
+					if (i == 2)
+					{
+						flg = gimick.Ford();
+					}
+					if (key_.getKeyDown(KEY_INPUT_F))
+					{
+						if (i == 0)
+						{
+							i = 2;
+							mFlg = true;
+							PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
+						}
+						else if (i == 2 || flg)
+						{
+							if (flg)
+							{
+								aitemFlag_ = true;
+								auto a = GetRand(50);
+								if (a > 1)
 								{
-									Bule++;
-									aitemNum_ = 3;
+									fish++;
+									aitemNum_ = 1;
 								}
 								if (a == 1)
 								{
 									Red++;
 									aitemNum_ = 2;
 								}
-								if (a > 1)
-								{
-									auto r = GetRand(50);
-									Ru = 10 + r;
-									aitemNum_ = 4;
-								}
 							}
-							i = 3;
-							tFlg = true;
-							tCnt = 60;
-							ttCnt = 0;
+							i = 0;
+							mFlg = false;
+							DeleteSoundMem(oHandle);
+							oHandle = LoadSoundMem("image/Sound/êÖÇ…êZÇ©ÇËÇ»Ç™ÇÁï‡Ç≠.ogg");
 							switch (plID_)
 							{
 							case PlayerID::Jack:
-								Energy(5);
+								Energy(15);
 								break;
 							case PlayerID::Calendula:
-								Energy(20);
+								Energy(5);
 								break;
 							case PlayerID::Soy:
 								Energy(10);
@@ -317,22 +258,87 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit)
 							default:
 								break;
 							}
+							gimick.fisingFlg_ = false;
 						}
+
 					}
 					else
 					{
 						aitemFlag_ = false;
+					}
 
+				}
+				//Ç¬ÇÈÇÕÇµ
+
+				if (mapID == MAP_ID::CAVE || mapID == MAP_ID::SNOWCAVE)
+				{
+					if (!((mChipId == 315) || (mChipId == 316) ||
+						(mChipId == 317) || (mChipId == 306) ||
+						(mChipId == 308) || (mChipId == 297) ||
+						(mChipId == 298) || (mChipId == 299) ||
+						(mChipId == 307)))
+					{
+						if (key_.getKeyDown(KEY_INPUT_F))
+						{
+							if (i == 0)
+							{
+								if (gimick.Pick())
+								{
+									aitemFlag_ = true;
+									auto a = GetRand(5);
+									if (a == 0)
+									{
+										Bule++;
+										aitemNum_ = 3;
+									}
+									if (a == 1)
+									{
+										Red++;
+										aitemNum_ = 2;
+									}
+									if (a > 1)
+									{
+										auto r = GetRand(50);
+										Ru = 10 + r;
+										aitemNum_ = 4;
+									}
+								}
+								i = 3;
+								tFlg = true;
+								tCnt = 60;
+								ttCnt = 0;
+								switch (plID_)
+								{
+								case PlayerID::Jack:
+									Energy(5);
+									break;
+								case PlayerID::Calendula:
+									Energy(20);
+									break;
+								case PlayerID::Soy:
+									Energy(10);
+									break;
+								case PlayerID::Max:
+									break;
+								default:
+									break;
+								}
+							}
+						}
+						else
+						{
+							aitemFlag_ = false;
+
+						}
 					}
 				}
 			}
-		}
-		else
-		{
-			aitemFlag_ = false;
+			else
+			{
+				aitemFlag_ = false;
 
-		}
-
+			}
+		
 		if (tFlg == true)
 		{
 			tCnt--;
@@ -473,6 +479,8 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit)
 						}
 
 					}
+
+
 					//à⁄ìÆÉ`ÉbÉvÇ…ìñÇΩÇ¡ÇƒÇ¢ÇÈéû
 					if (lpMapMng.GetEvent(copyPos) == true)
 					{
@@ -491,7 +499,7 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit)
 					{
 						mPos = copyPos;
 					}
-
+					//npcÇ∆ÇÃìñÇΩÇËîªíË
 					if (mloveNpc == true)
 					{
 						if (mMoveDir == DIR_UP)
@@ -504,7 +512,7 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit)
 						}
 						if (mMoveDir == DIR_DOWN)
 						{
-							if ((mPos.y_ < 691) && (mPos.y_ > 684))
+							if ((mPos.y_ < 689) && (mPos.y_ > 684))
 							{
 								mPos.y_ = 684;
 								mPos.x_ = copyPos.x_;
@@ -528,6 +536,9 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit)
 						}
 
 					}
+
+					/*mDamyPos = copyPos;*/
+
 				}
 				if (lpMapMng.GetMapChange(copyPos) == true)
 				{
@@ -535,13 +546,12 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit)
 					copyPos = lpMapMng.GetPos();
 					mMoveDir = lpMapMng.GetDir();
 					lpMapMng.mMapChange = false;
-
 					mPos = copyPos;
 				}
 			}
 		}
 
-		//ÉâÉCÉÄÇ…èÊÇÈ
+			//ÉâÉCÉÄÇ…èÊÇÈ
 		if (mapID == MAP_ID::SWEETS)
 		{
 			if ((mPos.x_ < 580) && (mPos.x_ > 490) && (mPos.y_ > 285) && (mPos.y_ < 310))
@@ -583,61 +593,59 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit)
 			oHandle = LoadSoundMem("image/Sound/êÖÇ…êZÇ©ÇËÇ»Ç™ÇÁï‡Ç≠.ogg");
 		}
 
-
-
-		//ç≈èâÇÃì|ÇÍÇƒÇ¢ÇÈéû
-		if (mAnmCnt == 150)
-		{
-			PlaySoundMem(sHandle, DX_PLAYTYPE_BACK);
-		}
-
-		if (mAnmCnt == 270)
-		{
-			PlaySoundMem(fHandle, DX_PLAYTYPE_BACK);
-		}
-
-		if (mAnmCnt == 270)
-		{
-			mAnmCnt = 290;
-			moveAnmCnt = false;
-		}
-		if (moveAnmCnt == false)
-		{
-			if (key_.getKeyDown(KEY_INPUT_F))
+			//ç≈èâÇÃì|ÇÍÇƒÇ¢ÇÈéû
+			if (mAnmCnt == 150)
 			{
-				moveAnmCnt = true;
-				qflg_ = true;
-			}
-		}
-
-		if (moveAnmCnt == true)
-		{
-			mAnmCnt++;
-		}
-		if (qflg_)
-		{
-			QuestIns.UpDate(qflg_, 1, copyPos, mSize, mapID);
-		}
-		if (QuestIns.CompFlg())
-		{
-			if (QuestIns.GetCont() > 570)
-			{
-				qflg_ = false;
+				PlaySoundMem(sHandle, DX_PLAYTYPE_BACK);
 			}
 
+			if (mAnmCnt == 270)
+			{
+				PlaySoundMem(fHandle, DX_PLAYTYPE_BACK);
+			}
+
+			if (mAnmCnt == 270)
+			{
+				mAnmCnt = 290;
+				moveAnmCnt = false;
+			}
+			if (moveAnmCnt == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					moveAnmCnt = true;
+					qflg_ = true;
+				}
+			}
+
+			if (moveAnmCnt == true)
+			{
+				mAnmCnt++;
+			}
+			if (qflg_)
+			{
+				QuestIns.UpDate(qflg_, 1, copyPos, mSize, mapID);
+			}
+			if (QuestIns.CompFlg())
+			{
+				if (QuestIns.GetCont() > 570)
+				{
+					qflg_ = false;
+				}
+
+			}
+			ttCnt++;
 		}
-		ttCnt++;
+		else
+		{
+			StopSoundMem(sHandle);
+			StopSoundMem(tHandle);
+			StopSoundMem(fHandle);
+			StopSoundMem(oHandle);
+			StopSoundMem(ttHandle);
+		}
 	}
-	else
-	{
-		StopSoundMem(sHandle);
-		StopSoundMem(tHandle);
-		StopSoundMem(fHandle);
-		StopSoundMem(oHandle);
-		StopSoundMem(ttHandle);
-	}
-
-
+	Energy(-En);
 	return mPos;
 
 }
@@ -876,6 +884,11 @@ void Player::message_box()
 void Player::Energy(int num)
 {
 	Energy_ = Energy_ - num;
+}
+
+int Player::EnergyNum()
+{
+	return Energy_;
 }
 
 
