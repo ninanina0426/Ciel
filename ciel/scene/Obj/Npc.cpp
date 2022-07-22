@@ -29,10 +29,14 @@ bool Npc::init(void)
 	mFmNpc5 = false;
 	mFmNpc6 = false;
 
+	mWmNpc1 = false;
+
 
 	mQSoNpc1 = false;
 	mQSoNpc2 = false;
 	mQSmNpc1 = false;
+
+	mQWmNpc1 = false;
 
 	
 	qnum_ = 0;
@@ -91,6 +95,9 @@ bool Npc::init(void)
 	case NpcType::TM_NPC:
 		break;
 	case NpcType::WM_NPC:
+		mMoveDir = DIR_UP;
+		mSize.x_ = 32;
+		mSize.y_ = 32;
 		break;
 	case NpcType::WS_NPC:
 		break;
@@ -122,6 +129,12 @@ bool Npc::init(void)
 	{
 		return false;
 	}
+
+	if (LoadDivGraph("image/npc/cat.png", 12, 3, 4, 32, 32, &mImage7[0][0]) == -1)
+	{
+		return false;
+	}
+
 
 	mSizeOffset.x_ = mSize.x_ / 2;
 	mSizeOffset.y_ = mSize.y_ / 2;
@@ -439,7 +452,38 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 	case NpcType::TM_NPC:
 		break;
 	case NpcType::WM_NPC:
+	{
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 573 + 32 / 2) &&
+			(mPos.y_ + 573 - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 994 + 32 / 2) &&
+			(mPos.x_ + 994 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			mNumType = NumType::NPC_1;
+			if (mWmNpc1 == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mWmNpc1 = true;
+					i = 60;
+				}
+			}
+			else
+			{
+				if (flg == false)
+				{
+					mWmNpc1 = false;
+					i = 0;
+					if (mQWmNpc1 == false)
+					{
+						mQWmNpc1 = true;
+						/*qflg_ = mQWmNpc1;*/
+						/*qnum_ = 2;*/
+					}
+				}
+			}
+		}
 		break;
+	}
 	case NpcType::WS_NPC:
 	{
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 1750 + 64 / 2) &&
@@ -513,6 +557,7 @@ void Npc::Draw(Vector2 offset)
 	case NpcType::TM_NPC:
 		break;
 	case NpcType::WM_NPC:
+		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 994, mPos.y_ - offset.y_ - mSizeOffset.y_ + 573, mImage7[0][0], true);
 		break;
 	case NpcType::WS_NPC:
 		DrawGraph(mPos.x_ - offset.x_ - 32 + 1825, mPos.y_ - offset.y_ - 64 + 1750, mImage5[0][3], true);
@@ -642,7 +687,22 @@ bool Npc::Getflg()
 		
 		break;
 	case NpcType::WM_NPC:
-		
+		switch (mNumType)
+		{
+		case NumType::NPC_1:
+			return mWmNpc1;
+			break;
+		case NumType::NPC_2:
+			break;
+		case NumType::NPC_3:
+			break;
+		case NumType::NPC_4:
+			break;
+		case NumType::NPC_5:
+			break;
+		default:
+			break;
+		}
 		break;
 	case NpcType::WS_NPC:
 		switch (mNumType)

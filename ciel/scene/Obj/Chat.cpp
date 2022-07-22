@@ -73,6 +73,12 @@ bool Chat::init(void)
 	mImage[59] = LoadGraph("image/talk/temple.png");
 	mImage[60] = LoadGraph("image/talk/temple.png");
 
+	mImage[61] = LoadGraph("image/talk/temple.png");
+	mImage[62] = LoadGraph("image/talk/temple.png");
+	mImage[63] = LoadGraph("image/talk/temple.png");
+	mImage[64] = LoadGraph("image/talk/temple.png");
+	mImage[65] = LoadGraph("image/talk/temple.png");
+
 
 	mNum = 100;
 
@@ -380,6 +386,27 @@ bool Chat::Update(bool flg, int num,bool sflg,bool sPose, bool wflg, bool wPose)
 			}
 		}
 		break;
+		case 60:
+		{
+
+			if (mNum == 100)
+			{
+				mNum = num - 1;
+			}
+			if (key_.getKeyDown(KEY_INPUT_F) && (mNum != 100))
+			{
+
+				mNum += 1;
+				if (mNum == 64)
+				{
+					mFlg = false;
+					mNum = 0;
+
+				}
+
+			}
+		}
+		break;
 		default:
 			break;
 		}
@@ -447,6 +474,11 @@ void Chat::Draw(Vector2 offset)
 	case 55:
 	{
 		DrawGraph(mPos.x_ - offset.x_ + 2591 - 32, mPos.y_ - offset.y_ + 129 - 128 - 50, mImage[mNum], true);
+		break;
+	}
+	case 60:
+	{
+		DrawGraph(mPos.x_ - offset.x_ + 994 - 50, mPos.y_ - offset.y_ + 753 -300, mImage[mNum], true);
 		break;
 	}
 	default:

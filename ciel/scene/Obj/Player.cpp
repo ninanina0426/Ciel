@@ -502,35 +502,36 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg)
 					//npc‚Æ‚Ì“–‚½‚è”»’è
 					if (mloveNpc == true)
 					{
+						
 						if (mMoveDir == DIR_UP)
 						{
-							if ((mPos.y_ < 750) && (mPos.y_ > 745))
+							if ((mPos.y_ < 2064) && (mPos.y_ > 2055))
 							{
-								mPos.y_ = 750;
+								mPos.y_ = 2064;
 								mPos.x_ = copyPos.x_;
 							}
 						}
 						if (mMoveDir == DIR_DOWN)
 						{
-							if ((mPos.y_ < 689) && (mPos.y_ > 684))
+							if ((mPos.y_ < 2005) && (mPos.y_ > 2000))
 							{
-								mPos.y_ = 684;
+								mPos.y_ = 2000;
 								mPos.x_ = copyPos.x_;
 							}
 						}
 						if (mMoveDir == DIR_LEFT)
 						{
-							if ((mPos.x_ < 1670) && (mPos.x_ > 1665))
+							if ((mPos.x_ < 784) && (mPos.x_ > 779))
 							{
-								mPos.x_ = 1670;
+								mPos.x_ = 784;
 								mPos.y_ = copyPos.y_;
 							}
 						}
 						if (mMoveDir == DIR_RIGHT)
 						{
-							if ((mPos.x_ > 1615) && (mPos.x_ < 1620))
+							if ((mPos.x_ > 735) && (mPos.x_ < 740))
 							{
-								mPos.x_ = 1615;
+								mPos.x_ = 735;
 								mPos.y_ = copyPos.y_;
 							}
 						}
@@ -787,7 +788,7 @@ void Player::Draw(Vector2 offset)
 	}
 
 
-	DrawFormatString(0, 0, GetColor(0, 0, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
+	DrawFormatString(0, 500, GetColor(0, 0, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mgPos.x_, mgPos.y_);
 	//DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
 	/*DrawFormatString(0, 30, 0xff0000, "chipID:%d", mChiID);*/
