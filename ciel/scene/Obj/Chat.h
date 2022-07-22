@@ -38,5 +38,6 @@ public:
 	bool Getflg();
 
 	int GetNum(void);
+	
 };
 

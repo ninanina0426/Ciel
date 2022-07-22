@@ -265,10 +265,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     }
     skycnt_++;
     
-
     DrawOwnScn();//ŒÂ•Ê‚ÌDrawˆ—‚Èˆ×•K‚¸‘‚­
-
-   
 
     if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&(ui_.eveflg_==false)&&(mPose==false))
     {

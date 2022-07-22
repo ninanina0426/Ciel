@@ -270,7 +270,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_UP;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			mMapID = MAP_ID::FORESTIN;
-			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<ForestInMap>());
 			//mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
 		}
@@ -282,7 +281,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_DOWN;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			mMapID = MAP_ID::TEMPLE;
-			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<templeMap>());
 		}
 		if (chipID == 62)
@@ -293,7 +291,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_DOWN;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			mMapID = MAP_ID::FORESTIN;
-			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<ForestInMap>());
 		}
 		if (mTchipId == 843 && pos.y_ > 1969)
@@ -303,7 +300,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_UP;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			mMapID = MAP_ID::FORESTIN;
-			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<ForestInMap>());
 			//mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
 		}
@@ -314,7 +310,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_UP;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			mMapID = MAP_ID::FORESTIN;
-			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<ForestInMap>());
 			//mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
 		}
@@ -340,7 +335,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_DOWN;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			mMapID = MAP_ID::FOREST;
-			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<ForestMap>());
 		}
 		if (chipID == 2521)
@@ -351,7 +345,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_DOWN;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			mMapID = MAP_ID::FOREST;
-			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<ForestMap>());
 		}
 		
@@ -363,7 +356,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_RIGHT;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			mMapID = MAP_ID::FOREST;
-			mOffset = mNextPos - Vector2{ 540,300 };
 			stage_ = std::move(std::make_unique<ForestMap>());
 		}
 	}

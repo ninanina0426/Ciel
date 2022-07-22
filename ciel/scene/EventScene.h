@@ -37,8 +37,11 @@ private:
 	int aitem_;
 	uniquBaseScn gameScene_;
 	bool flg_;		//イベントが終わった
+	int Cnt;
 
-	
+	int mImageP[48];
+	int mImagePD[27];
+	int mImageC[20];
 
 	//グラフィック系
 	int airplan_[4][3];
