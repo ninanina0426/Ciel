@@ -113,7 +113,9 @@ private:
 	DIR keyDir;
 
 	int fish;
-	int jewel;
+	int Red;
+	int Bule;
+	int Ru;
 public:
 	Player();
 	~Player();
@@ -155,7 +157,9 @@ public:
 	PlayerID GetType(void);
 	
 	int GetFish(void);
-	int GetJewel(void);
+	int GetRed(void);
+	int GetBule(void);
+	int GetRu(void);
 };
 
 

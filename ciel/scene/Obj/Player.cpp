@@ -126,7 +126,7 @@ bool Player::init(PlayerID playerid)
 
 }
 
-Vector2 Player::Update(int chipId,bool fl, bool lhit)
+Vector2 Player::Update(int chipId, bool fl, bool lhit)
 {
 	keyDir = DIR_MAX;		//キー入力の方向
 	Vector2 copyPos = mPos;
@@ -141,29 +141,30 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 	key_.Update();
 
 	gimick.Update();
+
 	if (!fl)
 	{
-
-		//釣り
-		if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
+		if (Energy_ > 0)
 		{
-			bool flg_;
-			if (i == 1)
+			//釣り
+			if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
 			{
-				flg_ = gimick.Ford();
-			}
-			if (key_.getKeyDown(KEY_INPUT_F))
-			{
-				
-				if (i == 0)
+				bool flg_;
+				if (i == 1)
 				{
-					i = 1;
-					moveFlg = true;
-					PlaySoundMem(tHandle, DX_PLAYTYPE_BACK);
+					flg_ = gimick.Fishing();
 				}
-				else if (i == 1||flag_)
+				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					if (flg)
+					if (i == 0)
+					{
+						i = 1;
+						moveFlg = true;
+						PlaySoundMem(tHandle, DX_PLAYTYPE_BACK);
+					}
+					else if (i == 1 || flg_)
+					{
+					if (flg_)
 					{
 						aitemFlag_ = true;
 
@@ -190,103 +191,148 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 						break;
 					}
 					gimick.fisingFlg_ = false;
-				}
-				
-			}
-		}
-		//浅瀬
-		if ((mChipId == 896))
-		{
-			bool flg;
-			if (i == 2)
-			{
-				flg=gimick.Ford();
-			}
-			if (key_.getKeyDown(KEY_INPUT_F))
-			{
-				if (i == 0)
-				{
-					i = 2;
-					mFlg = true;
-					PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
-				}
-				else if (i == 2|| flg)
-				{
-					if (flg)
-					{
-						aitemFlag_ = true;
-						auto a = GetRand(50);
-						if (a > 1)
-						{
-							fish++;
-							aitemNum_ = 1;
-						}
-						if (a == 1)
-						{
-							jewel++;
-							aitemNum_ = 2;
-						}
 					}
 
-					i = 0;
-					mFlg = false;
-					DeleteSoundMem(oHandle);
-					oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
-					switch (plID_)
-					{
-					case PlayerID::Jack:
-						Energy(15);
-						break;
-					case PlayerID::Calendula:
-						Energy(5);
-						break;
-					case PlayerID::Soy:
-						Energy(10);
-						break;
-					case PlayerID::Max:
-						break;
-					default:
-						break;
-					}
-					gimick.fisingFlg_ = false;
 				}
-				
-			}
-			else
-			{
-				aitemFlag_ = false;
-			}
-			
-		}
-		//つるはし
-		if (key_.getKeyDown(KEY_INPUT_B))
-		{
-			if (i == 0)
-			{
-				i = 3;
-				tFlg = true;
-				tCnt = 60;
-				ttCnt = 0;
-				switch (plID_)
+				else
 				{
-				case PlayerID::Jack:
-					Energy(5);
-					break;
-				case PlayerID::Calendula:
-					Energy(20);
-					break;
-				case PlayerID::Soy:
-					Energy(10);
-					break;
-				case PlayerID::Max:
-					break;
-				default:
-					break;
+					aitemFlag_ = false;
 				}
-				
 			}
-			gimick.Pick();
+			//浅瀬
+			if ((mChipId == 896))
+			{
+				bool flg;
+				if (i == 2)
+				{
+					flg = gimick.Ford();
+				}
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					if (i == 0)
+					{
+						i = 2;
+						mFlg = true;
+						PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
+					}
+					else if (i == 2 || flg)
+					{
+						if (flg)
+						{
+							aitemFlag_ = true;
+							auto a = GetRand(50);
+							if (a > 1)
+							{
+								fish++;
+								aitemNum_ = 1;
+							}
+							if (a == 1)
+							{
+								Red++;
+								aitemNum_ = 2;
+							}
+						}
+						i = 0;
+						mFlg = false;
+						DeleteSoundMem(oHandle);
+						oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
+						switch (plID_)
+						{
+						case PlayerID::Jack:
+							Energy(15);
+							break;
+						case PlayerID::Calendula:
+							Energy(5);
+							break;
+						case PlayerID::Soy:
+							Energy(10);
+							break;
+						case PlayerID::Max:
+							break;
+						default:
+							break;
+						}
+						gimick.fisingFlg_ = false;
+					}
+
+				}
+				else
+				{
+					aitemFlag_ = false;
+				}
+
+			}
+			//つるはし
+
+			if (mapID == MAP_ID::CAVE || mapID == MAP_ID::SNOWCAVE)
+			{
+				if (!((mChipId == 315) || (mChipId == 316) ||
+					(mChipId == 317) || (mChipId == 306) ||
+					(mChipId == 308) || (mChipId == 297) ||
+					(mChipId == 298) || (mChipId == 299)||
+					(mChipId==307)))
+				{
+					if (key_.getKeyDown(KEY_INPUT_F))
+					{
+						if (i == 0)
+						{
+							if (gimick.Pick())
+							{
+								aitemFlag_ = true;
+								auto a = GetRand(5);
+								if (a == 0)
+								{
+									Bule++;
+									aitemNum_ = 3;
+								}
+								if (a == 1)
+								{
+									Red++;
+									aitemNum_ = 2;
+								}
+								if (a > 1)
+								{
+									auto r = GetRand(50);
+									Ru = 10 + r;
+									aitemNum_ = 4;
+								}
+							}
+							i = 3;
+							tFlg = true;
+							tCnt = 60;
+							ttCnt = 0;
+							switch (plID_)
+							{
+							case PlayerID::Jack:
+								Energy(5);
+								break;
+							case PlayerID::Calendula:
+								Energy(20);
+								break;
+							case PlayerID::Soy:
+								Energy(10);
+								break;
+							case PlayerID::Max:
+								break;
+							default:
+								break;
+							}
+						}
+					}
+					else
+					{
+						aitemFlag_ = false;
+
+					}
+				}
+			}
 		}
+		else
+		{
+			aitemFlag_ = false;
+
+		}
+
 		if (tFlg == true)
 		{
 			tCnt--;
@@ -303,8 +349,6 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 			}
 
 		}
-
-
 		if ((mAnmCnt / 10 > 30) && (moveAnmCnt == true))
 		{
 			if ((moveFlg == false) && (mFlg == false) && (tFlg == false))
@@ -331,8 +375,6 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 					keyDir = DIR_RIGHT;
 					num = 5;
 				}
-
-
 				//走る
 				if (key_.getKeyDownHold(KEY_INPUT_LSHIFT) && Stamina_ != 0 && keyDir != DIR::DIR_MAX)
 				{
@@ -364,7 +406,6 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 						mMoveSpeed = 3;
 					}
 				}
-
 				if (keyDir != DIR_MAX)
 				{
 					mMoveDir = keyDir;
@@ -432,8 +473,6 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 						}
 
 					}
-
-
 					//移動チップに当たっている時
 					if (lpMapMng.GetEvent(copyPos) == true)
 					{
@@ -447,9 +486,6 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 					{
 						lpMapMng.GetEvent(copyPos);
 					}
-
-
-
 					//当たり判定
 					if (lpMapMng.cheakMapChip(copyPos))
 					{
@@ -490,11 +526,8 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 								mPos.y_ = copyPos.y_;
 							}
 						}
-						
+
 					}
-
-					/*mDamyPos = copyPos;*/
-
 				}
 				if (lpMapMng.GetMapChange(copyPos) == true)
 				{
@@ -505,11 +538,7 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 
 					mPos = copyPos;
 				}
-
-
 			}
-
-
 		}
 
 		//ライムに乗る
@@ -601,11 +630,11 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 	}
 	else
 	{
-	StopSoundMem(sHandle);
-	StopSoundMem(tHandle);
-	StopSoundMem(fHandle);
-	StopSoundMem(oHandle);
-	StopSoundMem(ttHandle);
+		StopSoundMem(sHandle);
+		StopSoundMem(tHandle);
+		StopSoundMem(fHandle);
+		StopSoundMem(oHandle);
+		StopSoundMem(ttHandle);
 	}
 
 
@@ -616,7 +645,7 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 
 void Player::Draw(Vector2 offset)
 {
-	
+
 	//ライム
 	if (mapID == MAP_ID::SWEETS)
 	{
@@ -630,15 +659,15 @@ void Player::Draw(Vector2 offset)
 			DrawGraph(580 - offset.x_ - 79, 285 - offset.y_ - 48, mImageF, true);
 		}
 	}
-	
+
 
 	if (plID_ == PlayerID::Jack)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80-50, mImageChat[3], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80 - 50, mImageChat[3], true);
 		}
-		if (mAnmCnt< 270)
+		if (mAnmCnt < 270)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - 16, mPos.y_ - offset.y_ - 24, mImageI[mAnmCnt / 10], true);
 		}
@@ -654,7 +683,7 @@ void Player::Draw(Vector2 offset)
 				{
 					DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 				}
-				
+
 			}
 			else if (i == 1)
 			{
@@ -662,16 +691,16 @@ void Player::Draw(Vector2 offset)
 			}
 			else if (i == 2)
 			{
-				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[(4+num) * DIR_MAX + ((mAnmCnt / 10) % 4)], true);
+				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[(4 + num) * DIR_MAX + ((mAnmCnt / 10) % 4)], true);
 			}
 			else if (i == 3)
 			{
 				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImageTI[mMoveDir * 6 + ((ttCnt / 10))], true);
 			}
-			
+
 		}
-		
-		
+
+
 	}
 	if (plID_ == PlayerID::Soy)
 	{
@@ -679,7 +708,7 @@ void Player::Draw(Vector2 offset)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80 - 50, mImageChat[2], true);
 		}
-		if (mAnmCnt< 270)
+		if (mAnmCnt < 270)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - 16, mPos.y_ - offset.y_ - 24, mImageS[mAnmCnt / 10], true);
 		}
@@ -714,11 +743,11 @@ void Player::Draw(Vector2 offset)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_-63 , mPos.y_ - offset.y_ -80 - 50, mImageChat[1], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80 - 50, mImageChat[1], true);
 		}
-		if (mAnmCnt< 270)
+		if (mAnmCnt < 270)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - 16, mPos.y_ - offset.y_ - 24, mImageC[mAnmCnt/10], true);
+			DrawGraph(mPos.x_ - offset.x_ - 16, mPos.y_ - offset.y_ - 24, mImageC[mAnmCnt / 10], true);
 		}
 		else
 		{
@@ -746,11 +775,11 @@ void Player::Draw(Vector2 offset)
 				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImageTC[mMoveDir * 6 + ((ttCnt / 10))], true);
 			}
 		}
-		
+
 	}
 
-	
-	DrawFormatString(0, 0, GetColor(0,0,255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
+
+	DrawFormatString(0, 0, GetColor(0, 0, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mgPos.x_, mgPos.y_);
 	//DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
 	/*DrawFormatString(0, 30, 0xff0000, "chipID:%d", mChiID);*/
@@ -812,9 +841,19 @@ int Player::GetFish(void)
 	return fish;
 }
 
-int Player::GetJewel(void)
+int Player::GetRed(void)
 {
-	return jewel;
+	return Red;
+}
+
+int Player::GetBule(void)
+{
+	return Bule;
+}
+
+int Player::GetRu(void)
+{
+	return Ru;
 }
 
 void Player::message_box() 

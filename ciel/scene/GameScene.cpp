@@ -283,7 +283,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     mAitem->TotalAitem(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori(), mShop.SsRice(), mShop.SsDango(), mShop.SsTea(),mShop.SsFish(), mShop.SsStoneR(),mShop.SsStoneB(),
         mWshop.SsApple(), mWshop.SsKinominoKusiyaki(), mWshop.SsFruitDrink(), mWshop.SsFishingRodS(), mWshop.SsRagBag(), mWshop.SsPickaxe(), mWshop.SsKinomi(), mWshop.SsRantan(), mWshop.SsHaori(), mWshop.SsRice(), mWshop.SsDango(), mWshop.SsTea(), mWshop.SsFish(), mWshop.SsStoneR(), mWshop.SsStoneB(),
         mMenus.AppleE(), mMenus.KinominoKusiyakiE(), mMenus.FruitDrinkE(), mMenus.FishingRodSE(), mMenus.RagBagE(), mMenus.PickaxeE(), mMenus.KnomiE(), mMenus.mRantanE(), mMenus.mHaoriE(), mMenus.RiceE(), mMenus.DangoE(), mMenus.TeaE(),mMenus.FishE(),mMenus.StoneRE(),mMenus.StoneBE(),
-        mLove->Apple(),mLove->KinominoKusiyaki(),mLove->FruitDrink(),mLove->Rice(),mLove->Dango(),mLove->Tea() , mPlayer.GetJewel(), mPlayer.GetFish());
+        mLove->Apple(),mLove->KinominoKusiyaki(),mLove->FruitDrink(),mLove->Rice(),mLove->Dango(),mLove->Tea() , mPlayer.GetRed(), mPlayer.GetFish(),mPlayer.GetBule());
 
 
 

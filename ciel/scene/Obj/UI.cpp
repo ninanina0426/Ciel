@@ -56,7 +56,17 @@ void UI::Upadate(Player player, Vector2 offset)
 		if (player.aitemNum_ == 2)
 		{
 			telop_ = true;
-			aitemname_ = "•óÎ";
+			aitemname_ = "Ô‚¢Î";
+		}
+		if (player.aitemNum_ == 3)
+		{
+			telop_ = true;
+			aitemname_ = "Â‚¢Î";
+		}
+		if (player.aitemNum_ == 4)
+		{
+			telop_ = true;
+			aitemname_ = "  ƒ‹[";
 		}
 	}
 	

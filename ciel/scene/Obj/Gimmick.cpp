@@ -12,7 +12,8 @@ Gimmick::~Gimmick()
 
 void Gimmick::Update()
 {
-	time=GetRand(50);
+	time=GetRand(100);
+	rock = GetRand(8);
 	if (fisingFlg_)
 	{
 		count--;
@@ -30,7 +31,7 @@ void Gimmick::Draw()
 
 bool Gimmick::Fishing()
 {
-	if (time == 3)
+	if (time == 8)
 	{
 
 		fisingFlg_ = true;
@@ -52,12 +53,16 @@ bool Gimmick::Fishing()
 
 bool Gimmick::Pick()
 {
+	if (rock==7 )
+	{
+		return true;
+	}
 	return false;
 }
 
 bool Gimmick::Ford()
 {
-	
+	//ƒ‰ƒ“ƒ_ƒ€‚ÈŠÔ
 	if (time == 3)
 	{
 		
@@ -65,14 +70,14 @@ bool Gimmick::Ford()
 		return true;
 	}
 
-	if (count > 60)
+	if (count > 30)
 	{
 		return true;
 	}
 	else if(count<0|| fisingFlg_==false)
 	{
 		fisingFlg_ = false;
-		count = 60;
+		count = 30;
 		return false;
 	}
 	
@@ -81,5 +86,5 @@ bool Gimmick::Ford()
 void Gimmick::Init()
 {
 	fisingFlg_ = false;
-	count = 60;
+	count = 30;
 }
