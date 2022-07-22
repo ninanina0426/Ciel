@@ -34,7 +34,7 @@ public:
 	bool SPose(void);
 	bool CanselFlg(void);
 
-	int SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h,int ri,int d,int t);
+	int SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h,int ri,int d,int t, int f, int sr, int sb);
 
 	int SetMoney();
 	bool GetMoney();
@@ -60,6 +60,9 @@ public:
 	int SsKinomi(void);
 	int SsRantan(void);
 	int SsHaori(void);
+	int SsFish(void);
+	int SsStoneR(void);
+	int SsStoneB(void);
 
 private:
 
@@ -78,6 +81,9 @@ private:
 	int mImageBsB;
 	int mImageBsS;
 	int mImageBuy;
+	int mImageBuy2;
+
+	int mNumS;
 
 	Vector2 mBoxSe[10];
 	Vector2 mBoxA[10][10];
@@ -117,6 +123,9 @@ private:
 	int gKinomi;
 	int gRantan;
 	int gHaori;
+	int gFish;
+	int gStoneR;
+	int gStoneB;
 
 	//îÑîÉ
 	int bApple;
@@ -131,6 +140,9 @@ private:
 	int bKinomi;
 	int bRantan;
 	int bHaori;
+	int bFish;
+	int bStoneR;
+	int bStoneB;
 
 	//ç›å…
 
@@ -147,6 +159,7 @@ private:
 	int maxRantan;
 	int maxHaori;
 
+
 	//ëççá
 	int sApple;
 	int sKinominoKusiyaki;
@@ -160,6 +173,9 @@ private:
 	int sKinomi;
 	int sRantan;
 	int sHaori;
+	int sFish;
+	int sStoneR;
+	int sStoneB;
 
 	//â¡å∏éZ
 	int kApple;
@@ -174,6 +190,9 @@ private:
 	int kKinomi;
 	int kRantan;
 	int kHaori;
+	int kFish;
+	int kStoneR;
+	int kStoneB;
 
 	//Ç®ã‡
 	int mA;
@@ -188,6 +207,9 @@ private:
 	int mK;
 	int mR;
 	int mH;
+	int mF;
+	int mSR;
+	int mSB;
 
 	bool moveFlg;
 

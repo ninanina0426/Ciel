@@ -38,6 +38,9 @@ bool wshop::init(void)
     bKinomi = 0;
     bRantan = 0;
     bHaori = 0;
+    bFish = 0;
+    bStoneR = 0;
+    bStoneB = 0;
 
     H = -1;
 
@@ -68,6 +71,9 @@ bool wshop::init(void)
     mA = 25;
     mKK = 30;
     mFD = 50;
+    mF = 20;
+    mSR = 200;
+    mSB = 150;
 
     SelectNum = 1;
     moveFlg = false;
@@ -108,7 +114,8 @@ bool wshop::init(void)
 
     mImageBsB = LoadGraph("image/shop/shop4.png");
     mImageBsS = LoadGraph("image/shop/shop5.png");
-    mImageBuy = LoadGraph("image/shop/shop21.png");
+    mImageBuy = LoadGraph("image/shop/shop30.png");
+    mImageBuy2 = LoadGraph("image/shop/shop31.png");
 
     cHandle = LoadSoundMem("image/Sound/ƒLƒƒƒ“ƒZƒ‹5.ogg");
     kHandle = LoadSoundMem("image/Sound/‹àŠz•\Ž¦.ogg");
@@ -254,36 +261,58 @@ void wshop::Draw(void)
         }
         break;
         case wshop::WSHOP_SELECT::SELL:
-            DrawGraph(0, 0, mImageBuy, true);
-            if (yy == 1)
+            if (mNumS == 0)
             {
-                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gRice);
-                /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxApple);*/
+                DrawGraph(0, 0, mImageBuy, true);
+                if (yy == 1)
+                {
+                    DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gApple);
+                    /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxApple);*/
+                }
+                if (yy == 3)
+                {
+                    DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gKinominoKusiyaki);
+                    /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxKinominoKusiyaki);*/
+                }
+                if (yy == 6)
+                {
+                    DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gFruitDrink);
+                    /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFruitDrink);*/
+                }
+                if (yy == 2)
+                {
+                    DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gRice);
+                    /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFishingRodS);*/
+                }
+                if (yy == 4)
+                {
+                    DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gDango);
+                    /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxRagBag);*/
+                }
+                if (yy == 5)
+                {
+                    DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gTea);
+                    /* DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxPickaxe);*/
+                }
             }
-            if (yy == 2)
+            else if (mNumS == 1)
             {
-                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gDango);
-                /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxKinominoKusiyaki);*/
-            }
-            if (yy == 3)
-            {
-                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gTea);
-                /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFruitDrink);*/
-            }
-            if (yy == 4)
-            {
-                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gApple);
-                /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFishingRodS);*/
-            }
-            if (yy == 5)
-            {
-                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gKinominoKusiyaki);
-                /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxRagBag);*/
-            }
-            if (yy == 6)
-            {
-                DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gFruitDrink);
-                /* DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxPickaxe);*/
+                DrawGraph(0, 0, mImageBuy2, true);
+                if (yy == 1)
+                {
+                    DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gStoneR);
+                    /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxApple);*/
+                }
+                if (yy == 2)
+                {
+                    DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gStoneB);
+                    /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxKinominoKusiyaki);*/
+                }
+                if (yy == 3)
+                {
+                    DrawFormatStringToHandle(950, 260, 0xff0000, FontSize, "%d", gFish);
+                    /*DrawFormatStringToHandle(950, 320, 0xff0000, FontSize, "%d", maxFruitDrink);*/
+                }
             }
             break;
         case wshop::WSHOP_SELECT::CANSEL:
@@ -334,29 +363,47 @@ void wshop::Draw(void)
         SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
         DrawBox(mBoxB[SelectNum][0].x_, 418, mBoxB[SelectNum + 1][0].x_, 475, GetColor(255, 255, 255), true);
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-        if (yy == 1)
+        if (mNumS == 0)
         {
-            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bRice);
+            if (yy == 1)
+            {
+                DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bApple);
+            }
+            if (yy == 3)
+            {
+                DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bKinominoKusiyaki);
+            }
+            if (yy == 6)
+            {
+                DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bFruitDrink);
+            }
+            if (yy == 2)
+            {
+                DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bRice);
+            }
+            if (yy == 4)
+            {
+                DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bDango);
+            }
+            if (yy == 5)
+            {
+                DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bTea);
+            }
         }
-        if (yy == 2)
+        else if (mNumS == 1)
         {
-            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bDango);
-        }
-        if (yy == 3)
-        {
-            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bTea);
-        }
-        if (yy == 4)
-        {
-            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bApple);
-        }
-        if (yy == 5)
-        {
-            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bKinominoKusiyaki);
-        }
-        if (yy == 6)
-        {
-            DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bFruitDrink);
+            if (yy == 1)
+            {
+                DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bStoneR);
+            }
+            if (yy == 2)
+            {
+                DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bStoneB);
+            }
+            if (yy == 3)
+            {
+                DrawFormatStringToHandle(530, 300, 0xff0000, FontSize, "%d", bFish);
+            }
         }
         break;
     case wshop::WSHOP_BS::BS_MAX:
@@ -389,7 +436,7 @@ bool wshop::CanselFlg(void)
     return Canflg;
 }
 
-int wshop::SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t)
+int wshop::SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int f, int sr, int sb)
 {
     gRice = ri;
     gDango = d;
@@ -403,6 +450,9 @@ int wshop::SetAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r,
     gApple = a;
     gKinominoKusiyaki = kk;
     gFruitDrink = fd;
+    gFish = f;
+    gStoneR = sr;
+    gStoneB = sb;
 
    
 
@@ -600,7 +650,7 @@ void wshop::Buy(void)
 void wshop::Sell(void)
 {
     Canflg = false;
-    if ((yy >= 0) && (xx == 0))
+    if (mNumS == 0)
     {
         if (key_.getKeyDown(KEY_INPUT_DOWN))
         {
@@ -608,6 +658,27 @@ void wshop::Sell(void)
             if (yy > 6)
             {
                 yy = 1;
+                mNumS = 1;
+            }
+        }
+        else if (key_.getKeyDown(KEY_INPUT_UP) && yy >= 0)
+        {
+            yy -= 1;
+            if (yy <= 0)
+            {
+                yy = 1;
+            }
+        }
+    }
+    else if (mNumS == 1)
+    {
+        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        {
+            yy += 1;
+            if (yy > 3)
+            {
+                yy = 3;
+
             }
         }
         else if (key_.getKeyDown(KEY_INPUT_UP) && yy >= 0)
@@ -616,19 +687,21 @@ void wshop::Sell(void)
             if (yy <= 0)
             {
                 yy = 6;
+                mNumS = 0;
             }
         }
-        if (key_.getKeyDown(KEY_INPUT_F)/* || key_.getKeyDown(KEY_INPUT_RETURN)*/)
-        {
-            ChangeBS(WSHOP_BS::BS_SELL);
-            xx = 1;
-        }
-        if (key_.getKeyDown(KEY_INPUT_Q))
-        {
-            ChangeState(WSHOP_SELECT::SELECT);
-
-        }
     }
+    if (key_.getKeyDown(KEY_INPUT_F)/* || key_.getKeyDown(KEY_INPUT_RETURN)*/)
+    {
+        ChangeBS(WSHOP_BS::BS_SELL);
+        xx = 1;
+    }
+    if (key_.getKeyDown(KEY_INPUT_Q))
+    {
+        ChangeState(WSHOP_SELECT::SELECT);
+
+    }
+
     if (key_.getKeyDown(KEY_INPUT_F))
     {
     }
@@ -1129,393 +1202,596 @@ void wshop::BSBuy(void)
 void wshop::BSSell(void)
 {
 
-    if (yy == 1)
+    if (mNumS == 0)
     {
-        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        if (yy == 1)
         {
-            bRice -= 1;
-            if (bRice <= 0)
+            if (key_.getKeyDown(KEY_INPUT_DOWN))
             {
-                bRice = 0;
+                bApple -= 1;
+                if (bApple <= 0)
+                {
+                    bApple = 0;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_UP))
+            {
+                bApple += 1;
+                if (bApple >= gApple)
+                {
+                    bApple = gApple;
+                }
+            }
+            else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+            {
+                SelectNum += 1;
+                if (SelectNum >= 3)
+                {
+                    SelectNum = 1;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_LEFT))
+            {
+                SelectNum -= 1;
+                if (SelectNum <= 0)
+                {
+                    SelectNum = 2;
+                }
+            }
+
+            if (key_.getKeyDown(KEY_INPUT_F))
+            {
+                if (SelectNum == 2)
+                {
+                    gApple -= bApple;
+                    kApple = -bApple + sApple;
+                    sApple = kApple;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    numRu = (mA * (bApple));
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bApple = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                }
+                else if (SelectNum == 1)
+                {
+                    sApple = sApple;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bApple = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
+                }
+
+
             }
 
         }
-        else if (key_.getKeyDown(KEY_INPUT_UP))
+        if (yy == 3)
         {
-            bRice += 1;
-            if (bRice >= sRice)
+            if (key_.getKeyDown(KEY_INPUT_DOWN))
             {
-                bRice = sRice;
+                bKinominoKusiyaki -= 1;
+                if (bKinominoKusiyaki <= 0)
+                {
+                    bKinominoKusiyaki = 0;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_UP))
+            {
+                bKinominoKusiyaki += 1;
+                if (bKinominoKusiyaki >= gKinominoKusiyaki)
+                {
+                    bKinominoKusiyaki = gKinominoKusiyaki;
+                }
+            }
+            else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+            {
+                SelectNum += 1;
+                if (SelectNum >= 3)
+                {
+                    SelectNum = 1;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_LEFT))
+            {
+                SelectNum -= 1;
+                if (SelectNum <= 0)
+                {
+                    SelectNum = 2;
+                }
+            }
+
+            if (key_.getKeyDown(KEY_INPUT_F))
+            {
+
+                if (SelectNum == 2)
+                {
+                    gKinominoKusiyaki -= bKinominoKusiyaki;
+                    kKinominoKusiyaki = -bKinominoKusiyaki + sKinominoKusiyaki;
+                    sKinominoKusiyaki = kKinominoKusiyaki;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    numRu = (mKK * (bKinominoKusiyaki));
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bKinominoKusiyaki = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                }
+                else if (SelectNum == 1)
+                {
+                    sKinominoKusiyaki = sKinominoKusiyaki;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bKinominoKusiyaki = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
+                }
             }
         }
-        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+        if (yy == 6)
         {
-            SelectNum += 1;
-            if (SelectNum >= 3)
+            if (key_.getKeyDown(KEY_INPUT_DOWN))
             {
-                SelectNum = 1;
+                bFruitDrink -= 1;
+                if (bFruitDrink <= 0)
+                {
+                    bFruitDrink = 0;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_UP))
+            {
+                bFruitDrink += 1;
+                if (bFruitDrink >= gFruitDrink)
+                {
+                    bFruitDrink = gFruitDrink;
+                }
+            }
+            else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+            {
+                SelectNum += 1;
+                if (SelectNum >= 3)
+                {
+                    SelectNum = 1;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_LEFT))
+            {
+                SelectNum -= 1;
+                if (SelectNum <= 0)
+                {
+                    SelectNum = 2;
+                }
+            }
+
+            if (key_.getKeyDown(KEY_INPUT_F))
+            {
+
+                if (SelectNum == 2)
+                {
+                    gFruitDrink -= bFruitDrink;
+                    kFruitDrink = -bFruitDrink + sFruitDrink;
+                    sFruitDrink = kFruitDrink;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    numRu = (mFD * (bFruitDrink));
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bFruitDrink = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                }
+                else if (SelectNum == 1)
+                {
+                    sFruitDrink = sFruitDrink;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bFruitDrink = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
+                }
+            }
+        }
+        if (yy == 2)
+        {
+            if (key_.getKeyDown(KEY_INPUT_DOWN))
+            {
+                bRice -= 1;
+                if (bRice <= 0)
+                {
+                    bRice = 0;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_UP))
+            {
+                bRice += 1;
+                if (bRice >= gRice)
+                {
+                    bRice = gRice;
+                }
+            }
+            else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+            {
+                SelectNum += 1;
+                if (SelectNum >= 3)
+                {
+                    SelectNum = 1;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_LEFT))
+            {
+                SelectNum -= 1;
+                if (SelectNum <= 0)
+                {
+                    SelectNum = 2;
+                }
+            }
+
+            if (key_.getKeyDown(KEY_INPUT_F))
+            {
+                if (SelectNum == 2)
+                {
+                    gRice -= bRice;
+                    kRice = -bRice + sRice;
+                    sRice = kRice;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    numRu = (mRi * (bRice));
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bRice = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                }
+                else if (SelectNum == 1)
+                {
+                    sRice = sRice;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bRice = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
+                }
+
+
             }
 
         }
-        else if (key_.getKeyDown(KEY_INPUT_LEFT))
+        if (yy == 4)
         {
-            SelectNum -= 1;
-            if (SelectNum <= 0)
+            if (key_.getKeyDown(KEY_INPUT_DOWN))
             {
-                SelectNum = 2;
+                bDango -= 1;
+                if (bDango <= 0)
+                {
+                    bDango = 0;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_UP))
+            {
+                bDango += 1;
+                if (bDango >= gDango)
+                {
+                    bDango = gDango;
+                }
+            }
+            else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+            {
+                SelectNum += 1;
+                if (SelectNum >= 3)
+                {
+                    SelectNum = 1;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_LEFT))
+            {
+                SelectNum -= 1;
+                if (SelectNum <= 0)
+                {
+                    SelectNum = 2;
+                }
+            }
+
+            if (key_.getKeyDown(KEY_INPUT_F))
+            {
+
+                if (SelectNum == 2)
+                {
+                    gDango -= bDango;
+                    kDango = -bDango + sDango;
+                    sDango = kDango;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    numRu = (mD * (bDango));
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bDango = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                }
+                else if (SelectNum == 1)
+                {
+                    sDango = sDango;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bDango = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
+                }
             }
         }
-
-        if (key_.getKeyDown(KEY_INPUT_F))
+        if (yy == 5)
         {
-            if (SelectNum == 2)
+            if (key_.getKeyDown(KEY_INPUT_DOWN))
             {
-                gRice -= bRice;
-                kRice = -bRice + sRice;
-                sRice = kRice;
-                xx = 0;
-                ChangeBS(WSHOP_BS::BS_MAX);
-                numRu = (mRi * (bRice));
-                MoneyFlg = true;
-                SelectNum = 0;
-                bRice = 0;
-                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                bTea -= 1;
+                if (bTea <= 0)
+                {
+                    bTea = 0;
+                }
+
             }
-            else if (SelectNum == 1)
+            else if (key_.getKeyDown(KEY_INPUT_UP))
             {
-                sRice = sRice;
-                xx = 0;
-                ChangeBS(WSHOP_BS::BS_MAX);
-                SelectNum = 0;
-                bRice = 0;
-                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
+                bTea += 1;
+                if (bTea >= gTea)
+                {
+                    bTea = gTea;
+                }
+            }
+            else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+            {
+                SelectNum += 1;
+                if (SelectNum >= 3)
+                {
+                    SelectNum = 1;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_LEFT))
+            {
+                SelectNum -= 1;
+                if (SelectNum <= 0)
+                {
+                    SelectNum = 2;
+                }
             }
 
+            if (key_.getKeyDown(KEY_INPUT_F))
+            {
 
+                if (SelectNum == 2)
+                {
+                    gTea -= bTea;
+                    kTea = -bTea + sTea;
+                    sTea = kTea;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    numRu = (mT * (bTea));
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bTea = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                }
+                else if (SelectNum == 1)
+                {
+                    sTea = sTea;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bTea = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
+                }
+            }
         }
-
     }
-    if (yy == 2)
+    else if (mNumS == 1)
     {
-        if (key_.getKeyDown(KEY_INPUT_DOWN))
+        if (yy == 1)
         {
-            bDango -= 1;
-            if (bDango <= 0)
+            if (key_.getKeyDown(KEY_INPUT_DOWN))
             {
-                bDango = 0;
+                bStoneR -= 1;
+                if (bStoneR <= 0)
+                {
+                    bStoneR = 0;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_UP))
+            {
+                bStoneR += 1;
+                if (bStoneR >= gStoneR)
+                {
+                    bStoneR = gStoneR;
+                }
+            }
+            else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+            {
+                SelectNum += 1;
+                if (SelectNum >= 3)
+                {
+                    SelectNum = 1;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_LEFT))
+            {
+                SelectNum -= 1;
+                if (SelectNum <= 0)
+                {
+                    SelectNum = 2;
+                }
+            }
+
+            if (key_.getKeyDown(KEY_INPUT_F))
+            {
+                if (SelectNum == 2)
+                {
+                    gStoneR -= bStoneR;
+                    kStoneR = -bStoneR + sStoneR;
+                    sStoneR = kStoneR;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    numRu = (mSR * (bStoneR));
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bStoneR = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                }
+                else if (SelectNum == 1)
+                {
+                    sStoneR = sStoneR;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bStoneR = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
+                }
+
+
             }
 
         }
-        else if (key_.getKeyDown(KEY_INPUT_UP))
+        if (yy == 2)
         {
-            bDango += 1;
-            if (bDango >= sDango)
+            if (key_.getKeyDown(KEY_INPUT_DOWN))
             {
-                bDango = sDango;
+                bStoneB -= 1;
+                if (bStoneB <= 0)
+                {
+                    bStoneB = 0;
+                }
+
             }
-        }
-        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
-        {
-            SelectNum += 1;
-            if (SelectNum >= 3)
+            else if (key_.getKeyDown(KEY_INPUT_UP))
             {
-                SelectNum = 1;
+                bStoneB += 1;
+                if (bStoneB >= gStoneB)
+                {
+                    bStoneB = gStoneB;
+                }
+            }
+            else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+            {
+                SelectNum += 1;
+                if (SelectNum >= 3)
+                {
+                    SelectNum = 1;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_LEFT))
+            {
+                SelectNum -= 1;
+                if (SelectNum <= 0)
+                {
+                    SelectNum = 2;
+                }
             }
 
-        }
-        else if (key_.getKeyDown(KEY_INPUT_LEFT))
-        {
-            SelectNum -= 1;
-            if (SelectNum <= 0)
+            if (key_.getKeyDown(KEY_INPUT_F))
             {
-                SelectNum = 2;
+                if (SelectNum == 2)
+                {
+                    gStoneB -= bStoneB;
+                    kStoneB = -bStoneB + sStoneB;
+                    sStoneB = kStoneB;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    numRu = (mSB * (bStoneB));
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bStoneR = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                }
+                else if (SelectNum == 1)
+                {
+                    sStoneB = sStoneB;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bStoneB = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
+                }
+
+
             }
         }
-
-        if (key_.getKeyDown(KEY_INPUT_F))
+        if (yy == 3)
         {
+            if (key_.getKeyDown(KEY_INPUT_DOWN))
+            {
+                bFish -= 1;
+                if (bFish <= 0)
+                {
+                    bFish = 0;
+                }
 
-            if (SelectNum == 2)
-            {
-                gDango -= bDango;
-                kDango = -bDango + sDango;
-                sDango = kDango;
-                xx = 0;
-                ChangeBS(WSHOP_BS::BS_MAX);
-                numRu = (mD * (bDango));
-                MoneyFlg = true;
-                SelectNum = 0;
-                bDango = 0;
-                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
             }
-            else if (SelectNum == 1)
+            else if (key_.getKeyDown(KEY_INPUT_UP))
             {
-                sDango = sDango;
-                xx = 0;
-                ChangeBS(WSHOP_BS::BS_MAX);
-                SelectNum = 0;
-                bDango = 0;
-                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
+                bFish += 1;
+                if (bFish >= gFish)
+                {
+                    bFish = gFish;
+                }
+            }
+            else if (key_.getKeyDown(KEY_INPUT_RIGHT))
+            {
+                SelectNum += 1;
+                if (SelectNum >= 3)
+                {
+                    SelectNum = 1;
+                }
+
+            }
+            else if (key_.getKeyDown(KEY_INPUT_LEFT))
+            {
+                SelectNum -= 1;
+                if (SelectNum <= 0)
+                {
+                    SelectNum = 2;
+                }
+            }
+
+            if (key_.getKeyDown(KEY_INPUT_F))
+            {
+
+                if (SelectNum == 2)
+                {
+                    gFish -= bFish;
+                    kFish = -bFish + sFish;
+                    sFish = kFish;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    numRu = (mF * (bFish));
+                    MoneyFlg = true;
+                    SelectNum = 0;
+                    bFish = 0;
+                    PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
+                }
+                else if (SelectNum == 1)
+                {
+                    sFish = sFish;
+                    xx = 0;
+                    ChangeBS(WSHOP_BS::BS_MAX);
+                    SelectNum = 0;
+                    bFish = 0;
+                    PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
+                }
             }
         }
     }
-    if (yy == 3)
-    {
-        if (key_.getKeyDown(KEY_INPUT_DOWN))
-        {
-            bTea -= 1;
-            if (bTea <= 0)
-            {
-                bTea = 0;
-            }
 
-        }
-        else if (key_.getKeyDown(KEY_INPUT_UP))
-        {
-            bTea += 1;
-            if (bTea >= sTea)
-            {
-                bTea = sTea;
-            }
-        }
-        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
-        {
-            SelectNum += 1;
-            if (SelectNum >= 3)
-            {
-                SelectNum = 1;
-            }
-
-        }
-        else if (key_.getKeyDown(KEY_INPUT_LEFT))
-        {
-            SelectNum -= 1;
-            if (SelectNum <= 0)
-            {
-                SelectNum = 2;
-            }
-        }
-
-        if (key_.getKeyDown(KEY_INPUT_F))
-        {
-
-            if (SelectNum == 2)
-            {
-                gTea -= bTea;
-                kTea = -bTea + sTea;
-                sTea = kTea;
-                xx = 0;
-                ChangeBS(WSHOP_BS::BS_MAX);
-                numRu = (mT * (bTea));
-                MoneyFlg = true;
-                SelectNum = 0;
-                bTea = 0;
-                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
-            }
-            else if (SelectNum == 1)
-            {
-                sTea = sTea;
-                xx = 0;
-                ChangeBS(WSHOP_BS::BS_MAX);
-                SelectNum = 0;
-                bTea = 0;
-                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
-            }
-        }
-    }
-    if (yy == 4)
-    {
-        if (key_.getKeyDown(KEY_INPUT_DOWN))
-        {
-            bApple -= 1;
-            if (bApple <= 0)
-            {
-                bApple = 0;
-            }
-
-        }
-        else if (key_.getKeyDown(KEY_INPUT_UP))
-        {
-            bApple += 1;
-            if (bApple >= gApple)
-            {
-                bApple = gApple;
-            }
-        }
-        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
-        {
-            SelectNum += 1;
-            if (SelectNum >= 3)
-            {
-                SelectNum = 1;
-            }
-
-        }
-        else if (key_.getKeyDown(KEY_INPUT_LEFT))
-        {
-            SelectNum -= 1;
-            if (SelectNum <= 0)
-            {
-                SelectNum = 2;
-            }
-        }
-
-        if (key_.getKeyDown(KEY_INPUT_F))
-        {
-            if (SelectNum == 2)
-            {
-                gApple -= bApple;
-                kApple = -bApple + sApple;
-                sApple = kApple;
-                xx = 0;
-                ChangeBS(WSHOP_BS::BS_MAX);
-                numRu = (mA * (bApple));
-                MoneyFlg = true;
-                SelectNum = 0;
-                bApple = 0;
-                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
-            }
-            else if (SelectNum == 1)
-            {
-                sApple = sApple;
-                xx = 0;
-                ChangeBS(WSHOP_BS::BS_MAX);
-                SelectNum = 0;
-                bApple = 0;
-                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
-            }
-
-
-        }
-    }
-    if (yy == 5)
-    {
-        if (key_.getKeyDown(KEY_INPUT_DOWN))
-        {
-            bKinominoKusiyaki -= 1;
-            if (bKinominoKusiyaki <= 0)
-            {
-                bKinominoKusiyaki = 0;
-            }
-
-        }
-        else if (key_.getKeyDown(KEY_INPUT_UP))
-        {
-            bKinominoKusiyaki += 1;
-            if (bKinominoKusiyaki >= gKinominoKusiyaki)
-            {
-                bKinominoKusiyaki = gKinominoKusiyaki;
-            }
-        }
-        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
-        {
-            SelectNum += 1;
-            if (SelectNum >= 3)
-            {
-                SelectNum = 1;
-            }
-
-        }
-        else if (key_.getKeyDown(KEY_INPUT_LEFT))
-        {
-            SelectNum -= 1;
-            if (SelectNum <= 0)
-            {
-                SelectNum = 2;
-            }
-        }
-
-        if (key_.getKeyDown(KEY_INPUT_F))
-        {
-
-            if (SelectNum == 2)
-            {
-                gKinominoKusiyaki -= bKinominoKusiyaki;
-                kKinominoKusiyaki = -bKinominoKusiyaki + sKinominoKusiyaki;
-                sKinominoKusiyaki = kKinominoKusiyaki;
-                xx = 0;
-                ChangeBS(WSHOP_BS::BS_MAX);
-                numRu = (mKK * (bKinominoKusiyaki));
-                MoneyFlg = true;
-                SelectNum = 0;
-                bKinominoKusiyaki = 0;
-                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
-            }
-            else if (SelectNum == 1)
-            {
-                sKinominoKusiyaki = sKinominoKusiyaki;
-                xx = 0;
-                ChangeBS(WSHOP_BS::BS_MAX);
-                SelectNum = 0;
-                bKinominoKusiyaki = 0;
-                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
-            }
-        }
-    }
-    if (yy == 6)
-    {
-        if (key_.getKeyDown(KEY_INPUT_DOWN))
-        {
-            bFruitDrink -= 1;
-            if (bFruitDrink <= 0)
-            {
-                bFruitDrink = 0;
-            }
-
-        }
-        else if (key_.getKeyDown(KEY_INPUT_UP))
-        {
-            bFruitDrink += 1;
-            if (bFruitDrink >= gFruitDrink)
-            {
-                bFruitDrink = gFruitDrink;
-            }
-        }
-        else if (key_.getKeyDown(KEY_INPUT_RIGHT))
-        {
-            SelectNum += 1;
-            if (SelectNum >= 3)
-            {
-                SelectNum = 1;
-            }
-
-        }
-        else if (key_.getKeyDown(KEY_INPUT_LEFT))
-        {
-            SelectNum -= 1;
-            if (SelectNum <= 0)
-            {
-                SelectNum = 2;
-            }
-        }
-
-        if (key_.getKeyDown(KEY_INPUT_F))
-        {
-
-            if (SelectNum == 2)
-            {
-                gFruitDrink -= bFruitDrink;
-                kFruitDrink = -bFruitDrink + sFruitDrink;
-                sFruitDrink = kFruitDrink;
-                xx = 0;
-                ChangeBS(WSHOP_BS::BS_MAX);
-                numRu = (mFD * (bFruitDrink));
-                MoneyFlg = true;
-                SelectNum = 0;
-                bFruitDrink = 0;
-                PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
-            }
-            else if (SelectNum == 1)
-            {
-                sFruitDrink = sFruitDrink;
-                xx = 0;
-                ChangeBS(WSHOP_BS::BS_MAX);
-                SelectNum = 0;
-                bFruitDrink = 0;
-                PlaySoundMem(cHandle, DX_PLAYTYPE_BACK);
-            }
-        }
-    }
 }
 
 void wshop::BS(void)
@@ -1617,6 +1893,21 @@ int wshop::SsRantan(void)
 int wshop::SsHaori(void)
 {
     return kHaori;
+}
+
+int wshop::SsFish(void)
+{
+    return kFish;
+}
+
+int wshop::SsStoneR(void)
+{
+    return kStoneR;
+}
+
+int wshop::SsStoneB(void)
+{
+    return kStoneB;
 }
 
 int wshop::SsApple(void)
