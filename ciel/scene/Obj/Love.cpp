@@ -73,7 +73,7 @@ bool Love::init()
     lFish=0;
 
     mNum[0] = { 0,0 };
-    mNum[1] = { 1645,715 };
+    mNum[1] = { 754,2030 };
 
     return true;
 }
@@ -91,7 +91,7 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
     HaveNum = num;
 
     
-    if (mapID == MAP_ID::TEMPLE)
+    if (mapID == MAP_ID::WA)
     {
         if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[1].y_ + 32 / 2) &&
             (mPos.y_ + mNum[1].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
@@ -234,7 +234,7 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
 
 void Love::Draw(Vector2 offset)
 {
-    if (mapID == MAP_ID::TEMPLE)
+    if (mapID == MAP_ID::WA)
     {
         if (numC!=0)
         {

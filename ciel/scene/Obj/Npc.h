@@ -40,6 +40,7 @@ private:
 	int mImage4[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	int mImage5[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	int mImage6[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage7[12][12];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	
 
 
@@ -88,10 +89,13 @@ public:
 
 	bool mSmNpc1;
 
+	bool mWmNpc1;
 	bool mWsNpc1;
 
 	bool mQSoNpc1;
 	bool mQSoNpc2;
+
+	bool mQWmNpc1;
 
 	
 	int qnum_;
