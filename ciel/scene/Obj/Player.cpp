@@ -169,7 +169,7 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg)
 						}
 						else if (i == 1 || flg_)
 						{
-							if (flg)
+							if (flg_)
 							{
 								aitemFlag_ = true;
 
