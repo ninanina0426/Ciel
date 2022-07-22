@@ -128,12 +128,10 @@ private:
 	int mTamaN;
 	int mKey;
 	int mFish;
-<<<<<<< HEAD
 	int jewel;
-=======
+
 	int mStoneR;
 	int mStoneB;
->>>>>>> b596655dfc7bbfcfd5765882b30298d33db9fcbf
 
 	int mtakara;
 

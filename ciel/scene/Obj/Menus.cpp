@@ -21,6 +21,9 @@ bool Menus::init(void)
 
 	have = 0;
 
+	//‰ñ•œ
+	mEnergy = 0;
+
 	//‰½‚à‘I‘ð‚µ‚Ä‚¢‚È‚¢‚Æ‚«
 	mImage[0]= LoadGraph("image/menyu/J.png");
 	mImage[1]= LoadGraph("image/menyu/S.png");
@@ -255,13 +258,15 @@ void Menus::Update(int num, bool flg)
 
 }
 
-void Menus::Draw(PlayerID type, int ru)
+void Menus::Draw(PlayerID type, int ru, int En)
 {
 	PlayerID mType = type;
 
 	MAP_ID mapID = lpMapMng.GetMapId();
 
 	int Ru = ru;
+
+	int E = En;
 
 	switch (mSelect)
 	{
@@ -270,6 +275,7 @@ void Menus::Draw(PlayerID type, int ru)
 		{
 		case PlayerID::Jack:
 			DrawGraph(0, 0, mImage[0], true);
+			DrawFormatStringToHandle(850, 400, GetColor(150, 255, 255), FontSize, "%d", E);
 			break;
 		case PlayerID::Calendula:
 			DrawGraph(0, 0, mImage[2], true);
@@ -740,6 +746,9 @@ void Menus::Heal(void)
 			ai = 1;
 			PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 		}
+		
+		mEnergy = 0;
+		
 	}
 	else if (SHflg == true)
 	{
@@ -790,6 +799,7 @@ void Menus::Heal(void)
 							if (ssApple > 0)
 							{
 								eApple += 1;
+								mEnergy += 20;
 								PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
 								SHflg = false;
 							}
@@ -832,6 +842,7 @@ void Menus::Heal(void)
 							if (ssRice > 0)
 							{
 								eRice += 1;
+								mEnergy += 15;
 								SHflg = false;
 								PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
 							}
@@ -875,6 +886,7 @@ void Menus::Heal(void)
 							if (ssKinominoKusiyaki > 0)
 							{
 								eKinominoKusiyaki += 1;
+								mEnergy += 25;
 								SHflg = false;
 								PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
 							}
@@ -917,6 +929,7 @@ void Menus::Heal(void)
 							//‰ñ•œ
 							if (ssDango > 0)
 							{
+								mEnergy += 20;
 								eDango += 1;
 								SHflg = false;
 								PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
@@ -959,6 +972,7 @@ void Menus::Heal(void)
 							//‰ñ•œ
 							if (ssFruitDrink > 0)
 							{
+								mEnergy += 30;
 								eFruitDrink += 1;
 								SHflg = false;
 								PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
@@ -1001,6 +1015,7 @@ void Menus::Heal(void)
 							//‰ñ•œ
 							if (ssTea > 0)
 							{
+								mEnergy = 15;
 								eTea += 1;
 								SHflg = false;
 								PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
@@ -1045,6 +1060,7 @@ void Menus::Heal(void)
 						if (ssfish > 0)
 						{
 							efish += 1;
+							mEnergy += 10;
 							PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
 							SHflg = false;
 						}
@@ -1706,4 +1722,9 @@ int Menus::StoneBE(void)
 int Menus::NumHave(void)
 {
 	return haveNum;
+}
+
+int Menus::En()
+{
+	return mEnergy;
 }
