@@ -37,6 +37,7 @@ uniquBaseScn EventScene::Update(uniquBaseScn own)
     Event(aitem_);
 
     animcnt_++;
+    Cnt++;
     return std::move(own);
 }
 
@@ -48,8 +49,6 @@ void EventScene::DrawOwnScn()
     switch (plID)
     {
     case PlayerID::Jack:
-        DrawExtendGraph(0, 0, 1080, 600, house_, true);
-       
         break;
     case PlayerID::Calendula:
         break;
@@ -69,6 +68,8 @@ bool EventScene::Init(void)
 {
     flg_ = false;
     shFlg_ = false;
+
+    Cnt = 0;
    
     //aitem_ = new Aitem;
     sea_ = LoadGraph("./image/move/umi.png");
@@ -79,6 +80,20 @@ bool EventScene::Init(void)
 
     LoadDivGraph("./image/move/air.png", 12, 3, 4, AirplneSize, AirplneSize, *airplan_, true);
     LoadDivGraph("./image/move/煙.png", 12, 3, 4, 352, 256, *kemuri_, true);
+
+    if (LoadDivGraph("image/char/110.png", 48, 4, 12, 48, 48, &mImageP[0]) == -1)
+    {
+        return false;
+    }
+    if (LoadDivGraph("image/char/金.png", 27, 1, 27, 32, 48, &mImagePD[0]) == -1)
+    {
+        return false;
+    }
+
+    mImageC[0] = LoadGraph("image/talk/temple.png");
+    mImageC[1] = LoadGraph("image/talk/temple.png");
+    mImageC[2] = LoadGraph("image/talk/temple.png");
+    mImageC[3] = LoadGraph("image/talk/temple.png");
 
     house_ = LoadGraph("image/1108s.png");
     //move1_ = LoadGraph("./image/move/video.avi");
@@ -94,6 +109,7 @@ SceneID EventScene::GetSceneID(void)
 void EventScene::Event(int num)
 {
     auto evetype = static_cast<EventType>(abs(num-5));
+    auto plID = player_.plID_;
    
     switch (evetype)
     {
@@ -138,13 +154,71 @@ void EventScene::Event(int num)
         
         break;
     case EventType::STORY_1:
-        DrawOwnScn();
-        DrawString(400, 300, "エピソード1", 0xffffff, true);
+        switch (plID)
+        {
+        case PlayerID::Jack:
+
+            DrawExtendGraph(0, 0, 1080, 600, house_, true);
+            DrawGraph(370, 320, mImageP[8], true);
+            if (Cnt >= 100)
+            {
+                DrawGraph(330, 260, mImageC[0], true);
+            }
+            if (Cnt >= 200)
+            {
+                DeleteGraph(mImageC[0], true);
+                DrawGraph(330, 260, mImageC[1], true);
+            }
+            break;
+        case PlayerID::Calendula:
+            break;
+        case PlayerID::Soy:
+            break;
+        default:
+            break;
+        }
+        //DrawString(400, 300, "エピソード1", 0xffffff, true);
         break;
-    case EventType::STORY_2:
-        DrawString(400, 300, "エピソード2", 0xffffff, true);
+
+    case EventType::STORY_2: 
+        switch (plID)
+        {
+        case PlayerID::Jack:
+            DrawExtendGraph(0, 0, 1080, 600, house_, true);
+            DrawGraph(370, 320, mImagePD[0], true);
+            if (Cnt >= 100)
+            {
+                DrawGraph(330, 260, mImageC[2], true);
+            }
+            if (Cnt >= 200)
+            {
+                DeleteGraph(mImageC[2], true);
+                DrawGraph(330, 260, mImageC[3], true);
+            }
+            break;
+        case PlayerID::Calendula:
+            break;
+        case PlayerID::Soy:
+            break;
+        default:
+            break;
+        }
+        //DrawString(400, 300, "エピソード2", 0xffffff, true);
         break;
+
     case EventType::STORY_3:
+        switch (plID)
+        {
+        case PlayerID::Jack:
+            DrawGraph(0, 0, mImageP[8], true);
+            break;
+        case PlayerID::Calendula:
+            break;
+        case PlayerID::Soy:
+            break;
+        default:
+            break;
+        }
         DrawString(400, 300, "エピソード3", 0xffffff, true);
         break;
     case EventType::STORY_4:
