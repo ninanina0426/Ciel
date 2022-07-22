@@ -412,11 +412,12 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 						mPos = copyPos;
 					}
 
+					//npc‚Æ‚Ì“–‚½‚è”»’è
 					if (mloveNpc == true)
 					{
 						if (mMoveDir == DIR_UP)
 						{
-							if ((mPos.y_ < 750) && (mPos.y_ > 745))
+							if ((mPos.y_ < 750) && (mPos.y_ > 748))
 							{
 								mPos.y_ = 750;
 								mPos.x_ = copyPos.x_;
@@ -424,7 +425,7 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 						}
 						if (mMoveDir == DIR_DOWN)
 						{
-							if ((mPos.y_ < 691) && (mPos.y_ > 684))
+							if ((mPos.y_ < 687) && (mPos.y_ > 684))
 							{
 								mPos.y_ = 684;
 								mPos.x_ = copyPos.x_;
@@ -432,7 +433,7 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 						}
 						if (mMoveDir == DIR_LEFT)
 						{
-							if ((mPos.x_ < 1670) && (mPos.x_ > 1665))
+							if ((mPos.x_ < 1670) && (mPos.x_ > 1667))
 							{
 								mPos.x_ = 1670;
 								mPos.y_ = copyPos.y_;
@@ -440,7 +441,7 @@ Vector2 Player::Update(int chipId,bool fl, bool lhit)
 						}
 						if (mMoveDir == DIR_RIGHT)
 						{
-							if ((mPos.x_ > 1615) && (mPos.x_ < 1620))
+							if ((mPos.x_ > 1615) && (mPos.x_ < 1618))
 							{
 								mPos.x_ = 1615;
 								mPos.y_ = copyPos.y_;
