@@ -9,6 +9,8 @@
 #include "../stage/stage.h"
 #include "../stage/transitionStage/FadeInStage.h"
 #include "Obj/UI.h"
+
+
 class SceneMng;
 class Aitem;
 class BGM;
@@ -17,6 +19,7 @@ class Chat;
 class Layer;
 class Masuku;
 class Love;
+
 
 class GameScene : public BaseScene
 {

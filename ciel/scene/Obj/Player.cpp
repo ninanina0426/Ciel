@@ -628,7 +628,7 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg)
 			}
 			if (qflg_)
 			{
-				QuestIns.UpDate(qflg_, 1, copyPos, mSize, mapID);
+				QuestIns.UpDate(qflg_, 1, copyPos, mSize, mapID, GetFish());
 			}
 			if (QuestIns.CompFlg())
 			{

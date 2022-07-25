@@ -476,8 +476,8 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 					if (mQWmNpc1 == false)
 					{
 						mQWmNpc1 = true;
-						/*qflg_ = mQWmNpc1;*/
-						/*qnum_ = 2;*/
+						qflg_ = mQWmNpc1;
+						qnum_ = 3;
 					}
 				}
 			}
@@ -517,7 +517,7 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 
 	mAnmCnt++;
 	//クエスト
-	QuestIns.UpDate(qflg_, qnum_, playerPos,playerSize, mapID);
+	QuestIns.UpDate(qflg_, qnum_, playerPos,playerSize, mapID,0);
 
 	return i;
 

@@ -2,6 +2,8 @@
 #include <string>
 #include "../../common/Vector2.h"
 #include "Aitem.h"
+
+
 class UI
 {
 public:
@@ -9,7 +11,6 @@ public:
 	~UI();
 
 	void Upadate(Player player,Vector2 offset);
-	void Update1();
 	void Draw(void);
 
 	bool eveflg_;
@@ -34,5 +35,9 @@ private:
 	int action_;
 	int boxid;
 	int mImageChat_;
+	int questid_;
+	bool queTabF_;
+
+	Keyboard key_;
 };
 

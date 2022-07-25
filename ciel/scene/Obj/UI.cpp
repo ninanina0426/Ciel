@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include "UI.h"
 #include "../../stage/StageMng.h"
+#include "Quest.h"
 
 UI::UI()
 {
@@ -13,6 +14,7 @@ UI::~UI()
 
 void UI::Upadate(Player player, Vector2 offset)
 {
+	key_.Update();
 	stamina = player.Stamina_;
 	plPos_ = player.GetPos();
 	off_ = offset;
@@ -93,7 +95,23 @@ void UI::Upadate(Player player, Vector2 offset)
 			
 		}
 	}
-
+	if (queTabF_ == false)
+	{
+		if (key_.getKeyDown(KEY_INPUT_TAB))
+		{
+			queTabF_ = true;
+			
+			//QuestIns.questCmpFlg[1]
+		}
+	}
+	else
+	{
+		if (key_.getKeyDown(KEY_INPUT_TAB))
+		{
+			queTabF_ = false;
+		}
+	}
+	
 }
 
 
@@ -135,12 +153,19 @@ void UI::Draw(void)
 		DrawGraph(plPos_.x_ - off_.x_ - 63, plPos_.y_ - off_.y_ - 80, mImageChat_, true);
 	}
 	DrawString(0, 200, "W:âŸéq\nA:êX\nS:ê_ìa\nD:ê·\nE:òa\nR:ì¥åA",0x000000,true);
+
+	if (queTabF_)
+	{
+		DrawGraph(780, 0, questid_, true);
+	}
+	
 }
 
 
 
 void UI::Init()
 {
+	questid_= LoadGraph("./image/ui/questbox.jpg");
 	boxid = LoadGraph("./image/ui/aitembox.png");
 	mImageChat_=  LoadGraph("image/talk/s1.png", true);
 	action_ = LoadGraph("image/ui/action.png", true);
@@ -148,4 +173,5 @@ void UI::Init()
 	updown_ = 0;
 	count_ = 0;
 	telop_ = false;
+	queTabF_ = false;
 }

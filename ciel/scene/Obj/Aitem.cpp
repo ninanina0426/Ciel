@@ -658,6 +658,10 @@ void Aitem::Draw(Vector2 mMapoffset)
 		break;
 	}
 
+	if (mHaoriN != 0)
+	{
+		mHaori = true;
+	}
 
 	DrawFormatString(0,150, GetColor(255, 255, 255), "num=%d", apple);
 	DrawFormatString(0, 170, GetColor(255, 255, 255), "‹Ê=%d", mTama);
@@ -735,7 +739,7 @@ int Aitem::HaveMoney()
 }
 
 
-void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int f, int ssr, int sb, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int sf, int sssr, int ssb, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt, int mf, int msr, int msb ,int la, int lkk, int lfd, int lri, int ld, int lt, int je, int fis,int bul)
+void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int f, int ssr, int sb, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int sf, int sssr, int ssb, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt, int mf, int msr, int msb ,int la, int lkk, int lfd, int lri, int ld, int lt, int je, int fis,int bul, int haori)
 {
 
 	mNumKinomi=k+sk+mk;
@@ -745,7 +749,7 @@ void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int
 	mFishingRodS=frs+sfrs-mfrs;
 	mRagBag=rb+srb-mrb;
 	mPickaxe=p+sp-mp;
-	mHaoriN=h+sh-mh;
+	mHaoriN=h+sh+haori-mh;
 	mRantanN=r+sr+rantan-mr;
 	mRice = ri+sri-mri+lri;
 	mDango = d+sd-md+ld;
@@ -855,6 +859,11 @@ int Aitem::StoneRNum(void)
 int Aitem::StoneBNum(void)
 {
 	return mStoneB;
+}
+
+int Aitem::GetKey(void)
+{
+	return mKey;
 }
 
 int Aitem::GetTam(void)

@@ -79,6 +79,11 @@ void EndScene::DrawOwnScn()
 		DrawExtendGraph(0, 0, 1080, 610, e5_, false);
 		DrawFormatString(850, 590, 0xffffff, "END_5 #カラダを大セツに");
 	}
+	if (endType_ == "end_6")
+	{
+		DrawExtendGraph(0, 0, 1080, 610, e5_, false);
+		DrawFormatString(850, 590, 0xffffff, "END_6 #暗いくらい暗いクライ。");
+	}
 }
 
 bool EndScene::Init(void)

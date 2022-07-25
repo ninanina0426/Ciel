@@ -3,6 +3,7 @@
 #include "../../stage/Stage.h"
 #include "Player.h"
 #include "Aitem.h"
+#include "../Input/Keyboard.h"
 
 #define QuestIns Quest::GetInstance()
 
@@ -43,12 +44,16 @@ public:
 	}
 	
 
-	void UpDate(bool stateFlg, int q,Vector2 plPos, Vector2 plsize,MAP_ID mapid);
+	void UpDate(bool stateFlg, int q,Vector2 plPos, Vector2 plsize,MAP_ID mapid,int fish);
 	void Draw(void);
 
 	bool CompFlg(void);
 	int GetCont(void);
 	int GetRu(void);
+
+	QuestState questCmpFlg[5];		//各クエストのフラグ
+
+	int GetHaori(void);
 private:
 	Quest();
 	~Quest();
@@ -58,7 +63,8 @@ private:
 	//Player *player_;
 
 
-	bool QFlg_;
+	QuestState QFlg_;
+	
 	bool CompFlg_;
 	std::string QTxt_;
 	QUEST quest_;
@@ -72,11 +78,15 @@ private:
 	
 	bool keyf_[3];
 
+	Keyboard key_;
+
 	int qe_id_;
 	int qe_cm_;
 	int count_;
 	int alq_;
 	int Ccount_;
 	int Calq_;
+	int Hao;
+	//friend Aitem;
 };
 
