@@ -76,6 +76,7 @@ bool Aitem::init()
 
 	apple = 0;
 	rantan = 0;
+	mKinomis = 0;
 
 	
 	
@@ -146,7 +147,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[9] = mNum[0];
 					mKinomi1 = true;
-					mNumKinomi += 1;
+					mKinomis += 1;
 					mGet = true;
 					mAitem = 1;
 				}
@@ -165,7 +166,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[10] = mNum[0];
 					mKinomi2 = true;
-					mNumKinomi += 1;
+					mKinomis += 1;
 					mGet = true;
 					mAitem = 1;
 				}
@@ -184,7 +185,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[11] = mNum[0];
 					mKinomi3 = true;
-					mNumKinomi += 1;
+					mKinomis += 1;
 					mGet = true;
 					mAitem = 1;
 				}
@@ -204,7 +205,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[12] = mNum[0];
 					mKinomi4 = true;
-					mNumKinomi += 1;
+					mKinomis += 1;
 					mGet = true;
 					mAitem = 1;
 				}
@@ -223,7 +224,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mKinomi -= 1;
 					mNum[13] = mNum[0];
 					mKinomi5 = true;
-					mNumKinomi += 1;
+					mKinomis += 1;
 					mGet = true;
 					mAitem = 1;
 				}
@@ -742,7 +743,7 @@ int Aitem::HaveMoney()
 void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int f, int ssr, int sb, int sa, int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int sf, int sssr, int ssb, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt, int mf, int msr, int msb ,int la, int lkk, int lfd, int lri, int ld, int lt, int je, int fis,int bul, int haori)
 {
 
-	mNumKinomi=k+sk+mk;
+	mNumKinomi=k+sk+mk+ mKinomis;
 	mApple = apple + a + sa-ma+la;
 	mKinominoKusiyaki=kk+skk-mkk+lkk;
 	mFruitDrink=fd+sfd-mfd+lfd;

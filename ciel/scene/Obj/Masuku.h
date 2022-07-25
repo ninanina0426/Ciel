@@ -16,6 +16,8 @@ private:
 
 	int Rantan;
 
+	bool moveFlg;
+
 	bool Rantan0;
 
 	Vector2 mPos;
@@ -34,5 +36,6 @@ public:
 
 	bool Flg();
 
+	bool MoveFlg();
 };
 

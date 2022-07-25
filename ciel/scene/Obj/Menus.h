@@ -90,7 +90,6 @@ public:
 
 	int En();
 
-
 	void SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t,int tam,int key,int fish, int je, int bul);
 
 private:

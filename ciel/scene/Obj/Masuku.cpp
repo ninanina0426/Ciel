@@ -30,10 +30,12 @@ bool Masuku::init(void)
 
     Rantan = 0;
 
+    moveFlg = false;
+
     return true;
 }
 
-void Masuku::Update(Vector2 playerPos, int r,int ra)
+void Masuku::Update(Vector2 playerPos, int r, int ra)
 {
     mPos = playerPos;
 
@@ -45,27 +47,37 @@ void Masuku::Update(Vector2 playerPos, int r,int ra)
 
     if (mapID == MAP_ID::CAVE)
     {
-        if ((Rantan == 0))
+
+        if (mAnmMum < 200)
         {
-            if (mAnmMum == 50)
+            if ((Rantan == 0))
             {
-                i = 1;
-            }
-            if (mFlg == false)
-            {
-                if (key_.getKeyDown(KEY_INPUT_F))
+                if (mAnmMum == 50)
                 {
-                    i += 1;
+                    i = 1;
                 }
-            }
+                if (mFlg == false)
+                {
+                    if (key_.getKeyDown(KEY_INPUT_F))
+                    {
+                        i += 1;
+                    }
+                }
 
-            if ((i == 2))
-            {
-                mFlg = true;
-            }
+                if ((i == 2))
+                {
+                    mFlg = true;
+                }
 
+            }
         }
-  
+        else if (mAnmMum > 201)
+        {
+            if (Rantan == 0)
+            {
+                moveFlg = true;
+            }
+        }
         mAnmMum++;
     }
 
@@ -73,8 +85,7 @@ void Masuku::Update(Vector2 playerPos, int r,int ra)
     {
         mFlg = false;
     }
-    
-   
+
 }
 
 void Masuku::Draw(Vector2 offset)
@@ -108,4 +119,9 @@ bool Masuku::Release(void)
 bool Masuku::Flg()
 {
     return mFlg;
+}
+
+bool Masuku::MoveFlg()
+{
+    return moveFlg;
 }
