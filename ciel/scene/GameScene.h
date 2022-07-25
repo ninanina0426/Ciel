@@ -9,8 +9,6 @@
 #include "../stage/stage.h"
 #include "../stage/transitionStage/FadeInStage.h"
 #include "Obj/UI.h"
-
-
 class SceneMng;
 class Aitem;
 class BGM;
@@ -110,6 +108,9 @@ private:
 
     void DeadState(void);
     int ded_;
+
+    void CaveState(void);
+    int cave_;
 
     Chat* mChat;
 
