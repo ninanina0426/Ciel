@@ -1564,6 +1564,10 @@ void Menus::End(void)
 	{
 		ChangeState(MENUS_SELECT::MENU_ID);
 	}
+	if (key_.getKeyDown(KEY_INPUT_SPACE))
+	{
+		exit(0);
+	}
 }
 
 int Menus::OpBgm(void)
