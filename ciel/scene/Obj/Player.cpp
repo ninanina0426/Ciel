@@ -127,7 +127,7 @@ bool Player::init(PlayerID playerid)
 
 }
 
-Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg)
+Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nHit)
 {
 	keyDir = DIR_MAX;		//ÉLÅ[ì¸óÕÇÃï˚å¸
 	Vector2 copyPos = mPos;
@@ -502,10 +502,10 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg)
 					{
 						mPos = copyPos;
 					}
+
 					//npcÇ∆ÇÃìñÇΩÇËîªíË
 					if (mloveNpc == true)
 					{
-						
 						if (mMoveDir == DIR_UP)
 						{
 							if ((mPos.y_ < 2064) && (mPos.y_ > 2055))
@@ -538,7 +538,58 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg)
 								mPos.y_ = copyPos.y_;
 							}
 						}
+					}
+					if (nHit == true)
+					{
+						if (mMoveDir == DIR_UP)
+						{
+							if ((mPos.y_ < 626) && (mPos.y_ > 621))
+							{
+								mPos.y_ = 626;
+								mPos.x_ = copyPos.x_;
+							}
+						}
+						if (mMoveDir == DIR_DOWN)
+						{
+							if ((mPos.y_ < 573) && (mPos.y_ > 568))
+							{
+								mPos.y_ = 568;
+								mPos.x_ = copyPos.x_;
+							}
+						}
+						if (mMoveDir == DIR_RIGHT)
+						{
+							if ((mPos.x_ > 987) && (mPos.x_ < 992))
+							{
+								mPos.x_ = 992;
+								mPos.y_ = copyPos.y_;
+							}
+						}
 
+						if (mMoveDir == DIR_UP)
+						{
+							if ((mPos.y_ < 1730) && (mPos.y_ > 1725))
+							{
+								mPos.y_ = 1730;
+								mPos.x_ = copyPos.x_;
+							}
+						}
+						if (mMoveDir == DIR_DOWN)
+						{
+							if ((mPos.y_ < 573) && (mPos.y_ > 568))
+							{
+								mPos.y_ = 568;
+								mPos.x_ = copyPos.x_;
+							}
+						}
+						if (mMoveDir == DIR_RIGHT)
+						{
+							if ((mPos.x_ > 1780) && (mPos.x_ < 1785) && (mPos.y_ < 1730))
+							{
+								mPos.x_ = 1780;
+								mPos.y_ = copyPos.y_;
+							}
+						}
 					}
 
 					/*mDamyPos = copyPos;*/
@@ -918,6 +969,11 @@ void Player::message_box()
 		gFlg = true;
 		mPos.x_ = 455;
 		mPos.y_ = 550;
+	}
+	else if (flag == IDNO)
+	{
+		mPos.x_ = 548;
+		mPos.y_ = 270;
 	}
 	
 }

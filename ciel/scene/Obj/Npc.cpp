@@ -42,7 +42,7 @@ bool Npc::init(void)
 	qnum_ = 0;
 	qflg_ = false;
 
-	
+	npcHit = false;
 
 	mPos.x_ = 0;
 	mPos.y_ = 0;
@@ -453,12 +453,14 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 		break;
 	case NpcType::WM_NPC:
 	{
-		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 573 + 32 / 2) &&
-			(mPos.y_ + 573 - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 573 + 64 / 2) &&
+			(mPos.y_ + 573 - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 994 + 32 / 2) &&
 			(mPos.x_ + 994 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
+
 			mNumType = NumType::NPC_1;
+			npcHit = true;
 			if (mWmNpc1 == false)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
@@ -482,16 +484,21 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 				}
 			}
 		}
+		else
+		{
+			npcHit = false;
+		}
 		break;
 	}
 	case NpcType::WS_NPC:
 	{
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 1750 + 64 / 2) &&
 			(mPos.y_ + 1750 - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
-			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 1825 + 32 / 2) &&
-			(mPos.x_ + 1825 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 1825 + 22) &&
+			(mPos.x_ + 1825 - 22 < playerPos.x_ + playerSize.x_ / 2))
 		{
 			mNumType = NumType::NPC_1;
+			npcHit = true;
 			if (mWsNpc1 == false)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
@@ -508,6 +515,10 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 					i = 0;
 				}
 			}
+		}
+		else
+		{
+			npcHit = false;
 		}
 		break;
 	}
@@ -592,6 +603,11 @@ Vector2 Npc::GetSiz(void)
 Vector2 Npc::GetPos(void)
 {
 	return mPos;
+}
+
+bool Npc::NpcHit()
+{
+	return npcHit;
 }
 
 int Npc::Num()

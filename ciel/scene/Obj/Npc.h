@@ -59,6 +59,8 @@ private:
 
 	int i;
 
+	bool npcHit;
+
 public:
 	Npc();
 	~Npc();
@@ -70,6 +72,8 @@ public:
 	DIR GetDIR(void);
 	Vector2 GetSiz(void);
 	Vector2 GetPos(void);
+
+	bool NpcHit();
 
 	int Num();
 
