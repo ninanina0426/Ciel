@@ -53,6 +53,8 @@ public:
 
 	bool mRantan;
 
+	int mKinomis;
+
 	int Num();
 
 	bool Getflg();
