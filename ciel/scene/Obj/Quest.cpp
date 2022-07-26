@@ -247,15 +247,21 @@ void Quest::Draw()
 
 	if (questCmpFlg[0] == QuestState::ALIVE)
 	{
+		quelmap.insert(std::make_pair(1, "あいうえお"));
+		QuestList.push_back("探索してみよう!\n 　・←↑→↓：移動\n 　・左shift：走る\n 　・F：アクション");
 		DrawString(1000, 0, "クエスト１", 0xffffff, true);
 	}
 
 	if (questCmpFlg[1] == QuestState::ALIVE)
 	{
+		quelmap.insert(std::make_pair(2, "かきくけこ"));
+		QuestList.push_back("スイーツの材料を集めよう");
 		DrawString(1000, 10, "クエスト2", 0xffffff, true);
 	}
 	if (questCmpFlg[2] == QuestState::ALIVE)
 	{
+		quelmap.insert(std::make_pair(3, "さしすせそ"));
+		QuestList.push_back("寒い寒い地域の過ごし方");
 		DrawString(1000, 20, "クエスト3", 0xffffff, true);
 	}
 
@@ -298,7 +304,7 @@ bool Quest::Init(void)
 	keyf_[0] = false;
 	keyf_[1] = false;
 	keyf_[2] = false;
-
+	
 
 	for (int a = 0; a < 5; a++)
 	{
