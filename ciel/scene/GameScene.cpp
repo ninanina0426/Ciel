@@ -224,6 +224,11 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     {
         return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_5", mPlayer.plID_));
     }
+   
+    if (cave_ > 700)
+    {
+        return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_6", mPlayer.plID_));
+    }
     
     //時間
     nowTime_ = std::chrono::system_clock::now();		//現在の時間を取得
@@ -386,6 +391,12 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         else
         {
             ded_ = 0;
+        }
+
+        //暗躍エンド
+        if (mMasuku->MoveFlg())
+        {
+            CaveState();
         }
     }
     
@@ -692,6 +703,28 @@ void GameScene::DeadState(void)
             DrawString(400, 300, "お腹・・・空いた・・・もうダメ・・・・・・", 0xffffff, true);
         }
     }
+}
+
+void GameScene::CaveState(void)
+{
+    auto map = lpMapMng.GetMapId();
+    if (map == MAP_ID::CAVE)
+    {
+        cave_++;
+
+        if (cave_ > 200)
+        {
+            SetDrawBlendMode(DX_BLENDMODE_ALPHA, (detTime_ / 2) - 50);
+            DrawBox(0, 0, 1080, 609, 0x000000, true);
+            SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+            if (cave_ > 600)
+            {
+                DrawString(500, 300, "何か聞こえる・・・・", 0xffffff, true);
+            }
+        }
+
+    }
+
 }
 
 
