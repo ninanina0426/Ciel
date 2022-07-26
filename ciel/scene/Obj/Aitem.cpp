@@ -42,7 +42,8 @@ bool Aitem::init()
 
 	Key = false;
 
-	mHaori = false;
+	mHaori = true;
+
 
 	mRantan = false;
 

@@ -110,6 +110,9 @@ private:
 	Gimmick gimick;
 	void message_box();
 	
+	//ê·
+	bool mSky;
+	bool moveSky;
 
 	DIR keyDir;
 

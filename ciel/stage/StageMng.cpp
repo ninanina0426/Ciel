@@ -708,7 +708,7 @@ bool StageMng::GetEvent(Vector2 pos)
 		}
 
 		//ê·Ç©ÇÁê·ÉVÉáÉbÉvÇ÷
-		if (mTchipId == 411 && 600 < pos.x_ && 700 > pos.x_)
+		if (mTchipId == 411 && 800 < pos.x_ && 900 > pos.x_)
 		{
 			mMapChange = true;
 			mNextPos = { 1450,1580 };
@@ -718,7 +718,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mMapID = MAP_ID::SNOWSHOP;
 
 		}
-		if (mTchipId == 412 && 600 < pos.x_ && 700 > pos.x_)
+		if (mTchipId == 412 && 800 < pos.x_ && 900 > pos.x_)
 		{
 			mMapChange = true;
 			mNextPos = { 1450,1580 };
@@ -734,7 +734,7 @@ bool StageMng::GetEvent(Vector2 pos)
 	//ê·ÇÃì¥åAÇ©ÇÁê·Ç÷
 	if (lpMapMng.mMapID == MAP_ID::SNOWCAVE)
 	{
-		if (chipID == 22 && 1900 < pos.x_)
+		if (mTchipId == 127 && 1900 < pos.x_)
 		{
 			mMapChange = true;
 			mNextPos = { 2450,2740 };
@@ -744,7 +744,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mMapID = MAP_ID::SNOW;
 
 		}
-		else if (chipID == 22)
+		else if (mTchipId == 127)
 		{
 			mMapChange = true;
 			mNextPos = { 800, 2600 };
