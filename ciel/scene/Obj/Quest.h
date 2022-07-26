@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <vector>
+#include <map>
 #include "../../stage/Stage.h"
 #include "Player.h"
 #include "Aitem.h"
@@ -54,6 +56,8 @@ public:
 	QuestState questCmpFlg[5];		//各クエストのフラグ
 
 	int GetHaori(void);
+	std::vector <std::string> QuestList;
+	std::map <int, std::string> quelmap;
 private:
 	Quest();
 	~Quest();

@@ -158,7 +158,18 @@ void UI::Draw(void)
 	{
 		DrawGraph(780, 0, questid_, true);
 	}
+	/*auto a = QuestIns.QuestList;
+	auto b = QuestIns.quelmap.find(1);
+	auto c = QuestIns.quelmap;
+	if (b != c.end())
+	{
+
+		auto C = c.at(1).c_str();
+		DrawFormatString(0, 500, 0x000000, "%s", C);
+	}
 	
+	DrawFormatString(500, 100, 0x000000, "%s", a.begin());*/
+
 }
 
 
