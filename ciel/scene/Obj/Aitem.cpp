@@ -40,7 +40,7 @@ bool Aitem::init()
 	mKinomi4 = false;
 	mKinomi5 = false;
 
-	mHaori = false;
+	mHaori = true;
 
 	mRantan = false;
 
