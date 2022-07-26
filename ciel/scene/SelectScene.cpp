@@ -122,25 +122,24 @@ void SelectScene::DrawOwnScn()
     {
         DrawExtendGraph(0, 100, 800, 700, eff_b[(animcnt_ / 10) % 10], true);
         DrawGraph(0, 100, eff_[(animcnt_ / 10) % 15], true);
-        DrawBox(650, 50, 1030, 350, 0xffffff, false);
-        DrawBox(0, 30, 200, 80, 0xffffff, false);
+        DrawGraph(0, 0, Ui_, true);
     }
     
-   
+    
 
     if (player_.plID_ == PlayerID::Jack)
     {
-        DrawString(20, 50, "ジャック", 0xffffff, true);
+        DrawGraph(0, 0, a, true);
         DrawGraph(280, 20, titi_, true);
     }
     if (player_.plID_ == PlayerID::Calendula)
     {
-        DrawString(20, 50, "カレンデュラ", 0xffffff, true);
+        DrawGraph(0, 0, b, true);
         DrawGraph(280, 30, carenImage_, true);
     }
     if (player_.plID_ == PlayerID::Soy)
     {
-        DrawString(20, 50, "SOY", 0xffffff, true);
+        DrawGraph(0, 0, c, true);
         DrawGraph(300, 30, soyImage_, true);
     }
 
@@ -150,7 +149,7 @@ void SelectScene::DrawOwnScn()
     }
     else
     {
-        DrawString(300, 250, "冒険しない", 0xffffff);
+        DrawString(350, 300, "冒険しない", 0xffffff);
     }
    
     DrawString(200, 300, "<", 0xffffff, true);
@@ -169,6 +168,12 @@ bool SelectScene::Init(void)
     carenImage_ = LoadGraph("./image/player/caren.png");
     titi_ = LoadGraph("./image/player/titi.png");
     bg_ = LoadGraph("./image/player/hi.png");
+    Ui_ = LoadGraph("./image/player/selectUI.png");
+
+    a = LoadGraph("./image/player/jackN.png");
+    b = LoadGraph("./image/player/calN.png");
+    c = LoadGraph("./image/player/soyN.png");
+
     LoadDivGraph("./image/player/eff.png", 16, 2, 8, 800, 600, eff_, true);
     LoadDivGraph("./image/player/eff_f.png", 10, 5, 2, 400, 400, eff_f, true);
     LoadDivGraph("./image/player/eff_b.png", 10, 5, 2, 400, 400, eff_b, true);

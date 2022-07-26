@@ -21,7 +21,7 @@ public:
 	
 	bool Init();
 	void Draw();
-	Vector2 Update(Vector2 mPlayerset,int ai,bool flg);
+	Vector2 Update(Vector2 mPlayerset,int ai,bool flg,bool keyf);
 	bool Release(void);
 	int GetMapChipMng(Vector2 pos);
 	bool cheakMapChip(Vector2 pos);
@@ -47,8 +47,8 @@ public:
 
 	int GetChipId(void);
 	int GetChipID(void);
-
-
+	int GetDamage(void);
+	
 
 	bool qeopd_ = false;
 private:
@@ -70,6 +70,8 @@ private:
 
 	int chipID;
 
+	int Damage_;
+
 	 //マップの変更処理
 
 	MAP_ID mNextMapID;
@@ -77,6 +79,9 @@ private:
 	int aitem;
 	bool mflg;
 	bool opendir_;
+	bool follFlag_;
+	int damCnt_;
+	bool keyFlag_;
 
 	friend Stage;
 };

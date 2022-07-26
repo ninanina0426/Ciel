@@ -224,8 +224,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     {
         return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_5", mPlayer.plID_));
     }
-   
-    if (cave_ > 700)
+    //暗躍エンド
+    if (cave_ > 400)
     {
         return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_6", mPlayer.plID_));
     }
@@ -302,7 +302,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&(ui_.eveflg_==false))
     {
-        mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg());
+        mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg(),mAitem->GetKey());
         mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_, mLove->Hit(),mMenus.En(),mPose,mNpc->NpcHit());
 
     }
@@ -393,7 +393,6 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
             ded_ = 0;
         }
 
-        //暗躍エンド
         if (mMasuku->MoveFlg())
         {
             CaveState();
@@ -402,7 +401,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     
     mMasuku->Update(PlayerPos, mAitem->mRantanNum(),mMenus.NumHave());
 
-    ui_.Upadate(mPlayer, mMapOffset);
+    ui_.Upadate(mPlayer, mMapOffset,mMenus.NumHave());
    
   
 
@@ -712,17 +711,10 @@ void GameScene::CaveState(void)
     {
         cave_++;
 
-        if (cave_ > 200)
+        if (cave_ > 300)
         {
-            SetDrawBlendMode(DX_BLENDMODE_ALPHA, (detTime_ / 2) - 50);
-            DrawBox(0, 0, 1080, 609, 0x000000, true);
-            SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-            if (cave_ > 600)
-            {
-                DrawString(500, 300, "何か聞こえる・・・・", 0xffffff, true);
-            }
+            DrawString(500, 300, "何か聞こえる・・・・", 0xffffff, true);
         }
-
     }
 
 }

@@ -26,6 +26,9 @@ bool StageMng::Init()
 	aitem = 0;
 	mflg = false;
 	mOffset = mPlayer.GetPos()-Vector2{540,0};
+	Damage_ = 0;
+	follFlag_ = false;
+	damCnt_ = 0;
 	/*mOffset = {0,0};*/
 	
     return true;
@@ -50,7 +53,7 @@ void StageMng::Draw()
 
 
 
-Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg)
+Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg,bool keyf)
 {
 	mMapOldID = mMapID;
 
@@ -58,13 +61,15 @@ Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg)
 
 	mflg = flg;
 
+	keyFlag_ = keyf;
+
 	movePos = mPlayerset - mOffset; //playerのPos
 
 	OldPos = mPlayer.GetPos();
 
 	key_.Update();
 	
-
+	Damage_ = 0;
 	if (OldPos != mPlayerset)
 	{
 		if (lpMapMng.mMapID == MAP_ID::SWEETS || lpMapMng.mMapID == MAP_ID::SWEETSOUT || lpMapMng.mMapID == MAP_ID::SWEETSSCHOOL)
@@ -215,8 +220,20 @@ Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg)
 
 	}
 	
-
-
+	if (follFlag_)
+	{
+		Damage_ ++;
+		damCnt_++;
+	}
+	else
+	{
+		damCnt_ = 0;
+	}
+	if (damCnt_>10)
+	{
+		Damage_ = 0;
+		follFlag_ = false;
+	}
 	stage_->Update(mOffset);
 
 	//フェードイン
@@ -255,6 +272,7 @@ bool StageMng::cheakMapChip(Vector2 pos)
 
 bool StageMng::GetEvent(Vector2 pos)
 {
+
 	chipID = stage_->GetMapChip(pos);
 
 	mTchipId = stage_->GetTMapChip(pos);
@@ -263,7 +281,9 @@ bool StageMng::GetEvent(Vector2 pos)
 	//FORESTからFORESTINへ
 	if (lpMapMng.mMapID == MAP_ID::FOREST)
 	{
-		if (chipID == 1407)
+		//
+		
+		if (keyFlag_)
 		{
 			mMapChange = true;
 			mNextPos = { 1440,840 };
@@ -271,8 +291,10 @@ bool StageMng::GetEvent(Vector2 pos)
 			mOffset = mNextPos - Vector2{ 540,300 };
 			mMapID = MAP_ID::FORESTIN;
 			stage_ = std::move(std::make_unique<ForestInMap>());
-			//mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
 		}
+	
+		
+
 		if (chipID == 2269)
 		{
 			mMapChange = true;
@@ -291,6 +313,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_DOWN;
 			mOffset = mNextPos - Vector2{ 540,300 };
 			mMapID = MAP_ID::FORESTIN;
+			follFlag_ = true;
 			stage_ = std::move(std::make_unique<ForestInMap>());
 		}
 		if (mTchipId == 843 && pos.y_ > 1969)
@@ -313,7 +336,6 @@ bool StageMng::GetEvent(Vector2 pos)
 			stage_ = std::move(std::make_unique<ForestInMap>());
 			//mOffset = mNextPos / (Vector2{ 4,4 }) * Vector2 { 2, 3 };
 		}
-		
 	}
 	//FORESTINからFORESTへ
 	if (lpMapMng.mMapID == MAP_ID::FORESTIN)
@@ -1038,6 +1060,62 @@ bool StageMng::GetMapChange(Vector2 pos)
 
 		}
 	}
+	if (lpMapMng.mMapID == MAP_ID::FOREST)
+	{
+		//
+		if (pos.x_ > 1445 && pos.x_ < 1468 && pos.y_ < 230)
+		{
+			if (!opendir_)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					opendir_ = true;
+				}
+			}
+			else
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					opendir_ = false;
+					qeopd_ = true;
+				}
+			}
+			if (opendir_)
+			{
+				SetDrawBlendMode(DX_BLENDMODE_ALPHA, 180);
+				DrawBox(0, 250, 1080, 400, 0x000000, true);
+				SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+				DrawString(450, 280, "鍵がかかっている。", 0xffffff);
+
+
+			}
+			if (keyFlag_)
+			{
+				mMapChange = true;
+				mNextPos = { 1440,840 };
+				mDir = DIR_UP;
+				mOffset = mNextPos - Vector2{ 540,300 };
+				mMapID = MAP_ID::FORESTIN;
+				stage_ = std::move(std::make_unique<ForestInMap>());
+			}
+		}
+		else
+		{
+			opendir_ = false;
+		}
+
+
+		if (chipID == 2269)
+		{
+			mMapChange = true;
+			//マップを切り替えることになった
+			mNextPos = { 1645,715 };
+			mDir = DIR_DOWN;
+			mOffset = mNextPos - Vector2{ 540,300 };
+			mMapID = MAP_ID::TEMPLE;
+			stage_ = std::move(std::make_unique<templeMap>());
+		}
+	}
 
 	return mMapChange;
 }
@@ -1070,6 +1148,11 @@ int StageMng::GetChipId(void)
 int StageMng::GetChipID(void)
 {
 	return chipID;
+}
+
+int StageMng::GetDamage(void)
+{
+	return Damage_;
 }
 
 StageMng::StageMng()
