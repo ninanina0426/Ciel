@@ -49,6 +49,7 @@ public:
 
 	bool Takara;
 
+	bool Key;
 	
 	bool mHaori;
 

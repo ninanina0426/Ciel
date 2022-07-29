@@ -40,7 +40,10 @@ bool Aitem::init()
 	mKinomi4 = false;
 	mKinomi5 = false;
 
+	Key = false;
+
 	mHaori = true;
+
 
 	mRantan = false;
 
@@ -107,6 +110,9 @@ bool Aitem::init()
 
 	//Хє
 	mNum[15] = {1425,1026};
+
+	//Мо
+	mNum[16] = { 337,1704 };
 
 	i = 0;
 
@@ -338,6 +344,20 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 					mTamaN += 1;
 				}
 
+			}
+		}
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[16].y_ + 32 / 2) &&
+			(mPos.y_ + mNum[16].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[16].x_ + 32 / 2) &&
+			(mPos.x_ + mNum[16].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if (key_.getKeyDown(KEY_INPUT_F))
+			{
+				mKey += 1;
+				mNum[16] = mNum[0];
+				Key = true;
+				mGet = true;
+				mAitem = 6;
 			}
 		}
 		if (key_.getKeyDown(KEY_INPUT_F))
@@ -598,6 +618,14 @@ void Aitem::Draw(Vector2 mMapoffset)
 			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
 			{
 				DrawGraph(mPos.x_ + mNum[4].x_ - mMapoffset.x_, mPos.y_ + mNum[4].y_ - mMapoffset.y_ , mImage[3][mAnimCnt], true);
+			}
+		}
+		if (mKey == 0)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ + mNum[16].x_ - mMapoffset.x_, mPos.y_ + mNum[16].y_ - mMapoffset.y_, mImage[1][mAnimCnt], true);
 			}
 		}
 		break;

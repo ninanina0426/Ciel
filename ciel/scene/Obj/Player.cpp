@@ -163,7 +163,9 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 
 	bool mloveNpc = lhit;
 
-	/*mMove = false;*/
+	auto dam = lpMapMng.GetDamage();
+
+	Energy_ = Energy_ - dam;
 
 	key_.Update();
 
@@ -339,7 +341,7 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 									Energy(5);
 									break;
 								case PlayerID::Calendula:
-									Energy(20);
+									Energy(15);
 									break;
 								case PlayerID::Soy:
 									Energy(10);

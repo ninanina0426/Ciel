@@ -12,13 +12,31 @@ UI::~UI()
 {
 }
 
-void UI::Upadate(Player player, Vector2 offset)
+void UI::Upadate(Player player, Vector2 offset,int num)
 {
 	key_.Update();
 	stamina = player.Stamina_;
 	plPos_ = player.GetPos();
 	off_ = offset;
 	energy = player.Energy_;
+
+
+
+	if (num == 0){aitemNum = 14;}
+	if (num == 1){aitemNum = 0;}
+	if (num == 2){aitemNum = 1;}
+	if (num == 3){aitemNum = 2;}
+	if (num == 4){aitemNum = 3;}
+	if (num == 5){aitemNum = 4;}
+	if (num == 6){aitemNum = 5;}
+	if (num == 10){aitemNum = 6;}
+	if (num == 12){aitemNum = 7;}
+	if (num == 13){aitemNum = 8;}
+	if (num == 14){aitemNum = 9;}
+	if (num == 16){aitemNum = 10;}
+	if (num == 17){aitemNum = 11;}
+	if (num == 15){aitemNum = 12;}
+	
 
 	aitem_.Update(plPos_, player.GetSiz());
 	
@@ -45,6 +63,10 @@ void UI::Upadate(Player player, Vector2 offset)
 		if (aitem_.SetAitem() == 5)
 		{
 			aitemname_ = "  îÈïÛ";
+		}
+		if (aitem_.SetAitem() == 6)
+		{
+			aitemname_ = "  Å@åÆ";
 		}
 
 	}
@@ -120,8 +142,17 @@ void UI::Draw(void)
 {
 	DrawBox(0, 20, stamina, 40, 0xffff00, true);
 	DrawBox(0, 0, energy*4, 20, 0x00ff00, true);
-	
+
+	if (queTabF_)
+	{
+		DrawGraph(780, 0, questid_, true);
+	}
+
+	DrawGraph(990, 520, aitemBox, true);
+	DrawGraph(1000, 520, aitem[0][aitemNum], true);
+
 	auto mapid = lpMapMng.GetMapId();
+	auto mChipId = lpMapMng.GetChipId();
 	if (mapid == MAP_ID::TEMPLE)
 	{
 		if (!aitem_.mTama6)
@@ -134,17 +165,67 @@ void UI::Draw(void)
 		}
 		if (plPos_.y_ < 580)
 		{
-			DrawGraph(plPos_.x_- off_.x_-20, plPos_.y_- off_.y_-55, action_, true);
+			DrawGraph(plPos_.x_ - off_.x_ - 20, plPos_.y_ - off_.y_ - 55, action_, true);
 		}
-		
-	}
-	
 
+	}
+	if (mapid == MAP_ID::CAVE)
+	{
+		if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297))
+		{
+			if (!kuesution_)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					kuesution_ = true;
+				}
+			}
+			else
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					kuesution_ = false;
+				}
+			}
+			if (!kuesution_)
+			{
+				DrawGraph(plPos_.x_ - off_.x_ - 20, plPos_.y_ - off_.y_ - 55, que_, true);
+			}	
+		}
+	}
+	if (mapid == MAP_ID::FORESTIN)
+	{
+		if ((mChipId == 896))
+		{
+			if (!kuesution_)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					kuesution_ = true;
+				}
+			}
+			else
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					kuesution_ = false;
+				}
+			}
+			if (!kuesution_)
+			{
+				DrawGraph(plPos_.x_ - off_.x_ - 20, plPos_.y_ - off_.y_ - 55, que_, true);
+			}
+		}
+	}
+
+
+	
+	
 
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, updown_);
 	DrawGraph(0, 609 - updown_, boxid, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-	if (telop_&& updown_>150)
+	if (telop_ && updown_ > 150)
 	{
 		DrawFormatString(5, 529, 0xffffff, "%sÇèEÇ¡ÇΩÅI", aitemname_.c_str());
 	}
@@ -152,12 +233,16 @@ void UI::Draw(void)
 	{
 		DrawGraph(plPos_.x_ - off_.x_ - 63, plPos_.y_ - off_.y_ - 80, mImageChat_, true);
 	}
+
+	
+
+
+
+	
 	DrawString(0, 200, "W:âŸéq\nA:êX\nS:ê_ìa\nD:ê·\nE:òa\nR:ì¥åA",0x000000,true);
 
-	if (queTabF_)
-	{
-		DrawGraph(780, 0, questid_, true);
-	}
+	
+	
 	/*auto a = QuestIns.QuestList;
 	auto b = QuestIns.quelmap.find(1);
 	auto c = QuestIns.quelmap;
@@ -178,11 +263,16 @@ void UI::Init()
 {
 	questid_= LoadGraph("./image/ui/questbox.jpg");
 	boxid = LoadGraph("./image/ui/aitembox.png");
-	mImageChat_=  LoadGraph("image/talk/s1.png", true);
-	action_ = LoadGraph("image/ui/action.png", true);
+	mImageChat_=  LoadGraph("image/talk/s1.png");
+	action_ = LoadGraph("image/ui/action.png");
+	aitemBox = LoadGraph("./image/ui/aitemB.png");
+	que_ = LoadGraph("./image/ui/question.png");
+	LoadDivGraph("./image/ui/aitem.png", 15, 1, 15, 70, 70, *aitem, true);
 	aitemname_ = "ÉäÉìÉS";
 	updown_ = 0;
 	count_ = 0;
+	aitemNum = 14;
 	telop_ = false;
 	queTabF_ = false;
+	kuesution_ = false;
 }
