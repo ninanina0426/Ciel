@@ -57,6 +57,8 @@ public:
 
 	int mKinomis;
 
+	int mTamaNum;
+
 	int Num();
 
 	bool Getflg();

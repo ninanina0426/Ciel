@@ -343,7 +343,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mWshop.Update(mChat->GetNum());
 
-    mMenus.SetMenu(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->TeaNum(), mAitem->KeyNum(), mAitem->FishNum(),mAitem->StoneRNum(),mAitem->StoneBNum());
+    mMenus.SetMenu(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->TamNum(), mAitem->KeyNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
    
     mMenus.Update(mLove->NumH(),mPose);
 

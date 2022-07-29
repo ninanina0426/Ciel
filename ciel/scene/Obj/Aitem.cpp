@@ -80,7 +80,7 @@ bool Aitem::init()
 	apple = 0;
 	rantan = 0;
 	mKinomis = 0;
-
+	mTamaNum = 0;
 	
 	
 	Flg = true;
@@ -786,6 +786,7 @@ void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int
 	mFish = f + sf+fis - mf;
 	mStoneR = ssr + sssr+je - msr;
 	mStoneB = sb + ssb+bul - msb;
+	mTamaNum = mTamaN;
 	
 
 }
@@ -867,7 +868,7 @@ int Aitem::TeaNum(void)
 
 int Aitem::TamNum(void)
 {
-	return mTamaN;
+	return mTamaNum;
 }
 
 int Aitem::KeyNum(void)
