@@ -57,6 +57,16 @@ private:
 	int mImageS[27];		//
 	int mImageChat[100];	//
 
+	//‘«Õ
+	int mFoot[10000][2];
+	bool mMove;
+	int asiCnt;
+	int asi;
+
+	int mImagef1[15];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImagef2[15];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImagef3[15];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+
 	int mImageF;
 	//int mImage4[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	//int mImage5[32];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
@@ -67,6 +77,8 @@ private:
 	Vector2 mPlayer;
 
 	Keyboard key_;
+
+	
 	
 	int i;
 	int num;

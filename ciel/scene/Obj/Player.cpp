@@ -42,6 +42,21 @@ bool Player::init(PlayerID playerid)
 	mFlg = false;
 	tFlg = false;
 
+	//NPC
+	mMove = false;
+	asiCnt = 0;
+	asi =0;
+
+
+
+	for (int y = 0; y < 100; y++)
+	{
+		for (int x = 0; x < 2; x++)
+		{
+			mFoot[y][x] = 0;
+		}
+	}
+
 	Stamina_ = STAMINA;
 	Energy_ = ENERGY;
 	
@@ -109,6 +124,10 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
+	if (LoadDivGraph("image/char/muri.png", 15, 1, 15, 12, 12, &mImagef1[0]) == -1)
+	{
+		return false;
+	}
 
 	//âÔòb
 	mImageChat[1] = LoadGraph("image/talk/c1.png",true);
@@ -143,6 +162,8 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 	mChiID = lpMapMng.GetChipID();
 
 	bool mloveNpc = lhit;
+
+	/*mMove = false;*/
 
 	key_.Update();
 
@@ -435,22 +456,25 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 					{
 						keyDir = DIR_DOWN;
 						num = 6;
-
+						mMove = true;
 					}
 					if (key_.getKeyDownHold(KEY_INPUT_UP))
 					{
 						keyDir = DIR_UP;
 						num = 4;
+						mMove = true;
 					}
 					if (key_.getKeyDownHold(KEY_INPUT_LEFT))
 					{
 						keyDir = DIR_LEFT;
 						num = 7;
+						mMove = true;
 					}
 					if (key_.getKeyDownHold(KEY_INPUT_RIGHT))
 					{
 						keyDir = DIR_RIGHT;
 						num = 5;
+						mMove = true;
 					}
 
 
@@ -684,6 +708,22 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 				}
 			}
 
+			//ë´ê’
+			if (mMove == true)
+			{
+				if (asi%20==0)
+				{
+					asiCnt += 1;
+					mFoot[asiCnt][0] = mPos.x_;
+					mFoot[asiCnt][1] = mPos.y_;
+
+					if (asiCnt > 20)
+					{
+						asiCnt = 0;
+					}
+				}
+			}
+
 			//ÉâÉCÉÄÇ…èÊÇÈ
 			if (mapID == MAP_ID::SWEETS)
 			{
@@ -809,6 +849,11 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 		break;
 	}
 
+	if (mMove)
+	{
+		asi += 1;
+	}
+	
 
 	Energy(-En);
 	return mPos;
@@ -847,6 +892,33 @@ void Player::Draw(Vector2 offset)
 		{
 			if (i == 0)
 			{
+				if (mMove)
+				{
+					if (mapID == MAP_ID::SNOW)
+					{
+						DrawGraph(mFoot[0][0] - offset.x_ - 6, mFoot[0][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[1][0] - offset.x_ - 6, mFoot[1][1] - offset.y_ - 6, mImagef1[12], true);
+						DrawGraph(mFoot[2][0] - offset.x_ - 6, mFoot[2][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[3][0] - offset.x_ - 6, mFoot[3][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[4][0] - offset.x_ - 6, mFoot[4][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[5][0] - offset.x_ - 6, mFoot[5][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[6][0] - offset.x_ - 6, mFoot[6][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[7][0] - offset.x_ - 6, mFoot[7][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[8][0] - offset.x_ - 6, mFoot[8][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[9][0] - offset.x_ - 6, mFoot[9][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[10][0] - offset.x_ - 6, mFoot[10][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[11][0] - offset.x_ - 6, mFoot[11][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[12][0] - offset.x_ - 6, mFoot[12][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[13][0] - offset.x_ - 6, mFoot[13][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[14][0] - offset.x_ - 6, mFoot[14][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[15][0] - offset.x_ - 6, mFoot[15][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[16][0] - offset.x_ - 6, mFoot[16][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[17][0] - offset.x_ - 6, mFoot[17][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[18][0] - offset.x_ - 6, mFoot[18][1] - offset.y_ - 6, mImagef1[12], true);
+						DrawGraph(mFoot[19][0] - offset.x_ - 6, mFoot[19][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[20][0] - offset.x_ - 6, mFoot[20][1] - offset.y_ - 6, mImagef1[7], true);
+					}
+				}
 				if (keyDir == DIR_MAX)
 				{
 					DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[mMoveDir * DIR_MAX], true);
@@ -888,6 +960,33 @@ void Player::Draw(Vector2 offset)
 		{
 			if (i == 0)
 			{
+				if (mMove)
+				{
+					if (mapID == MAP_ID::SNOW)
+					{
+						DrawGraph(mFoot[0][0] - offset.x_ - 6, mFoot[0][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[1][0] - offset.x_ - 6, mFoot[1][1] - offset.y_ - 6, mImagef1[12], true);
+						DrawGraph(mFoot[2][0] - offset.x_ - 6, mFoot[2][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[3][0] - offset.x_ - 6, mFoot[3][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[4][0] - offset.x_ - 6, mFoot[4][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[5][0] - offset.x_ - 6, mFoot[5][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[6][0] - offset.x_ - 6, mFoot[6][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[7][0] - offset.x_ - 6, mFoot[7][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[8][0] - offset.x_ - 6, mFoot[8][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[9][0] - offset.x_ - 6, mFoot[9][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[10][0] - offset.x_ - 6, mFoot[10][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[11][0] - offset.x_ - 6, mFoot[11][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[12][0] - offset.x_ - 6, mFoot[12][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[13][0] - offset.x_ - 6, mFoot[13][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[14][0] - offset.x_ - 6, mFoot[14][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[15][0] - offset.x_ - 6, mFoot[15][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[16][0] - offset.x_ - 6, mFoot[16][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[17][0] - offset.x_ - 6, mFoot[17][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[18][0] - offset.x_ - 6, mFoot[18][1] - offset.y_ - 6, mImagef1[12], true);
+						DrawGraph(mFoot[19][0] - offset.x_ - 6, mFoot[19][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[20][0] - offset.x_ - 6, mFoot[20][1] - offset.y_ - 6, mImagef1[7], true);
+					}
+				}
 				if (keyDir == DIR_MAX)
 				{
 					DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage2[mMoveDir * DIR_MAX], true);
@@ -925,6 +1024,33 @@ void Player::Draw(Vector2 offset)
 		{
 			if (i == 0)
 			{
+				if (mMove)
+				{
+					if (mapID == MAP_ID::SNOW)
+					{
+						DrawGraph(mFoot[0][0] - offset.x_ - 6, mFoot[0][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[1][0] - offset.x_ - 6, mFoot[1][1] - offset.y_ - 6, mImagef1[12], true);
+						DrawGraph(mFoot[2][0] - offset.x_ - 6, mFoot[2][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[3][0] - offset.x_ - 6, mFoot[3][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[4][0] - offset.x_ - 6, mFoot[4][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[5][0] - offset.x_ - 6, mFoot[5][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[6][0] - offset.x_ - 6, mFoot[6][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[7][0] - offset.x_ - 6, mFoot[7][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[8][0] - offset.x_ - 6, mFoot[8][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[9][0] - offset.x_ - 6, mFoot[9][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[10][0] - offset.x_ - 6, mFoot[10][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[11][0] - offset.x_ - 6, mFoot[11][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[12][0] - offset.x_ - 6, mFoot[12][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[13][0] - offset.x_ - 6, mFoot[13][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[14][0] - offset.x_ - 6, mFoot[14][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[15][0] - offset.x_ - 6, mFoot[15][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[16][0] - offset.x_ - 6, mFoot[16][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[17][0] - offset.x_ - 6, mFoot[17][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[18][0] - offset.x_ - 6, mFoot[18][1] - offset.y_ - 6, mImagef1[12], true);
+						DrawGraph(mFoot[19][0] - offset.x_ - 6, mFoot[19][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[20][0] - offset.x_ - 6, mFoot[20][1] - offset.y_ - 6, mImagef1[7], true);
+					}
+				}
 				if (keyDir == DIR_MAX)
 				{
 					DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage3[mMoveDir * DIR_MAX], true);
