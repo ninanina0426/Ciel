@@ -43,6 +43,12 @@ private:
 	int mImagePD[27];
 	int mImageC[20];
 
+	//soy
+	int mImageS[16];
+	int mImageST[16];
+	int mImageMap;
+	Vector2 mPos;		//キャラクターの地図上の座標
+
 	//グラフィック系
 	int airplan_[4][3];
 	int sea_;

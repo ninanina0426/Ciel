@@ -70,6 +70,8 @@ bool EventScene::Init(void)
     shFlg_ = false;
 
     Cnt = 0;
+
+    mPos = {0,0};
    
     //aitem_ = new Aitem;
     sea_ = LoadGraph("./image/move/umi.png");
@@ -78,7 +80,7 @@ bool EventScene::Init(void)
     rany = LoadSoundMem("image/Sound/rain.ogg");
     li_ = LoadSoundMem("image/Sound/li.ogg");
 
-    LoadDivGraph("./image/move/air.png", 12, 3, 4, AirplneSize, AirplneSize, *airplan_, true);
+    LoadDivGraph("./image/move/air.png", 12, 3, 4, AirplneSize, AirplneSize, &airplan_[0][0], true);
     LoadDivGraph("./image/move/‰Œ.png", 12, 3, 4, 352, 256, *kemuri_, true);
 
     if (LoadDivGraph("image/char/110.png", 48, 4, 12, 48, 48, &mImageP[0]) == -1)
@@ -89,6 +91,13 @@ bool EventScene::Init(void)
     {
         return false;
     }
+
+    //soy
+    LoadDivGraph("./image/char/‰ß‹ŽS.png", 16, 4, 4, 48, 48, &mImageS[0]);
+    LoadDivGraph("./image/char/‰ß‹ŽS2.png", 16, 4, 4, 48, 48, &mImageST[0]);
+    mImageMap=LoadGraph("image/soy.png");
+
+
 
     mImageC[0] = LoadGraph("image/talk/temple.png");
     mImageC[1] = LoadGraph("image/talk/temple.png");
@@ -108,7 +117,7 @@ SceneID EventScene::GetSceneID(void)
 
 void EventScene::Event(int num)
 {
-    auto evetype = static_cast<EventType>(abs(num-5));
+    auto evetype = static_cast<EventType>(abs(num-6));
     auto plID = player_.plID_;
    
     switch (evetype)
@@ -173,6 +182,8 @@ void EventScene::Event(int num)
         case PlayerID::Calendula:
             break;
         case PlayerID::Soy:
+            DrawGraph(0, 0, mImageMap, true);
+            DrawGraph(0,0, mImageS[1], true);
             break;
         default:
             break;

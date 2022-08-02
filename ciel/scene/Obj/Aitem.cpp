@@ -42,14 +42,14 @@ bool Aitem::init()
 
 	Key = false;
 
-	mHaori = true;
+	mHaori = false;
 
 
 	mRantan = false;
 
 	Takara = false;
 
-	mTama = 5;
+	mTama = 6;
 	mKinomi = 5;
 	
 	mtakara = 0;
@@ -97,6 +97,7 @@ bool Aitem::init()
 	mNum[6] = { 1585,1070 };	//洞窟
 	mNum[7] = { 465,500 };		//和
 	mNum[8] = {1457,653};		//神殿
+	mNum[17] = {2990,120};		//雪
 
 	//木の実
 	mNum[9] = { 2536,1635 };
@@ -497,6 +498,38 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 		break;
 	case MAP_ID::SWEETSSCHOOL:
 		break;
+	case MAP_ID::SNOW:
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[17].y_ + 32 / 2) &&
+			(mPos.y_ + mNum[17].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[17].x_ + 32 / 2) &&
+			(mPos.x_ + mNum[17].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if ((mTama != 0) && (mTama <= 6))
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mTama -= 1;
+					mNum[17] = mNum[0];
+					mTama2 = true;
+					mGet = true;
+					mAitem = 2;
+					mTamaN += 1;
+				}
+
+			}
+		}
+
+		if (key_.getKeyDown(KEY_INPUT_F))
+		{
+		}
+		else
+		{
+			mGet = false;
+		}
+		break;
+	case MAP_ID::SNOWCAVE:
+		break;
+	case MAP_ID::SNOWSHOP:
 	case MAP_ID::TRANGETIONS:
 		
 		break;
@@ -504,6 +537,11 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 		break;
 	default:
 		break;
+	}
+
+	if (mHaoriN != 0)
+	{
+		mHaori = true;
 	}
 
 	ItemAnimcount++;
@@ -678,6 +716,20 @@ void Aitem::Draw(Vector2 mMapoffset)
 	case MAP_ID::SWEETSSCHOOL:
 
 		break;
+	case MAP_ID::SNOW:
+		//キーアイテム
+		if (mTama != 0)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 15 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ + mNum[17].x_ - mMapoffset.x_, mPos.y_ + mNum[17].y_ - mMapoffset.y_, mImage[3][mAnimCnt], true);
+			}
+		}
+		break;
+	case MAP_ID::SNOWCAVE:
+		break;
+	case MAP_ID::SNOWSHOP:
 	case MAP_ID::TRANGETIONS:
 
 		break;
@@ -686,16 +738,8 @@ void Aitem::Draw(Vector2 mMapoffset)
 	default:
 		break;
 	}
-
-	if (mHaoriN != 0)
-	{
-		mHaori = true;
-	}
-
-	DrawFormatString(0,150, GetColor(255, 255, 255), "num=%d", apple);
-	DrawFormatString(0, 170, GetColor(255, 255, 255), "玉=%d", mTama);
-	
-
+	//DrawFormatString(0,150, GetColor(255, 255, 255), "num=%d", apple);
+	//DrawFormatString(0, 170, GetColor(255, 255, 255), "玉=%d", mTama);
 }
 
 bool Aitem::Release(void)

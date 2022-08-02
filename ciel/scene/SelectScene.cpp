@@ -100,7 +100,7 @@ uniquBaseScn SelectScene::Update(uniquBaseScn own)
                return std::move(own);
            }
         }
-        return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EventScene>(std::make_unique<GameScene>(player_.plID_), player_.plID_, 5));
+        return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EventScene>(std::make_unique<GameScene>(player_.plID_), player_.plID_, 6));
     }
 
     //player‚Ì‘I‘ð
