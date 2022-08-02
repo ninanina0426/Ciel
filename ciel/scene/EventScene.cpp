@@ -195,6 +195,7 @@ bool EventScene::Init(void)
     rany = LoadSoundMem("image/Sound/rain.ogg");
     li_ = LoadSoundMem("image/Sound/li.ogg");
 
+
     LoadDivGraph("./image/move/air.png", 12, 3, 4, AirplneSize, AirplneSize, &airplan_[0][0], true);
     LoadDivGraph("./image/move/‰Œ.png", 12, 3, 4, 352, 256, *kemuri_, true);
 
@@ -210,7 +211,6 @@ bool EventScene::Init(void)
 
     mImageN =  LoadGraph("image/npc/marine011.png", true);
    
-
     mImagePC[0] = LoadGraph("image/talk/j1.png");
     mImagePC[1] = LoadGraph("image/talk/j2.png");
     mImagePC[2] = LoadGraph("image/talk/j3.png");
@@ -239,8 +239,6 @@ bool EventScene::Init(void)
     LoadDivGraph("./image/char/‰ß‹ŽS.png", 16, 4, 4, 48, 48, &mImageST[0]);
     LoadDivGraph("./image/char/‰ß‹ŽS3.png", 16, 4, 4, 48, 48, &mImageSF[0]);
     mImageMap=LoadGraph("image/soy.png");
-
-
 
 
     house_ = LoadGraph("image/1108s.png");
@@ -309,6 +307,8 @@ void EventScene::Event(int num)
            
             DrawExtendGraph(0, 0, 1080, 600, house_, true);
             DrawGraph(370, 320, mImageP[8], true);
+           
+           
             if (Cnt >= 100)
             {
                 DrawGraph(330, 260, mImagePC[0], true);

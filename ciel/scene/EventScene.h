@@ -73,5 +73,8 @@ private:
 	bool shFlg_;
 	int rany;
 	int li_;
+	int bgm1;
+	int bgm2;
+	int bgm3;
 };
 
