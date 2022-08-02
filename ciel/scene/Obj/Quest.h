@@ -56,8 +56,8 @@ public:
 	QuestState questCmpFlg[5];		//各クエストのフラグ
 
 	int GetHaori(void);
-	std::vector <std::string> QuestList;
-	std::map <int, std::string> quelmap;
+	int Getfish(void);
+	
 private:
 	Quest();
 	~Quest();
@@ -68,6 +68,7 @@ private:
 
 
 	QuestState QFlg_;
+	
 	
 	bool CompFlg_;
 	std::string QTxt_;
@@ -91,6 +92,7 @@ private:
 	int Ccount_;
 	int Calq_;
 	int Hao;
+	int fish_;
 	//friend Aitem;
 };
 

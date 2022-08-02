@@ -302,7 +302,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&(ui_.eveflg_==false))
     {
-        mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg(),mAitem->GetKey());
+        mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg(),mAitem->GetKey(), TamaPow());
         mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_, mLove->Hit(),mMenus.En(),mPose,mNpc->NpcHit());
 
     }
@@ -311,7 +311,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     PlayerSize = mPlayer.GetSiz();
 
-    mNpc->Update(PlayerPos, PlayerSize, mChat->Getflg());
+    mNpc->Update(PlayerPos, PlayerSize, mChat->Getflg(),mAitem->FishNum());
 
     mLove->Update(PlayerPos, PlayerSize,mPlayer.GetDIR(),mMenus.NumHave());
 
@@ -323,7 +323,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     mAitem->TotalAitem(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori(), mShop.SsRice(), mShop.SsDango(), mShop.SsTea(),mShop.SsFish(), mShop.SsStoneR(),mShop.SsStoneB(),
         mWshop.SsApple(), mWshop.SsKinominoKusiyaki(), mWshop.SsFruitDrink(), mWshop.SsFishingRodS(), mWshop.SsRagBag(), mWshop.SsPickaxe(), mWshop.SsKinomi(), mWshop.SsRantan(), mWshop.SsHaori(), mWshop.SsRice(), mWshop.SsDango(), mWshop.SsTea(), mWshop.SsFish(), mWshop.SsStoneR(), mWshop.SsStoneB(),
         mMenus.AppleE(), mMenus.KinominoKusiyakiE(), mMenus.FruitDrinkE(), mMenus.FishingRodSE(), mMenus.RagBagE(), mMenus.PickaxeE(), mMenus.KnomiE(), mMenus.mRantanE(), mMenus.mHaoriE(), mMenus.RiceE(), mMenus.DangoE(), mMenus.TeaE(),mMenus.FishE(),mMenus.StoneRE(),mMenus.StoneBE(),
-        mLove->Apple(),mLove->KinominoKusiyaki(),mLove->FruitDrink(),mLove->Rice(),mLove->Dango(),mLove->Tea() , mPlayer.GetRed(), mPlayer.GetFish(),mPlayer.GetBule(),QuestIns.GetHaori());
+        mLove->Apple(),mLove->KinominoKusiyaki(),mLove->FruitDrink(),mLove->Rice(),mLove->Dango(),mLove->Tea() , mPlayer.GetRed(), mPlayer.GetFish(),mPlayer.GetBule(),QuestIns.GetHaori(),QuestIns.Getfish());
 
 
 
@@ -592,6 +592,42 @@ bool GameScene::Init(void)
 
    	return true;
 
+}
+
+int GameScene::TamaPow(void)
+{
+ 
+    chengF_ = 10;
+
+
+    if (mAitem->mTama1&&!lpMapMng.Tama_Use[2])
+    {
+        chengF_ = 2;
+        
+    }
+    if (mAitem->mTama2 && !lpMapMng.Tama_Use[0])
+    {
+        chengF_ = 0;
+    }
+    if (mAitem->mTama3 && !lpMapMng.Tama_Use[3])
+    {
+        chengF_ = 3;
+    }
+    if (mAitem->mTama4 && !lpMapMng.Tama_Use[1])
+    {
+        chengF_ = 1;
+    }
+    if (mAitem->mTama5 && !lpMapMng.Tama_Use[4])
+    {
+        chengF_ = 4;
+    }
+    if (mAitem->mTama6 && !lpMapMng.Tama_Use[5])
+    {
+        chengF_ = 5;
+    }
+
+    
+    return chengF_;
 }
 
 void GameScene::TimeManeger(void)

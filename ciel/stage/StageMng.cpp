@@ -31,6 +31,22 @@ bool StageMng::Init()
 	damCnt_ = 0;
 	/*mOffset = {0,0};*/
 	
+
+	flyMap[0]=false;
+	flyMap[1]=false;
+	flyMap[2]=false;
+	flyMap[3]=false;
+	flyMap[4]=false;
+
+	back = false;
+	
+	Tama_Use[0] = false;
+	Tama_Use[1] = false;
+	Tama_Use[2] = false;
+	Tama_Use[3] = false;
+	Tama_Use[4] = false;
+	Tama_Use[5] = false;
+
     return true;
 }
 
@@ -53,7 +69,7 @@ void StageMng::Draw()
 
 
 
-Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg,bool keyf)
+Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg,bool keyf,int tamaFlg)
 {
 	mMapOldID = mMapID;
 
@@ -70,6 +86,11 @@ Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg,bool keyf)
 	key_.Update();
 	
 	Damage_ = 0;
+
+	Tama_ = tamaFlg;
+	
+	
+
 	if (OldPos != mPlayerset)
 	{
 		if (lpMapMng.mMapID == MAP_ID::SWEETS || lpMapMng.mMapID == MAP_ID::SWEETSOUT || lpMapMng.mMapID == MAP_ID::SWEETSSCHOOL)
@@ -281,19 +302,6 @@ bool StageMng::GetEvent(Vector2 pos)
 	//FORESTからFORESTINへ
 	if (lpMapMng.mMapID == MAP_ID::FOREST)
 	{
-		//
-		
-		if (keyFlag_)
-		{
-			mMapChange = true;
-			mNextPos = { 1440,840 };
-			mDir = DIR_UP;
-			mOffset = mNextPos - Vector2{ 540,300 };
-			mMapID = MAP_ID::FORESTIN;
-			stage_ = std::move(std::make_unique<ForestInMap>());
-		}
-	
-		
 
 		if (chipID == 2269)
 		{
@@ -871,6 +879,7 @@ bool StageMng::GetMapChange(Vector2 pos)
 			{
 				opendir_ = false;
 			}
+			
 			if (pos.y_<581&& aitem==0)//chipID == 470
 			{
 				mMapChange = true;
@@ -887,10 +896,40 @@ bool StageMng::GetMapChange(Vector2 pos)
 		if (pos.x_ >= 1380 && pos.x_ < 1450 &&
 			pos.y_ >= 730 && pos.y_ < 760)
 		{
+			if (Tama_!=10&& !flyMap[0])
+			{
+				if (!back)
+				{
+					auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
+					if (f == IDYES)
+					{
+						flyMap[0] = true;
+						fadeinFlg_ = true;
+						fadein_.Setcnt(0);
+						Tama_Use[Tama_] = true;
+					}
+					else if (f == IDNO)
+					{
+						back = true;
+					}
+				}
+				
+				if (back)
+				{
+					mMapChange = true;
+					mNextPos = { pos.x_,770 };
+					back = false;
+				}
+				
+
+			}
 			if (key_.getKeyDown(KEY_INPUT_F))
 			{
-				fadeinFlg_ = true;
-				fadein_.Setcnt(0);
+				if (flyMap[0])
+				{
+					fadeinFlg_ = true;
+					fadein_.Setcnt(0);
+				}
 			}
 			if (fadeinFlg_)
 			{
@@ -910,10 +949,37 @@ bool StageMng::GetMapChange(Vector2 pos)
 		if (pos.x_ >= 1440 && pos.x_ < 1480 &&
 			pos.y_ >= 835 && pos.y_ < 860)
 		{
+			if (Tama_!=10&& !flyMap[1])
+			{
+				if (!back)
+				{
+					auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
+					if (f == IDYES)
+					{
+						flyMap[1] = true;
+						fadeinFlg_ = true;
+						fadein_.Setcnt(0);
+						Tama_Use[Tama_] = true;
+					}
+					else if (f == IDNO)
+					{
+						back = true;
+					}
+				}
+			}
+				if (back)
+				{
+					mMapChange = true;
+					mNextPos = { pos.x_,870 };
+					back = false;
+				}
 			if (key_.getKeyDown(KEY_INPUT_F))
 			{
-				fadeinFlg_ = true;
-				fadein_.Setcnt(0);
+				if (flyMap[1])
+				{
+					fadeinFlg_ = true;
+					fadein_.Setcnt(0);
+				}
 
 			}
 			if (fadeinFlg_)
@@ -933,10 +999,37 @@ bool StageMng::GetMapChange(Vector2 pos)
 		if (pos.x_ >= 1825 && pos.x_ < 1855 &&
 			pos.y_ >= 835 && pos.y_ < 860)
 		{
+			if (Tama_!=10 && !flyMap[2])
+			{
+				if (!back&& flyMap[0])
+				{
+					auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
+					if (f == IDYES)
+					{
+						flyMap[2] = true;
+						fadeinFlg_ = true;
+						fadein_.Setcnt(0);
+						Tama_Use[Tama_] = true;
+					}
+					else if (f == IDNO)
+					{
+						back = true;
+					}
+				}
+			}
+				if (back)
+				{
+					mMapChange = true;
+					mNextPos = { pos.x_,870 };
+					back = false;
+				}
 			if (key_.getKeyDown(KEY_INPUT_F))
 			{
-				fadeinFlg_ = true;
-				fadein_.Setcnt(0);
+				if (flyMap[2])
+				{
+					fadeinFlg_ = true;
+					fadein_.Setcnt(0);
+				}
 			}
 			if (fadeinFlg_)
 			{
@@ -955,10 +1048,37 @@ bool StageMng::GetMapChange(Vector2 pos)
 		if (pos.x_ >= 1890 && pos.x_ < 1920 &&
 			pos.y_ >= 730 && pos.y_ < 760)
 		{
+			if (Tama_!=10 && !flyMap[3])
+			{
+				if (!back&& flyMap[2])
+				{
+					auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
+					if (f == IDYES)
+					{
+						flyMap[3] = true;
+						fadeinFlg_ = true;
+						fadein_.Setcnt(0);
+						Tama_Use[Tama_] = true;
+					}
+					else if (f == IDNO)
+					{
+						back = true;
+					}
+				}
+			}
+				if (back)
+				{
+					mMapChange = true;
+					mNextPos = { pos.x_,770 };
+					back = false;
+				}
 			if (key_.getKeyDown(KEY_INPUT_F))
 			{
-				fadeinFlg_ = true;
-				fadein_.Setcnt(0);
+				if (flyMap[3])
+				{
+					fadeinFlg_ = true;
+					fadein_.Setcnt(0);
+				}
 			}
 			if (fadeinFlg_)
 			{
@@ -977,10 +1097,38 @@ bool StageMng::GetMapChange(Vector2 pos)
 		if (pos.x_ >= 1825 && pos.x_ < 1855 &&
 			pos.y_ >= 640 && pos.y_ < 660)
 		{
+			if (Tama_!=10 && !flyMap[4])
+			{
+				if (!back)
+				{
+					auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
+					if (f == IDYES)
+					{
+						flyMap[4] = true;
+						fadeinFlg_ = true;
+						fadein_.Setcnt(0);
+						Tama_Use[Tama_] = true;
+					}
+					else if (f == IDNO)
+					{
+						back = true;
+					}
+				}
+
+				if (back)
+				{
+					mMapChange = true;
+					mNextPos = { pos.x_,670 };
+					back = false;
+				}
+			}
 			if (key_.getKeyDown(KEY_INPUT_F))
 			{
-				fadeinFlg_ = true;
-				fadein_.Setcnt(0);
+				if (flyMap[4])
+				{
+					fadeinFlg_ = true;
+					fadein_.Setcnt(0);
+				}
 			}
 			if (fadeinFlg_)
 			{
@@ -1023,6 +1171,7 @@ bool StageMng::GetMapChange(Vector2 pos)
 
 		}
 	}
+
 	if (lpMapMng.mMapID == MAP_ID::CAVE)
 	{
 		//ランタンが無くて進めない
@@ -1154,6 +1303,8 @@ int StageMng::GetDamage(void)
 {
 	return Damage_;
 }
+
+
 
 StageMng::StageMng()
 {

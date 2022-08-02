@@ -7,6 +7,11 @@ int Quest::GetHaori(void)
 	return Hao;
 }
 
+int Quest::Getfish(void)
+{
+	return fish_;
+}
+
 Quest::Quest()
 {
 	Init();
@@ -34,22 +39,28 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 		switch (quest_)
 		{
 		case QUEST::MAX:
+//			QFlg_ = QuestState::NON;
 			break;
 		case QUEST::QUEST_1:
 			if (questCmpFlg[0] != QuestState::COMP)
 			{
 				questCmpFlg[0] = QuestState::ALIVE;
 				QFlg_ = QuestState::ALIVE;
-				QTxt_ = "探索してみよう!\n 　・←↑→↓：移動\n 　・左shift：走る\n 　・F：アクション";
+				/*if (QFlg_Old == QuestState::NON)
+				{
+					QFlg_ = QuestState::ALIVE;
+					QFlg_Old == QFlg_;
+				}
+				QFlg_ == QuestState::NON;*/
 			}
-			
 			break;
 		case QUEST::QUEST_2:
 			if (questCmpFlg[1] != QuestState::COMP)
 			{
 				questCmpFlg[1] = QuestState::ALIVE;
 				QFlg_ = QuestState::ALIVE;
-				QTxt_ = "スイーツの材料を集めよう";
+				
+				
 			}
 			break;
 		case QUEST::QUEST_3:
@@ -57,19 +68,22 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 			{
 				questCmpFlg[2] = QuestState::ALIVE;
 				QFlg_ = QuestState::ALIVE;
-				QTxt_ = "寒い寒い地域の過ごし方";
+				
+				
 			}
 			break;
 		case QUEST::QUEST_4:
 			if (questCmpFlg[3] != QuestState::COMP)
 			{
 				questCmpFlg[3] = QuestState::ALIVE;
+				
 			}
 			break;
 		case QUEST::QUEST_5:
 			if (questCmpFlg[4] != QuestState::COMP)
 			{
 				questCmpFlg[4] = QuestState::ALIVE;
+				
 			}
 			break;
 		default:
@@ -86,6 +100,8 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 			{
 				questCmpFlg[3] = QuestState::COMP;
 				CompFlg_ = true;
+				Ccount_ = 0;
+				Calq_ = 0;
 			}
 		}
 		break;
@@ -96,8 +112,12 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 			{
 				questCmpFlg[2] = QuestState::COMP;
 				CompFlg_ = true;
+				QFlg_ = QuestState::COMP;
 				aitem_.mHaori = true;
 				Hao = 1;
+				Ccount_ = 0;
+				Calq_ = 0;
+				fish_ = 3;
 			}
 		}
 		break;
@@ -116,6 +136,10 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 		{
 			questCmpFlg[0] =  QuestState::COMP;
 			CompFlg_ = true;
+			QFlg_ = QuestState::COMP;
+			Ccount_ = 0;
+			Calq_ = 0;
+
 		}
 		break;
 	case MAP_ID::TEMPLEIN:
@@ -129,8 +153,11 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 			{
 				questCmpFlg[1] = QuestState::COMP;
 				CompFlg_ = true;
+				QFlg_ = QuestState::COMP;
 				aitem_.mKinomi = 0;
-				getru_ = 55;
+				getru_ = 150;
+				Ccount_ = 0;
+				Calq_ = 0;
 			}
 		}
 		break;
@@ -148,7 +175,7 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 	
 	if (CompFlg_)
 	{
-		QFlg_ = QuestState::COMP;
+		
 		quest_old = quest_;
 		//quest_ = QUEST::MAX;
 		state_ = QuestState::COMP;
@@ -189,8 +216,6 @@ void Quest::Draw()
 {
 	if (QFlg_== QuestState::ALIVE)
 	{
-		/*DrawFormatString(800, 0, 0xff0000, "クエスト受注しました");
-		DrawFormatString(900, 50, 0xff0000, "□　%s", QTxt_.c_str());*/
 		if (count_ < 570)
 		{
 			if (count_ < 255)
@@ -244,28 +269,6 @@ void Quest::Draw()
 		}
 	}
 	
-
-	if (questCmpFlg[0] == QuestState::ALIVE)
-	{
-		quelmap.insert(std::make_pair(1, "あいうえお"));
-		QuestList.push_back("探索してみよう!\n 　・←↑→↓：移動\n 　・左shift：走る\n 　・F：アクション");
-		DrawString(1000, 0, "クエスト１", 0xffffff, true);
-	}
-
-	if (questCmpFlg[1] == QuestState::ALIVE)
-	{
-		quelmap.insert(std::make_pair(2, "かきくけこ"));
-		QuestList.push_back("スイーツの材料を集めよう");
-		DrawString(1000, 10, "クエスト2", 0xffffff, true);
-	}
-	if (questCmpFlg[2] == QuestState::ALIVE)
-	{
-		quelmap.insert(std::make_pair(3, "さしすせそ"));
-		QuestList.push_back("寒い寒い地域の過ごし方");
-		DrawString(1000, 20, "クエスト3", 0xffffff, true);
-	}
-
-
 
 }
 

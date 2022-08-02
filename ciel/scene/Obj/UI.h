@@ -46,6 +46,12 @@ private:
 	int aitemBox;
 	int aitem[1][15];
 
+	int q1_;
+	int q1C_;
+	int q2_;
+	int q2C_;
+	int q3_;
+	int q3C_;
 	Keyboard key_;
 };
 

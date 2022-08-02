@@ -149,7 +149,7 @@ bool Npc::init(void)
 	return true;;
 }
 
-int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
+int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg ,int fis)
 {
 	MAP_ID mapID = lpMapMng.GetMapId();
 
@@ -409,6 +409,7 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 					{
 						mQSoNpc1 = true;
 					}
+
 				}
 
 			}
@@ -427,6 +428,10 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 					mSoNpc2 = true;
 					i = 4;
 				}
+				if (mQSoNpc2 )
+				{
+					qnum_ = 0;
+				}
 			}
 			else
 			{
@@ -440,6 +445,7 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 						qflg_ = mQSoNpc2;
 						qnum_ = 2;
 					}
+					
 				}
 			}
 		}
@@ -468,6 +474,10 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 					mWmNpc1 = true;
 					i = 60;
 				}
+				if (mQWmNpc1)
+				{
+					qnum_ = 0;
+				}
 			}
 			else
 			{
@@ -481,6 +491,7 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 						qflg_ = mQWmNpc1;
 						qnum_ = 3;
 					}
+					
 				}
 			}
 		}
@@ -528,7 +539,7 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 
 	mAnmCnt++;
 	//クエスト
-	QuestIns.UpDate(qflg_, qnum_, playerPos,playerSize, mapID,0);
+	QuestIns.UpDate(qflg_, qnum_, playerPos,playerSize, mapID,fis);
 
 	return i;
 

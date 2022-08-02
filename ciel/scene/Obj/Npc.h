@@ -66,7 +66,7 @@ public:
 	~Npc();
 
 	bool init(void);		//初期化
-	int Update(Vector2 playerPos, Vector2 playerSize,bool flg);		//更新
+	int Update(Vector2 playerPos, Vector2 playerSize,bool flg,int fis);		//更新
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
 	DIR GetDIR(void);

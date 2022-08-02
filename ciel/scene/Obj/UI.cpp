@@ -146,7 +146,38 @@ void UI::Draw(void)
 	if (queTabF_)
 	{
 		DrawGraph(780, 0, questid_, true);
+		if (QuestIns.questCmpFlg[0] == QuestState::ALIVE) {DrawGraph(10, 0, q1_, true);}
+		if (QuestIns.questCmpFlg[0] == QuestState::COMP) {DrawGraph(10, 0, q1C_, true);}
+		if (QuestIns.questCmpFlg[2] == QuestState::NON)
+		{
+			if (QuestIns.questCmpFlg[1] == QuestState::ALIVE)
+			{
+				DrawGraph(10, 50, q2_, true);
+			}	
+			
+			if (QuestIns.questCmpFlg[1] == QuestState::COMP) { DrawGraph(10, 50, q2C_, true); }
+		}
+		else if(QuestIns.questCmpFlg[2] == QuestState::ALIVE)
+		{
+			if (QuestIns.questCmpFlg[1] == QuestState::ALIVE)
+			{
+				DrawGraph(10, 100, q2_, true);
+			}
+			if (QuestIns.questCmpFlg[1] == QuestState::COMP) { DrawGraph(10, 100, q2C_, true); }
+		}
+		if (QuestIns.questCmpFlg[2] == QuestState::COMP)
+		{
+			if (QuestIns.questCmpFlg[1] == QuestState::ALIVE)
+			{
+				DrawGraph(10, 100, q2_, true);
+			}
+			if (QuestIns.questCmpFlg[1] == QuestState::COMP) { DrawGraph(10, 100, q2C_, true); }
+		}
+		if (QuestIns.questCmpFlg[2] == QuestState::ALIVE) { DrawGraph(10,50, q3_, true); }
+		if (QuestIns.questCmpFlg[2] == QuestState::COMP) { DrawGraph(10, 50, q3C_, true); }
 	}
+
+	
 
 	DrawGraph(990, 520, aitemBox, true);
 	DrawGraph(1000, 520, aitem[0][aitemNum], true);
@@ -267,6 +298,14 @@ void UI::Init()
 	action_ = LoadGraph("image/ui/action.png");
 	aitemBox = LoadGraph("./image/ui/aitemB.png");
 	que_ = LoadGraph("./image/ui/question.png");
+
+	q1_= LoadGraph("./image/ui/Q1.png");
+	q1C_ = LoadGraph("./image/ui/Q1C.png");
+	q2_ = LoadGraph("./image/ui/Q2.png");
+	q2C_ = LoadGraph("./image/ui/Q2C.png");
+	q3_ = LoadGraph("./image/ui/Q3.png");
+	q3C_ = LoadGraph("./image/ui/Q3C.png");
+
 	LoadDivGraph("./image/ui/aitem.png", 15, 1, 15, 70, 70, *aitem, true);
 	aitemname_ = "ƒŠƒ“ƒS";
 	updown_ = 0;

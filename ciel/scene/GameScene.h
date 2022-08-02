@@ -79,6 +79,8 @@ private:
     bool mMapChange;
     MAP_ID mNextMapID;
     Vector2 mNextPos;
+    int TamaPow(void);
+    int chengF_;
 
     FadeInStage fadein_;
     

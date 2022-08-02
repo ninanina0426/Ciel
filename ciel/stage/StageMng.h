@@ -21,7 +21,7 @@ public:
 	
 	bool Init();
 	void Draw();
-	Vector2 Update(Vector2 mPlayerset,int ai,bool flg,bool keyf);
+	Vector2 Update(Vector2 mPlayerset,int ai,bool flg,bool keyf,int tamaFlg);
 	bool Release(void);
 	int GetMapChipMng(Vector2 pos);
 	bool cheakMapChip(Vector2 pos);
@@ -51,6 +51,7 @@ public:
 	
 
 	bool qeopd_ = false;
+	bool Tama_Use[6];		//菓　和　森　洞　雪
 private:
 	StageMng();
 	~StageMng();
@@ -82,6 +83,11 @@ private:
 	bool follFlag_;
 	int damCnt_;
 	bool keyFlag_;
+
+	bool flyMap[5];
+	int Tama_;
+	
+	bool back;
 
 	friend Stage;
 };

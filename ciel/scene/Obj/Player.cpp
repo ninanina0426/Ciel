@@ -806,6 +806,7 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 				if (QuestIns.GetCont() > 570)
 				{
 					qflg_ = false;
+					QuestIns.UpDate(qflg_, 0, copyPos, mSize, mapID, GetFish());
 				}
 
 			}
