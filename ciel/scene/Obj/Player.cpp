@@ -896,7 +896,7 @@ void Player::Draw(Vector2 offset)
 			{
 				if (mMove)
 				{
-					if (mapID == MAP_ID::SNOW)
+					if ((mapID == MAP_ID::SNOW)||(mapID == MAP_ID::SWEETS))
 					{
 						DrawGraph(mFoot[0][0] - offset.x_ - 6, mFoot[0][1] - offset.y_ - 6, mImagef1[7], true);
 						DrawGraph(mFoot[1][0] - offset.x_ - 6, mFoot[1][1] - offset.y_ - 6, mImagef1[12], true);
@@ -964,7 +964,7 @@ void Player::Draw(Vector2 offset)
 			{
 				if (mMove)
 				{
-					if (mapID == MAP_ID::SNOW)
+					if ((mapID == MAP_ID::SNOW) || (mapID == MAP_ID::SWEETS))
 					{
 						DrawGraph(mFoot[0][0] - offset.x_ - 6, mFoot[0][1] - offset.y_ - 6, mImagef1[7], true);
 						DrawGraph(mFoot[1][0] - offset.x_ - 6, mFoot[1][1] - offset.y_ - 6, mImagef1[12], true);
@@ -1028,7 +1028,7 @@ void Player::Draw(Vector2 offset)
 			{
 				if (mMove)
 				{
-					if (mapID == MAP_ID::SNOW)
+					if ((mapID == MAP_ID::SNOW) || (mapID == MAP_ID::SWEETS))
 					{
 						DrawGraph(mFoot[0][0] - offset.x_ - 6, mFoot[0][1] - offset.y_ - 6, mImagef1[7], true);
 						DrawGraph(mFoot[1][0] - offset.x_ - 6, mFoot[1][1] - offset.y_ - 6, mImagef1[12], true);
