@@ -592,7 +592,7 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 						{
 							lpMapMng.GetEvent(copyPos);
 						}
-						//“–‚½‚è”»’è
+						//ˆÚ“®
 						if (lpMapMng.cheakMapChip(copyPos))
 						{
 							mPos = copyPos;

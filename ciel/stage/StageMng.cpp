@@ -201,9 +201,9 @@ Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg,bool keyf)
 	}
 	else
 	{
-		if (mOffset.x_ > 2130)
+		if (mOffset.x_ > 2100)
 		{
-			mOffset.x_ = 2130;
+			mOffset.x_ = 2100;
 		}
 		if (mOffset.x_ < 0)
 		{
