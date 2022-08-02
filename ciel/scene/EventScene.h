@@ -47,7 +47,9 @@ private:
 	int mImageS[16];
 	int mImageST[16];
 	int mImageSF[16];
+	int mImageMob[16];
 	int mImageMap;
+	int mImageMap1;
 	Vector2 mPos;		//キャラクターの地図上の座標
 	int dir;
 	Vector2 movePos;

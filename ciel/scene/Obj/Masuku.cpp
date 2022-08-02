@@ -48,7 +48,7 @@ void Masuku::Update(Vector2 playerPos, int r, int ra)
     if (mapID == MAP_ID::CAVE)
     {
 
-        if (mAnmMum < 200)
+        if (mAnmMum < 500)
         {
             if ((Rantan == 0))
             {
@@ -71,7 +71,7 @@ void Masuku::Update(Vector2 playerPos, int r, int ra)
 
             }
         }
-        else if (mAnmMum > 201)
+        else if (mAnmMum > 501)
         {
             if (Rantan == 0)
             {

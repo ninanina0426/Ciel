@@ -16,14 +16,17 @@ EventScene::~EventScene()
 
 uniquBaseScn EventScene::Update(uniquBaseScn own)
 {
-    if (CheckHitKey(KEY_INPUT_F))
+   /* if (CheckHitKey(KEY_INPUT_F))
     {
         flg_ = true;
-    }
-    if (mNum > 100)
+    }*/
+    if (mNum >= 70)
     {
-        flg_ = true;
-        mNum = 0;
+        if (CheckHitKey(KEY_INPUT_F))
+        {
+            flg_ = true;
+            mNum = 0;
+        }
     }
     //フラグがtrueになったらゲームシーンに返す
     if (flg_)
@@ -41,29 +44,32 @@ uniquBaseScn EventScene::Update(uniquBaseScn own)
 
     movePos = mPos - mOffset;
     //プレイヤーの操作
-    if (CheckHitKey(KEY_INPUT_DOWN))
+    if (mNum < 70)
     {
-        mPos.y_ += 3;
-        dir = 2;
-        mNum += 1;
-    }
-    else if (CheckHitKey(KEY_INPUT_UP))
-    {
-        mPos.y_ -= 3;
-        dir = 0;
-        mNum += 1;
-    }
-    else if (CheckHitKey(KEY_INPUT_LEFT))
-    {
-        mPos.x_ -= 3;
-        dir = 3;
-        mNum += 1;
-    }
-    else if (CheckHitKey(KEY_INPUT_RIGHT))
-    {
-        mPos.x_ += 3; 
-        dir = 1;
-        mNum += 1;
+        if (CheckHitKey(KEY_INPUT_DOWN))
+        {
+            mPos.y_ += 3;
+            dir = 2;
+            mNum += 1;
+        }
+        else if (CheckHitKey(KEY_INPUT_UP))
+        {
+            mPos.y_ -= 3;
+            dir = 0;
+            mNum += 1;
+        }
+        else if (CheckHitKey(KEY_INPUT_LEFT))
+        {
+            mPos.x_ -= 3;
+            dir = 3;
+            mNum += 1;
+        }
+        else if (CheckHitKey(KEY_INPUT_RIGHT))
+        {
+            mPos.x_ += 3;
+            dir = 1;
+            mNum += 1;
+        }
     }
     
     //カメラ
@@ -183,7 +189,7 @@ bool EventScene::Init(void)
 
     Cnt = 0;
 
-    /*mPos = {0,0};*/
+    mPos = {500,600};
     mOffset = { 0,0 };
     dir = 2;
     mNum=0;
@@ -211,7 +217,9 @@ bool EventScene::Init(void)
     LoadDivGraph("./image/char/過去S2.png", 16, 4, 4, 48, 48, &mImageS[0]);
     LoadDivGraph("./image/char/過去S.png", 16, 4, 4, 48, 48, &mImageST[0]);
     LoadDivGraph("./image/char/過去S3.png", 16, 4, 4, 48, 48, &mImageSF[0]);
+    LoadDivGraph("./image/npc/例.png", 16, 4, 4, 32, 48, &mImageMob[0]);
     mImageMap=LoadGraph("image/soy.png");
+    mImageMap1=LoadGraph("image/soy1.png");
 
 
 
@@ -241,9 +249,7 @@ void EventScene::Event(int num)
     case EventType::PROLOGUE:
         DrawGraph(0, -1300+animcnt_, sea_, false);
         DrawExtendGraph(500, 350, 500 + AirplneSize * 3, 350 + AirplneSize * 3, airplan_[3][(animcnt_ / 5) % 3], true);
-       
-      
-       
+
         if (animcnt_ > 76)
         {
             DrawGraph(0, 0, cloud_, true);
@@ -282,7 +288,6 @@ void EventScene::Event(int num)
         switch (plID)
         {
         case PlayerID::Jack:
-
             DrawExtendGraph(0, 0, 1080, 600, house_, true);
             DrawGraph(370, 320, mImageP[8], true);
             if (Cnt >= 100)
@@ -298,9 +303,17 @@ void EventScene::Event(int num)
         case PlayerID::Calendula:
             break;
         case PlayerID::Soy:
-            DrawGraph(0-mOffset.x_, 0-mOffset.y_, mImageMap, true);
-            DrawGraph(mPos.x_ - mOffset.x_- 24, mPos.y_ - mOffset.y_ - 24, mImageS[dir * 4 + ((animcnt_ / 8) % 4)], true);
-           /* DrawFormatString(0, 500, GetColor(0, 0, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);*/
+            DrawGraph(0-mOffset.x_, 0-mOffset.y_, mImageMap1, true);
+            if (mNum < 70)
+            {
+                DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageS[dir * 4 + ((animcnt_ / 8) % 4)], true);
+            }
+            if (mNum >= 70)
+            {
+                DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageS[dir * 4], true);
+                DrawGraph(mPos.x_ - mOffset.x_-50, mPos.y_ - mOffset.y_ - 100, mImageC[0], true);
+            }
+            //DrawFormatString(0, 500, GetColor(0, 0, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
             break;
         default:
             break;
@@ -327,8 +340,15 @@ void EventScene::Event(int num)
         case PlayerID::Calendula:
             break;
         case PlayerID::Soy:
-            DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap, true);
-            DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageS[dir * 4 + ((animcnt_ / 8) % 4)], true);
+            DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap1, true);
+
+            DrawGraph(500 - mOffset.x_, 600 - mOffset.y_, mImageSF[1 * 4], true);
+            DrawGraph(570 - mOffset.x_, 580 - mOffset.y_, mImageMob[1 * 4], true);
+            if (mNum >= 1)
+            {
+                DrawGraph(570 - mOffset.x_ - 60, 600 - mOffset.y_ - 100, mImageC[0], true);
+                DrawGraph(500 - mOffset.x_ - 40, 600 - mOffset.y_ - 100, mImageC[0], true);
+            }
             break;
         default:
             break;
@@ -346,7 +366,15 @@ void EventScene::Event(int num)
             break;
         case PlayerID::Soy:
             DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap, true);
-            DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageST[dir * 4 + ((animcnt_ / 8) % 4)], true);
+            if (mNum < 70)
+            {
+                DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageST[dir * 4 + ((animcnt_ / 8) % 4)], true);
+            }
+            if (mNum >= 70)
+            {
+                DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageST[dir * 4], true);
+                DrawGraph(mPos.x_ - mOffset.x_ - 50, mPos.y_ - mOffset.y_ - 100, mImageC[0], true);
+            }
             break;
         default:
             break;
@@ -363,7 +391,10 @@ void EventScene::Event(int num)
             break;
         case PlayerID::Soy:
             DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap, true);
-            DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageSF[dir * 4 + ((animcnt_ / 8) % 4)], true);
+            DrawGraph(500,600, mImageSF[1 * 4], true);
+            DrawGraph(550, 600, mImageMob[3 * 4], true);
+            DrawGraph(550- 40,600- 100, mImageC[0], true);
+            DrawGraph(500- 60,600- 100, mImageC[0], true);
             break;
         default:
             break;
@@ -380,7 +411,15 @@ void EventScene::Event(int num)
             break;
         case PlayerID::Soy:
             DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap, true);
-            DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageSF[dir * 4 + ((animcnt_ / 8) % 4)], true);
+            if (mNum < 70)
+            {
+                DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageSF[dir * 4 + ((animcnt_ / 8) % 4)], true);
+            }
+            if (mNum >= 70)
+            {
+                DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageSF[dir * 4], true);
+                DrawGraph(mPos.x_ - mOffset.x_ - 50, mPos.y_ - mOffset.y_ - 100, mImageC[0], true);
+            }
             break;
         default:
             break;

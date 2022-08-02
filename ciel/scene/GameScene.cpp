@@ -112,24 +112,25 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 {
      //ポーズ機能
     key_.Update();
-    if (mPose == false)
+    if ((mShop.SPose() == false) && (mWshop.SPose() == false))
     {
-        if (key_.getKeyDown(KEY_INPUT_ESCAPE))
+        if (mPose == false)
         {
-            mPose = true;
+            if (key_.getKeyDown(KEY_INPUT_ESCAPE))
+            {
+                mPose = true;
+            }
         }
-    }
-    else
-    {
-        if (key_.getKeyDown(KEY_INPUT_ESCAPE))
+        else
         {
-            mPose = false;
-            /* mMenu.init(this);*/
+            if (key_.getKeyDown(KEY_INPUT_ESCAPE))
+            {
+                mPose = false;
+                /* mMenu.init(this);*/
+            }
         }
     }
 
-
-   
     if (key_.getKeyDown(KEY_INPUT_G))
     {
         return std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam());
@@ -326,11 +327,9 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         mLove->Apple(),mLove->KinominoKusiyaki(),mLove->FruitDrink(),mLove->Rice(),mLove->Dango(),mLove->Tea() , mPlayer.GetRed(), mPlayer.GetFish(),mPlayer.GetBule(),QuestIns.GetHaori());
 
 
-    if (mPose == false)
-    {
-        mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
-        mWshop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
-    }
+   
+    mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
+    mWshop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
    
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
@@ -341,14 +340,19 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     mShop.SsetAitem(AitemGet);
     mWshop.SsetAitem(AitemGet);
 
-    mShop.Update(mChat->GetNum());
-
-    mWshop.Update(mChat->GetNum());
+    if ((mPose == false))
+    {
+        mShop.Update(mChat->GetNum());
+        mWshop.Update(mChat->GetNum());
+    }
 
     mMenus.SetMenu(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->TamNum(), mAitem->KeyNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
    
-    mMenus.Update(mLove->NumH(),mPose);
-
+    if ((mShop.SPose() == false) && (mWshop.SPose() == false))
+    {
+        mMenus.Update(mLove->NumH(), mPose);
+    }
+   
     mShop.AMoney(mAitem->Money(mShop.SetMoney(), mShop.GetMoney()));
 
 
@@ -517,7 +521,7 @@ void GameScene::DrawOwnScn()
      //時間帯
      TimeManeger();
 
-     if (mPose == true)
+     if ((mPose == true)&& ((mShop.SPose() == false) && (mWshop.SPose() == false)))
      {
          mMenus.Draw(mPlayer.GetType(),mAitem->HaveMoney(),mPlayer.EnergyNum(),mPlayer.StaminaNum());
      }
