@@ -392,7 +392,6 @@ bool CaveMap::CheckMapChip(Vector2 pos)
 	case 298:
 	case 299:
 	case 306:
-	case 307:
 	case 308:
 	case 315:
 	case 316:

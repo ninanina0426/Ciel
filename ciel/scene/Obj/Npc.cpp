@@ -29,16 +29,20 @@ bool Npc::init(void)
 	mFmNpc5 = false;
 	mFmNpc6 = false;
 
+	mWmNpc1 = false;
+
 
 	mQSoNpc1 = false;
 	mQSoNpc2 = false;
 	mQSmNpc1 = false;
 
+	mQWmNpc1 = false;
+
 	
 	qnum_ = 0;
 	qflg_ = false;
 
-	
+	npcHit = false;
 
 	mPos.x_ = 0;
 	mPos.y_ = 0;
@@ -91,6 +95,9 @@ bool Npc::init(void)
 	case NpcType::TM_NPC:
 		break;
 	case NpcType::WM_NPC:
+		mMoveDir = DIR_UP;
+		mSize.x_ = 32;
+		mSize.y_ = 32;
 		break;
 	case NpcType::WS_NPC:
 		break;
@@ -122,6 +129,12 @@ bool Npc::init(void)
 	{
 		return false;
 	}
+
+	if (LoadDivGraph("image/npc/cat.png", 12, 3, 4, 32, 32, &mImage7[0][0]) == -1)
+	{
+		return false;
+	}
+
 
 	mSizeOffset.x_ = mSize.x_ / 2;
 	mSizeOffset.y_ = mSize.y_ / 2;
@@ -183,8 +196,16 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 	case MAP_ID::SWEETSSCHOOL:
 		mNpcType = NpcType::SS_NPC;
 		break;
+	case MAP_ID::SNOW:
+		mNpcType = NpcType::SN_NPC;
+		break;
+	case MAP_ID::SNOWCAVE:
+		mNpcType = NpcType::SNC_NPC;
+		break;
+	case MAP_ID::SNOWSHOP:
+		mNpcType = NpcType::SNS_NPC;
+		break;
 	case MAP_ID::TRANGETIONS:
-		
 		break;
 	case MAP_ID::MAX:
 		break;
@@ -192,7 +213,6 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 		break;
 	}
 
-	
 	switch (mNpcType)
 	{
 	case NpcType::CM_NPC:
@@ -439,15 +459,53 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 	case NpcType::TM_NPC:
 		break;
 	case NpcType::WM_NPC:
+	{
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 573 + 64 / 2) &&
+			(mPos.y_ + 573 - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 994 + 32 / 2) &&
+			(mPos.x_ + 994 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+
+			mNumType = NumType::NPC_1;
+			npcHit = true;
+			if (mWmNpc1 == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					mWmNpc1 = true;
+					i = 60;
+				}
+			}
+			else
+			{
+				if (flg == false)
+				{
+					mWmNpc1 = false;
+					i = 0;
+					if (mQWmNpc1 == false)
+					{
+						mQWmNpc1 = true;
+						qflg_ = mQWmNpc1;
+						qnum_ = 3;
+					}
+				}
+			}
+		}
+		else
+		{
+			npcHit = false;
+		}
 		break;
+	}
 	case NpcType::WS_NPC:
 	{
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + 1750 + 64 / 2) &&
 			(mPos.y_ + 1750 - 64 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
-			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 1825 + 32 / 2) &&
-			(mPos.x_ + 1825 - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + 1825 + 22) &&
+			(mPos.x_ + 1825 - 22 < playerPos.x_ + playerSize.x_ / 2))
 		{
 			mNumType = NumType::NPC_1;
+			npcHit = true;
 			if (mWsNpc1 == false)
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
@@ -465,6 +523,10 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 				}
 			}
 		}
+		else
+		{
+			npcHit = false;
+		}
 		break;
 	}
 	default:
@@ -473,7 +535,7 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg)
 
 	mAnmCnt++;
 	//クエスト
-	QuestIns.UpDate(qflg_, qnum_, playerPos,playerSize, mapID);
+	QuestIns.UpDate(qflg_, qnum_, playerPos,playerSize, mapID,0);
 
 	return i;
 
@@ -513,16 +575,20 @@ void Npc::Draw(Vector2 offset)
 	case NpcType::TM_NPC:
 		break;
 	case NpcType::WM_NPC:
+		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 994, mPos.y_ - offset.y_ - mSizeOffset.y_ + 573, mImage7[0][0], true);
 		break;
 	case NpcType::WS_NPC:
 		DrawGraph(mPos.x_ - offset.x_ - 32 + 1825, mPos.y_ - offset.y_ - 64 + 1750, mImage5[0][3], true);
 		break;
+	case NpcType::SN_NPC:
+		break;
+	case NpcType::SNC_NPC:
+		break;
+	case NpcType::SNS_NPC:
+		break;
 	default:
 		break;
 	}
-
-
-
 }
 
 bool Npc::Release(void)
@@ -547,6 +613,11 @@ Vector2 Npc::GetSiz(void)
 Vector2 Npc::GetPos(void)
 {
 	return mPos;
+}
+
+bool Npc::NpcHit()
+{
+	return npcHit;
 }
 
 int Npc::Num()
@@ -642,7 +713,22 @@ bool Npc::Getflg()
 		
 		break;
 	case NpcType::WM_NPC:
-		
+		switch (mNumType)
+		{
+		case NumType::NPC_1:
+			return mWmNpc1;
+			break;
+		case NumType::NPC_2:
+			break;
+		case NumType::NPC_3:
+			break;
+		case NumType::NPC_4:
+			break;
+		case NumType::NPC_5:
+			break;
+		default:
+			break;
+		}
 		break;
 	case NpcType::WS_NPC:
 		switch (mNumType)

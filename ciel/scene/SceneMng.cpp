@@ -24,9 +24,9 @@ void SceneMng::Run(void)
 	//初期シーンのインスタンス
 	scene_ = std::make_unique<TitleScene>();
 	
+	 
 
-
-	while (ProcessMessage() == 0 ) //ProcessMessage()はウィンドウにメッセージを送る
+	while ((ProcessMessage() == 0)) //ProcessMessage()はウィンドウにメッセージを送る
 	{
 		_dbgStartDraw();		//デバッグDraw
 
@@ -34,7 +34,6 @@ void SceneMng::Run(void)
 		scene_ = scene_->Update(std::move(scene_));			//シーンのUpdata呼び出し
 
 		
-
 		SetDrawScreen(DX_SCREEN_BACK);//転写するだけのバックバッファ
 		ClsDrawScreen();
 		scene_->Draw();				//シーンのDraw

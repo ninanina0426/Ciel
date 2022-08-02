@@ -72,15 +72,24 @@ void EndScene::DrawOwnScn()
 	
 	if (endType_ == "end_4")
 	{
-		DrawFormatString(450, 600, 0xffffff, "END_4 #本当の幸せとは何なのか");
+		DrawFormatString(700, 590, 0xffffff, "END_4 #本当の幸せとは何なのか");
 	}
-
+	if (endType_ == "end_5")
+	{
+		DrawExtendGraph(0, 0, 1080, 610, e5_, false);
+		DrawFormatString(850, 590, 0xffffff, "END_5 #カラダを大セツに");
+	}
+	if (endType_ == "end_6")
+	{
+		DrawExtendGraph(0, 0, 1080, 610, e5_, false);
+		DrawFormatString(850, 590, 0xffffff, "END_6 #暗いくらい暗いクライ。");
+	}
 }
 
 bool EndScene::Init(void)
 {
 	e1_ = LoadGraph("./image/move/氷.jpg");
 	e3_ = LoadGraph("./image/ui/noizu.jpg");
-
+	e5_ = LoadGraph("./image/move/yourdead.png");
     return true;
 }

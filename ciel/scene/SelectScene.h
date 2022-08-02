@@ -37,10 +37,15 @@ private:
     int carenImage_;    //カレンデュラのグラフィックID
     int titi_;          //
 
+    int a;
+    int b;
+    int c;
+
     int eff_[16];
     int eff_f[10];
     int eff_b[10];
     int bg_;
+    int Ui_;
     int animcnt_;
 
     int SHandle;

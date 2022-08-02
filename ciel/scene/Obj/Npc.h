@@ -16,7 +16,10 @@ enum class NpcType
 	TI_NPC,
 	TM_NPC,
 	WM_NPC,
-	WS_NPC
+	WS_NPC,
+	SN_NPC,
+	SNC_NPC,
+	SNS_NPC
 };
 
 enum class NumType
@@ -40,6 +43,7 @@ private:
 	int mImage4[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	int mImage5[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	int mImage6[16][16];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
+	int mImage7[12][12];		//‰æ‘œ‚ÌŠi”[—Ìˆæ
 	
 
 
@@ -58,6 +62,8 @@ private:
 
 	int i;
 
+	bool npcHit;
+
 public:
 	Npc();
 	~Npc();
@@ -69,6 +75,8 @@ public:
 	DIR GetDIR(void);
 	Vector2 GetSiz(void);
 	Vector2 GetPos(void);
+
+	bool NpcHit();
 
 	int Num();
 
@@ -88,10 +96,13 @@ public:
 
 	bool mSmNpc1;
 
+	bool mWmNpc1;
 	bool mWsNpc1;
 
 	bool mQSoNpc1;
 	bool mQSoNpc2;
+
+	bool mQWmNpc1;
 
 	
 	int qnum_;

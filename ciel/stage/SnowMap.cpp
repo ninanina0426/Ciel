@@ -341,7 +341,7 @@ void SnowMap::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[ZIMENN[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[OBU2[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[OBU3[y][x]], true);
-			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(0, 0, 0), "%d", OBU2[y][x]);
+			/*DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(0, 0, 0), "%d", OBU2[y][x]);*/
 
 		}
 	}

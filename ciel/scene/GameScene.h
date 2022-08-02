@@ -18,6 +18,7 @@ class Layer;
 class Masuku;
 class Love;
 
+
 class GameScene : public BaseScene
 {
 public:
@@ -99,10 +100,17 @@ private:
     int you_;
     std::chrono::system_clock::time_point nowTime_;
     std::chrono::system_clock::time_point oldTime_;
+    int cnt_;
 
     void ColdState(void);
     int detTime_;
     int ice_;
+
+    void DeadState(void);
+    int ded_;
+
+    void CaveState(void);
+    int cave_;
 
     Chat* mChat;
 

@@ -73,7 +73,7 @@ bool Love::init()
     lFish=0;
 
     mNum[0] = { 0,0 };
-    mNum[1] = { 1645,715 };
+    mNum[1] = { 754,2030 };
 
     return true;
 }
@@ -91,138 +91,141 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
     HaveNum = num;
 
     
-
-    if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[1].y_ + 32 / 2) &&
-        (mPos.y_ + mNum[1].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
-        (playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[1].x_ + 32 / 2) &&
-        (mPos.x_ + mNum[1].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+    if (mapID == MAP_ID::WA)
     {
-        if (numC == 0)
+        if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[1].y_ + 32 / 2) &&
+            (mPos.y_ + mNum[1].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+            (playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[1].x_ + 32 / 2) &&
+            (mPos.x_ + mNum[1].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
         {
-            if (key_.getKeyDown(KEY_INPUT_F))
+            if (numC == 0)
             {
-                moveFlg = true;
-                numC = 1;
+                if (key_.getKeyDown(KEY_INPUT_F))
+                {
+                    moveFlg = true;
+                    numC = 1;
 
-                if (HaveNum == 0)
-                {
-                    chat = GetRand(10);
+                    if (HaveNum == 0)
+                    {
+                        chat = GetRand(10);
+                    }
+
+                    if (HaveNum == 1)
+                    {
+                        lApple -= 1;
+                        FR += 10;
+                        HaveNum = 20;
+                        chat = 17;
+                    }
+                    else if (HaveNum == 2)
+                    {
+                        lRice -= 1;
+                        FR += 10;
+                        HaveNum = 20;
+                        chat = 17;
+                    }
+                    else if (HaveNum == 3)
+                    {
+                        lKinominoKusiyaki -= 1;
+                        FR += 15;
+                        HaveNum = 20;
+                        chat = 17;
+                    }
+                    else if (HaveNum == 4)
+                    {
+                        lDango -= 1;
+                        FR += 15;
+                        HaveNum = 20;
+                        chat = 17;
+                    }
+                    else if (HaveNum == 5)
+                    {
+                        lFruitDrink -= 1;
+                        FR += 20;
+                        HaveNum = 20;
+                        chat = 17;
+                    }
+                    else if (HaveNum == 6)
+                    {
+                        lTea -= 1;
+                        FR += 10;
+                        HaveNum = 20;
+                        chat = 17;
+                    }
+                    else if (HaveNum == 0)
+                    {
+                        FR += 5;
+                    }
                 }
 
-                if (HaveNum == 1)
+                hitflg = true;
+            }
+            else if (numC == 27)
+            {
+                message_box();
+            }
+            else if (numC == 18)
+            {
+                eFlg = true;
+            }
+            else if (numC != 0)
+            {
+                if (key_.getKeyDown(KEY_INPUT_F))
                 {
-                    lApple -= 1;
-                    FR += 10;
-                    HaveNum = 20;
-                    chat = 17;
-                }
-                else if (HaveNum == 2)
-                {
-                    lRice -= 1;
-                    FR += 10;
-                    HaveNum = 20;
-                    chat = 17;
-                }
-                else if (HaveNum == 3)
-                {
-                    lKinominoKusiyaki -= 1;
-                    FR += 15;
-                    HaveNum = 20;
-                    chat = 17;
-                }
-                else if (HaveNum == 4)
-                {
-                    lDango -= 1;
-                    FR += 15;
-                    HaveNum = 20;
-                    chat = 17;
-                }
-                else if (HaveNum == 5)
-                {
-                    lFruitDrink -= 1;
-                    FR += 20;
-                    HaveNum = 20;
-                    chat = 17;
-                }
-                else if (HaveNum == 6)
-                {
-                    lTea -= 1;
-                    FR += 10;
-                    HaveNum = 20;
-                    chat = 17;
-                }
-                else if (HaveNum == 0)
-                {
-                    FR += 5;
+                    numC -= 1;
+                    chat -= 1;
                 }
             }
 
-            hitflg = true;
         }
-        else if (numC == 27)
+        else
         {
-            message_box();
+            numC = 0;
+            hitflg = false;
         }
-        else if (numC == 18)
+
+        if (HaveNum == 20)
         {
-            eFlg = true;
+            HaveNum = 100;
         }
-        else if (numC != 0)
+
+        if (key_.getKeyDown(KEY_INPUT_F))
         {
-            if (key_.getKeyDown(KEY_INPUT_F))
+        }
+        else
+        {
+            moveFlg = false;
+        }
+
+        if (moveFlg == true)
+        {
+            if (playerDir == DIR_DOWN)
             {
-                numC -= 1;
-                chat -= 1;
+                mMoveDir = DIR_LEFT;
+            }
+            if (playerDir == DIR_UP)
+            {
+                mMoveDir = DIR_UP;
+            }
+            if (playerDir == DIR_LEFT)
+            {
+                mMoveDir = DIR_DOWN;
+            }
+            if (playerDir == DIR_RIGHT)
+            {
+                mMoveDir = DIR_RIGHT;
             }
         }
-       
-    }
-    else
-    {
-        numC = 0;
-        hitflg = false;
-    }
 
-    if (HaveNum == 20)
-    {
-        HaveNum = 100;
-    }
-
-    if (key_.getKeyDown(KEY_INPUT_F))
-    {
-    }
-    else
-    {
-        moveFlg = false;
-    }
-
-    if (moveFlg == true)
-    {
-        if (playerDir == DIR_DOWN)
+        //好感度max
+        if (FR == 200)
         {
-            mMoveDir = DIR_LEFT;
-        }
-        if (playerDir == DIR_UP)
-        {
-            mMoveDir = DIR_UP;
-        }
-        if (playerDir == DIR_LEFT)
-        {
-            mMoveDir = DIR_DOWN;
-        }
-        if (playerDir == DIR_RIGHT)
-        {
-            mMoveDir = DIR_RIGHT;
+            numC = 30;
+            FR = 205;
+            chat = 30;
         }
     }
-  
-    //好感度max
-    if (FR == 200)
-    {
-        numC = 30;
-        FR = 205;
-        chat = 30;
-    }
+   
 
 
     mAnmCnt++;
@@ -231,7 +234,7 @@ Vector2 Love::Update(Vector2 playerPos, Vector2 playerSize, DIR playerDir, int n
 
 void Love::Draw(Vector2 offset)
 {
-    if (mapID == MAP_ID::TEMPLE)
+    if (mapID == MAP_ID::WA)
     {
         if (numC!=0)
         {

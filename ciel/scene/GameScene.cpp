@@ -13,6 +13,7 @@
 #include"Obj/Love.h"
 #include "Transition/FadeInOut.h"
 #include "EndScene.h"
+#include "Obj/Quest.h"
 
 GameScene::GameScene(PlayerID playerID)
 {
@@ -99,8 +100,6 @@ bool GameScene::IsRantan(void)
     return mAitem->mRantan;
 }
 
-
-
 bool GameScene::mEnd()
 {
     return mAitem->Takara;
@@ -111,11 +110,6 @@ bool GameScene::mEnd()
 
 uniquBaseScn GameScene::Update(uniquBaseScn own)
 {
-    /* if (CheckHitKey(KEY_INPUT_SPACE))
-     {
-         return std::make_unique<GameScene>(std::move(own));
-     }*/
-
      //ポーズ機能
     key_.Update();
     if (mPose == false)
@@ -225,7 +219,17 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     {
         return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_4", mPlayer.plID_));
     }
-
+    //餓死エンド
+    if (ded_>700)
+    {
+        return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_5", mPlayer.plID_));
+    }
+    //暗躍エンド
+    if (cave_ > 400)
+    {
+        return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_6", mPlayer.plID_));
+    }
+    
     //時間
     nowTime_ = std::chrono::system_clock::now();		//現在の時間を取得
     auto elTime = nowTime_ - oldTime_;                  //時間の差をとる
@@ -235,6 +239,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     //一日の流れ
     int min = 60;    //一分間のフレーム数
     int Day = min * 5;      //一日の秒数
+    cnt_++;
     //yuugata
     if (delta % Day == 120)
     {
@@ -264,13 +269,41 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         count_++;
     }
     skycnt_++;
+    //一日の消費カロリー
+    switch (mPlayer.plID_)
+    {
+    case PlayerID::Jack:
+        if (cnt_ %600==0)
+        {
+            //20heru
+            mPlayer.Energy_ -= 1;
+        }
+        break;
+    case PlayerID::Calendula:
+        if (cnt_ % 2400 == 0)
+        {
+            //5
+            mPlayer.Energy(1);
+        }
+        break;
+    case PlayerID::Soy:
+        if (cnt_ % 1200 == 0)
+        {
+            //10
+            mPlayer.Energy(1);
+        }
+            break;
+    default:
+        break;
+    }
+    
     
     DrawOwnScn();//個別のDraw処理な為必ず書く
 
-    if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&(ui_.eveflg_==false)&&(mPose==false))
+    if ((mShop.SPose() == false) && (mWshop.SPose() == false)&&(ui_.eveflg_==false))
     {
-        mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg());
-        mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_, mLove->Hit());
+        mMapOffset = lpMapMng.Update(PlayerPos, mAitem->GetTam(), mMasuku->Flg(),mAitem->GetKey());
+        mPlayer.Update(lpMapMng.GetChipId(), ui_.eveflg_, mLove->Hit(),mMenus.En(),mPose,mNpc->NpcHit());
 
     }
 
@@ -290,12 +323,15 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     mAitem->TotalAitem(mShop.SsApple(), mShop.SsKinominoKusiyaki(), mShop.SsFruitDrink(), mShop.SsFishingRodS(), mShop.SsRagBag(), mShop.SsPickaxe(), mShop.SsKinomi(), mShop.SsRantan(), mShop.SsHaori(), mShop.SsRice(), mShop.SsDango(), mShop.SsTea(),mShop.SsFish(), mShop.SsStoneR(),mShop.SsStoneB(),
         mWshop.SsApple(), mWshop.SsKinominoKusiyaki(), mWshop.SsFruitDrink(), mWshop.SsFishingRodS(), mWshop.SsRagBag(), mWshop.SsPickaxe(), mWshop.SsKinomi(), mWshop.SsRantan(), mWshop.SsHaori(), mWshop.SsRice(), mWshop.SsDango(), mWshop.SsTea(), mWshop.SsFish(), mWshop.SsStoneR(), mWshop.SsStoneB(),
         mMenus.AppleE(), mMenus.KinominoKusiyakiE(), mMenus.FruitDrinkE(), mMenus.FishingRodSE(), mMenus.RagBagE(), mMenus.PickaxeE(), mMenus.KnomiE(), mMenus.mRantanE(), mMenus.mHaoriE(), mMenus.RiceE(), mMenus.DangoE(), mMenus.TeaE(),mMenus.FishE(),mMenus.StoneRE(),mMenus.StoneBE(),
-        mLove->Apple(),mLove->KinominoKusiyaki(),mLove->FruitDrink(),mLove->Rice(),mLove->Dango(),mLove->Tea());
+        mLove->Apple(),mLove->KinominoKusiyaki(),mLove->FruitDrink(),mLove->Rice(),mLove->Dango(),mLove->Tea() , mPlayer.GetRed(), mPlayer.GetFish(),mPlayer.GetBule(),QuestIns.GetHaori());
 
 
-    mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(),mAitem->FishNum(),mAitem->StoneRNum(),mAitem->StoneBNum());
-    mWshop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
-
+    if (mPose == false)
+    {
+        mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
+        mWshop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
+    }
+   
     DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
@@ -309,7 +345,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mWshop.Update(mChat->GetNum());
 
-    mMenus.SetMenu(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->TeaNum(), mAitem->KeyNum(), mAitem->FishNum());
+    mMenus.SetMenu(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->TamNum(), mAitem->KeyNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
    
     mMenus.Update(mLove->NumH(),mPose);
 
@@ -340,14 +376,36 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         }
     }
     
-    if (!IsHaori())
+    
+   
+
+    if (!mPose)
     {
-        ColdState();
+        if (!IsHaori())
+        {
+            ColdState();
+        }
+
+        if (mPlayer.GetSEnergy() <= 0)
+        {
+            DeadState();
+        }
+        else
+        {
+            ded_ = 0;
+        }
+
+        if (mMasuku->MoveFlg())
+        {
+            CaveState();
+        }
     }
+    
+    mMasuku->Update(PlayerPos, mAitem->mRantanNum(),mMenus.NumHave());
 
-    mMasuku->Update(PlayerPos, mAitem->mRantanNum());
-
-    ui_.Upadate(mPlayer.GetStamina(), mPlayer.GetSEnergy(), mPlayer.GetPos(), mPlayer.GetSiz(), mMapOffset);
+    ui_.Upadate(mPlayer, mMapOffset,mMenus.NumHave());
+   
+  
 
     mBgm->Update(mMenus.OpBgm(),ui_.eveflg_);
 
@@ -461,7 +519,7 @@ void GameScene::DrawOwnScn()
 
      if (mPose == true)
      {
-         mMenus.Draw(mPlayer.GetType(),mAitem->HaveMoney());
+         mMenus.Draw(mPlayer.GetType(),mAitem->HaveMoney(),mPlayer.EnergyNum(),mPlayer.StaminaNum());
      }
 
      
@@ -515,6 +573,7 @@ bool GameScene::Init(void)
     count_ = 0;
     skycnt_ = 255;
     detTime_ = 0;
+    cnt_ = 0;
 
     for (int i = 0; i < 6; i++)
     {
@@ -615,7 +674,7 @@ void GameScene::ColdState(void)
         detTime_++;
 
         SetDrawBlendMode(DX_BLENDMODE_ALPHA, 150);
-        DrawExtendGraph(0, 0, 1080, 609, ice_, true);
+        DrawExtendGraph(0, 0, 1080, 610, ice_, true);
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
         if (detTime_ > 200)
@@ -630,6 +689,36 @@ void GameScene::ColdState(void)
         }
         
     }
+}
+
+void GameScene::DeadState(void)
+{
+    ded_++;
+    if (ded_ > 200)
+    {
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, (ded_ / 2) - 50);
+        DrawBox(0, 0, 1080, 609, 0x000000, true);
+        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+        if (ded_ > 600)
+        {
+            DrawString(400, 300, "お腹・・・空いた・・・もうダメ・・・・・・", 0xffffff, true);
+        }
+    }
+}
+
+void GameScene::CaveState(void)
+{
+    auto map = lpMapMng.GetMapId();
+    if (map == MAP_ID::CAVE)
+    {
+        cave_++;
+
+        if (cave_ > 300)
+        {
+            DrawString(500, 300, "何か聞こえる・・・・", 0xffffff, true);
+        }
+    }
+
 }
 
 

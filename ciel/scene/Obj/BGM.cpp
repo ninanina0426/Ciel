@@ -36,6 +36,7 @@ void BGM::Update(int num, bool evfl)
     if (coppymapID != mapID)
     {
         DeleteSoundMem(SHandle);
+
         switch (mapID)
         {
         case MAP_ID::FOREST:
@@ -74,8 +75,16 @@ void BGM::Update(int num, bool evfl)
         case MAP_ID::SWEETSSCHOOL:
             SHandle = LoadSoundMem("image/music/SweetSchool.ogg");
             break;
+        case MAP_ID::SNOW:
+            SHandle = LoadSoundMem("image/music/SnowMap.ogg");
+            break;
+        case MAP_ID::SNOWCAVE:
+            SHandle = LoadSoundMem("image/music/SnowCave.ogg");
+            break;
+        case MAP_ID::SNOWSHOP:
+            SHandle = LoadSoundMem("image/music/SnowShop.ogg");
+            break;
         case MAP_ID::TRANGETIONS:
-            
             break;
         case MAP_ID::MAX:
             break;

@@ -23,5 +23,6 @@ private:
     //グラフィック関係
     int e1_;
     int e3_;
+    int e5_;
 };
 

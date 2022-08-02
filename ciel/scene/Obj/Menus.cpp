@@ -21,6 +21,9 @@ bool Menus::init(void)
 
 	have = 0;
 
+	//‰ñ•œ
+	mEnergy = 0;
+
 	//‰½‚à‘I‘ð‚µ‚Ä‚¢‚È‚¢‚Æ‚«
 	mImage[0]= LoadGraph("image/menyu/J.png");
 	mImage[1]= LoadGraph("image/menyu/S.png");
@@ -255,13 +258,17 @@ void Menus::Update(int num, bool flg)
 
 }
 
-void Menus::Draw(PlayerID type, int ru)
+void Menus::Draw(PlayerID type, int ru, int En, int St)
 {
 	PlayerID mType = type;
 
 	MAP_ID mapID = lpMapMng.GetMapId();
 
 	int Ru = ru;
+
+	int E = En;
+
+	int S = St;
 
 	switch (mSelect)
 	{
@@ -270,12 +277,18 @@ void Menus::Draw(PlayerID type, int ru)
 		{
 		case PlayerID::Jack:
 			DrawGraph(0, 0, mImage[0], true);
+			DrawFormatStringToHandle(850, 370, GetColor(255, 255, 255), FontSize, "%d", E);
+			DrawFormatStringToHandle(850, 410, GetColor(255, 255, 255), FontSize, "%d", S);
 			break;
 		case PlayerID::Calendula:
 			DrawGraph(0, 0, mImage[2], true);
+			DrawFormatStringToHandle(850, 370, GetColor(255, 255, 255), FontSize, "%d", E);
+			DrawFormatStringToHandle(850, 410, GetColor(255, 255, 255), FontSize, "%d", S);
 			break;
 		case PlayerID::Soy:
 			DrawGraph(0, 0, mImage[1], true);
+			DrawFormatStringToHandle(850, 370, GetColor(255, 255, 255), FontSize, "%d", E);
+			DrawFormatStringToHandle(850, 410, GetColor(255, 255, 255), FontSize, "%d", S);
 			break;
 		case PlayerID::Max:
 			break;
@@ -740,6 +753,9 @@ void Menus::Heal(void)
 			ai = 1;
 			PlaySoundMem(kHandle, DX_PLAYTYPE_BACK);
 		}
+		
+		mEnergy = 0;
+		
 	}
 	else if (SHflg == true)
 	{
@@ -790,6 +806,7 @@ void Menus::Heal(void)
 							if (ssApple > 0)
 							{
 								eApple += 1;
+								mEnergy += 20;
 								PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
 								SHflg = false;
 							}
@@ -832,6 +849,7 @@ void Menus::Heal(void)
 							if (ssRice > 0)
 							{
 								eRice += 1;
+								mEnergy += 15;
 								SHflg = false;
 								PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
 							}
@@ -875,6 +893,7 @@ void Menus::Heal(void)
 							if (ssKinominoKusiyaki > 0)
 							{
 								eKinominoKusiyaki += 1;
+								mEnergy += 25;
 								SHflg = false;
 								PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
 							}
@@ -917,6 +936,7 @@ void Menus::Heal(void)
 							//‰ñ•œ
 							if (ssDango > 0)
 							{
+								mEnergy += 20;
 								eDango += 1;
 								SHflg = false;
 								PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
@@ -959,6 +979,7 @@ void Menus::Heal(void)
 							//‰ñ•œ
 							if (ssFruitDrink > 0)
 							{
+								mEnergy += 30;
 								eFruitDrink += 1;
 								SHflg = false;
 								PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
@@ -1001,6 +1022,7 @@ void Menus::Heal(void)
 							//‰ñ•œ
 							if (ssTea > 0)
 							{
+								mEnergy = 15;
 								eTea += 1;
 								SHflg = false;
 								PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
@@ -1045,6 +1067,7 @@ void Menus::Heal(void)
 						if (ssfish > 0)
 						{
 							efish += 1;
+							mEnergy += 10;
 							PlaySoundMem(hHandle, DX_PLAYTYPE_BACK);
 							SHflg = false;
 						}
@@ -1541,6 +1564,10 @@ void Menus::End(void)
 	{
 		ChangeState(MENUS_SELECT::MENU_ID);
 	}
+	if (key_.getKeyDown(KEY_INPUT_SPACE))
+	{
+		exit(0);
+	}
 }
 
 int Menus::OpBgm(void)
@@ -1548,7 +1575,7 @@ int Menus::OpBgm(void)
 	return b;
 }
 
-void Menus::SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int tam, int key, int fish)
+void Menus::SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t, int tam, int key, int fish,int je,int bul)
 {
 	ssApple=a;
 	ssKinominoKusiyaki=kk;
@@ -1565,6 +1592,8 @@ void Menus::SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r,
 	ssKey=key;
 	ssTama=tam;
 	ssfish=fish;
+	ssStoneR=je;
+	ssStoneB=bul;
 
 }
 
@@ -1706,4 +1735,9 @@ int Menus::StoneBE(void)
 int Menus::NumHave(void)
 {
 	return haveNum;
+}
+
+int Menus::En()
+{
+	return mEnergy;
 }

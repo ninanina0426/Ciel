@@ -42,8 +42,24 @@ bool Player::init(PlayerID playerid)
 	mFlg = false;
 	tFlg = false;
 
+	//NPC
+	mMove = false;
+	asiCnt = 0;
+	asi =0;
+
+
+
+	for (int y = 0; y < 100; y++)
+	{
+		for (int x = 0; x < 2; x++)
+		{
+			mFoot[y][x] = 0;
+		}
+	}
+
 	Stamina_ = STAMINA;
 	Energy_ = ENERGY;
+	
 	staminaFlg_ = false;
 	qflg_ = false;
 	staminacnt_ = 0;
@@ -56,6 +72,9 @@ bool Player::init(PlayerID playerid)
 
 	i = 0;
 
+	mSky = false;
+	moveSky = false;
+
 	num = 0;
 
 	//ギミック
@@ -64,8 +83,8 @@ bool Player::init(PlayerID playerid)
 	mgSize.x_ = 96;
 	mgSize.y_ = 96;
 	gFlg = false;
-
-	
+	aitemNum_ = 0;
+	aitemFlag_ = false;
 
 	//グラフィックの読み込み
 
@@ -105,6 +124,10 @@ bool Player::init(PlayerID playerid)
 	{
 		return false;
 	}
+	if (LoadDivGraph("image/char/muri.png", 15, 1, 15, 12, 12, &mImagef1[0]) == -1)
+	{
+		return false;
+	}
 
 	//会話
 	mImageChat[1] = LoadGraph("image/talk/c1.png",true);
@@ -126,453 +149,722 @@ bool Player::init(PlayerID playerid)
 
 }
 
-Vector2 Player::Update(int chipId,bool fl, bool lhit)
+Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nHit)
 {
 	keyDir = DIR_MAX;		//キー入力の方向
 	Vector2 copyPos = mPos;
 
 	mapID = lpMapMng.GetMapId();
 
+	int En = e;
+
 	mChipId = chipId;
 	mChiID = lpMapMng.GetChipID();
 
 	bool mloveNpc = lhit;
 
+	auto dam = lpMapMng.GetDamage();
+
+	Energy_ = Energy_ - dam;
+
 	key_.Update();
 
-	if (!fl)
+	gimick.Update(*this);
+
+	if (gflg == false)
 	{
-
-		//釣り
-		if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
+		if (!fl)
 		{
-			if (key_.getKeyDown(KEY_INPUT_F))
+			if (Energy_ > 0)
 			{
-				if (i == 0)
+				//釣り
+				if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
 				{
-					i = 1;
-					moveFlg = true;
-					PlaySoundMem(tHandle, DX_PLAYTYPE_BACK);
-				}
-				else if (i == 1)
-				{
-					i = 0;
-					moveFlg = false;
-					switch (plID_)
+					bool flg_;
+					if (i == 1)
 					{
-					case PlayerID::Jack:
-						Energy(10);
-						break;
-					case PlayerID::Calendula:
-						Energy(10);
-						break;
-					case PlayerID::Soy:
-						Energy(5);
-						break;
-					case PlayerID::Max:
-						break;
-					default:
-						break;
+						flg_ = gimick.Fishing();
 					}
-				}
-				
-			}
-		}
-		//浅瀬
-		if ((mChipId == 896))
-		{
-			if (key_.getKeyDown(KEY_INPUT_F))
-			{
-				if (i == 0)
-				{
-					i = 2;
-					mFlg = true;
-					PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
-				}
-				else if (i == 2)
-				{
-					i = 0;
-					mFlg = false;
-					DeleteSoundMem(oHandle);
-					oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
-					switch (plID_)
+					if (key_.getKeyDown(KEY_INPUT_F))
 					{
-					case PlayerID::Jack:
-						Energy(15);
-						break;
-					case PlayerID::Calendula:
-						Energy(5);
-						break;
-					case PlayerID::Soy:
-						Energy(10);
-						break;
-					case PlayerID::Max:
-						break;
-					default:
-						break;
-					}
-				}
-				
-			}
-		}
-		//つるはし
-		if (key_.getKeyDown(KEY_INPUT_B))
-		{
-			if (i == 0)
-			{
-				i = 3;
-				tFlg = true;
-				tCnt = 60;
-				ttCnt = 0;
-				switch (plID_)
-				{
-				case PlayerID::Jack:
-					Energy(5);
-					break;
-				case PlayerID::Calendula:
-					Energy(20);
-					break;
-				case PlayerID::Soy:
-					Energy(10);
-					break;
-				case PlayerID::Max:
-					break;
-				default:
-					break;
-				}
-				
-			}
-		}
-		if (tFlg == true)
-		{
-			tCnt--;
-			if (tCnt == 10)
-			{
-				PlaySoundMem(ttHandle, DX_PLAYTYPE_BACK);
-			}
-			if (tCnt < 1)
-			{
-				i = 0;
-				tFlg = false;
-				tCnt = 60;
-				ttCnt = 0;
-			}
-
-		}
-
-
-		if ((mAnmCnt / 10 > 30) && (moveAnmCnt == true))
-		{
-			if ((moveFlg == false) && (mFlg == false) && (tFlg == false))
-			{
-				//プレイヤーの操作
-				if (key_.getKeyDownHold(KEY_INPUT_DOWN))
-				{
-					keyDir = DIR_DOWN;
-					num = 6;
-
-				}
-				if (key_.getKeyDownHold(KEY_INPUT_UP))
-				{
-					keyDir = DIR_UP;
-					num = 4;
-				}
-				if (key_.getKeyDownHold(KEY_INPUT_LEFT))
-				{
-					keyDir = DIR_LEFT;
-					num = 7;
-				}
-				if (key_.getKeyDownHold(KEY_INPUT_RIGHT))
-				{
-					keyDir = DIR_RIGHT;
-					num = 5;
-				}
-
-
-				//走る
-				if (key_.getKeyDownHold(KEY_INPUT_LSHIFT) && Stamina_ != 0 && keyDir != DIR::DIR_MAX)
-				{
-					Stamina_--;
-					mMoveSpeed = 5;
-				}
-				else
-				{
-					if (Stamina_ == 0)
-					{
-						staminaFlg_ = true;
-					}
-					if (staminaFlg_)
-					{
-						mMoveSpeed = 2;
-						staminacnt_++;
-					}
-					if (staminacnt_ > 120)
-					{
-						staminacnt_ = 0;
-						staminaFlg_ = false;
-					}
-					if (!staminaFlg_)
-					{
-						if (Stamina_ != STAMINA)
+						if (i == 0)
 						{
-							Stamina_++;
+							i = 1;
+							moveFlg = true;
+							PlaySoundMem(tHandle, DX_PLAYTYPE_BACK);
 						}
-						mMoveSpeed = 3;
-					}
-				}
-
-				if (keyDir != DIR_MAX)
-				{
-					mMoveDir = keyDir;
-
-					//プレイヤーのコピー
-					if (mMoveDir == DIR_UP)
-					{
-
-						copyPos.y_ -= mMoveSpeed;
-						if (copyPos.y_ < 0)
+						else if (i == 1 || flg_)
 						{
-							copyPos.y_ = 0;
-						}
-
-					}
-					if (mMoveDir == DIR_DOWN)
-					{
-						copyPos.y_ += mMoveSpeed;
-
-
-						if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
-						{
-							if (copyPos.y_ > 1600)
+							if (flg_)
 							{
-								copyPos.y_ = 1600;
+								aitemFlag_ = true;
+
+								fish++;
+								aitemNum_ = 1;
+
+							}
+							i = 0;
+							moveFlg = false;
+							switch (plID_)
+							{
+							case PlayerID::Jack:
+								Energy(10);
+								break;
+							case PlayerID::Calendula:
+								Energy(10);
+								break;
+							case PlayerID::Soy:
+								Energy(5);
+								break;
+							case PlayerID::Max:
+								break;
+							default:
+								break;
+							}
+							gimick.fisingFlg_ = false;
+						}
+
+					}
+					else
+					{
+						aitemFlag_ = false;
+					}
+
+				}
+				//浅瀬
+				if ((mChipId == 896))
+				{
+					bool flg;
+					if (i == 2)
+					{
+						flg = gimick.Ford();
+					}
+					if (key_.getKeyDown(KEY_INPUT_F))
+					{
+						if (i == 0)
+						{
+							i = 2;
+							mFlg = true;
+							PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
+						}
+						else if (i == 2 || flg)
+						{
+							if (flg)
+							{
+								aitemFlag_ = true;
+								auto a = GetRand(50);
+								if (a > 1)
+								{
+									fish++;
+									aitemNum_ = 1;
+								}
+								if (a == 1)
+								{
+									Red++;
+									aitemNum_ = 2;
+								}
+							}
+							i = 0;
+							mFlg = false;
+							DeleteSoundMem(oHandle);
+							oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
+							switch (plID_)
+							{
+							case PlayerID::Jack:
+								Energy(15);
+								break;
+							case PlayerID::Calendula:
+								Energy(5);
+								break;
+							case PlayerID::Soy:
+								Energy(10);
+								break;
+							case PlayerID::Max:
+								break;
+							default:
+								break;
+							}
+							gimick.fisingFlg_ = false;
+						}
+
+					}
+					else
+					{
+						aitemFlag_ = false;
+					}
+
+				}
+				//つるはし
+
+				if (mapID == MAP_ID::CAVE || mapID == MAP_ID::SNOWCAVE)
+				{
+					if (!((mChipId == 315) || (mChipId == 316) ||
+						(mChipId == 317) || (mChipId == 306) ||
+						(mChipId == 308) || (mChipId == 297) ||
+						(mChipId == 298) || (mChipId == 299) ||
+						(mChipId == 307) || (mChipId == 155) ||
+						(mChipId == 146) || (mChipId == 101) ||
+						(mChipId == 28)))
+					{
+						if (key_.getKeyDown(KEY_INPUT_F))
+						{
+							if (i == 0)
+							{
+								if (gimick.Pick())
+								{
+									aitemFlag_ = true;
+									auto a = GetRand(5);
+									if (a == 0)
+									{
+										Bule++;
+										aitemNum_ = 3;
+									}
+									if (a == 1)
+									{
+										Red++;
+										aitemNum_ = 2;
+									}
+									if (a > 1)
+									{
+										auto r = GetRand(50);
+										Ru = 10 + r;
+										aitemNum_ = 4;
+									}
+								}
+								i = 3;
+								tFlg = true;
+								tCnt = 60;
+								ttCnt = 0;
+								switch (plID_)
+								{
+								case PlayerID::Jack:
+									Energy(5);
+									break;
+								case PlayerID::Calendula:
+									Energy(15);
+									break;
+								case PlayerID::Soy:
+									Energy(10);
+									break;
+								case PlayerID::Max:
+									break;
+								default:
+									break;
+								}
 							}
 						}
 						else
 						{
-							if (copyPos.y_ > 3200)
-							{
-								copyPos.y_ = 3200;
-							}
+							aitemFlag_ = false;
+
 						}
 					}
-					if (mMoveDir == DIR_RIGHT)
+				}
+			}
+			else
+			{
+				aitemFlag_ = false;
+
+			}
+
+			if (tFlg == true)
+			{
+				tCnt--;
+				if (tCnt == 10)
+				{
+					PlaySoundMem(ttHandle, DX_PLAYTYPE_BACK);
+				}
+				if (tCnt < 1)
+				{
+					i = 0;
+					tFlg = false;
+					tCnt = 60;
+					ttCnt = 0;
+				}
+
+			}
+			if ((mAnmCnt / 10 > 30) && (moveAnmCnt == true))
+			{
+				if ((moveFlg == false) && (mFlg == false) && (tFlg == false))
+				{
+					if (mapID == MAP_ID::SNOWCAVE)
 					{
-						copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
-
-						if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
+						if (mChiID == 462 || mChiID == 463 || mChiID == 464 || mChiID == 378 || mChiID == 442 || mChiID == 295 || mChiID == 379)
 						{
-							if (copyPos.x_ > 1600)
+
+							//プレイヤーの操作
+							if (key_.getKeyDown(KEY_INPUT_DOWN))
 							{
-								copyPos.x_ = 1600;
+								mMoveDir = DIR_DOWN;
+								moveSky = true;
+							}
+							if (key_.getKeyDown(KEY_INPUT_UP))
+							{
+								mMoveDir = DIR_UP;
+								moveSky = true;
+							}
+							if (key_.getKeyDown(KEY_INPUT_LEFT))
+							{
+								mMoveDir = DIR_LEFT;
+								moveSky = true;
+							}
+							if (key_.getKeyDown(KEY_INPUT_RIGHT))
+							{
+								mMoveDir = DIR_RIGHT;
+								moveSky = true;
+							}
+
+							if (moveSky == true)
+							{
+								if (mMoveDir == DIR_UP)
+								{
+									copyPos.y_ -= 6;
+								}
+								if (mMoveDir == DIR_DOWN)
+								{
+									copyPos.y_ += 6;
+								}
+								if (mMoveDir == DIR_RIGHT)
+								{
+									copyPos.x_ += 6;
+								}
+								if (mMoveDir == DIR_LEFT)
+								{
+									copyPos.x_ -= 6;
+								}
 							}
 
 						}
-						else
+						if (moveSky == true)
 						{
-							if (copyPos.x_ > 3200)
+							if (copyPos.y_ > 1538)
 							{
-								copyPos.x_ = 3200;
-
+								moveSky = false;
+								copyPos.y_ = 1540;
+							}
+							if (mChiID == 315)
+							{
+								moveSky = false;
+							}
+							if (mChiID == 317)
+							{
+								moveSky = false;
 							}
 						}
 					}
 
-					if (mMoveDir == DIR_LEFT)
+					//プレイヤーの操作
+					if (key_.getKeyDownHold(KEY_INPUT_DOWN))
 					{
-						copyPos.x_ -= mMoveSpeed;
-
-						if (copyPos.x_ < 0)
-						{
-							copyPos.x_ = 0;
-						}
-
+						keyDir = DIR_DOWN;
+						num = 6;
+						mMove = true;
+					}
+					if (key_.getKeyDownHold(KEY_INPUT_UP))
+					{
+						keyDir = DIR_UP;
+						num = 4;
+						mMove = true;
+					}
+					if (key_.getKeyDownHold(KEY_INPUT_LEFT))
+					{
+						keyDir = DIR_LEFT;
+						num = 7;
+						mMove = true;
+					}
+					if (key_.getKeyDownHold(KEY_INPUT_RIGHT))
+					{
+						keyDir = DIR_RIGHT;
+						num = 5;
+						mMove = true;
 					}
 
 
-					//移動チップに当たっている時
-					if (lpMapMng.GetEvent(copyPos) == true)
+					//走る
+					if (key_.getKeyDownHold(KEY_INPUT_LSHIFT) && Stamina_ != 0 && keyDir != DIR::DIR_MAX)
+					{
+						Stamina_--;
+						mMoveSpeed = 5;
+					}
+					else
+					{
+						if (Stamina_ == 0)
+						{
+							staminaFlg_ = true;
+						}
+						if (staminaFlg_)
+						{
+							mMoveSpeed = 2;
+							staminacnt_++;
+						}
+						if (staminacnt_ > 120)
+						{
+							staminacnt_ = 0;
+							staminaFlg_ = false;
+						}
+						if (!staminaFlg_)
+						{
+							if (Stamina_ != STAMINA)
+							{
+								Stamina_++;
+							}
+							mMoveSpeed = 3;
+						}
+					}
+					if (keyDir != DIR_MAX)
+					{
+						mMoveDir = keyDir;
+
+						//プレイヤーのコピー
+						if (mMoveDir == DIR_UP)
+						{
+
+							copyPos.y_ -= mMoveSpeed;
+							if (copyPos.y_ < 0)
+							{
+								copyPos.y_ = 0;
+							}
+
+						}
+						if (mMoveDir == DIR_DOWN)
+						{
+							copyPos.y_ += mMoveSpeed;
+
+
+							if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
+							{
+								if (copyPos.y_ > 1600)
+								{
+									copyPos.y_ = 1600;
+								}
+							}
+							else
+							{
+								if (copyPos.y_ > 3200)
+								{
+									copyPos.y_ = 3200;
+								}
+							}
+						}
+						if (mMoveDir == DIR_RIGHT)
+						{
+							copyPos.x_ += mMoveSpeed;		//プレイヤーのマップ上の移動
+
+							if (mapID == MAP_ID::SWEETS || mapID == MAP_ID::SWEETSOUT || mapID == MAP_ID::SWEETSSCHOOL)
+							{
+								if (copyPos.x_ > 1600)
+								{
+									copyPos.x_ = 1600;
+								}
+
+							}
+							else
+							{
+								if (copyPos.x_ > 3200)
+								{
+									copyPos.x_ = 3200;
+
+								}
+							}
+						}
+
+						if (mMoveDir == DIR_LEFT)
+						{
+							copyPos.x_ -= mMoveSpeed;
+
+							if (copyPos.x_ < 0)
+							{
+								copyPos.x_ = 0;
+							}
+
+						}
+
+						//移動チップに当たっている時
+						if (lpMapMng.GetEvent(copyPos) == true)
+						{
+							//切り替え先のSetposをもらう
+							copyPos = lpMapMng.GetPos();
+							mMoveDir = lpMapMng.GetDir();
+							lpMapMng.mMapChange = false;
+
+						}
+						else if (lpMapMng.GetEvent(copyPos) == false)
+						{
+							lpMapMng.GetEvent(copyPos);
+						}
+						//移動
+						if (lpMapMng.cheakMapChip(copyPos))
+						{
+							mPos = copyPos;
+						}
+
+						//npcとの当たり判定
+						if (mloveNpc == true)
+						{
+							if (mMoveDir == DIR_UP)
+							{
+								if ((mPos.y_ < 2064) && (mPos.y_ > 2055))
+								{
+									mPos.y_ = 2064;
+									mPos.x_ = copyPos.x_;
+								}
+							}
+							if (mMoveDir == DIR_DOWN)
+							{
+								if ((mPos.y_ < 2005) && (mPos.y_ > 2000))
+								{
+									mPos.y_ = 2000;
+									mPos.x_ = copyPos.x_;
+								}
+							}
+							if (mMoveDir == DIR_LEFT)
+							{
+								if ((mPos.x_ < 784) && (mPos.x_ > 779))
+								{
+									mPos.x_ = 784;
+									mPos.y_ = copyPos.y_;
+								}
+							}
+							if (mMoveDir == DIR_RIGHT)
+							{
+								if ((mPos.x_ > 735) && (mPos.x_ < 740))
+								{
+									mPos.x_ = 735;
+									mPos.y_ = copyPos.y_;
+								}
+							}
+						}
+						if (nHit == true)
+						{
+							if (mMoveDir == DIR_UP)
+							{
+								if ((mPos.y_ < 626) && (mPos.y_ > 621))
+								{
+									mPos.y_ = 626;
+									mPos.x_ = copyPos.x_;
+								}
+							}
+							if (mMoveDir == DIR_DOWN)
+							{
+								if ((mPos.y_ < 573) && (mPos.y_ > 568))
+								{
+									mPos.y_ = 568;
+									mPos.x_ = copyPos.x_;
+								}
+							}
+							if (mMoveDir == DIR_RIGHT)
+							{
+								if ((mPos.x_ > 987) && (mPos.x_ < 992))
+								{
+									mPos.x_ = 992;
+									mPos.y_ = copyPos.y_;
+								}
+							}
+
+							if (mMoveDir == DIR_UP)
+							{
+								if ((mPos.y_ < 1730) && (mPos.y_ > 1725))
+								{
+									mPos.y_ = 1730;
+									mPos.x_ = copyPos.x_;
+								}
+							}
+							if (mMoveDir == DIR_DOWN)
+							{
+								if ((mPos.y_ < 573) && (mPos.y_ > 568))
+								{
+									mPos.y_ = 568;
+									mPos.x_ = copyPos.x_;
+								}
+							}
+							if (mMoveDir == DIR_RIGHT)
+							{
+								if ((mPos.x_ > 1780) && (mPos.x_ < 1785) && (mPos.y_ < 1730))
+								{
+									mPos.x_ = 1780;
+									mPos.y_ = copyPos.y_;
+								}
+							}
+						}
+
+						/*mDamyPos = copyPos;*/
+
+					}
+					if (lpMapMng.GetMapChange(copyPos) == true)
 					{
 						//切り替え先のSetposをもらう
 						copyPos = lpMapMng.GetPos();
 						mMoveDir = lpMapMng.GetDir();
 						lpMapMng.mMapChange = false;
-
-					}
-					else if (lpMapMng.GetEvent(copyPos) == false)
-					{
-						lpMapMng.GetEvent(copyPos);
-					}
-
-
-
-					//当たり判定
-					if (lpMapMng.cheakMapChip(copyPos))
-					{
 						mPos = copyPos;
 					}
-
-					if (mloveNpc == true)
-					{
-						if (mMoveDir == DIR_UP)
-						{
-							if ((mPos.y_ < 750) && (mPos.y_ > 745))
-							{
-								mPos.y_ = 750;
-								mPos.x_ = copyPos.x_;
-							}
-						}
-						if (mMoveDir == DIR_DOWN)
-						{
-							if ((mPos.y_ < 691) && (mPos.y_ > 684))
-							{
-								mPos.y_ = 684;
-								mPos.x_ = copyPos.x_;
-							}
-						}
-						if (mMoveDir == DIR_LEFT)
-						{
-							if ((mPos.x_ < 1670) && (mPos.x_ > 1665))
-							{
-								mPos.x_ = 1670;
-								mPos.y_ = copyPos.y_;
-							}
-						}
-						if (mMoveDir == DIR_RIGHT)
-						{
-							if ((mPos.x_ > 1615) && (mPos.x_ < 1620))
-							{
-								mPos.x_ = 1615;
-								mPos.y_ = copyPos.y_;
-							}
-						}
-						
-					}
-
-					/*mDamyPos = copyPos;*/
-
 				}
-				if (lpMapMng.GetMapChange(copyPos) == true)
-				{
-					//切り替え先のSetposをもらう
-					copyPos = lpMapMng.GetPos();
-					mMoveDir = lpMapMng.GetDir();
-					lpMapMng.mMapChange = false;
+			}
 
+			if (moveSky)
+			{
+				//当たり判定
+				if (lpMapMng.cheakMapChip(copyPos))
+				{
 					mPos = copyPos;
 				}
-
-
 			}
 
-
-		}
-
-		//ライムに乗る
-		if (mapID == MAP_ID::SWEETS)
-		{
-			if ((mPos.x_ < 580) && (mPos.x_ > 490) && (mPos.y_ > 285) && (mPos.y_ < 310))
+			//足跡
+			if (mMove == true)
 			{
-				message_box();
-			}
-			if (gFlg == true)
-			{
-				if (key_.getKeyDown(KEY_INPUT_LEFT))
+				if (asi%20==0)
 				{
-					PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
-				}
-				if (key_.getKeyDown(KEY_INPUT_RIGHT))
-				{
-					PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
-				}
+					asiCnt += 1;
+					mFoot[asiCnt][0] = mPos.x_;
+					mFoot[asiCnt][1] = mPos.y_;
 
-				mgPos.x_ = mPos.x_;
-				mgPos.y_ = 560;
-
-				if (mgPos.x_ < 403)
-				{
-					mgPos.x_ = 403;
-
-				}
-				else if (mgPos.x_ > 510)
-				{
-					mgPos.x_ = 510;
-
+					if (asiCnt > 20)
+					{
+						asiCnt = 0;
+					}
 				}
 			}
 
-		}
-		//ライム
-		if (mChiID == 4220 || mChiID == 4221 || mChiID == 4320 || mChiID == 4321)
-		{
-			gFlg = false;
-			DeleteSoundMem(oHandle);
-			oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
-		}
-
-
-
-		//最初の倒れている時
-		if (mAnmCnt == 150)
-		{
-			PlaySoundMem(sHandle, DX_PLAYTYPE_BACK);
-		}
-
-		if (mAnmCnt == 270)
-		{
-			PlaySoundMem(fHandle, DX_PLAYTYPE_BACK);
-		}
-
-		if (mAnmCnt == 270)
-		{
-			mAnmCnt = 290;
-			moveAnmCnt = false;
-		}
-		if (moveAnmCnt == false)
-		{
-			if (key_.getKeyDown(KEY_INPUT_F))
+			//ライムに乗る
+			if (mapID == MAP_ID::SWEETS)
 			{
-				moveAnmCnt = true;
-				qflg_ = true;
+				if ((mPos.x_ < 580) && (mPos.x_ > 490) && (mPos.y_ > 285) && (mPos.y_ < 310))
+				{
+					message_box();
+				}
+				if (gFlg == true)
+				{
+					if (key_.getKeyDown(KEY_INPUT_LEFT))
+					{
+						PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
+					}
+					if (key_.getKeyDown(KEY_INPUT_RIGHT))
+					{
+						PlaySoundMem(oHandle, DX_PLAYTYPE_BACK);
+					}
+
+					mgPos.x_ = mPos.x_;
+					mgPos.y_ = 560;
+
+					if (mgPos.x_ < 403)
+					{
+						mgPos.x_ = 403;
+
+					}
+					else if (mgPos.x_ > 510)
+					{
+						mgPos.x_ = 510;
+
+					}
+				}
+
 			}
-		}
-
-		if (moveAnmCnt == true)
-		{
-			mAnmCnt++;
-		}
-		if (qflg_)
-		{
-			QuestIns.UpDate(qflg_, 1, copyPos, mSize, mapID);
-		}
-		if (QuestIns.CompFlg())
-		{
-			if (QuestIns.GetCont() > 570)
+			//ライム
+			if (mChipId == 4220 || mChipId == 4221 || mChipId == 4320 || mChipId == 4321)
 			{
-				qflg_ = false;
+				gFlg = false;
+				DeleteSoundMem(oHandle);
+				oHandle = LoadSoundMem("image/Sound/水に浸かりながら歩く.ogg");
 			}
 
+			//最初の倒れている時
+			if (mAnmCnt == 150)
+			{
+				PlaySoundMem(sHandle, DX_PLAYTYPE_BACK);
+			}
+
+			if (mAnmCnt == 270)
+			{
+				PlaySoundMem(fHandle, DX_PLAYTYPE_BACK);
+			}
+
+			if (mAnmCnt == 270)
+			{
+				mAnmCnt = 290;
+				moveAnmCnt = false;
+			}
+			if (moveAnmCnt == false)
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					moveAnmCnt = true;
+					qflg_ = true;
+				}
+			}
+
+			if (moveAnmCnt == true)
+			{
+				mAnmCnt++;
+			}
+			if (qflg_)
+			{
+				QuestIns.UpDate(qflg_, 1, copyPos, mSize, mapID, GetFish());
+			}
+			if (QuestIns.CompFlg())
+			{
+				if (QuestIns.GetCont() > 570)
+				{
+					qflg_ = false;
+				}
+
+			}
+			ttCnt++;
 		}
-		ttCnt++;
+		else
+		{
+			StopSoundMem(sHandle);
+			StopSoundMem(tHandle);
+			StopSoundMem(fHandle);
+			StopSoundMem(oHandle);
+			StopSoundMem(ttHandle);
+		}
 	}
-	else
+
+	if (Energy_ < 0)
 	{
-	StopSoundMem(sHandle);
-	StopSoundMem(tHandle);
-	StopSoundMem(fHandle);
-	StopSoundMem(oHandle);
-	StopSoundMem(ttHandle);
+		Energy_ = 0;
+	}
+	switch (plID_)
+	{
+	case PlayerID::Jack:
+		if (Energy_ >= 150)
+		{
+			Energy_ = 150;
+		}
+		break;
+	case PlayerID::Calendula:
+		if (Energy_ >= 100)
+		{
+			Energy_ = 100;
+		}
+		break;
+	case PlayerID::Soy:
+		if (Energy_ >= 130)
+		{
+			Energy_ = 130;
+		}
+		break;
+	case PlayerID::Max:
+		break;
+	default:
+		break;
 	}
 
+	if (mMove)
+	{
+		asi += 1;
+	}
+	
 
+	Energy(-En);
 	return mPos;
 
 }
 
-
 void Player::Draw(Vector2 offset)
 {
-	
+	offset_ = offset;
 	//ライム
 	if (mapID == MAP_ID::SWEETS)
 	{
@@ -586,15 +878,15 @@ void Player::Draw(Vector2 offset)
 			DrawGraph(580 - offset.x_ - 79, 285 - offset.y_ - 48, mImageF, true);
 		}
 	}
-	
+
 
 	if (plID_ == PlayerID::Jack)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80-50, mImageChat[3], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80 - 50, mImageChat[3], true);
 		}
-		if (mAnmCnt< 270)
+		if (mAnmCnt < 270)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - 16, mPos.y_ - offset.y_ - 24, mImageI[mAnmCnt / 10], true);
 		}
@@ -602,6 +894,33 @@ void Player::Draw(Vector2 offset)
 		{
 			if (i == 0)
 			{
+				if (mMove)
+				{
+					if ((mapID == MAP_ID::SNOW)||(mapID == MAP_ID::SWEETS))
+					{
+						DrawGraph(mFoot[0][0] - offset.x_ - 6, mFoot[0][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[1][0] - offset.x_ - 6, mFoot[1][1] - offset.y_ - 6, mImagef1[12], true);
+						DrawGraph(mFoot[2][0] - offset.x_ - 6, mFoot[2][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[3][0] - offset.x_ - 6, mFoot[3][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[4][0] - offset.x_ - 6, mFoot[4][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[5][0] - offset.x_ - 6, mFoot[5][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[6][0] - offset.x_ - 6, mFoot[6][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[7][0] - offset.x_ - 6, mFoot[7][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[8][0] - offset.x_ - 6, mFoot[8][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[9][0] - offset.x_ - 6, mFoot[9][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[10][0] - offset.x_ - 6, mFoot[10][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[11][0] - offset.x_ - 6, mFoot[11][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[12][0] - offset.x_ - 6, mFoot[12][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[13][0] - offset.x_ - 6, mFoot[13][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[14][0] - offset.x_ - 6, mFoot[14][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[15][0] - offset.x_ - 6, mFoot[15][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[16][0] - offset.x_ - 6, mFoot[16][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[17][0] - offset.x_ - 6, mFoot[17][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[18][0] - offset.x_ - 6, mFoot[18][1] - offset.y_ - 6, mImagef1[12], true);
+						DrawGraph(mFoot[19][0] - offset.x_ - 6, mFoot[19][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[20][0] - offset.x_ - 6, mFoot[20][1] - offset.y_ - 6, mImagef1[7], true);
+					}
+				}
 				if (keyDir == DIR_MAX)
 				{
 					DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[mMoveDir * DIR_MAX], true);
@@ -610,7 +929,7 @@ void Player::Draw(Vector2 offset)
 				{
 					DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 				}
-				
+
 			}
 			else if (i == 1)
 			{
@@ -618,16 +937,16 @@ void Player::Draw(Vector2 offset)
 			}
 			else if (i == 2)
 			{
-				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[(4+num) * DIR_MAX + ((mAnmCnt / 10) % 4)], true);
+				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage1[(4 + num) * DIR_MAX + ((mAnmCnt / 10) % 4)], true);
 			}
 			else if (i == 3)
 			{
 				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImageTI[mMoveDir * 6 + ((ttCnt / 10))], true);
 			}
-			
+
 		}
-		
-		
+
+
 	}
 	if (plID_ == PlayerID::Soy)
 	{
@@ -635,7 +954,7 @@ void Player::Draw(Vector2 offset)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80 - 50, mImageChat[2], true);
 		}
-		if (mAnmCnt< 270)
+		if (mAnmCnt < 270)
 		{
 			DrawGraph(mPos.x_ - offset.x_ - 16, mPos.y_ - offset.y_ - 24, mImageS[mAnmCnt / 10], true);
 		}
@@ -643,6 +962,33 @@ void Player::Draw(Vector2 offset)
 		{
 			if (i == 0)
 			{
+				if (mMove)
+				{
+					if ((mapID == MAP_ID::SNOW) || (mapID == MAP_ID::SWEETS))
+					{
+						DrawGraph(mFoot[0][0] - offset.x_ - 6, mFoot[0][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[1][0] - offset.x_ - 6, mFoot[1][1] - offset.y_ - 6, mImagef1[12], true);
+						DrawGraph(mFoot[2][0] - offset.x_ - 6, mFoot[2][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[3][0] - offset.x_ - 6, mFoot[3][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[4][0] - offset.x_ - 6, mFoot[4][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[5][0] - offset.x_ - 6, mFoot[5][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[6][0] - offset.x_ - 6, mFoot[6][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[7][0] - offset.x_ - 6, mFoot[7][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[8][0] - offset.x_ - 6, mFoot[8][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[9][0] - offset.x_ - 6, mFoot[9][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[10][0] - offset.x_ - 6, mFoot[10][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[11][0] - offset.x_ - 6, mFoot[11][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[12][0] - offset.x_ - 6, mFoot[12][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[13][0] - offset.x_ - 6, mFoot[13][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[14][0] - offset.x_ - 6, mFoot[14][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[15][0] - offset.x_ - 6, mFoot[15][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[16][0] - offset.x_ - 6, mFoot[16][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[17][0] - offset.x_ - 6, mFoot[17][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[18][0] - offset.x_ - 6, mFoot[18][1] - offset.y_ - 6, mImagef1[12], true);
+						DrawGraph(mFoot[19][0] - offset.x_ - 6, mFoot[19][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[20][0] - offset.x_ - 6, mFoot[20][1] - offset.y_ - 6, mImagef1[7], true);
+					}
+				}
 				if (keyDir == DIR_MAX)
 				{
 					DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage2[mMoveDir * DIR_MAX], true);
@@ -670,16 +1016,43 @@ void Player::Draw(Vector2 offset)
 	{
 		if (moveAnmCnt == false)
 		{
-			DrawGraph(mPos.x_ - offset.x_-63 , mPos.y_ - offset.y_ -80 - 50, mImageChat[1], true);
+			DrawGraph(mPos.x_ - offset.x_ - 63, mPos.y_ - offset.y_ - 80 - 50, mImageChat[1], true);
 		}
-		if (mAnmCnt< 270)
+		if (mAnmCnt < 270)
 		{
-			DrawGraph(mPos.x_ - offset.x_ - 16, mPos.y_ - offset.y_ - 24, mImageC[mAnmCnt/10], true);
+			DrawGraph(mPos.x_ - offset.x_ - 16, mPos.y_ - offset.y_ - 24, mImageC[mAnmCnt / 10], true);
 		}
 		else
 		{
 			if (i == 0)
 			{
+				if (mMove)
+				{
+					if ((mapID == MAP_ID::SNOW) || (mapID == MAP_ID::SWEETS))
+					{
+						DrawGraph(mFoot[0][0] - offset.x_ - 6, mFoot[0][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[1][0] - offset.x_ - 6, mFoot[1][1] - offset.y_ - 6, mImagef1[12], true);
+						DrawGraph(mFoot[2][0] - offset.x_ - 6, mFoot[2][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[3][0] - offset.x_ - 6, mFoot[3][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[4][0] - offset.x_ - 6, mFoot[4][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[5][0] - offset.x_ - 6, mFoot[5][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[6][0] - offset.x_ - 6, mFoot[6][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[7][0] - offset.x_ - 6, mFoot[7][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[8][0] - offset.x_ - 6, mFoot[8][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[9][0] - offset.x_ - 6, mFoot[9][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[10][0] - offset.x_ - 6, mFoot[10][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[11][0] - offset.x_ - 6, mFoot[11][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[12][0] - offset.x_ - 6, mFoot[12][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[13][0] - offset.x_ - 6, mFoot[13][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[14][0] - offset.x_ - 6, mFoot[14][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[15][0] - offset.x_ - 6, mFoot[15][1] - offset.y_ - 6, mImagef1[3], true);
+						DrawGraph(mFoot[16][0] - offset.x_ - 6, mFoot[16][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[17][0] - offset.x_ - 6, mFoot[17][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[18][0] - offset.x_ - 6, mFoot[18][1] - offset.y_ - 6, mImagef1[12], true);
+						DrawGraph(mFoot[19][0] - offset.x_ - 6, mFoot[19][1] - offset.y_ - 6, mImagef1[7], true);
+						DrawGraph(mFoot[20][0] - offset.x_ - 6, mFoot[20][1] - offset.y_ - 6, mImagef1[7], true);
+					}
+				}
 				if (keyDir == DIR_MAX)
 				{
 					DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage3[mMoveDir * DIR_MAX], true);
@@ -702,10 +1075,11 @@ void Player::Draw(Vector2 offset)
 				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImageTC[mMoveDir * 6 + ((ttCnt / 10))], true);
 			}
 		}
-		
+
 	}
 
-	DrawFormatString(0, 0, GetColor(0,0,255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
+
+	DrawFormatString(0, 500, GetColor(0, 0, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mgPos.x_, mgPos.y_);
 	//DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
 	/*DrawFormatString(0, 30, 0xff0000, "chipID:%d", mChiID);*/
@@ -747,6 +1121,11 @@ Vector2 Player::GetPos(void)
 	return mPos;
 }
 
+Vector2 Player::GetOffset(void)
+{
+	return offset_;
+}
+
 int Player::GetStamina(void)
 {
 	return Stamina_;
@@ -760,6 +1139,26 @@ int Player::GetSEnergy(void)
 PlayerID Player::GetType(void)
 {
 	return plID_;
+}
+
+int Player::GetFish(void)
+{
+	return fish;
+}
+
+int Player::GetRed(void)
+{
+	return Red;
+}
+
+int Player::GetBule(void)
+{
+	return Bule;
+}
+
+int Player::GetRu(void)
+{
+	return Ru;
 }
 
 void Player::message_box() 
@@ -776,12 +1175,27 @@ void Player::message_box()
 		mPos.x_ = 455;
 		mPos.y_ = 550;
 	}
+	else if (flag == IDNO)
+	{
+		mPos.x_ = 548;
+		mPos.y_ = 270;
+	}
 	
 }
 
 void Player::Energy(int num)
 {
 	Energy_ = Energy_ - num;
+}
+
+int Player::EnergyNum()
+{
+	return Energy_;
+}
+
+int Player::StaminaNum()
+{
+	return Stamina_;
 }
 
 

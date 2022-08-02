@@ -2,6 +2,7 @@
 #include "../../common/Vector2.h"
 #include"../Input/Keyboard.h"
 #include"../../stage/Stage.h"
+#include "Gimmick.h"
 
 class UI;
 
@@ -56,6 +57,16 @@ private:
 	int mImageS[27];		//
 	int mImageChat[100];	//
 
+	//足跡
+	int mFoot[10000][2];
+	bool mMove;
+	int asiCnt;
+	int asi;
+
+	int mImagef1[15];		//画像の格納領域
+	int mImagef2[15];		//画像の格納領域
+	int mImagef3[15];		//画像の格納領域
+
 	int mImageF;
 	//int mImage4[32];		//画像の格納領域
 	//int mImage5[32];		//画像の格納領域
@@ -66,6 +77,8 @@ private:
 	Vector2 mPlayer;
 
 	Keyboard key_;
+
+	
 	
 	int i;
 	int num;
@@ -92,6 +105,7 @@ private:
 	Vector2 mSize;		//キャラクター画像のサイズ
 	int mMoveSpeed;		//キャラクター移動スピード
 	int mAnmCnt;
+	Vector2 offset_;
 
 	//効果音
 	int sHandle;
@@ -105,13 +119,19 @@ private:
 	Vector2 mgSize;
 	bool gFlg;
 	MAP_ID mapID;
-
+	Gimmick gimick;
 	void message_box();
+	
+	//雪
+	bool mSky;
+	bool moveSky;
 
 	DIR keyDir;
 
-	void Energy(int num);
-	
+	int fish;
+	int Red;
+	int Bule;
+	int Ru;
 public:
 	Player();
 	~Player();
@@ -122,7 +142,7 @@ public:
 
 	bool init(PlayerID playerid);		//初期化
 
-	Vector2 Update(int chipid,bool fl, bool lhit);		//更新
+	Vector2 Update(int chipid,bool fl, bool lhit,int e,bool gflg,bool nHit);		//更新
 
 	void Draw(Vector2 offset);		//描画
 	bool Release(void);		//開放
@@ -131,9 +151,17 @@ public:
 	void SetPos(Vector2 pos);
 	Vector2 GetSiz(void);
 	Vector2 GetPos(void);
+	Vector2 GetOffset(void);
 
 	int GetStamina(void);
 	int GetSEnergy(void);
+	int aitemNum_;
+	bool aitemFlag_;
+
+	void Energy(int num);
+	int EnergyNum();
+
+	int StaminaNum();
 
 	int Stamina_;		//スタミナ管理
 	int Energy_;		//エネルギー管理
@@ -148,6 +176,10 @@ public:
 
 	PlayerID GetType(void);
 	
+	int GetFish(void);
+	int GetRed(void);
+	int GetBule(void);
+	int GetRu(void);
 };
 
 

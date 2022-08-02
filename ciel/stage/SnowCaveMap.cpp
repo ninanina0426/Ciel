@@ -237,8 +237,8 @@ void SnowCaveMap::DrawOwnScn()
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[ground[y][x]], true);
 			DrawGraph(32 * x - mOffset.x_, 32 * y - mOffset.y_, mChipImage[obj[y][x]], true);
 			
-			//DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", obj[y][x]);
-			DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(0, 0, 0), "%d", ground[y][x]);
+			/*DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(255, 255, 255), "%d", ground[y][x]);*/
+			/*DrawFormatString(32 * x - mOffset.x_, 32 * y - mOffset.y_, GetColor(0, 0, 0), "%d", ground[y][x]);*/
 
 		}
 	}
@@ -259,29 +259,52 @@ bool SnowCaveMap::CheckMapChip(Vector2 pos)
 	layer1 = ground[pos.y_ / 32][pos.x_ / 32];
 	layer2 = obj[pos.y_ / 32][pos.x_ / 32];
 	
-
-
 	bool flg = true;	//true=playerÇ™ï‡ÇØÇÈ
 
 	//	//à⁄ìÆîÕàÕÇçsÇ§
-	//switch (layer1)
-	//{
-	//case 3:
-	//	flg = true;
-	//	break;
-	//default:
-	//	break;
-	//}
-	//switch (layer2)
-	//{
-
-	//
-
-	//	flg = false;
-	//	break;
-	//default:
-	//	break;
-	//}
+	switch (layer1)
+	{
+	case 86:
+	case 23:
+	case 147:
+	case 148:
+	case 149:
+	case 21:
+	case 84:
+	case 85:
+	case 22:
+		flg = false;
+		break;
+	default:
+		break;
+	}
+	switch (layer2)
+	{
+	case 339:
+	case 318:
+	case 256:
+	case 255:
+	case 319:
+	case 361:
+	case 340:
+	case 360:
+	case 382:
+	case 315:
+	case 317:
+		flg = false;
+		break;
+	case 462:
+	case 463:
+	case 464:
+	case 378:
+	case 442:
+	case 295:
+	case 379:
+		flg = true;
+		break;
+	default:
+		break;
+	}
 	return flg;
 }
 

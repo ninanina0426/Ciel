@@ -6,6 +6,7 @@ class shop;
 
 #define ITEM_ANIM_MAX 3
 
+class Quest;
 class Aitem
 {
 public:
@@ -19,6 +20,7 @@ public:
 	Vector2 GetSize(void);
 	Vector2 GetPos(void);
 
+
 	int Money(int ru,bool flg);
 
 	int wMoney(int ru, bool flg);
@@ -27,15 +29,17 @@ public:
 
 	int HaveMoney();
 
-	void TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h,int ri,int d,int t, int f, int ssr, int sb, int sa ,int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int sf, int sssr, int ssb, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt,int mf,int msr,int msb, int la, int lkk, int lfd, int lri, int ld, int lt);
+
+	void TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h,int ri,int d,int t, int f, int ssr, int sb, int sa ,int skk, int sfd, int sfrs, int srb, int sp, int sk, int sr, int sh, int sri, int sd, int st, int sf, int sssr, int ssb, int ma, int mkk, int mfd, int mfrs, int mrb, int mp, int mk, int mr, int mh, int mri, int md, int mt,int mf,int msr,int msb, int la, int lkk, int lfd, int lri, int ld, int lt, int je, int fis,int bul,int haori);
 
 
-	bool mTama1;
-	bool mTama2;
-	bool mTama3;
-	bool mTama4;
-	bool mTama5;
-	bool mTama6;
+
+	bool mTama1;		//X
+	bool mTama2;		//‰Ùq
+	bool mTama3;		//“´ŒA
+	bool mTama4;		//˜a
+	bool mTama5;		//á
+	bool mTama6;		//_“a
 
 	bool mKinomi1;
 	bool mKinomi2;
@@ -45,10 +49,15 @@ public:
 
 	bool Takara;
 
+	bool Key;
 	
 	bool mHaori;
 
 	bool mRantan;
+
+	int mKinomis;
+
+	int mTamaNum;
 
 	int Num();
 
@@ -81,7 +90,7 @@ public:
 	int FishNum(void);
 	int StoneRNum(void);
 	int StoneBNum(void);
-
+	int GetKey(void);
 
 	int GetTam(void);
 
@@ -125,6 +134,8 @@ private:
 	int mTamaN;
 	int mKey;
 	int mFish;
+	int jewel;
+
 	int mStoneR;
 	int mStoneB;
 
@@ -139,5 +150,6 @@ private:
 
 	bool Flg;
 	
+	friend Quest;
 };
 

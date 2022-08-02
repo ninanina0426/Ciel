@@ -20,6 +20,11 @@ uniquBaseScn EventScene::Update(uniquBaseScn own)
     {
         flg_ = true;
     }
+    if (mNum > 100)
+    {
+        flg_ = true;
+        mNum = 0;
+    }
     //フラグがtrueになったらゲームシーンに返す
     if (flg_)
     {
@@ -34,6 +39,113 @@ uniquBaseScn EventScene::Update(uniquBaseScn own)
         flg_ = true;
     }
 
+    movePos = mPos - mOffset;
+    //プレイヤーの操作
+    if (CheckHitKey(KEY_INPUT_DOWN))
+    {
+        mPos.y_ += 3;
+        dir = 2;
+        mNum += 1;
+    }
+    else if (CheckHitKey(KEY_INPUT_UP))
+    {
+        mPos.y_ -= 3;
+        dir = 0;
+        mNum += 1;
+    }
+    else if (CheckHitKey(KEY_INPUT_LEFT))
+    {
+        mPos.x_ -= 3;
+        dir = 3;
+        mNum += 1;
+    }
+    else if (CheckHitKey(KEY_INPUT_RIGHT))
+    {
+        mPos.x_ += 3; 
+        dir = 1;
+        mNum += 1;
+    }
+    
+    //カメラ
+    if (movePos.x_ > 200)
+    {
+        if (CheckHitKey(KEY_INPUT_RIGHT))
+        {
+            mOffset.x_ += 3;
+        }
+    }
+    if (movePos.x_ < 880)
+    {
+        if (CheckHitKey(KEY_INPUT_LEFT))
+        {
+            mOffset.x_ -= 1;
+        }
+    }
+    if (movePos.y_ > 100)
+    {
+        if (CheckHitKey(KEY_INPUT_DOWN))
+        {
+            mOffset.y_ += 3;
+        }
+    }
+    if (movePos.y_ < 509)
+    {
+        if (CheckHitKey(KEY_INPUT_UP))
+        {
+            mOffset.y_ -= 3;
+        }
+    }
+    //	//カメラ追従
+    if (movePos.x_ > 500)
+    {
+        mOffset.x_ += 2;
+    }
+    if (movePos.x_ < 1370)
+    {
+        mOffset.x_ -= 2;
+    }
+    if (movePos.y_ < 450)
+    {
+        mOffset.y_ -= 2;
+    }
+    if (movePos.y_ > 400)
+    {
+        mOffset.y_ += 2;
+    }
+    //カメラ端
+    if (mOffset.x_ > 500)
+    {
+        mOffset.x_ = 500;
+    }
+    if (mOffset.x_ < 0)
+    {
+        mOffset.x_ = 0;
+    }
+    if (mOffset.y_ < 0)
+    {
+        mOffset.y_ = 0;
+    }
+    if (mOffset.y_ > 950)
+    {
+        mOffset.y_ = 950;
+    }
+
+    if (mPos.y_ < 585)
+    {
+        mPos.y_ = 585;
+    }
+    if (mPos.y_ > 1365)
+    {
+        mPos.y_ = 1365;
+    }
+    if (mPos.x_ < 402)
+    {
+        mPos.x_ = 402;
+    }
+    if (mPos.x_ > 936)
+    {
+        mPos.x_=936;
+    }
     Event(aitem_);
 
     animcnt_++;
@@ -70,6 +182,11 @@ bool EventScene::Init(void)
     shFlg_ = false;
 
     Cnt = 0;
+
+    /*mPos = {0,0};*/
+    mOffset = { 0,0 };
+    dir = 2;
+    mNum=0;
    
     //aitem_ = new Aitem;
     sea_ = LoadGraph("./image/move/umi.png");
@@ -78,7 +195,7 @@ bool EventScene::Init(void)
     rany = LoadSoundMem("image/Sound/rain.ogg");
     li_ = LoadSoundMem("image/Sound/li.ogg");
 
-    LoadDivGraph("./image/move/air.png", 12, 3, 4, AirplneSize, AirplneSize, *airplan_, true);
+    LoadDivGraph("./image/move/air.png", 12, 3, 4, AirplneSize, AirplneSize, &airplan_[0][0], true);
     LoadDivGraph("./image/move/煙.png", 12, 3, 4, 352, 256, *kemuri_, true);
 
     if (LoadDivGraph("image/char/110.png", 48, 4, 12, 48, 48, &mImageP[0]) == -1)
@@ -89,6 +206,7 @@ bool EventScene::Init(void)
     {
         return false;
     }
+
 
     mImageN =  LoadGraph("image/npc/marine011.png", true);
    
@@ -116,6 +234,15 @@ bool EventScene::Init(void)
     mImageNC[6] = LoadGraph("image/talk/n7.png");
     mImageNC[7] = LoadGraph("image/talk/n8.png");
 
+    //soy
+    LoadDivGraph("./image/char/過去S2.png", 16, 4, 4, 48, 48, &mImageS[0]);
+    LoadDivGraph("./image/char/過去S.png", 16, 4, 4, 48, 48, &mImageST[0]);
+    LoadDivGraph("./image/char/過去S3.png", 16, 4, 4, 48, 48, &mImageSF[0]);
+    mImageMap=LoadGraph("image/soy.png");
+
+
+
+
     house_ = LoadGraph("image/1108s.png");
     //move1_ = LoadGraph("./image/move/video.avi");
     PlayMovieToGraph(move1_);
@@ -129,7 +256,7 @@ SceneID EventScene::GetSceneID(void)
 
 void EventScene::Event(int num)
 {
-    auto evetype = static_cast<EventType>(abs(num-5));
+    auto evetype = static_cast<EventType>(abs(num-6));
     auto plID = player_.plID_;
  
    
@@ -196,6 +323,9 @@ void EventScene::Event(int num)
         case PlayerID::Calendula:
             break;
         case PlayerID::Soy:
+            DrawGraph(0-mOffset.x_, 0-mOffset.y_, mImageMap, true);
+            DrawGraph(mPos.x_ - mOffset.x_- 24, mPos.y_ - mOffset.y_ - 24, mImageS[dir * 4 + ((animcnt_ / 8) % 4)], true);
+           /* DrawFormatString(0, 500, GetColor(0, 0, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);*/
             break;
         default:
             break;
@@ -223,6 +353,8 @@ void EventScene::Event(int num)
         case PlayerID::Calendula:
             break;
         case PlayerID::Soy:
+            DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap, true);
+            DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageS[dir * 4 + ((animcnt_ / 8) % 4)], true);
             break;
         default:
             break;
@@ -261,11 +393,15 @@ void EventScene::Event(int num)
         case PlayerID::Calendula:
             break;
         case PlayerID::Soy:
+            DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap, true);
+            DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageST[dir * 4 + ((animcnt_ / 8) % 4)], true);
             break;
         default:
             break;
         }
+
         DrawString(20, 20, "エピソード3", 0xffffff, true);
+
         break;
     case EventType::STORY_4:
         switch (plID)
@@ -325,21 +461,27 @@ void EventScene::Event(int num)
                 DrawGraph(382, 280, mImagePC[9], true);
             }
             
-
             break;
         case PlayerID::Calendula:
             break;
         case PlayerID::Soy:
+
+            DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap, true);
+            DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageSF[dir * 4 + ((animcnt_ / 8) % 4)], true);
+
             break;
         default:
             break;
         }
+
         DrawString(20, 20, "エピソード4", 0xffffff, true);
+
         break;
     case EventType::STORY_5:
         switch (plID)
         {
         case PlayerID::Jack:
+
 
             DrawExtendGraph(0, 0, 1080, 600, house_, true);
             DrawGraph(470, 400, mImageP[0], true);
@@ -364,16 +506,23 @@ void EventScene::Event(int num)
                 DeleteGraph(mImagePC[12], true);
                 DeleteGraph(mImageP[0], true);
             }
+
             break;
         case PlayerID::Calendula:
             break;
         case PlayerID::Soy:
+
+            DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap, true);
+            DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageSF[dir * 4 + ((animcnt_ / 8) % 4)], true);
+
             break;
         default:
             break;
         }
+
         DrawString(20, 20, "エピソード5", 0xffffff, true);
        
+
         break;
     default:
         break;

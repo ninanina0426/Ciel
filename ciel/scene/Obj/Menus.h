@@ -32,7 +32,7 @@ public:
 
 	bool init(void);		//‰Šú‰»
 	void Update(int num,bool flg);		//XV
-	void Draw(PlayerID type,int ru);		//•`‰æ
+	void Draw(PlayerID type,int ru,int En,int St);		//•`‰æ
 	bool Release(void);		//ŠJ•ú
 
 	void Menu(void);
@@ -88,8 +88,9 @@ public:
 
 	int NumHave(void);
 
+	int En();
 
-	void SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t,int tam,int key,int fish);
+	void SetMenu(int a, int kk, int fd, int frs, int rb, int p, int k, int r, int h, int ri, int d, int t,int tam,int key,int fish, int je, int bul);
 
 private:
 
@@ -105,6 +106,8 @@ private:
 	int mImageMap[10];
 
 	int FontSize;
+
+	int mEnergy;
 	
 	Vector2 mBox[20];
 	Vector2 mBoxAS[10];
