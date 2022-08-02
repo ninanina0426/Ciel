@@ -36,18 +36,29 @@ private:
 	Player player_;
 	int aitem_;
 	uniquBaseScn gameScene_;
+
+
 	bool flg_;		//イベントが終わった
 	int Cnt;
 
 	int mImageP[48];
 	int mImagePD[27];
-	int mImageC[20];
+	int mImagePC[15];
+	int mImageNC[10];
+	int mImageN;
 
 	//soy
 	int mImageS[16];
 	int mImageST[16];
+	int mImageSF[16];
+	int mImageMob[16];
 	int mImageMap;
+	int mImageMap1;
 	Vector2 mPos;		//キャラクターの地図上の座標
+	int dir;
+	Vector2 movePos;
+	Vector2 mOffset;
+	int mNum;
 
 	//グラフィック系
 	int airplan_[4][3];
@@ -64,5 +75,8 @@ private:
 	bool shFlg_;
 	int rany;
 	int li_;
+	int bgm1;
+	int bgm2;
+	int bgm3;
 };
 

@@ -196,8 +196,16 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg ,int fis)
 	case MAP_ID::SWEETSSCHOOL:
 		mNpcType = NpcType::SS_NPC;
 		break;
+	case MAP_ID::SNOW:
+		mNpcType = NpcType::SN_NPC;
+		break;
+	case MAP_ID::SNOWCAVE:
+		mNpcType = NpcType::SNC_NPC;
+		break;
+	case MAP_ID::SNOWSHOP:
+		mNpcType = NpcType::SNS_NPC;
+		break;
 	case MAP_ID::TRANGETIONS:
-		
 		break;
 	case MAP_ID::MAX:
 		break;
@@ -205,7 +213,6 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg ,int fis)
 		break;
 	}
 
-	
 	switch (mNpcType)
 	{
 	case NpcType::CM_NPC:
@@ -584,12 +591,15 @@ void Npc::Draw(Vector2 offset)
 	case NpcType::WS_NPC:
 		DrawGraph(mPos.x_ - offset.x_ - 32 + 1825, mPos.y_ - offset.y_ - 64 + 1750, mImage5[0][3], true);
 		break;
+	case NpcType::SN_NPC:
+		break;
+	case NpcType::SNC_NPC:
+		break;
+	case NpcType::SNS_NPC:
+		break;
 	default:
 		break;
 	}
-
-
-
 }
 
 bool Npc::Release(void)

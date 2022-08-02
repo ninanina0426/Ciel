@@ -16,7 +16,10 @@ enum class NpcType
 	TI_NPC,
 	TM_NPC,
 	WM_NPC,
-	WS_NPC
+	WS_NPC,
+	SN_NPC,
+	SNC_NPC,
+	SNS_NPC
 };
 
 enum class NumType

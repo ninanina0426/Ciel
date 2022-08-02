@@ -17,6 +17,7 @@
 #include "SnowShopMap.h"
 
 
+
 bool StageMng::Init()
 {
 	stage_ = std::make_unique<templeMap>();
@@ -222,9 +223,9 @@ Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg,bool keyf,int tama
 	}
 	else
 	{
-		if (mOffset.x_ > 2130)
+		if (mOffset.x_ > 2100)
 		{
-			mOffset.x_ = 2130;
+			mOffset.x_ = 2100;
 		}
 		if (mOffset.x_ < 0)
 		{
@@ -840,6 +841,7 @@ bool StageMng::GetMapChange(Vector2 pos)
 		mOffset = mNextPos - Vector2{ 540,300 };
 		stage_ = std::move(std::make_unique<CaveMap>());
 	}
+	
 	//---------------------------------------------------------------------------
 
 
