@@ -49,6 +49,7 @@
     <ClCompile Include="scene\Obj\Menus.cpp" />
     <ClCompile Include="stage\SnowShopMap.cpp" />
     <ClCompile Include="scene\Obj\Gimmick.cpp" />
+
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
