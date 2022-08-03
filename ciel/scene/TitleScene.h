@@ -31,5 +31,8 @@ private:
 
     int SHandle;
 
+    bool tabF_;
+    int tb_;
+
 };
 

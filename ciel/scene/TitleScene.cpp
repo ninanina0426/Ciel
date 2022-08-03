@@ -29,6 +29,24 @@ uniquBaseScn TitleScene::Update(uniquBaseScn own)
     blink_++;
     alpha_++;
     
+
+    if (tabF_ == false)
+    {
+        if (key_.getKeyDown(KEY_INPUT_TAB))
+        {
+            tabF_ = true;
+
+            //QuestIns.questCmpFlg[1]
+        }
+    }
+    else
+    {
+        if (key_.getKeyDown(KEY_INPUT_TAB))
+        {
+            tabF_ = false;
+        }
+    }
+
     return std::move(own);
 }
 
@@ -36,8 +54,8 @@ void TitleScene::DrawOwnScn()
 {
     SetDrawScreen(sceneScrID_);
     ClsDrawScreen();
-    //DrawExtendGraph(0, 0, 1080, 609, bgid_, true);
     DrawGraph(0, 0, bgid_, true);
+    DrawGraph(1050, 0, tb_, true);
     if (pos1_.y_ < -BGSIZE)
     {
         pos1_.y_ = pos1_.y_ +BGSIZE*2;
@@ -46,8 +64,11 @@ void TitleScene::DrawOwnScn()
     {
         pos1_.x_ = pos1_.x_ + BGSIZE*2;
     }
+    SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
     DrawGraph(0, pos1_.y_, bg1_, true);
     DrawGraph(0, pos1_.x_, bg2_, true);
+    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
     if (alpha_ > 255)
     {
         if ((blink_ / 60) % 2 == 0)
@@ -56,7 +77,10 @@ void TitleScene::DrawOwnScn()
         }
     }
     
-    
+    if (tabF_)
+    {
+        DrawGraph(780, 0, tb_, true);
+    }
   
     SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha_);
     //800,550
@@ -75,10 +99,12 @@ bool TitleScene::Init(void)
     alpha_ = 0;
     pos1_ = { -BGSIZE,0 };
     SHandle = LoadSoundMem("image/music/titel.ogg");
+    tb_ = LoadGraph("./image/ui/tub.jpg");
     blink_ = 0;
     // âπó ÇÃê›íË
     ChangeVolumeSoundMem(100, SHandle);
-
+    
+    tabF_ = false;
    
 
     if (CheckSoundMem(SHandle) == 0)

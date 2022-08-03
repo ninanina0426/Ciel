@@ -16,10 +16,10 @@ EventScene::~EventScene()
 
 uniquBaseScn EventScene::Update(uniquBaseScn own)
 {
-   /* if (CheckHitKey(KEY_INPUT_F))
+    if (CheckHitKey(KEY_INPUT_F))
     {
         flg_ = true;
-    }*/
+    }
     if (mNum >= 70)
     {
         if (CheckHitKey(KEY_INPUT_F))
@@ -198,9 +198,10 @@ bool EventScene::Init(void)
     sea_ = LoadGraph("./image/move/umi.png");
     rany_= LoadGraph("./image/move/rany.png");
     cloud_ = LoadGraph("./image/move/ame.png");
+
     rany = LoadSoundMem("image/Sound/rain.ogg");
     li_ = LoadSoundMem("image/Sound/li.ogg");
-
+   
 
     LoadDivGraph("./image/move/air.png", 12, 3, 4, AirplneSize, AirplneSize, &airplan_[0][0], true);
     LoadDivGraph("./image/move/‰Œ.png", 12, 3, 4, 352, 256, *kemuri_, true);
@@ -300,6 +301,7 @@ void EventScene::Event(int num)
         }
         if (shFlg_)
         {
+            ChangeVolumeSoundMem(255 * 50 / 100, rany);
             PlaySoundMem(rany, DX_PLAYTYPE_BACK);
             PlaySoundMem(li_, DX_PLAYTYPE_BACK);
             shFlg_ = false;
@@ -336,7 +338,7 @@ void EventScene::Event(int num)
             if (mNum >= 70)
             {
                 DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageS[dir * 4], true);
-                DrawGraph(mPos.x_ - mOffset.x_-50, mPos.y_ - mOffset.y_ - 100, mImageC[0], true);
+               // DrawGraph(mPos.x_ - mOffset.x_-50, mPos.y_ - mOffset.y_ - 100, mImageC[0], true);
             }
             //DrawFormatString(0, 500, GetColor(0, 0, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
             break;
@@ -372,8 +374,8 @@ void EventScene::Event(int num)
             DrawGraph(570 - mOffset.x_, 580 - mOffset.y_, mImageMob[1 * 4], true);
             if (mNum >= 1)
             {
-                DrawGraph(570 - mOffset.x_ - 60, 600 - mOffset.y_ - 100, mImageC[0], true);
-                DrawGraph(500 - mOffset.x_ - 40, 600 - mOffset.y_ - 100, mImageC[0], true);
+                //DrawGraph(570 - mOffset.x_ - 60, 600 - mOffset.y_ - 100, mImageC[0], true);
+                //DrawGraph(500 - mOffset.x_ - 40, 600 - mOffset.y_ - 100, mImageC[0], true);
             }
             break;
         default:
@@ -421,7 +423,7 @@ void EventScene::Event(int num)
             if (mNum >= 70)
             {
                 DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageST[dir * 4], true);
-                DrawGraph(mPos.x_ - mOffset.x_ - 50, mPos.y_ - mOffset.y_ - 100, mImageC[0], true);
+                //DrawGraph(mPos.x_ - mOffset.x_ - 50, mPos.y_ - mOffset.y_ - 100, mImageC[0], true);
             }
             break;
         default:
@@ -497,8 +499,8 @@ void EventScene::Event(int num)
             DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap, true);
             DrawGraph(500,600, mImageSF[1 * 4], true);
             DrawGraph(550, 600, mImageMob[3 * 4], true);
-            DrawGraph(550- 40,600- 100, mImageC[0], true);
-            DrawGraph(500- 60,600- 100, mImageC[0], true);
+          //  DrawGraph(550- 40,600- 100, mImageC[0], true);
+           // DrawGraph(500- 60,600- 100, mImageC[0], true);
             DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageSF[dir * 4 + ((animcnt_ / 8) % 4)], true);
             break;
         default:
@@ -551,7 +553,7 @@ void EventScene::Event(int num)
             if (mNum >= 70)
             {
                 DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageSF[dir * 4], true);
-                DrawGraph(mPos.x_ - mOffset.x_ - 50, mPos.y_ - mOffset.y_ - 100, mImageC[0], true);
+               // DrawGraph(mPos.x_ - mOffset.x_ - 50, mPos.y_ - mOffset.y_ - 100, mImageC[0], true);
             }
             DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageSF[dir * 4 + ((animcnt_ / 8) % 4)], true);
             break;
