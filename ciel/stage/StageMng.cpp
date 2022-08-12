@@ -786,11 +786,11 @@ bool StageMng::GetEvent(Vector2 pos)
 
 bool StageMng::GetMapChange(Vector2 pos)
 {
-	//デバッグ用--------------------------------------------------------------------
+	////デバッグ用--------------------------------------------------------------------
 	if (CheckHitKey(KEY_INPUT_W))
 	{
 		mMapChange = true;
-		mNextPos = { 820,1520 };
+		mNextPos = { 553,565 };
 		mDir = DIR_UP;
 		mMapID = MAP_ID::SWEETS;
 		mOffset = mNextPos - Vector2{ 540,0 };
@@ -799,18 +799,18 @@ bool StageMng::GetMapChange(Vector2 pos)
 	if (CheckHitKey(KEY_INPUT_A))
 	{
 		mMapChange = true;
-		mNextPos = { 1630, 2590 };
+		mNextPos = { 1420,280 };
 		mDir = DIR_UP;
-		mMapID = MAP_ID::FOREST;
+		mMapID = MAP_ID::FORESTIN;
 		mOffset = mNextPos - Vector2{ 540,300 };
-		stage_ = std::move(std::make_unique<ForestMap>());
+		stage_ = std::move(std::make_unique<ForestInMap>());
 	}
 	if (CheckHitKey(KEY_INPUT_S))
 	{
 		mMapChange = true;
 		mNextPos = { 1645,715 };
 		mDir = DIR_DOWN;
-		mOffset = mNextPos - Vector2{ 540,300 };
+		mOffset = mNextPos - Vector2{ 1457,653 };
 		mMapID = MAP_ID::TEMPLE;
 		stage_ = std::move(std::make_unique<templeMap>());
 	}
@@ -820,7 +820,7 @@ bool StageMng::GetMapChange(Vector2 pos)
 		mNextPos = { 400, 2990 };
 		mDir = DIR_RIGHT;
 		mMapID = MAP_ID::SNOW;
-		mOffset = mNextPos - Vector2{ 540,300 };
+		mOffset = mNextPos - Vector2{ 2990,120 };
 		stage_ = std::move(std::make_unique<SnowMap>());
 	}
 	if (CheckHitKey(KEY_INPUT_E))
@@ -829,19 +829,19 @@ bool StageMng::GetMapChange(Vector2 pos)
 		mNextPos = { 25, 2400 };
 		mDir = DIR_RIGHT;
 		mMapID = MAP_ID::WA;
-		mOffset = mNextPos - Vector2{ 540,300 };
+		mOffset = mNextPos - Vector2{ 465,500 };
 		stage_ = std::move(std::make_unique<WaMap>());
 	}
 	if (CheckHitKey(KEY_INPUT_R))
 	{
 		mMapChange = true;
-		mNextPos = { 1600, 3050 };
+		mNextPos = { 1585,1070 };
 		mDir = DIR_UP;
-		mMapID = MAP_ID::CAVE;
+		mMapID = MAP_ID::DARK;
 		mOffset = mNextPos - Vector2{ 540,300 };
-		stage_ = std::move(std::make_unique<CaveMap>());
+		stage_ = std::move(std::make_unique<DarkTemple>());
 	}
-	
+	//
 	//---------------------------------------------------------------------------
 
 

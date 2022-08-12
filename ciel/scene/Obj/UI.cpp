@@ -270,7 +270,7 @@ void UI::Draw(void)
 
 
 	
-	DrawString(0, 200, "W:‰ÙŽq\nA:X\nS:_“a\nD:á\nE:˜a\nR:“´ŒA",0x000000,true);
+	/*DrawString(0, 200, "W:‰ÙŽq\nA:X\nS:_“a\nD:á\nE:˜a\nR:“´ŒA",0x000000,true);*/
 
 	
 	

@@ -58,7 +58,7 @@ bool Aitem::init()
 
 	mAitem = 0;
 	//‚¨‹à
-	Ru = 500;
+	Ru = 0;
 
 
 	mNumKinomi = 0;

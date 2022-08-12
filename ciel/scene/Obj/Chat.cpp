@@ -36,10 +36,10 @@ bool Chat::init(void)
 	mImage[12] = LoadGraph("image/talk/m5.png");
 	mImage[13] = LoadGraph("image/talk/temple.png");
 
-	mImage[15] = LoadGraph("image/talk/temple.png");
-	mImage[16] = LoadGraph("image/talk/temple.png");
-	mImage[17] = LoadGraph("image/talk/3.png");
-	mImage[18] = LoadGraph("image/talk/3.png");
+	mImage[15] = LoadGraph("image/talk/w1.png");
+	mImage[16] = LoadGraph("image/talk/w1.png");
+	mImage[17] = LoadGraph("image/talk/w2.png");
+	mImage[18] = LoadGraph("image/talk/w2.png");
 
 	mImage[30] = LoadGraph("image/talk/30.png");
 	mImage[31] = LoadGraph("image/talk/temple.png");
@@ -71,11 +71,11 @@ bool Chat::init(void)
 	mImage[57] = LoadGraph("image/talk/temple.png");
 	mImage[58] = LoadGraph("image/talk/temple.png");
 	mImage[59] = LoadGraph("image/talk/temple.png");
-	mImage[60] = LoadGraph("image/talk/temple.png");
 
-	mImage[61] = LoadGraph("image/talk/temple.png");
-	mImage[62] = LoadGraph("image/talk/temple.png");
-	mImage[63] = LoadGraph("image/talk/temple.png");
+	mImage[60] = LoadGraph("image/talk/neko1.png");
+	mImage[61] = LoadGraph("image/talk/neko2.png");
+	mImage[62] = LoadGraph("image/talk/neko3.png");
+	mImage[63] = LoadGraph("image/talk/neko4.png");
 	mImage[64] = LoadGraph("image/talk/temple.png");
 	mImage[65] = LoadGraph("image/talk/temple.png");
 
@@ -486,7 +486,7 @@ void Chat::Draw(Vector2 offset)
 	}
 
 
-	DrawFormatString(0, 70, GetColor(0,0,255), "Chat:%d", mNum);
+	//DrawFormatString(0, 70, GetColor(0,0,255), "Chat:%d", mNum);
 
 	
 }

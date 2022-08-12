@@ -1,3 +1,4 @@
+
 #include <DxLib.h>
 #include"../../stage/StageMng.h"
 #include "Love.h"
@@ -22,16 +23,16 @@ bool Love::init()
         return false;
     };
 
-    mImageChat[0] = LoadGraph("image/talk/30.png");
-    mImageChat[1] = LoadGraph("image/talk/35.png");
-    mImageChat[2] = LoadGraph("image/talk/40.png");
-    mImageChat[3] = LoadGraph("image/talk/45.png");
-    mImageChat[4] = LoadGraph("image/talk/50.png");
-    mImageChat[5] = LoadGraph("image/talk/55.png");
-    mImageChat[6] = LoadGraph("image/talk/1.png");
-    mImageChat[7] = LoadGraph("image/talk/2.png");
-    mImageChat[8] = LoadGraph("image/talk/3.png");
-    mImageChat[9] = LoadGraph("image/talk/temple.png");
+    mImageChat[0] = LoadGraph("image/talk/l11.png");
+    mImageChat[1] = LoadGraph("image/talk/l12.png");
+    mImageChat[2] = LoadGraph("image/talk/l13.png");
+    mImageChat[3] = LoadGraph("image/talk/l14.png");
+    mImageChat[4] = LoadGraph("image/talk/l15.png");
+    mImageChat[5] = LoadGraph("image/talk/l16.png");
+    mImageChat[6] = LoadGraph("image/talk/l17.png");
+    mImageChat[7] = LoadGraph("image/talk/l18.png");
+    mImageChat[8] = LoadGraph("image/talk/l19.png");
+    mImageChat[9] = LoadGraph("image/talk/l10.png");
 
     mImageChat[30] = LoadGraph("image/talk/l1.png");
     mImageChat[29] = LoadGraph("image/talk/l2.png");
@@ -243,7 +244,7 @@ void Love::Draw(Vector2 offset)
         DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + mNum[1].x_, mPos.y_ - offset.y_ - mSizeOffset.y_ + mNum[1].y_, mImage[mMoveDir * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
     }
 
-    DrawFormatString(0, 300, 0xff0000, "好感度%d", FR);
+    //DrawFormatString(0, 300, 0xff0000, "好感度%d", FR);
 }
 
 bool Love::Release(void)

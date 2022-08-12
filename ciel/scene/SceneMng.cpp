@@ -38,7 +38,8 @@ void SceneMng::Run(void)
 		ClsDrawScreen();
 		scene_->Draw();				//ƒV[ƒ“‚ÌDraw
 
-		_dbgDraw();
+		/*_dbgDraw();*/
+	
 		ScreenFlip();
 
 		

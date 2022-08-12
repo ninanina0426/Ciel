@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseScene.h"
+#include"../scene/Input/Keyboard.h"
 #include "Obj/Player.h"
 
 class Aitem;
@@ -37,9 +38,11 @@ private:
 	int aitem_;
 	uniquBaseScn gameScene_;
 
-
+	Keyboard key_;
 	bool flg_;		//イベントが終わった
 	int Cnt;
+
+	int d;
 
 	int mImageP[48];
 	int mImagePD[27];
@@ -52,13 +55,17 @@ private:
 	int mImageST[16];
 	int mImageSF[16];
 	int mImageMob[16];
+	int mImageMob2[16];
 	int mImageMap;
 	int mImageMap1;
+	int mImageK;
+	int mImageSC[7];
 	Vector2 mPos;		//キャラクターの地図上の座標
 	int dir;
 	Vector2 movePos;
 	Vector2 mOffset;
 	int mNum;
+	int mPush;
 
 	//グラフィック系
 	int airplan_[4][3];

@@ -131,10 +131,10 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         }
     }
 
-    if (key_.getKeyDown(KEY_INPUT_G))
+    /*if (key_.getKeyDown(KEY_INPUT_G))
     {
         return std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam());
-    }
+    }*/
 
     if (IsTama1() && !movefl[0])
     {

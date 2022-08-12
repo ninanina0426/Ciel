@@ -77,6 +77,9 @@ bool Npc::init(void)
 			mSize.y_ = 128;
 			break;
 		case NumType::NPC_2:
+			mMoveDir = DIR_UP;
+			mSize.x_ = 64;
+			mSize.y_ = 128;
 			break;
 		case NumType::NPC_3:
 			break;
@@ -125,7 +128,7 @@ bool Npc::init(void)
 		return false;
 	}
 
-	if (LoadDivGraph("image/char/107.png", 16, 4, 4, 32, 48, &mImage5[0][0]) == -1)
+	if (LoadDivGraph("image/npc/washop.png", 16, 4, 4, 32, 48, &mImage5[0][0]) == -1)
 	{
 		return false;
 	}
@@ -589,7 +592,7 @@ void Npc::Draw(Vector2 offset)
 		DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_ + 994, mPos.y_ - offset.y_ - mSizeOffset.y_ + 573, mImage7[0][0], true);
 		break;
 	case NpcType::WS_NPC:
-		DrawGraph(mPos.x_ - offset.x_ - 32 + 1825, mPos.y_ - offset.y_ - 64 + 1750, mImage5[0][3], true);
+		DrawGraph(mPos.x_ - offset.x_ - 32 + 1825, mPos.y_ - offset.y_ - 64 + 1750, mImage5[0][0], true);
 		break;
 	case NpcType::SN_NPC:
 		break;
