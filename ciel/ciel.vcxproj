@@ -121,21 +121,18 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-<<<<<<< HEAD
       <AdditionalIncludeDirectories>C:\DX_Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-=======
       <AdditionalIncludeDirectories>$(DXLIB_DIR);C:\DxLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
->>>>>>> d5b75ba3c9b46ab0f70b44486cb6529a87ed9946
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-<<<<<<< HEAD
+
       <AdditionalLibraryDirectories>C:\DX_Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-=======
+
       <AdditionalLibraryDirectories>$(DXLIB_DIR);C:\DxLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
->>>>>>> d5b75ba3c9b46ab0f70b44486cb6529a87ed9946
+
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,11 +144,11 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-<<<<<<< HEAD
+
       <AdditionalIncludeDirectories>C:\DX_Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-=======
+
       <AdditionalIncludeDirectories>$(DXLIB_DIR);C:\DxLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
->>>>>>> d5b75ba3c9b46ab0f70b44486cb6529a87ed9946
+
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -159,11 +156,11 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-<<<<<<< HEAD
+
       <AdditionalLibraryDirectories>C:\DX_Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-=======
+
       <AdditionalLibraryDirectories>$(DXLIB_DIR);C:\DxLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
->>>>>>> d5b75ba3c9b46ab0f70b44486cb6529a87ed9946
+
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

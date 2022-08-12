@@ -378,18 +378,18 @@ void EventScene::Event(int num)
             if (100 >= Cnt)
             {
                 DrawGraph(570 - mOffset.x_, 600 - mOffset.y_, mImageMob[3 * 4], true);
-                DrawGraph(500 - mOffset.x_, 600 - mOffset.y_, mImageMob[3 * 4], true);
+                DrawGraph(500 - mOffset.x_, 600 - mOffset.y_, mImageMob2[3 * 4], true);
             }
             else if ((200 >= Cnt) && (100 < Cnt))
             {
                 DrawGraph(570 - mOffset.x_, 600 - mOffset.y_, mImageMob[1 * 4], true);
-                DrawGraph(500 - mOffset.x_, 600 - mOffset.y_, mImageMob[2 * 4], true);
+                DrawGraph(500 - mOffset.x_, 600 - mOffset.y_, mImageMob2[2 * 4], true);
                 DrawGraph(570 - mOffset.x_ - 60, 600 - mOffset.y_ - 100, mImageSC[1], true);
             }
             else if (Cnt >= 200)
             {
                 DrawGraph(570 - mOffset.x_, 600 - mOffset.y_, mImageMob[1 * 4], true);
-                DrawGraph(500 - mOffset.x_, 600 - mOffset.y_, mImageMob[2 * 4], true);
+                DrawGraph(500 - mOffset.x_, 600 - mOffset.y_, mImageMob2[2 * 4], true);
                 DrawGraph(500 - mOffset.x_ - 60, 600 - mOffset.y_ - 100, mImageSC[2], true);
             }
 
@@ -506,18 +506,18 @@ void EventScene::Event(int num)
             DrawGraph(535 - mOffset.x_, 500 - mOffset.y_, mImageSF[2 * 4], true);
             if (100 >= Cnt)
             {
-                DrawGraph(570 - mOffset.x_, 600 - mOffset.y_, mImageMob[3 * 4], true);
+                DrawGraph(570 - mOffset.x_, 600 - mOffset.y_, mImageMob2[3 * 4], true);
                 DrawGraph(500 - mOffset.x_, 600 - mOffset.y_, mImageMob[3 * 4], true);
             }
             else if ((200 >= Cnt) && (100 < Cnt))
             {
-                DrawGraph(570 - mOffset.x_, 600 - mOffset.y_, mImageMob[1 * 4], true);
+                DrawGraph(570 - mOffset.x_, 600 - mOffset.y_, mImageMob2[1 * 4], true);
                 DrawGraph(500 - mOffset.x_, 600 - mOffset.y_, mImageMob[2 * 4], true);
                 DrawGraph(570 - mOffset.x_ - 60, 600 - mOffset.y_ - 100, mImageSC[3], true);
             }
             else if (Cnt >= 200)
             {
-                DrawGraph(570 - mOffset.x_, 600 - mOffset.y_, mImageMob[1 * 4], true);
+                DrawGraph(570 - mOffset.x_, 600 - mOffset.y_, mImageMob2[1 * 4], true);
                 DrawGraph(500 - mOffset.x_, 600 - mOffset.y_, mImageMob[2 * 4], true);
                 DrawGraph(500 - mOffset.x_ - 60, 600 - mOffset.y_ - 100, mImageSC[4], true);
             }
