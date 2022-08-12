@@ -16,11 +16,11 @@ EventScene::~EventScene()
 
 uniquBaseScn EventScene::Update(uniquBaseScn own)
 {
-  
     if (key_.getKeyDown(KEY_INPUT_F))
     {
         flg_ = true;
         mNum = 0;
+
     }
     //フラグがtrueになったらゲームシーンに返す
     if (flg_)
@@ -195,9 +195,10 @@ bool EventScene::Init(void)
     sea_ = LoadGraph("./image/move/umi.png");
     rany_= LoadGraph("./image/move/rany.png");
     cloud_ = LoadGraph("./image/move/ame.png");
+
     rany = LoadSoundMem("image/Sound/rain.ogg");
     li_ = LoadSoundMem("image/Sound/li.ogg");
-
+   
 
     LoadDivGraph("./image/move/air.png", 12, 3, 4, AirplneSize, AirplneSize, &airplan_[0][0], true);
     LoadDivGraph("./image/move/煙.png", 12, 3, 4, 352, 256, *kemuri_, true);
@@ -306,6 +307,7 @@ void EventScene::Event(int num)
         }
         if (shFlg_)
         {
+            ChangeVolumeSoundMem(255 * 50 / 100, rany);
             PlaySoundMem(rany, DX_PLAYTYPE_BACK);
             PlaySoundMem(li_, DX_PLAYTYPE_BACK);
             shFlg_ = false;
@@ -339,7 +341,7 @@ void EventScene::Event(int num)
             }
             if (mNum >= 70)
             {
-                DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageS[dir * 4], true);
+                DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageST[dir * 4], true);
                 DrawGraph(mPos.x_ - mOffset.x_-50, mPos.y_ - mOffset.y_ - 100, mImageSC[0], true);
             }
          
@@ -580,14 +582,11 @@ void EventScene::Event(int num)
                 DrawGraph(510 - mOffset.x_, 600 - mOffset.y_ - 100, mImageSC[6], true);
             }
             break;
-            break;
         default:
             break;
         }
 
        /* DrawString(20, 20, "エピソード5", 0xffffff, true);*/
-       
-
         break;
     default:
         break;

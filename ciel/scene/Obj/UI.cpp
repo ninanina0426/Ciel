@@ -143,6 +143,9 @@ void UI::Draw(void)
 	DrawBox(0, 20, stamina, 40, 0xffff00, true);
 	DrawBox(0, 0, energy*4, 20, 0x00ff00, true);
 
+	DrawBox(1050, 0, 1080, 30, 0x000000, true);
+	DrawGraph(1050, 0, tubk_, true);
+
 	if (queTabF_)
 	{
 		DrawGraph(780, 0, questid_, true);
@@ -298,6 +301,8 @@ void UI::Init()
 	action_ = LoadGraph("image/ui/action.png");
 	aitemBox = LoadGraph("./image/ui/aitemB.png");
 	que_ = LoadGraph("./image/ui/question.png");
+
+	tubk_ = LoadGraph("./image/ui/tub.jpg");
 
 	q1_= LoadGraph("./image/ui/Q1.png");
 	q1C_ = LoadGraph("./image/ui/Q1C.png");

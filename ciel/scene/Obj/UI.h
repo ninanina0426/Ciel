@@ -46,6 +46,8 @@ private:
 	int aitemBox;
 	int aitem[1][15];
 
+	int tubk_;
+
 	int q1_;
 	int q1C_;
 	int q2_;
