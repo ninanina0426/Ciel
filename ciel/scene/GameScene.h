@@ -58,6 +58,8 @@ private:
     bool Init(void) override;                           // タイトルシーン初期化
     SceneID GetSceneID(void) override { return SceneID::GAME; };   //sceneIDをタイトルに設定
 
+    
+
     shareBaseScn game;
 
     Vector2 PlayerPos;
@@ -113,6 +115,14 @@ private:
 
     void CaveState(void);
     int cave_;
+
+    void EndMV(void);
+    bool endFlg_;
+    int boxmove_;
+    bool moveFlg_;
+    int warp[13][2];
+    bool efff_;
+    int endcnt_;
 
     Chat* mChat;
 

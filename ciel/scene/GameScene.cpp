@@ -212,7 +212,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     }
     //trueエンド
-    if (mAitem->Takara==1)
+    if (endFlg_)
     {
         return std::make_unique<FadeInOut>(std::move(own), std::make_unique<EndScene>("end_2", mPlayer.plID_));
     }
@@ -408,8 +408,28 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         {
             CaveState();
         }
+       
     }
-    
+    if (mAitem->Takara == 1 && !moveFlg_)
+    {
+        EndMV();
+    }
+    if (moveFlg_)
+    {
+        if (mPlayer.GetPos().y_ < 1026 && lpMapMng.GetMapId()==MAP_ID::TEMPLEIN && key_.getKeyDown(KEY_INPUT_F))
+        {
+            auto f = MessageBox(NULL, TEXT("かえりますか？"), TEXT(""), MB_YESNO | MB_ICONINFORMATION);
+            if (f == IDYES)
+            {
+                endFlg_ = true;
+            }
+            else if (f == IDNO)
+            {
+                
+            }
+        }
+    }
+
     mMasuku->Update(PlayerPos, mAitem->mRantanNum(),mMenus.NumHave());
 
     ui_.Upadate(mPlayer, mMapOffset,mMenus.NumHave(),abs(5-mAitem->mKinomi),mAitem->FishNum());
@@ -574,7 +594,7 @@ bool GameScene::Init(void)
     yuu_ = LoadGraph("./image/move/夕.png");
     you_ = LoadGraph("./image/move/夜.png");
     ice_ = LoadGraph("./image/ui/ice.png");
-
+    LoadDivGraph("./image/warp.png", 26, 2, 13, 320, 240, warp[0], true);
 
     nowTime_ = std::chrono::system_clock::now();
     oldTime_ = nowTime_;
@@ -586,6 +606,12 @@ bool GameScene::Init(void)
     detTime_ = 0;
     cnt_ = 0;
 
+    boxmove_ = 0;
+
+    endFlg_ = false;
+    moveFlg_ = false;
+    endcnt_ = 0;
+    efff_ = false;
     for (int i = 0; i < 6; i++)
     {
         movefl[i] = false;
@@ -606,6 +632,8 @@ bool GameScene::Init(void)
    	return true;
 
 }
+
+
 
 int GameScene::TamaPow(void)
 {
@@ -768,4 +796,58 @@ void GameScene::CaveState(void)
 
 }
 
+
+void GameScene::EndMV(void)
+{
+
+    if (!moveFlg_)
+    {
+        DrawBox(0, 0, 1080, 609, 0x000000, true);
+        DrawString(400, 250, "Cielの秘宝を手に入れました\n      かえりますか？", 0xffffff, true);
+        DrawString(330, 370, "はい", 0xffffff, true);
+        DrawString(730, 370, "いいえ", 0xffffff, true);
+
+
+
+        Vector2 boxPos = { 300,350 };
+        if (key_.getKeyDown(KEY_INPUT_LEFT))
+        {
+            if (boxmove_ == 400)
+            {
+                boxmove_ = 0;
+            }
+        }
+        if (key_.getKeyDown(KEY_INPUT_RIGHT))
+        {
+            if (boxmove_ == 0)
+            {
+                boxmove_ = 400;
+            }
+        }
+        DrawBox(boxPos.x_ + boxmove_, boxPos.y_, boxPos.x_ + 100 + boxmove_, boxPos.y_ + 50, 0xffffff, false);
+        if (key_.getKeyDown(KEY_INPUT_RETURN) && boxmove_ == 0)
+        {
+            mPose = true;
+            efff_ = true;
+        }
+        else if (key_.getKeyDown(KEY_INPUT_RETURN) && boxmove_ == 400)
+        {
+            moveFlg_ = true;
+        }
+        if (efff_)
+        {
+            endcnt_++;
+            DrawBox(0, 0, 1080, 609, 0x000000, true);
+            
+            DrawExtendGraph(0, 0, 1080, 609, *warp[(endcnt_ / 10)%26], true);
+
+            if (endcnt_ > 100)
+            {
+                endFlg_ = true;
+            }
+        }
+    }
+    
+
+}
 

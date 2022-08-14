@@ -41,22 +41,22 @@ void EndScene::DrawOwnScn()
 	case PlayerID::Jack:
 		if (endType_ == "end_2")
 		{
-
-			DrawFormatString(800, 590, 0xffffff, "END_2 #一攫千金逆転人生");
+			DrawExtendGraph(0, 0, 1080, 609, el2_, false);
+			DrawFormatString(850, 590, 0x000000, "END_2 #一攫千金逆転人生");
 		}
 		break;
 	case PlayerID::Calendula:
 		if (endType_ == "end_2")
 		{
 
-			DrawFormatString(800, 590, 0xffffff, "END_2 #圧倒的な美しさ");
+			DrawFormatString(850, 590, 0xffffff, "END_2 #圧倒的な美しさ");
 		}
 		break;
 	case PlayerID::Soy:
 		if (endType_ == "end_2")
 		{
 
-			DrawFormatString(800, 590, 0xffffff, "END_2 #人間にナレタ！");
+			DrawFormatString(850, 590, 0xffffff, "END_2 #人間にナレタ！");
 		}
 		break;
 	case PlayerID::Max:
@@ -89,6 +89,7 @@ void EndScene::DrawOwnScn()
 bool EndScene::Init(void)
 {
 	e1_ = LoadGraph("./image/move/氷.jpg");
+	el2_ = LoadGraph("./image/kane.jpg");
 	e3_ = LoadGraph("./image/ui/noizu.jpg");
 	e5_ = LoadGraph("./image/move/yourdead.png");
     return true;
