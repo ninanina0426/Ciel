@@ -55,8 +55,8 @@ void EndScene::DrawOwnScn()
 	case PlayerID::Soy:
 		if (endType_ == "end_2")
 		{
-
-			DrawFormatString(850, 590, 0xffffff, "END_2 #人間にナレタ！");
+			DrawExtendGraph(0, 0, 1080, 609, el3_, false);
+			DrawFormatString(850, 590, GetColor(255,0,0), "END_2 #人間にナレタ！");
 		}
 		break;
 	case PlayerID::Max:
@@ -90,6 +90,7 @@ bool EndScene::Init(void)
 {
 	e1_ = LoadGraph("./image/move/氷.jpg");
 	el2_ = LoadGraph("./image/kane.jpg");
+	el3_ = LoadGraph("./image/negai.png");
 	e3_ = LoadGraph("./image/ui/noizu.jpg");
 	e5_ = LoadGraph("./image/move/yourdead.png");
     return true;

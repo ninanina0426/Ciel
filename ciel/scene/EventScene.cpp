@@ -244,9 +244,9 @@ bool EventScene::Init(void)
     LoadDivGraph("./image/char/‰ß‹ŽS3.png", 16, 4, 4, 48, 48, &mImageSF[0]);
     LoadDivGraph("./image/npc/skm1.png", 16, 4, 4, 32, 48, &mImageMob[0]);
     LoadDivGraph("./image/npc/skm2.png", 16, 4, 4, 32, 48, &mImageMob2[0]);
-    mImageMap=LoadGraph("image/soy.png");
-    mImageMap1=LoadGraph("image/soy1.png");
-    mImageK= LoadGraph("image/969_1.png");
+    mImageMap=LoadGraph("./image/soy.png");
+    mImageMap1=LoadGraph("./image/soy1.png");
+    mImageK= LoadGraph("./image/969_1.png");
     mImageSC[0]= LoadGraph("./image/talk/sk1.png");
     mImageSC[1]= LoadGraph("./image/talk/sk2.png");
     mImageSC[2]= LoadGraph("./image/talk/sk3.png");
@@ -364,8 +364,6 @@ void EventScene::Event(int num)
                 DrawGraph(mPos.x_ - mOffset.x_ - 24, mPos.y_ - mOffset.y_ - 24, mImageST[dir * 4], true);
                 DrawGraph(mPos.x_ - mOffset.x_-50, mPos.y_ - mOffset.y_ - 100, mImageSC[0], true);
             }
-         
-            //DrawFormatString(0, 500, GetColor(0, 0, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
             break;
         default:
             break;
