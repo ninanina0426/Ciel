@@ -791,7 +791,7 @@ bool StageMng::GetEvent(Vector2 pos)
 bool StageMng::GetMapChange(Vector2 pos)
 {
 	////デバッグ用--------------------------------------------------------------------
-	/*if (CheckHitKey(KEY_INPUT_W))
+	if (CheckHitKey(KEY_INPUT_W))
 	{
 		mMapChange = true;
 		mNextPos = { 553,565 };
@@ -845,7 +845,7 @@ bool StageMng::GetMapChange(Vector2 pos)
 		mOffset = mNextPos - Vector2{ 540,300 };
 		stage_ = std::move(std::make_unique<DarkTemple>());
 	}
-	*/
+	
 	//---------------------------------------------------------------------------
 
 
