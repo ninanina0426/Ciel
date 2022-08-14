@@ -36,7 +36,13 @@ bool Menus::init(void)
 	//アイテムの回復をどうするか
 	mImageAH[0] = LoadGraph("image/menyu/アイテム.png");
 	mImageAH[1] = LoadGraph("image/menyu/回復.png");
-	mImageH[0] = LoadGraph("image/menyu/ヒント.png");
+	//ヒント
+	mImageH[0] = LoadGraph("image/menyu/ヒント天空.png");
+	mImageH[1] = LoadGraph("image/menyu/ヒント森.png");
+	mImageH[2] = LoadGraph("image/menyu/ヒントお菓子.png");
+	mImageH[3] = LoadGraph("image/menyu/ヒント洞窟.png");
+	mImageH[4] = LoadGraph("image/menyu/ヒント和.png");
+	mImageH[5] = LoadGraph("image/menyu/ヒント雪.png");
 	mImageO= LoadGraph("image/menyu/オプション.png");
 	mEImage = LoadGraph("image/menyu/終了.png");
 
@@ -301,7 +307,57 @@ void Menus::Draw(PlayerID type, int ru, int En, int St)
 		DrawGraph(0, 0, mImageAS, true);
 		break;
 	case Menus::MENUS_SELECT::MENU_HINT:
-		DrawGraph(0, 0, mImageH[0], true);
+		switch (mapID)
+		{
+		case MAP_ID::FOREST:
+			DrawGraph(0, 0, mImageH[1], true);
+			break;
+		case MAP_ID::WA:
+			DrawGraph(0, 0, mImageH[4], true);
+			break;
+		case MAP_ID::WASHOP:
+			DrawGraph(0, 0, mImageH[4], true);
+			break;
+		case MAP_ID::CAVE:
+			DrawGraph(0, 0, mImageH[3], true);
+			break;
+		case MAP_ID::CAVESHOP:
+			DrawGraph(0, 0, mImageH[3], true);
+			break;
+		case MAP_ID::DARK:
+			DrawGraph(0, 0, mImageH[3], true);
+			break;
+		case MAP_ID::FORESTIN:
+			DrawGraph(0, 0, mImageH[1], true);
+			break;
+		case MAP_ID::TEMPLE:
+			DrawGraph(0, 0, mImageH[0], true);
+			break;
+		case MAP_ID::TEMPLEIN:
+			DrawGraph(0, 0, mImageH[0], true);
+			break;
+		case MAP_ID::SWEETS:
+			DrawGraph(0, 0, mImageH[2], true);
+			break;
+		case MAP_ID::SWEETSOUT:
+			DrawGraph(0, 0, mImageH[2], true);
+			break;
+		case MAP_ID::SWEETSSCHOOL:
+			DrawGraph(0, 0, mImageH[2], true);
+			break;
+		case MAP_ID::SNOW:
+			DrawGraph(0, 0, mImageH[5], true);
+			break;
+		case MAP_ID::SNOWCAVE:
+			DrawGraph(0, 0, mImageH[5], true);
+			break;
+		case MAP_ID::TRANGETIONS:
+			break;
+		case MAP_ID::MAX:
+			break;
+		default:
+			break;
+		}
 		break;
 	case Menus::MENUS_SELECT::MENU_OPTION:
 		DrawGraph(0, 0, mImageO, true);

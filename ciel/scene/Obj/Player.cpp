@@ -29,6 +29,7 @@ bool Player::init(PlayerID playerid)
 		plID_ = playerid;
 		state_ = PL_ST::NON;
 	}
+
 	mSizeOffset.x_ = 0;
 	mSizeOffset.y_ = 0;
 	mMoveSpeed = 3;
@@ -149,7 +150,7 @@ bool Player::init(PlayerID playerid)
 
 }
 
-Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nHit)
+Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nHit, int turi, int pi)
 {
 	keyDir = DIR_MAX;		//ƒL[“ü—Í‚Ì•ûŒü
 	Vector2 copyPos = mPos;
@@ -178,60 +179,64 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 		{
 			if (Energy_ > 0)
 			{
-				//’Þ‚è
-				if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
+				if (turi != 0)
 				{
-					bool flg_;
-					if (i == 1)
+					//’Þ‚è
+					if ((mChipId == 315) || (mChipId == 316) || (mChipId == 317) || (mChipId == 306) || (mChipId == 308) || (mChipId == 297) || (mChipId == 298) || (mChipId == 299))
 					{
-						flg_ = gimick.Fishing();
-					}
-					if (key_.getKeyDown(KEY_INPUT_F))
-					{
-						if (i == 0)
+						bool flg_;
+						if (i == 1)
 						{
-							i = 1;
-							moveFlg = true;
-							PlaySoundMem(tHandle, DX_PLAYTYPE_BACK);
+							flg_ = gimick.Fishing();
 						}
-						else if (i == 1 || flg_)
+						if (key_.getKeyDown(KEY_INPUT_F))
 						{
-							if (flg_)
+							if (i == 0)
 							{
-								aitemFlag_ = true;
-
-								fish++;
-								aitemNum_ = 1;
-
+								i = 1;
+								moveFlg = true;
+								PlaySoundMem(tHandle, DX_PLAYTYPE_BACK);
 							}
-							i = 0;
-							moveFlg = false;
-							switch (plID_)
+							else if (i == 1 || flg_)
 							{
-							case PlayerID::Jack:
-								Energy(10);
-								break;
-							case PlayerID::Calendula:
-								Energy(10);
-								break;
-							case PlayerID::Soy:
-								Energy(5);
-								break;
-							case PlayerID::Max:
-								break;
-							default:
-								break;
+								if (flg_)
+								{
+									aitemFlag_ = true;
+
+									fish++;
+									aitemNum_ = 1;
+
+								}
+								i = 0;
+								moveFlg = false;
+								switch (plID_)
+								{
+								case PlayerID::Jack:
+									Energy(10);
+									break;
+								case PlayerID::Calendula:
+									Energy(10);
+									break;
+								case PlayerID::Soy:
+									Energy(5);
+									break;
+								case PlayerID::Max:
+									break;
+								default:
+									break;
+								}
+								gimick.fisingFlg_ = false;
 							}
-							gimick.fisingFlg_ = false;
+
+						}
+						else
+						{
+							aitemFlag_ = false;
 						}
 
 					}
-					else
-					{
-						aitemFlag_ = false;
-					}
-
 				}
+
 				//ó£
 				if ((mChipId == 896))
 				{
@@ -296,91 +301,93 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 
 				}
 				//‚Â‚é‚Í‚µ
-
-				if (mapID == MAP_ID::CAVE || mapID == MAP_ID::SNOWCAVE)
+				if (pi != 0)
 				{
-					if (!((mChipId == 315) || (mChipId == 316) ||
-						(mChipId == 317) || (mChipId == 306) ||
-						(mChipId == 308) || (mChipId == 297) ||
-						(mChipId == 298) || (mChipId == 299) ||
-						(mChipId == 307) || (mChipId == 155) ||
-						(mChipId == 146) || (mChipId == 101) ||
-						(mChipId == 28)))
+					if (mapID == MAP_ID::CAVE || mapID == MAP_ID::SNOWCAVE)
 					{
-						if (key_.getKeyDown(KEY_INPUT_F))
+						if (!((mChipId == 315) || (mChipId == 316) ||
+							(mChipId == 317) || (mChipId == 306) ||
+							(mChipId == 308) || (mChipId == 297) ||
+							(mChipId == 298) || (mChipId == 299) ||
+							(mChipId == 307) || (mChipId == 155) ||
+							(mChipId == 146) || (mChipId == 101) ||
+							(mChipId == 28)))
 						{
-							if (i == 0)
+							if (key_.getKeyDown(KEY_INPUT_F))
 							{
-								if (gimick.Pick())
+								if (i == 0)
 								{
-									aitemFlag_ = true;
-									auto a = GetRand(5);
-									if (a == 0)
+									if (gimick.Pick())
 									{
-										Bule++;
-										aitemNum_ = 3;
+										aitemFlag_ = true;
+										auto a = GetRand(5);
+										if (a == 0)
+										{
+											Bule++;
+											aitemNum_ = 3;
+										}
+										if (a == 1)
+										{
+											Red++;
+											aitemNum_ = 2;
+										}
+										if (a > 1)
+										{
+											auto r = GetRand(50);
+											Ru = 10 + r;
+											aitemNum_ = 4;
+										}
 									}
-									if (a == 1)
+									i = 3;
+									tFlg = true;
+									tCnt = 60;
+									ttCnt = 0;
+									switch (plID_)
 									{
-										Red++;
-										aitemNum_ = 2;
+									case PlayerID::Jack:
+										Energy(5);
+										break;
+									case PlayerID::Calendula:
+										Energy(15);
+										break;
+									case PlayerID::Soy:
+										Energy(10);
+										break;
+									case PlayerID::Max:
+										break;
+									default:
+										break;
 									}
-									if (a > 1)
-									{
-										auto r = GetRand(50);
-										Ru = 10 + r;
-										aitemNum_ = 4;
-									}
-								}
-								i = 3;
-								tFlg = true;
-								tCnt = 60;
-								ttCnt = 0;
-								switch (plID_)
-								{
-								case PlayerID::Jack:
-									Energy(5);
-									break;
-								case PlayerID::Calendula:
-									Energy(15);
-									break;
-								case PlayerID::Soy:
-									Energy(10);
-									break;
-								case PlayerID::Max:
-									break;
-								default:
-									break;
 								}
 							}
-						}
-						else
-						{
-							aitemFlag_ = false;
+							else
+							{
+								aitemFlag_ = false;
 
+							}
 						}
 					}
 				}
-			}
-			else
-			{
-				aitemFlag_ = false;
-
-			}
-
-			if (tFlg == true)
-			{
-				tCnt--;
-				if (tCnt == 10)
+				else
 				{
-					PlaySoundMem(ttHandle, DX_PLAYTYPE_BACK);
+					aitemFlag_ = false;
+
 				}
-				if (tCnt < 1)
+				if (tFlg == true)
 				{
-					i = 0;
-					tFlg = false;
-					tCnt = 60;
-					ttCnt = 0;
+					tCnt--;
+					if (tCnt == 10)
+					{
+						PlaySoundMem(ttHandle, DX_PLAYTYPE_BACK);
+					}
+					if (tCnt < 1)
+					{
+						i = 0;
+						tFlg = false;
+						tCnt = 60;
+						ttCnt = 0;
+					}
+
 				}
 
 			}
