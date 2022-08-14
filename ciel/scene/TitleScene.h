@@ -33,6 +33,7 @@ private:
 
     bool tabF_;
     int tb_;
+    int susa_;
 
 };
 

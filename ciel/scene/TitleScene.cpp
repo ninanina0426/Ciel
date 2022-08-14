@@ -77,16 +77,17 @@ void TitleScene::DrawOwnScn()
         }
     }
     
-    if (tabF_)
-    {
-        DrawGraph(780, 0, tb_, true);
-    }
+    
   
     SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha_);
     //800,550
     DrawExtendGraph(0, 0, 480, 330, title_, true);
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-    
+
+    if (tabF_)
+    {
+        DrawGraph(0, 0, susa_, true);
+    }
 }
 
 bool TitleScene::Init(void)
@@ -96,6 +97,7 @@ bool TitleScene::Init(void)
     bg1_ = LoadGraph("./image/kirakira.png");
     bg2_ = LoadGraph("./image/kirakira.png");
     push_ = LoadGraph("./image/push_spce.png");
+    susa_ = LoadGraph("./image/ui/sousa.jpg");
     alpha_ = 0;
     pos1_ = { -BGSIZE,0 };
     SHandle = LoadSoundMem("image/music/titel.ogg");

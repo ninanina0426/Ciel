@@ -860,6 +860,7 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 		if (Energy_ >= 150)
 		{
 			Energy_ = 150;
+
 		}
 		break;
 	case PlayerID::Calendula:

@@ -12,7 +12,7 @@ public:
 	~UI();
 
 	void Upadate(Player player,Vector2 offset,int num,int kinomi,int fis);
-	void Draw(void);
+	void Draw(bool am,bool pm,bool npm);
 
 	bool eveflg_;
 
@@ -29,7 +29,7 @@ private:
 
 	std::string aitemname_;
 
-
+	PlayerID plID_;
 
 	bool telop_;
 	int count_;
@@ -50,6 +50,13 @@ private:
 	int aitem[1][15];
 
 	int tubk_;
+
+	int am_;
+	int pm_;
+	int time_;
+	int stat_;
+	int ene_;
+	int sta_;
 
 	int q1_;
 	int q1C_;

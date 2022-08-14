@@ -336,7 +336,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     mShop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
     mWshop.SetAitem(mAitem->AppleNum(), mAitem->KinominoKusiyakiNum(), mAitem->FruitDrinkNum(), mAitem->FishingRodSNum(), mAitem->RagBagNum(), mAitem->PickaxeNum(), mAitem->KnomiNum(), mAitem->mRantanNum(), mAitem->mHaoriNum(), mAitem->RiceNum(), mAitem->DangoNum(), mAitem->TeaNum(), mAitem->FishNum(), mAitem->StoneRNum(), mAitem->StoneBNum());
    
-    DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
+    //DrawFormatString(0, 100, 0xffffff, "deltaTime:%d", delta);
     /* PlayerPos = mPlayer.Update();*/
 
    
@@ -555,7 +555,7 @@ void GameScene::DrawOwnScn()
 
      mChat->Draw(mMapOffset);
 
-     ui_.Draw();
+     ui_.Draw(AMflg_,PMflg_,Nightflg_);
 
      mShop.Draw();
 

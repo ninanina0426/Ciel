@@ -637,4 +637,5 @@ void EventScene::Event(int num)
     default:
         break;
     }
+    DrawString(5, 3, "F:スキップ", 0xffffff, true);
 }

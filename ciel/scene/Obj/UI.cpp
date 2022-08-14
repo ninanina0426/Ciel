@@ -21,7 +21,7 @@ void UI::Upadate(Player player, Vector2 offset,int num,int kinomi,int fis)
 	energy = player.Energy_;
 	kinomi_ = kinomi;
 	fiss_ = fis;
-
+	plID_ = player.plID_;
 
 	if (num == 0){aitemNum = 14;}
 	if (num == 1){aitemNum = 0;}
@@ -139,10 +139,42 @@ void UI::Upadate(Player player, Vector2 offset,int num,int kinomi,int fis)
 
 
 
-void UI::Draw(void)
+void UI::Draw(bool am, bool pm, bool npm)
 {
-	DrawBox(0, 20, stamina, 40, 0xffff00, true);
-	DrawBox(0, 0, energy*4, 20, 0x00ff00, true);
+	DrawGraph(0, 0, stat_, true);
+
+	switch (plID_)
+	{
+	case PlayerID::Jack:
+		
+		DrawBox(100, 50, energy*4-10 , 70, 0x00ff00, true);
+		
+		break;
+	case PlayerID::Calendula:
+		DrawBox(100, 50, energy * 6-10 , 70, 0x00ff00, true);
+		break;
+	case PlayerID::Soy:
+		DrawBox(100, 50, energy * 5-60 , 70, 0x00ff00, true);
+		break;
+	case PlayerID::Max:
+		break;
+	default:
+		break;
+	}
+	//DrawBox(100, 50, 100+energy * 4, 70, 0x00ff00, true);
+	DrawBox(100, 97, 89+stamina, 117, 0xffff00, true);
+	DrawGraph(0, 0, time_, true);
+	if (am)
+	{
+		DrawGraph(0, 0, am_, true);
+	}
+	if (pm || npm)
+	{
+		DrawGraph(0, 0, pm_, true);
+	}
+	
+	
+	
 
 	DrawBox(1050, 0, 1080, 30, 0x000000, true);
 	DrawGraph(1050, 0, tubk_, true);
@@ -319,6 +351,13 @@ void UI::Init()
 	q2C_ = LoadGraph("./image/ui/Q2C.png");
 	q3_ = LoadGraph("./image/ui/Q3.png");
 	q3C_ = LoadGraph("./image/ui/Q3C.png");
+
+	am_ = LoadGraph("./image/ui/am.png");
+	pm_ = LoadGraph("./image/ui/pm.png");
+	time_ = LoadGraph("./image/ui/taim.png");
+	stat_ = LoadGraph("./image/ui/stayt.png");
+	ene_ = LoadGraph("./image/ui/ene.png");
+	sta_ = LoadGraph("./image/ui/sta.png");
 
 	LoadDivGraph("./image/ui/aitem.png", 15, 1, 15, 70, 70, *aitem, true);
 	aitemname_ = "ƒŠƒ“ƒS";
