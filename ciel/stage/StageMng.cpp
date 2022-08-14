@@ -15,6 +15,7 @@
 #include "SnowMap.h"
 #include "SnowCaveMap.h"
 #include "SnowShopMap.h"
+#include "../scene/Obj/Quest.h"
 
 
 
@@ -47,6 +48,8 @@ bool StageMng::Init()
 	Tama_Use[3] = false;
 	Tama_Use[4] = false;
 	Tama_Use[5] = false;
+
+	rimFlg_ = false;
 
     return true;
 }
@@ -90,7 +93,7 @@ Vector2 StageMng::Update(Vector2 mPlayerset, int ai, bool flg,bool keyf,int tama
 
 	Tama_ = tamaFlg;
 	
-	
+	rimFlg_ = false;
 
 	if (OldPos != mPlayerset)
 	{
@@ -574,6 +577,7 @@ bool StageMng::GetEvent(Vector2 pos)
 		//Sweetsからtempleへ
 		if (chipID == 4220|| chipID == 4221 || chipID == 4320 || chipID == 4321)
 		{
+			rimFlg_ = true;
 			mMapChange = true;
 			//マップを切り替えることになった
 			mNextPos = { 1645,715 };
@@ -787,7 +791,7 @@ bool StageMng::GetEvent(Vector2 pos)
 bool StageMng::GetMapChange(Vector2 pos)
 {
 	////デバッグ用--------------------------------------------------------------------
-	/*if (CheckHitKey(KEY_INPUT_W))
+	if (CheckHitKey(KEY_INPUT_W))
 	{
 		mMapChange = true;
 		mNextPos = { 553,565 };
@@ -840,13 +844,14 @@ bool StageMng::GetMapChange(Vector2 pos)
 		mMapID = MAP_ID::DARK;
 		mOffset = mNextPos - Vector2{ 540,300 };
 		stage_ = std::move(std::make_unique<DarkTemple>());
-	}*/
+	}
 	//
 	//---------------------------------------------------------------------------
 
 
 	if (lpMapMng.mMapID == MAP_ID::TEMPLE)
 	{
+
 		//TEMPLEからTEMPLEINへ
 		if (lpMapMng.mMapID == MAP_ID::TEMPLE)
 		{
@@ -873,16 +878,16 @@ bool StageMng::GetMapChange(Vector2 pos)
 					DrawBox(0, 250, 1080, 400, 0x000000, true);
 					SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 					DrawString(300, 280, "汝　願ひかなふるなら　言ふにしたがいて　くすしきたま　たいまつる\n \n　　　　　　　　こなたかなたに　それ　散りぼふ\n　\n　　　　　　　　　　　汝　たま　刈りつめ　", 0xffffff);
-				
-					
+
+
 				}
 			}
 			else
 			{
 				opendir_ = false;
 			}
-			
-			if (pos.y_<581&& aitem==0)//chipID == 470
+
+			if (pos.y_ < 581 && aitem == 0)//chipID == 470
 			{
 				mMapChange = true;
 				mNextPos = { 1425,1545 };
@@ -893,255 +898,257 @@ bool StageMng::GetMapChange(Vector2 pos)
 
 			}
 		}
-
-		//スイーツマップへ
-		if (pos.x_ >= 1380 && pos.x_ < 1450 &&
-			pos.y_ >= 730 && pos.y_ < 760)
+		if (QuestIns.questCmpFlg[0] == QuestState::COMP)
 		{
-			if (Tama_!=10&& !flyMap[0])
+			//スイーツマップへ
+			if (pos.x_ >= 1380 && pos.x_ < 1450 &&
+				pos.y_ >= 730 && pos.y_ < 760)
 			{
-				if (!back)
+				if (Tama_ != 10 && !flyMap[0])
 				{
-					auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
-					if (f == IDYES)
+					if (!back)
 					{
-						flyMap[0] = true;
+						auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
+						if (f == IDYES)
+						{
+							flyMap[0] = true;
+							fadeinFlg_ = true;
+							fadein_.Setcnt(0);
+							Tama_Use[Tama_] = true;
+						}
+						else if (f == IDNO)
+						{
+							back = true;
+						}
+					}
+
+					if (back)
+					{
+						mMapChange = true;
+						mNextPos = { pos.x_,770 };
+						back = false;
+					}
+
+
+				}
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					if (flyMap[0])
+					{
 						fadeinFlg_ = true;
 						fadein_.Setcnt(0);
-						Tama_Use[Tama_] = true;
-					}
-					else if (f == IDNO)
-					{
-						back = true;
 					}
 				}
-				
-				if (back)
+				if (fadeinFlg_)
 				{
-					mMapChange = true;
-					mNextPos = { pos.x_,770 };
-					back = false;
-				}
-				
+					if (fadein_.GetCnt() > 255)
+					{
+						mMapChange = true;
+						mNextPos = { 820,1520 };
+						mDir = DIR_UP;
+						mMapID = MAP_ID::SWEETS;
+						mOffset = mNextPos - Vector2{ 540,0 };
+						stage_ = std::move(std::make_unique<SweetsMap>());
+					}
 
-			}
-			if (key_.getKeyDown(KEY_INPUT_F))
-			{
-				if (flyMap[0])
-				{
-					fadeinFlg_ = true;
-					fadein_.Setcnt(0);
 				}
 			}
-			if (fadeinFlg_)
+			//和マップへ
+			if (pos.x_ >= 1440 && pos.x_ < 1480 &&
+				pos.y_ >= 835 && pos.y_ < 860)
 			{
-				if (fadein_.GetCnt() > 255)
+				if (Tama_ != 10 && !flyMap[1])
 				{
-					mMapChange = true;
-					mNextPos = { 820,1520 };
-					mDir = DIR_UP;
-					mMapID = MAP_ID::SWEETS;
-					mOffset = mNextPos - Vector2{ 540,0 };
-					stage_ = std::move(std::make_unique<SweetsMap>());
-				}
-
-			}
-		}
-		//和マップへ
-		if (pos.x_ >= 1440 && pos.x_ < 1480 &&
-			pos.y_ >= 835 && pos.y_ < 860)
-		{
-			if (Tama_!=10&& !flyMap[1])
-			{
-				if (!back)
-				{
-					auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
-					if (f == IDYES)
+					if (!back)
 					{
-						flyMap[1] = true;
-						fadeinFlg_ = true;
-						fadein_.Setcnt(0);
-						Tama_Use[Tama_] = true;
-					}
-					else if (f == IDNO)
-					{
-						back = true;
+						auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
+						if (f == IDYES)
+						{
+							flyMap[1] = true;
+							fadeinFlg_ = true;
+							fadein_.Setcnt(0);
+							Tama_Use[Tama_] = true;
+						}
+						else if (f == IDNO)
+						{
+							back = true;
+						}
 					}
 				}
-			}
-				if (back)
-				{
-					mMapChange = true;
-					mNextPos = { pos.x_,870 };
-					back = false;
-				}
-			if (key_.getKeyDown(KEY_INPUT_F))
-			{
-				if (flyMap[1])
-				{
-					fadeinFlg_ = true;
-					fadein_.Setcnt(0);
-				}
-
-			}
-			if (fadeinFlg_)
-			{
-				if (fadein_.GetCnt() > 255)
-				{
-					mMapChange = true;
-					mNextPos = { 25, 2400 };
-					mDir = DIR_RIGHT;
-					mMapID = MAP_ID::WA;
-					mOffset = mNextPos - Vector2{ 540,300 };
-					stage_ = std::move(std::make_unique<WaMap>());
-				}
-			}
-		}
-		//森マップへ
-		if (pos.x_ >= 1825 && pos.x_ < 1855 &&
-			pos.y_ >= 835 && pos.y_ < 860)
-		{
-			if (Tama_!=10 && !flyMap[2])
-			{
-				if (!back&& flyMap[0])
-				{
-					auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
-					if (f == IDYES)
-					{
-						flyMap[2] = true;
-						fadeinFlg_ = true;
-						fadein_.Setcnt(0);
-						Tama_Use[Tama_] = true;
-					}
-					else if (f == IDNO)
-					{
-						back = true;
-					}
-				}
-			}
 				if (back)
 				{
 					mMapChange = true;
 					mNextPos = { pos.x_,870 };
 					back = false;
 				}
-			if (key_.getKeyDown(KEY_INPUT_F))
-			{
-				if (flyMap[2])
+				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					fadeinFlg_ = true;
-					fadein_.Setcnt(0);
-				}
-			}
-			if (fadeinFlg_)
-			{
-				if (fadein_.GetCnt() > 255)
-				{
-					mMapChange = true;
-					mNextPos = { 1630, 2590 };
-					mDir = DIR_UP;
-					mMapID = MAP_ID::FOREST;
-					mOffset = mNextPos - Vector2{ 540,300 };
-					stage_ = std::move(std::make_unique<ForestMap>());
-				}
-			}
-		}
-		//洞窟マップへ
-		if (pos.x_ >= 1890 && pos.x_ < 1920 &&
-			pos.y_ >= 730 && pos.y_ < 760)
-		{
-			if (Tama_!=10 && !flyMap[3])
-			{
-				if (!back&& flyMap[2])
-				{
-					auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
-					if (f == IDYES)
+					if (flyMap[1])
 					{
-						flyMap[3] = true;
 						fadeinFlg_ = true;
 						fadein_.Setcnt(0);
-						Tama_Use[Tama_] = true;
 					}
-					else if (f == IDNO)
+
+				}
+				if (fadeinFlg_)
+				{
+					if (fadein_.GetCnt() > 255)
 					{
-						back = true;
+						mMapChange = true;
+						mNextPos = { 25, 2400 };
+						mDir = DIR_RIGHT;
+						mMapID = MAP_ID::WA;
+						mOffset = mNextPos - Vector2{ 540,300 };
+						stage_ = std::move(std::make_unique<WaMap>());
 					}
 				}
 			}
+			//森マップへ
+			if (pos.x_ >= 1825 && pos.x_ < 1855 &&
+				pos.y_ >= 835 && pos.y_ < 860)
+			{
+				if (Tama_ != 10 && !flyMap[2])
+				{
+					if (!back && flyMap[0])
+					{
+						auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
+						if (f == IDYES)
+						{
+							flyMap[2] = true;
+							fadeinFlg_ = true;
+							fadein_.Setcnt(0);
+							Tama_Use[Tama_] = true;
+						}
+						else if (f == IDNO)
+						{
+							back = true;
+						}
+					}
+				}
+				if (back)
+				{
+					mMapChange = true;
+					mNextPos = { pos.x_,870 };
+					back = false;
+				}
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					if (flyMap[2])
+					{
+						fadeinFlg_ = true;
+						fadein_.Setcnt(0);
+					}
+				}
+				if (fadeinFlg_)
+				{
+					if (fadein_.GetCnt() > 255)
+					{
+						mMapChange = true;
+						mNextPos = { 1630, 2590 };
+						mDir = DIR_UP;
+						mMapID = MAP_ID::FOREST;
+						mOffset = mNextPos - Vector2{ 540,300 };
+						stage_ = std::move(std::make_unique<ForestMap>());
+					}
+				}
+			}
+			//洞窟マップへ
+			if (pos.x_ >= 1890 && pos.x_ < 1920 &&
+				pos.y_ >= 730 && pos.y_ < 760)
+			{
+				if (Tama_ != 10 && !flyMap[3])
+				{
+					if (!back && flyMap[2])
+					{
+						auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
+						if (f == IDYES)
+						{
+							flyMap[3] = true;
+							fadeinFlg_ = true;
+							fadein_.Setcnt(0);
+							Tama_Use[Tama_] = true;
+						}
+						else if (f == IDNO)
+						{
+							back = true;
+						}
+					}
+				}
 				if (back)
 				{
 					mMapChange = true;
 					mNextPos = { pos.x_,770 };
 					back = false;
 				}
-			if (key_.getKeyDown(KEY_INPUT_F))
-			{
-				if (flyMap[3])
+				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					fadeinFlg_ = true;
-					fadein_.Setcnt(0);
-				}
-			}
-			if (fadeinFlg_)
-			{
-				if (fadein_.GetCnt() > 255)
-				{
-					mMapChange = true;
-					mNextPos = { 1600, 3050 };
-					mDir = DIR_UP;
-					mMapID = MAP_ID::CAVE;
-					mOffset = mNextPos - Vector2{ 540,300 };
-					stage_ = std::move(std::make_unique<CaveMap>());
-				}
-			}
-		}
-		//雪マップへ
-		if (pos.x_ >= 1825 && pos.x_ < 1855 &&
-			pos.y_ >= 640 && pos.y_ < 660)
-		{
-			if (Tama_!=10 && !flyMap[4])
-			{
-				if (!back)
-				{
-					auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
-					if (f == IDYES)
+					if (flyMap[3])
 					{
-						flyMap[4] = true;
 						fadeinFlg_ = true;
 						fadein_.Setcnt(0);
-						Tama_Use[Tama_] = true;
 					}
-					else if (f == IDNO)
+				}
+				if (fadeinFlg_)
+				{
+					if (fadein_.GetCnt() > 255)
 					{
-						back = true;
+						mMapChange = true;
+						mNextPos = { 1600, 3050 };
+						mDir = DIR_UP;
+						mMapID = MAP_ID::CAVE;
+						mOffset = mNextPos - Vector2{ 540,300 };
+						stage_ = std::move(std::make_unique<CaveMap>());
 					}
 				}
+			}
+			//雪マップへ
+			if (pos.x_ >= 1825 && pos.x_ < 1855 &&
+				pos.y_ >= 640 && pos.y_ < 660)
+			{
+				if (Tama_ != 10 && !flyMap[4])
+				{
+					if (!back)
+					{
+						auto f = MessageBox(NULL, TEXT("玉の力を使いますか？"), TEXT(""), MB_YESNO | MB_ICONWARNING);
+						if (f == IDYES)
+						{
+							flyMap[4] = true;
+							fadeinFlg_ = true;
+							fadein_.Setcnt(0);
+							Tama_Use[Tama_] = true;
+						}
+						else if (f == IDNO)
+						{
+							back = true;
+						}
+					}
 
-				if (back)
-				{
-					mMapChange = true;
-					mNextPos = { pos.x_,670 };
-					back = false;
+					if (back)
+					{
+						mMapChange = true;
+						mNextPos = { pos.x_,670 };
+						back = false;
+					}
 				}
-			}
-			if (key_.getKeyDown(KEY_INPUT_F))
-			{
-				if (flyMap[4])
+				if (key_.getKeyDown(KEY_INPUT_F))
 				{
-					fadeinFlg_ = true;
-					fadein_.Setcnt(0);
+					if (flyMap[4])
+					{
+						fadeinFlg_ = true;
+						fadein_.Setcnt(0);
+					}
 				}
-			}
-			if (fadeinFlg_)
-			{
-				if (fadein_.GetCnt() > 255)
+				if (fadeinFlg_)
 				{
-					mMapChange = true;
-					mNextPos = { 400, 2990 };
-					mDir = DIR_RIGHT;
-					mMapID = MAP_ID::SNOW;
-					mOffset = mNextPos - Vector2{ 540,300 };
-					stage_ = std::move(std::make_unique<SnowMap>());
+					if (fadein_.GetCnt() > 255)
+					{
+						mMapChange = true;
+						mNextPos = { 400, 2990 };
+						mDir = DIR_RIGHT;
+						mMapID = MAP_ID::SNOW;
+						mOffset = mNextPos - Vector2{ 540,300 };
+						stage_ = std::move(std::make_unique<SnowMap>());
+					}
 				}
 			}
 		}

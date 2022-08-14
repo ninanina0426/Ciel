@@ -155,6 +155,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
         {
             ui_.eveflg_ = false;
             game = std::make_shared <GameScene>(mPlayer.plID_);
+            StopSoundMem(mPlayer.oHandle);
             movefl[1] = true;
             return std::make_unique<FadeInOut>(game, std::make_unique<EventScene>(std::move(own), mPlayer.plID_, mAitem->GetTam()));
         }
@@ -308,6 +309,10 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     }
 
+    if (lpMapMng.rimFlg_)
+    {
+        mPlayer.gFlg = false;
+    }
     PlayerPos = mPlayer.GetPos();
 
     PlayerSize = mPlayer.GetSiz();
@@ -530,6 +535,8 @@ void GameScene::DrawOwnScn()
 
      mChat->Draw(mMapOffset);
 
+     ui_.Draw();
+
      mShop.Draw();
 
      mWshop.Draw();
@@ -538,7 +545,7 @@ void GameScene::DrawOwnScn()
     
      mMasuku->Draw(mMapOffset);
 
-     ui_.Draw();
+    
 
      //フェードイン
      if (lpMapMng.fadeinFlg_)

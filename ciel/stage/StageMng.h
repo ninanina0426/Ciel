@@ -49,6 +49,7 @@ public:
 	int GetChipID(void);
 	int GetDamage(void);
 	
+	bool rimFlg_;
 
 	bool qeopd_ = false;
 	bool Tama_Use[6];		//菓　和　森　洞　雪

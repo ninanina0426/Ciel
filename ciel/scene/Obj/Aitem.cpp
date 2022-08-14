@@ -54,7 +54,7 @@ bool Aitem::init()
 	
 	mtakara = 0;
 
-	sAitem = 2;
+	sAitem = 7;
 
 	mAitem = 0;
 	//お金
@@ -90,6 +90,11 @@ bool Aitem::init()
 	mNum[1] = { 1355,675 }; //posx
 	mNum[2] = { 785,1335 }; //posx
 	mNum[3] = { 625,1275 }; //posx
+	mNum[20] = { 722,503 }; //posx
+	mNum[21] = { 2476,1078 }; //posx
+	mNum[22] = { 1282,1711 }; //posx
+	mNum[23] = { 2632,1440 }; //posx
+	mNum[24] = { 289,95 }; //posx
 
 	//玉
 	mNum[4] = { 1420,280 };		//森
@@ -245,6 +250,106 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 		{
 			mGet = false;
 		}
+
+		//リンゴ
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[20].y_ + 32 / 2) &&
+			(mPos.y_ + mNum[20].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[20].x_ + 32 / 2) &&
+			(mPos.x_ + mNum[20].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if ((sAitem != 0) && (sAitem <= 7))
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					apple += 1;
+					//sAitem -= 1;
+					mNum[20] = mNum[0];
+					i = 2;
+					mGet = true;
+					mAitem = 3;
+
+				}
+			}
+		}
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[21].y_ + 32 / 2) &&
+			(mPos.y_ + mNum[21].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[21].x_ + 32 / 2) &&
+			(mPos.x_ + mNum[21].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if ((sAitem != 0) && (sAitem <= 7))
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					apple += 1;
+					//sAitem -= 1;
+					mNum[21] = mNum[0];
+					i = 2;
+					mGet = true;
+					mAitem = 3;
+
+				}
+			}
+		}
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[22].y_ + 32 / 2) &&
+			(mPos.y_ + mNum[22].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[22].x_ + 32 / 2) &&
+			(mPos.x_ + mNum[22].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if ((sAitem != 0) && (sAitem <= 7))
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					apple += 1;
+					//sAitem -= 1;
+					mNum[22] = mNum[0];
+					i = 2;
+					mGet = true;
+					mAitem = 3;
+
+				}
+			}
+		}
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[23].y_ + 32 / 2) &&
+			(mPos.y_ + mNum[23].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[23].x_ + 32 / 2) &&
+			(mPos.x_ + mNum[23].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if ((sAitem != 0) && (sAitem <= 7))
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					apple += 1;
+					//sAitem -= 1;
+					mNum[23] = mNum[0];
+					i = 2;
+					mGet = true;
+					mAitem = 3;
+
+				}
+			}
+		}
+		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[24].y_ + 32 / 2) &&
+			(mPos.y_ + mNum[24].y_ - 32 / 2 < playerPos.y_ + playerSize.y_ / 2) &&
+			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[24].x_ + 32 / 2) &&
+			(mPos.x_ + mNum[24].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
+		{
+			if ((sAitem != 0) && (sAitem <= 7))
+			{
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					apple += 1;
+					//sAitem -= 1;
+					mNum[24] = mNum[0];
+					i = 2;
+					mGet = true;
+					mAitem = 3;
+
+				}
+			}
+		}
+		
+
+
 		break;
 	case MAP_ID::WA:
 		if ((playerPos.y_ - playerSize.y_ / 2 < mPos.y_ + mNum[7].y_ + 32 / 2) &&
@@ -430,7 +535,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[2].x_  +32/ 2) &&
 			(mPos.x_ + mNum[2].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((sAitem != 0) && (sAitem <= 2))
+			if ((sAitem != 0) && (sAitem <= 7))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
@@ -450,7 +555,7 @@ Vector2 Aitem::Update(Vector2 playerPos, Vector2 playerSize)
 			(playerPos.x_ - playerSize.x_ / 2 < mPos.x_ + mNum[3].x_ + 32 / 2) &&
 			(mPos.x_ + mNum[3].x_ - 32 / 2 < playerPos.x_ + playerSize.x_ / 2))
 		{
-			if ((sAitem != 0) && (sAitem <= 2))
+			if ((sAitem != 0) && (sAitem <= 7))
 			{
 				if (key_.getKeyDown(KEY_INPUT_F))
 				{
@@ -607,7 +712,49 @@ void Aitem::Draw(Vector2 mMapoffset)
 				DrawGraph(mPos.x_ + mNum[13].x_ - mMapoffset.x_, mPos.y_ + mNum[13].y_ - mMapoffset.y_ , mImage[1][mAnimCnt], true);
 			}
 		}
-		DrawFormatString(0, 190, GetColor(255, 255, 255), "木の実 = %d", mKinomi);
+
+
+		if (mAitem != 0)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ + mNum[20].x_ - mMapoffset.x_, mPos.y_ + mNum[20].y_ - mMapoffset.y_, mImage[0][mAnimCnt], true);
+			}
+		}
+		if (mAitem != 0)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ + mNum[21].x_ - mMapoffset.x_, mPos.y_ + mNum[21].y_ - mMapoffset.y_, mImage[0][mAnimCnt], true);
+			}
+		}
+		if (mAitem != 0)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ + mNum[22].x_ - mMapoffset.x_, mPos.y_ + mNum[22].y_ - mMapoffset.y_, mImage[0][mAnimCnt], true);
+			}
+		}
+		if (mAitem != 0)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ + mNum[23].x_ - mMapoffset.x_, mPos.y_ + mNum[23].y_ - mMapoffset.y_, mImage[0][mAnimCnt], true);
+			}
+		}
+		if (mAitem != 0)
+		{
+			int mAnimCnt = abs((ItemAnimcount / 7 % 4) - 2);
+			if ((mAnimCnt >= 0) && (mAnimCnt < ITEM_ANIM_MAX))
+			{
+				DrawGraph(mPos.x_ + mNum[24].x_ - mMapoffset.x_, mPos.y_ + mNum[24].y_ - mMapoffset.y_, mImage[0][mAnimCnt], true);
+			}
+		}
+		//DrawFormatString(0, 190, GetColor(255, 255, 255), "木の実 = %d", mKinomi);
 		break;
 	case MAP_ID::WA:
 		//キーアイテム

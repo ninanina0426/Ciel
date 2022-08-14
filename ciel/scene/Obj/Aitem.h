@@ -98,7 +98,7 @@ public:
 
 	int sAitem;
 
-	int mAitem;
+	int mAitem; //‰½‚ÌƒAƒCƒeƒ€‚©
 	
 	bool GetAitem();
 

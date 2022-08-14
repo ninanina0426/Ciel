@@ -107,17 +107,12 @@ private:
 	int mAnmCnt;
 	Vector2 offset_;
 
-	//Œø‰Ê‰¹
-	int sHandle;
-	int tHandle;
-	int fHandle;
-	int oHandle;
-	int ttHandle;
+	
 
 	//ƒMƒ~ƒbƒN
 	Vector2 mgPos;
 	Vector2 mgSize;
-	bool gFlg;
+	
 	MAP_ID mapID;
 	Gimmick gimick;
 	void message_box();
@@ -180,6 +175,15 @@ public:
 	int GetRed(void);
 	int GetBule(void);
 	int GetRu(void);
+
+	bool gFlg;
+
+	//Œø‰Ê‰¹
+	int sHandle;
+	int tHandle;
+	int fHandle;
+	int oHandle;
+	int ttHandle;
 };
 
 

@@ -66,6 +66,12 @@ private:
 	Vector2 mOffset;
 	int mNum;
 	int mPush;
+	//cal
+	int bgst1_;
+	int bgst2_;
+	int bgst3_;
+	int c1_;
+	int c2_;
 
 	//グラフィック系
 	int airplan_[4][3];

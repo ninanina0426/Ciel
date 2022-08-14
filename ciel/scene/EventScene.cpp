@@ -254,6 +254,12 @@ bool EventScene::Init(void)
     mImageSC[4]= LoadGraph("./image/talk/sk5.png");
     mImageSC[5]= LoadGraph("./image/talk/sk6.png");
     mImageSC[6]= LoadGraph("./image/talk/sk7.png");
+
+    //cal
+    bgst1_= LoadGraph("./image/bg1.jpg");
+    c1_ = LoadGraph("./image/player/baby.png");
+    c2_ = LoadGraph("./image/player/oya.png");
+
    
     house_ = LoadGraph("image/1108s.png");
     //move1_ = LoadGraph("./image/move/video.avi");
@@ -302,6 +308,7 @@ void EventScene::Event(int num)
            
         }
         if (animcnt_ > 500)
+
         {
             flg_ = true;
         }
@@ -332,6 +339,9 @@ void EventScene::Event(int num)
             }
             break;
         case PlayerID::Calendula:
+            DrawExtendGraph(0, 0, 1080, 600, bgst1_, true);
+            DrawGraph(500, 300, c2_, true);
+            DrawGraph(500, 400, c1_, true);
             break;
         case PlayerID::Soy:
             DrawGraph(0-mOffset.x_, 0-mOffset.y_, mImageMap1, true);
