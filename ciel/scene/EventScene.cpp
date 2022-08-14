@@ -258,9 +258,14 @@ bool EventScene::Init(void)
     //cal
     bgst1_= LoadGraph("./image/bg1.jpg");
     c1_ = LoadGraph("./image/player/baby.png");
-    c2_ = LoadGraph("./image/player/oya.png");
+    LoadDivGraph("./image/player/oya.png", 4, 1, 4, 200, 200, c2_, true);
+    st1_t = LoadGraph("image/talk/sk1.png");
+    st2_t = LoadGraph("image/talk/k19.png");
+    bgst2_ = LoadGraph("image/ui/noizu.jpg");
+    st3_t = LoadGraph("image/player/st2.png");
+    st4_t = LoadGraph("image/player/st3.png");
+    st5_t = LoadGraph("image/player/st4.png");
 
-   
     house_ = LoadGraph("image/1108s.png");
     //move1_ = LoadGraph("./image/move/video.avi");
     PlayMovieToGraph(move1_);
@@ -340,8 +345,13 @@ void EventScene::Event(int num)
             break;
         case PlayerID::Calendula:
             DrawExtendGraph(0, 0, 1080, 600, bgst1_, true);
-            DrawGraph(500, 300, c2_, true);
-            DrawGraph(500, 400, c1_, true);
+            //DrawGraph(500, 300, c2_[0], true);
+            DrawGraph(830, 300, st1_t, true);
+            DrawExtendGraph(800, 350,1000,650, c1_, true);
+            if (Cnt >240)
+            {
+                flg_ = true;
+            }
             break;
         case PlayerID::Soy:
             DrawGraph(0-mOffset.x_, 0-mOffset.y_, mImageMap1, true);
@@ -381,6 +391,14 @@ void EventScene::Event(int num)
             }
             break;
         case PlayerID::Calendula:
+            DrawExtendGraph(0, 0, 1080, 600, bgst1_, true);
+            DrawGraph(530, 200, st2_t, true);
+            DrawGraph(500, 300, c2_[(animcnt_/10)%4], true);
+            DrawExtendGraph(800, 350, 1000, 650, c1_, true);
+            if (Cnt > 240)
+            {
+                flg_ = true;
+            }
             break;
         case PlayerID::Soy:
             DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap1, true);
@@ -439,6 +457,12 @@ void EventScene::Event(int num)
 
             break;
         case PlayerID::Calendula:
+            DrawGraph(0, 0, bgst2_, false);
+            DrawGraph(0, 0, st3_t, true);
+            if (Cnt > 240)
+            {
+                flg_ = true;
+            }
             break;
         case PlayerID::Soy:
             DrawGraph(0 - mOffset.x_, 200 - mOffset.y_ - Cnt * 2, mImageMap, true);
@@ -510,6 +534,12 @@ void EventScene::Event(int num)
             
             break;
         case PlayerID::Calendula:
+            DrawGraph(0, 0, bgst2_, true);
+            DrawGraph(0, 0, st4_t, true);
+            if (Cnt > 240)
+            {
+                flg_ = true;
+            }
             break;
         case PlayerID::Soy:
             DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap, true);
@@ -571,6 +601,12 @@ void EventScene::Event(int num)
 
             break;
         case PlayerID::Calendula:
+            DrawGraph(0, 0, bgst2_, true);
+            DrawGraph(0, 0, st5_t, true);
+            if (Cnt > 240)
+            {
+                flg_ = true;
+            }
             break;
         case PlayerID::Soy:
             DrawGraph(0 - mOffset.x_, 0 - mOffset.y_, mImageMap, true);

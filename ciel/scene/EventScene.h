@@ -71,7 +71,12 @@ private:
 	int bgst2_;
 	int bgst3_;
 	int c1_;
-	int c2_;
+	int c2_[5];
+	int st1_t;
+	int st2_t;
+	int st3_t;
+	int st4_t;
+	int st5_t;
 
 	//グラフィック系
 	int airplan_[4][3];

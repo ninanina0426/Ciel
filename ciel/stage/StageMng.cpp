@@ -791,61 +791,61 @@ bool StageMng::GetEvent(Vector2 pos)
 bool StageMng::GetMapChange(Vector2 pos)
 {
 	////デバッグ用--------------------------------------------------------------------
-	//if (CheckHitKey(KEY_INPUT_W))
-	//{
-	//	mMapChange = true;
-	//	mNextPos = { 553,565 };
-	//	mDir = DIR_UP;
-	//	mMapID = MAP_ID::SWEETS;
-	//	mOffset = mNextPos - Vector2{ 540,0 };
-	//	stage_ = std::move(std::make_unique<SweetsMap>());
-	//}
-	//if (CheckHitKey(KEY_INPUT_A))
-	//{
-	//	mMapChange = true;
-	//	mNextPos = { 1420,280 };
-	//	mDir = DIR_UP;
-	//	mMapID = MAP_ID::FORESTIN;
-	//	mOffset = mNextPos - Vector2{ 540,300 };
-	//	stage_ = std::move(std::make_unique<ForestInMap>());
-	//}
-	//if (CheckHitKey(KEY_INPUT_S))
-	//{
-	//	mMapChange = true;
-	//	mNextPos = { 1645,715 };
-	//	mDir = DIR_DOWN;
-	//	mOffset = mNextPos - Vector2{ 1457,653 };
-	//	mMapID = MAP_ID::TEMPLE;
-	//	stage_ = std::move(std::make_unique<templeMap>());
-	//}
-	//if (CheckHitKey(KEY_INPUT_D))
-	//{
-	//	mMapChange = true;
-	//	mNextPos = { 400, 2990 };
-	//	mDir = DIR_RIGHT;
-	//	mMapID = MAP_ID::SNOW;
-	//	mOffset = mNextPos - Vector2{ 2990,120 };
-	//	stage_ = std::move(std::make_unique<SnowMap>());
-	//}
-	//if (CheckHitKey(KEY_INPUT_E))
-	//{
-	//	mMapChange = true;
-	//	mNextPos = { 25, 2400 };
-	//	mDir = DIR_RIGHT;
-	//	mMapID = MAP_ID::WA;
-	//	mOffset = mNextPos - Vector2{ 465,500 };
-	//	stage_ = std::move(std::make_unique<WaMap>());
-	//}
-	//if (CheckHitKey(KEY_INPUT_R))
-	//{
-	//	mMapChange = true;
-	//	mNextPos = { 1585,1070 };
-	//	mDir = DIR_UP;
-	//	mMapID = MAP_ID::DARK;
-	//	mOffset = mNextPos - Vector2{ 540,300 };
-	//	stage_ = std::move(std::make_unique<DarkTemple>());
-	//}
-	//
+	/*if (CheckHitKey(KEY_INPUT_W))
+	{
+		mMapChange = true;
+		mNextPos = { 553,565 };
+		mDir = DIR_UP;
+		mMapID = MAP_ID::SWEETS;
+		mOffset = mNextPos - Vector2{ 540,0 };
+		stage_ = std::move(std::make_unique<SweetsMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_A))
+	{
+		mMapChange = true;
+		mNextPos = { 1420,280 };
+		mDir = DIR_UP;
+		mMapID = MAP_ID::FORESTIN;
+		mOffset = mNextPos - Vector2{ 540,300 };
+		stage_ = std::move(std::make_unique<ForestInMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_S))
+	{
+		mMapChange = true;
+		mNextPos = { 1200,600 };
+		mDir = DIR_DOWN;
+		mOffset = mNextPos - Vector2{ 540,300 };
+		mMapID = MAP_ID::TEMPLEIN;
+		stage_ = std::move(std::make_unique<TempleInMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_D))
+	{
+		mMapChange = true;
+		mNextPos = { 400, 2990 };
+		mDir = DIR_RIGHT;
+		mMapID = MAP_ID::SNOW;
+		mOffset = mNextPos - Vector2{ 2990,120 };
+		stage_ = std::move(std::make_unique<SnowMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_E))
+	{
+		mMapChange = true;
+		mNextPos = { 25, 2400 };
+		mDir = DIR_RIGHT;
+		mMapID = MAP_ID::WA;
+		mOffset = mNextPos - Vector2{ 465,500 };
+		stage_ = std::move(std::make_unique<WaMap>());
+	}
+	if (CheckHitKey(KEY_INPUT_R))
+	{
+		mMapChange = true;
+		mNextPos = { 1585,1070 };
+		mDir = DIR_UP;
+		mMapID = MAP_ID::DARK;
+		mOffset = mNextPos - Vector2{ 540,300 };
+		stage_ = std::move(std::make_unique<DarkTemple>());
+	}
+	*/
 	//---------------------------------------------------------------------------
 
 
