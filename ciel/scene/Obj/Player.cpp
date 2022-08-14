@@ -791,7 +791,9 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 					moveAnmCnt = true;
 					qflg_ = true;
 				}
+				
 			}
+			
 
 			if (moveAnmCnt == true)
 			{
@@ -800,6 +802,7 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 			if (qflg_)
 			{
 				QuestIns.UpDate(qflg_, 1, copyPos, mSize, mapID, GetFish());
+				
 			}
 			if (QuestIns.CompFlg())
 			{
@@ -1080,7 +1083,7 @@ void Player::Draw(Vector2 offset)
 	}
 
 
-	//DrawFormatString(0, 500, GetColor(0, 0, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
+	DrawFormatString(0, 500, GetColor(0, 0, 255), "playerPos=(%d,%d)", mPos.x_, mPos.y_);
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "playerPos=(%d,%d)", mgPos.x_, mgPos.y_);
 	//DrawFormatString(0, 30, 0xff0000, "playerID:%d", plID_);
 	/*DrawFormatString(0, 30, 0xff0000, "chipID:%d", mChiID);*/
