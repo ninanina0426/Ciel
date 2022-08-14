@@ -406,7 +406,12 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg ,int fis)
 
 						}
 					}
+
 					
+				}
+				if (mQSoNpc1)
+				{
+					qnum_ = 0;
 				}
 			}
 			else
@@ -418,6 +423,8 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg ,int fis)
 					if (mQSoNpc1 == false)
 					{
 						mQSoNpc1 = true;
+						qflg_ = mQSoNpc1;
+						qnum_ = 2;
 					}
 
 				}
@@ -451,9 +458,7 @@ int Npc::Update(Vector2 playerPos,Vector2 playerSize,bool flg ,int fis)
 					i = 0;
 					if (mQSoNpc2 == false)
 					{
-						mQSoNpc2 = true;
-						qflg_ = mQSoNpc2;
-						qnum_ = 2;
+						mQSoNpc2 = true;	
 					}
 					
 				}
