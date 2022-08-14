@@ -11,7 +11,7 @@ public:
 	UI();
 	~UI();
 
-	void Upadate(Player player,Vector2 offset,int num);
+	void Upadate(Player player,Vector2 offset,int num,int kinomi,int fis);
 	void Draw(void);
 
 	bool eveflg_;
@@ -42,6 +42,9 @@ private:
 	int questid_;
 	bool queTabF_;
 	bool kuesution_;
+
+	int kinomi_;
+	int fiss_;
 
 	int aitemBox;
 	int aitem[1][15];

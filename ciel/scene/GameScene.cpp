@@ -412,7 +412,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
     
     mMasuku->Update(PlayerPos, mAitem->mRantanNum(),mMenus.NumHave());
 
-    ui_.Upadate(mPlayer, mMapOffset,mMenus.NumHave());
+    ui_.Upadate(mPlayer, mMapOffset,mMenus.NumHave(),abs(5-mAitem->mKinomi),mAitem->FishNum());
    
   
 

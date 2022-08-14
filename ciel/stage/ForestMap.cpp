@@ -510,46 +510,38 @@ bool ForestMap::CheckMapChip(Vector2 pos)
 			case 846:
 			case 790:
 			case 2134:
-				
-				switch(mMap4)
-				{
-				case -1:
-				case 1904:
-				case 1905:
-				case 1906:
-				case 1907:
-				case 1908:
-				case 1960:
-				case 1961:
-				case 1962:
-				case 1963:
-				case 1964:
-				case 2016:
-				case 2017:
-				case 2018:
-				case 2019:
-				case 2020:
-				case 2072:
-				case 2073:
-				case 2074:
-				case 2075:
-				case 2076:
-				case 2128:
-				case 2129:
-				case 2130:
-				case 2131:
-				case 2132:
 
-				case 1570:
-				case 1571:
-				case 1626:
-				case 1627:
 
-					Flg = true;
-					break;
-				default:
-					break;
-				}
+			case 1904:
+			case 1905:
+			case 1906:
+			case 1907:
+			case 1908:
+			case 1960:
+			case 1961:
+			case 1962:
+			case 1963:
+			case 1964:
+			case 2016:
+			case 2017:
+			case 2018:
+			case 2019:
+			case 2020:
+			case 2072:
+			case 2073:
+			case 2074:
+			case 2075:
+			case 2076:
+			case 2129:
+			case 2130:
+			case 2131:
+
+			case 1570:
+			case 1571:
+			case 1626:
+			case 1627:
+
+				Flg = true;
 
 				break;
 			default:

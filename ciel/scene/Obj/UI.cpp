@@ -12,14 +12,15 @@ UI::~UI()
 {
 }
 
-void UI::Upadate(Player player, Vector2 offset,int num)
+void UI::Upadate(Player player, Vector2 offset,int num,int kinomi,int fis)
 {
 	key_.Update();
 	stamina = player.Stamina_;
 	plPos_ = player.GetPos();
 	off_ = offset;
 	energy = player.Energy_;
-
+	kinomi_ = kinomi;
+	fiss_ = fis;
 
 
 	if (num == 0){aitemNum = 14;}
@@ -155,6 +156,7 @@ void UI::Draw(void)
 		{
 			if (QuestIns.questCmpFlg[1] == QuestState::ALIVE)
 			{
+				DrawFormatString(990, 130, 0xffffff, "%d/5", kinomi_, true);
 				DrawGraph(10, 50, q2_, true);
 			}	
 			
@@ -164,6 +166,7 @@ void UI::Draw(void)
 		{
 			if (QuestIns.questCmpFlg[1] == QuestState::ALIVE)
 			{
+				DrawFormatString(990, 180, 0xffffff, "%d/5", kinomi_, true);
 				DrawGraph(10, 100, q2_, true);
 			}
 			if (QuestIns.questCmpFlg[1] == QuestState::COMP) { DrawGraph(10, 100, q2C_, true); }
@@ -172,11 +175,17 @@ void UI::Draw(void)
 		{
 			if (QuestIns.questCmpFlg[1] == QuestState::ALIVE)
 			{
+				DrawFormatString(990, 180, 0xffffff, "%d/5", kinomi_, true);
 				DrawGraph(10, 100, q2_, true);
 			}
 			if (QuestIns.questCmpFlg[1] == QuestState::COMP) { DrawGraph(10, 100, q2C_, true); }
 		}
-		if (QuestIns.questCmpFlg[2] == QuestState::ALIVE) { DrawGraph(10,50, q3_, true); }
+		if (QuestIns.questCmpFlg[2] == QuestState::ALIVE) 
+		{
+			DrawGraph(10,50, q3_, true); 
+			DrawFormatString(990, 130, 0xffffff, "%d/3", fiss_, true);
+
+		}
 		if (QuestIns.questCmpFlg[2] == QuestState::COMP) { DrawGraph(10, 50, q3C_, true); }
 	}
 

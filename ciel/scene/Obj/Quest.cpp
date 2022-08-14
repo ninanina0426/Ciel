@@ -106,19 +106,23 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 		}
 		break;
 	case MAP_ID::WA:
-		if (fish > 3 && questCmpFlg[2] == QuestState::ALIVE)
+		if (fish >= 3 && questCmpFlg[2] == QuestState::ALIVE)
 		{
-			if (key_.getKeyDown(KEY_INPUT_F))
+			if (plPos.x_ > 990 && plPos.x_<1025 && plPos.y_ < 650)
 			{
-				questCmpFlg[2] = QuestState::COMP;
-				CompFlg_ = true;
-				QFlg_ = QuestState::COMP;
-				aitem_.mHaori = true;
-				Hao = 1;
-				Ccount_ = 0;
-				Calq_ = 0;
-				fish_ = 3;
+				if (key_.getKeyDown(KEY_INPUT_F))
+				{
+					questCmpFlg[2] = QuestState::COMP;
+					CompFlg_ = true;
+					QFlg_ = QuestState::COMP;
+					aitem_.mHaori = true;
+					Hao = 1;
+					Ccount_ = 0;
+					Calq_ = 0;
+					fish_ = 3;
+				}
 			}
+			
 		}
 		break;
 	case MAP_ID::WASHOP:
