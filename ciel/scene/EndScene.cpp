@@ -72,6 +72,7 @@ void EndScene::DrawOwnScn()
 	
 	if (endType_ == "end_4")
 	{
+		DrawExtendGraph(0, 0, 1080, 610, e4_, false);
 		DrawFormatString(700, 590, 0xffffff, "END_4 #ñ{ìñÇÃçKÇπÇ∆ÇÕâΩÇ»ÇÃÇ©");
 	}
 	if (endType_ == "end_5")
@@ -92,6 +93,7 @@ bool EndScene::Init(void)
 	el2_ = LoadGraph("./image/kane.jpg");
 	el3_ = LoadGraph("./image/negai.png");
 	e3_ = LoadGraph("./image/ui/noizu.jpg");
+	e4_ = LoadGraph("./image/love.jpg");
 	e5_ = LoadGraph("./image/move/yourdead.png");
     return true;
 }
