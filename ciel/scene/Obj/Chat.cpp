@@ -28,7 +28,7 @@ bool Chat::init(void)
 	mImage[3] = LoadGraph("image/talk/m11.png");
 
 	mImage[4] = LoadGraph("image/talk/m20.png");
-	mImage[5] = LoadGraph("image/talk/mm21.png");
+	mImage[5] = LoadGraph("image/talk/m21.png");
 
 	mImage[8] = LoadGraph("image/talk/m1.png");
 	mImage[9] = LoadGraph("image/talk/m2.png");
