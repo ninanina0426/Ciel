@@ -173,9 +173,10 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 	gimick.Update(*this);
 
 	 
-	if (!fl)
+	
+	if (gflg == false)
 	{
-		if (gflg == false)
+		if (!fl)
 		{
 			if (Energy_ > 0)
 			{
@@ -272,8 +273,9 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 							}
 							i = 0;
 							mFlg = false;
-							DeleteSoundMem(oHandle);
-							oHandle = LoadSoundMem("image/Sound/…‚ÉZ‚©‚è‚È‚ª‚ç•à‚­.ogg");
+							StopSoundMem(oHandle);
+							//DeleteSoundMem(oHandle);
+							//oHandle = LoadSoundMem("image/Sound/…‚ÉZ‚©‚è‚È‚ª‚ç•à‚­.ogg");
 							switch (plID_)
 							{
 							case PlayerID::Jack:
@@ -368,11 +370,11 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 						}
 					}
 				}
-				else
+				/*else
 				{
 					aitemFlag_ = false;
 
-				}
+				}*/
 				if (tFlg == true)
 				{
 					tCnt--;
@@ -772,12 +774,12 @@ Vector2 Player::Update(int chipId, bool fl, bool lhit, int e, bool gflg, bool nH
 			if (mChipId == 4220 || mChipId == 4221 || mChipId == 4320 || mChipId == 4321)
 			{
 				gFlg = false;
-
-				DeleteSoundMem(oHandle);
-				oHandle = LoadSoundMem("image/Sound/…‚ÉZ‚©‚è‚È‚ª‚ç•à‚­.ogg");
+				StopSoundMem(oHandle);
+				//DeleteSoundMem(oHandle);
+				//oHandle = LoadSoundMem("image/Sound/…‚ÉZ‚©‚è‚È‚ª‚ç•à‚­.ogg");
 			}
 
-			if (!gFlg)
+			if (!gFlg&&lpMapMng.GetMapId()==MAP_ID::TEMPLE)
 			{
 				StopSoundMem(oHandle);
 			}

@@ -12,16 +12,16 @@ UI::~UI()
 {
 }
 
-void UI::Upadate(Player player, Vector2 offset,int num,int kinomi,int fis)
+void UI::Upadate(Player *player, Vector2 offset,int num,int kinomi,int fis,bool aitemf, int aitemnum)
 {
 	key_.Update();
-	stamina = player.Stamina_;
-	plPos_ = player.GetPos();
+	stamina = player->Stamina_;
+	plPos_ = player->GetPos();
 	off_ = offset;
-	energy = player.Energy_;
+	energy = player->Energy_;
 	kinomi_ = kinomi;
 	fiss_ = fis;
-	plID_ = player.plID_;
+	plID_ = player->plID_;
 
 	if (num == 0){aitemNum = 14;}
 	if (num == 1){aitemNum = 0;}
@@ -39,7 +39,7 @@ void UI::Upadate(Player player, Vector2 offset,int num,int kinomi,int fis)
 	if (num == 15){aitemNum = 12;}
 	
 
-	aitem_.Update(plPos_, player.GetSiz());
+	aitem_.Update(plPos_, player->GetSiz());
 	
 	if (aitem_.GetAitem())
 	{
@@ -71,24 +71,24 @@ void UI::Upadate(Player player, Vector2 offset,int num,int kinomi,int fis)
 		}
 
 	}
-	if (player.aitemFlag_)
+	if (aitemf)
 	{
-		if (player.aitemNum_ == 1)
+		if (aitemnum == 1)
 		{
 			telop_ = true;
 			aitemname_ = "‚³‚©‚È";
 		}
-		if (player.aitemNum_ == 2)
+		if (aitemnum == 2)
 		{
 			telop_ = true;
 			aitemname_ = "Ô‚¢Î";
 		}
-		if (player.aitemNum_ == 3)
+		if (aitemnum == 3)
 		{
 			telop_ = true;
 			aitemname_ = "Â‚¢Î";
 		}
-		if (player.aitemNum_ == 4)
+		if (aitemnum == 4)
 		{
 			telop_ = true;
 			aitemname_ = "  ƒ‹[";

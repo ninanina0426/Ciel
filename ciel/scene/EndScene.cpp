@@ -48,7 +48,7 @@ void EndScene::DrawOwnScn()
 	case PlayerID::Calendula:
 		if (endType_ == "end_2")
 		{
-
+			DrawGraph(0, 0, ec2_, true);
 			DrawFormatString(850, 590, 0xffffff, "END_2 #ˆ³“|“I‚È”ü‚µ‚³");
 		}
 		break;
@@ -95,5 +95,6 @@ bool EndScene::Init(void)
 	e3_ = LoadGraph("./image/ui/noizu.jpg");
 	e4_ = LoadGraph("./image/love.jpg");
 	e5_ = LoadGraph("./image/move/yourdead.png");
+	ec2_ = LoadGraph("./image/player/nuno.png");
     return true;
 }

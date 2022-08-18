@@ -11,7 +11,7 @@ public:
 	UI();
 	~UI();
 
-	void Upadate(Player player,Vector2 offset,int num,int kinomi,int fis);
+	void Upadate(Player *player,Vector2 offset,int num,int kinomi,int fis,bool aitemf,int aitemnum);
 	void Draw(bool am,bool pm,bool npm);
 
 	bool eveflg_;

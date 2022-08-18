@@ -27,5 +27,6 @@ private:
     int e5_;
     int el2_;
     int el3_;
+    int ec2_;
 };
 

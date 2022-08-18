@@ -363,8 +363,8 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mWshop.AMoney(mAitem->wMoney(mWshop.SetMoney(), mWshop.GetMoney()));
 
-    auto r = QuestIns.GetRu();
-    auto q = QuestIns.CompFlg();
+    auto r = QuestIns.getru_;
+    auto q = QuestIns.questCmpFlg[1]==QuestState::COMP;
 
     mAitem->qMoney(r, q);
 
@@ -432,7 +432,7 @@ uniquBaseScn GameScene::Update(uniquBaseScn own)
 
     mMasuku->Update(PlayerPos, mAitem->mRantanNum(),mMenus.NumHave());
 
-    ui_.Upadate(mPlayer, mMapOffset,mMenus.NumHave(),abs(5-mAitem->mKinomi),mAitem->FishNum());
+    ui_.Upadate(&mPlayer, mMapOffset,mMenus.NumHave(),abs(5-mAitem->mKinomi),mAitem->FishNum(),mPlayer.aitemFlag_,mPlayer.aitemNum_);
    
   
 
@@ -546,14 +546,16 @@ void GameScene::DrawOwnScn()
      //時間帯
      TimeManeger();
 
-     if ((mPose == true)&& ((mShop.SPose() == false) && (mWshop.SPose() == false)))
+     
+     if ((mPose == true) && ((mShop.SPose() == false) && (mWshop.SPose() == false)))
      {
-         mMenus.Draw(mPlayer.GetType(),mAitem->HaveMoney(),mPlayer.EnergyNum(),mPlayer.StaminaNum());
+         mMenus.Draw(mPlayer.GetType(), mAitem->HaveMoney(), mPlayer.EnergyNum(), mPlayer.StaminaNum());
      }
-
      
 
      mChat->Draw(mMapOffset);
+
+     mMasuku->Draw(mMapOffset);
 
      ui_.Draw(AMflg_,PMflg_,Nightflg_);
 
@@ -563,9 +565,9 @@ void GameScene::DrawOwnScn()
 
     
     
-     mMasuku->Draw(mMapOffset);
+     
 
-    
+     
 
      //フェードイン
      if (lpMapMng.fadeinFlg_)
