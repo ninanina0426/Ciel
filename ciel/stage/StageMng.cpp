@@ -584,6 +584,7 @@ bool StageMng::GetEvent(Vector2 pos)
 			mDir = DIR_DOWN;
 			mMapID = MAP_ID::TEMPLE;
 			mOffset = mNextPos - Vector2{ 540,300 };
+			StopSoundMem(mPlayer.oHandle);
 			stage_ = std::move(std::make_unique<templeMap>());
 
 			

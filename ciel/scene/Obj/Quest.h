@@ -57,7 +57,8 @@ public:
 
 	int GetHaori(void);
 	int Getfish(void);
-	
+
+	int getru_;
 private:
 	Quest();
 	~Quest();
@@ -79,7 +80,7 @@ private:
 	MAP_ID mapID_;
 	int Item_;
 
-	int getru_;
+	
 	
 	bool keyf_[3];
 

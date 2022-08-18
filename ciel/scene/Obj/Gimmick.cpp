@@ -68,10 +68,9 @@ bool Gimmick::Ford()
 {
 	//ƒ‰ƒ“ƒ_ƒ€‚ÈŽžŠÔ
 	if (time == 3)
-	{
-		
+	{	
 		fisingFlg_ = true;
-		return true;
+		return fisingFlg_;
 	}
 
 	if (count > 30)
@@ -82,7 +81,7 @@ bool Gimmick::Ford()
 	{
 		fisingFlg_ = false;
 		count = 30;
-		return false;
+		return fisingFlg_;
 	}
 	
 }

@@ -159,7 +159,7 @@ void Quest::UpDate(bool stateFlg,int q, Vector2 plPos, Vector2 plsize, MAP_ID ma
 				CompFlg_ = true;
 				QFlg_ = QuestState::COMP;
 				aitem_.mKinomi = 0;
-				getru_ = 150;
+				getru_ = 220;
 				Ccount_ = 0;
 				Calq_ = 0;
 			}
