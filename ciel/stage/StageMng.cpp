@@ -21,9 +21,9 @@
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<templeMap>();
+	stage_ = std::make_unique<DarkTemple>();
 	fadeinFlg_ = false;
-	mMapID = MAP_ID::TEMPLE;
+	mMapID = MAP_ID::DARK;
 	fl_ = false;
 	aitem = 0;
 	mflg = false;

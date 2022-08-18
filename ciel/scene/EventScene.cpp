@@ -258,13 +258,13 @@ bool EventScene::Init(void)
     //cal
     bgst1_= LoadGraph("./image/bg1.jpg");
     c1_ = LoadGraph("./image/player/baby.png");
-    LoadDivGraph("./image/player/oya.png", 4, 1, 4, 200, 200, c2_, true);
-    st1_t = LoadGraph("image/talk/sk1.png");
-    st2_t = LoadGraph("image/talk/k19.png");
-    bgst2_ = LoadGraph("image/ui/noizu.jpg");
-    st3_t = LoadGraph("image/player/st2.png");
-    st4_t = LoadGraph("image/player/st3.png");
-    st5_t = LoadGraph("image/player/st4.png");
+    LoadDivGraph("./image/player/oya.png", 4, 1, 4, 200, 200, &c2_[0], true);
+    st1_t = LoadGraph("./image/talk/sk1.png");
+    st2_t = LoadGraph("./image/talk/k19.png");
+    bgst2_ = LoadGraph("./image/ui/noizu.jpg");
+    st3_t = LoadGraph("./image/player/st2.png");
+    st4_t = LoadGraph("./image/player/st3.png");
+    st5_t = LoadGraph("./image/player/st4.png");
 
     house_ = LoadGraph("image/1108s.png");
     //move1_ = LoadGraph("./image/move/video.avi");

@@ -17,8 +17,8 @@ Player::~Player()
 bool Player::init(PlayerID playerid)
 {
 	/*mParent = parent;*/
-	mPos.x_ = 1590;
-	mPos.y_ = 2915;
+	mPos.x_ = 1585;
+	mPos.y_ = 1070;
 
 	/*mPos.x_ = 0;
 	mPos.y_ = 0;*/
@@ -1096,7 +1096,7 @@ void Player::Draw(Vector2 offset)
 			}
 			else if (i == 1)
 			{
-				DrawGraph(mPos.x_ - offset.x_ - mSizeOffset.x_, mPos.y_ - offset.y_ - 24, mImage3[num * DIR_MAX + (ttCnt % 6)], true);
+				DrawGraph(mPos.x_ - offset.x_ - 24, mPos.y_ - offset.y_ - 24, mImage3[num * DIR_MAX + ((mAnmCnt / 8) % 4)], true);
 			}
 			else if (i == 2)
 			{
