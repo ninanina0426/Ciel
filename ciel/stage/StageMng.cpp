@@ -21,9 +21,9 @@
 
 bool StageMng::Init()
 {
-	stage_ = std::make_unique<DarkTemple>();
+	stage_ = std::make_unique<templeMap>();
 	fadeinFlg_ = false;
-	mMapID = MAP_ID::DARK;
+	mMapID = MAP_ID::TEMPLE;
 	fl_ = false;
 	aitem = 0;
 	mflg = false;
@@ -1273,6 +1273,33 @@ bool StageMng::GetMapChange(Vector2 pos)
 			mOffset = mNextPos - Vector2{ 540,300 };
 			mMapID = MAP_ID::TEMPLE;
 			stage_ = std::move(std::make_unique<templeMap>());
+		}
+	}
+
+	if (lpMapMng.mMapID == MAP_ID::SNOW)
+	{
+		if (pos.x_ >3000 && pos.y_ > 768&&pos.y_<1119)
+		{
+			if (key_.getKeyDown(KEY_INPUT_F))
+			{
+				fadeinFlg_ = true;
+				fadein_.Setcnt(0);
+			}
+			if (fadeinFlg_)
+			{
+				if (fadein_.GetCnt() > 255)
+				{
+					mMapChange = true;
+					mNextPos = { 1645,715 };
+					mDir = DIR_DOWN;
+					mOffset = mNextPos - Vector2{ 540,300 };
+					mMapID = MAP_ID::TEMPLE;
+					stage_ = std::move(std::make_unique<templeMap>());
+					
+				}
+
+			}
+
 		}
 	}
 

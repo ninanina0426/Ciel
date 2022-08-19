@@ -966,11 +966,11 @@ void Aitem::TotalAitem(int a, int kk, int fd, int frs, int rb, int p, int k, int
 	mApple = apple + a + sa-ma+la;
 	mKinominoKusiyaki=kk+skk-mkk+lkk;
 	mFruitDrink=fd+sfd-mfd+lfd;
-	mFishingRodS=frs+sfrs-mfrs+1;
+	mFishingRodS=frs+sfrs-mfrs;
 	mRagBag=rb+srb-mrb;
 	mPickaxe=p+sp-mp;
 	mHaoriN=h+sh+haori-mh;
-	mRantanN = r + sr + rantan - mr+1;
+	mRantanN = r + sr + rantan - mr;
 	mRice = ri+sri-mri+lri;
 	mDango = d+sd-md+ld;
 	mTea = t+st-mt+lt;
